@@ -7,13 +7,13 @@
     public class Trailer: List<Child.Field>
     {
         /// <summary>
-        /// 
+        /// Trailer from xml file
         /// </summary>
         public static Trailer From(Xml.fix xml)
         {
             var section = new Trailer();
 
-            foreach (var field in xml.header) // need ??
+            foreach (var field in xml.trailer) // need ??
             {
                 // verify format
 
@@ -44,7 +44,7 @@
         }
 
         /// <summary>
-        /// 
+        /// fixml trailer from specification trailer
         /// </summary>
         public static Trailer From(Fix.Specification.Trailer trailer)
         {

@@ -8,7 +8,6 @@
 
     public class Enums : List<Enum>
     {
-
         public bool Exist
             => this.Any();
     }

@@ -9,11 +9,11 @@
     public class Fields : Dictionary<string, Field> {
 
         /// <summary>
-        /// 
+        /// Obtain fields from xml
         /// </summary>
         public static Fields From(Xml.fix xml)
         {
-            var section = new Fields();
+            var section = new Fields(); 
 
             foreach (var field in xml.fields) // need ??
             {
@@ -31,13 +31,13 @@
         }
 
         /// <summary>
-        /// 
+        /// Convert from specification Types to Xml Fields
         /// </summary>
         public static Fields From(Fix.Specification.Types fields)
         {
             var section = new Fields();
 
-            foreach (var field in fields.Values) // need ??
+            foreach (var field in fields) // need ??
             {
                 // verify field name exists // format
                 section[field.Name] = new Field
@@ -53,7 +53,7 @@
         }
 
         /// <summary>
-        /// 
+        /// Write fields to stream
         /// </summary>
         public void Write(System.IO.StreamWriter stream)
         {
@@ -85,7 +85,7 @@
 
             foreach (var pair in this)
             {
-                types[pair.Key] = pair.Value.ToSpecification(); // linq?
+                types.Add(pair.Value.ToSpecification());
             }
             
             return types;

@@ -3,7 +3,7 @@
     using System.Linq;
 
     /// <summary>
-    /// 
+    /// Contains value and data for a fix enumerator
     /// </summary>
 
     public class Enum
@@ -12,6 +12,9 @@
 
         public string Description;
 
+        /// <summary>
+        /// constructs an enum from a field value
+        /// </summary>
         public static Enum From(Xml.fixFieldValue @enum)
             => new Enum {
                 Value = @enum.@enum,
@@ -20,12 +23,15 @@
         
 
         /// <summary>
-        /// 
+        /// places Enum in specification format
         /// </summary>
         public Fix.Specification.Enum ToSpecification()
             => new Fix.Specification.Enum {
                 Value = Value, 
                 Description = Description
             };
+
+        public override string ToString()
+           => $"{Value} = {Description}";
     }
 }

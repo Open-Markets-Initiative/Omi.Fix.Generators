@@ -15,7 +15,7 @@
     public static partial class Extensions
     {
         /// <summary>
-        /// 
+        /// Put child in specification, dependant of object type
         /// </summary>
         public static Fix.Specification.Field ToSpecification(this IChild child)
         {

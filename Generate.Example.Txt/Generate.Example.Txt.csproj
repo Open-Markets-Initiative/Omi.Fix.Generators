@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<PackageId>GenerateExampleFixml</PackageId>
+	<PackageId>GenerateExampleTxt</PackageId>
 	<Version>1.4.2</Version>
 	<Authors>Sophia</Authors>
     <OutputType>Exe</OutputType>

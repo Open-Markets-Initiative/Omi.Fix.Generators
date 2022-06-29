@@ -5,8 +5,8 @@
     /// <summary>
     ///  Fixml Component (common collection of fields)
     /// </summary>
-
     public class Component {
+
         /// <summary>
         ///  Fixml component name
         /// </summary>
@@ -37,7 +37,7 @@
         }
 
         /// <summary>
-        /// 
+        /// Obtain fixml component from specification
         /// </summary>
         public static Component From(Fix.Specification.Component element)
         {
@@ -57,7 +57,7 @@
 
 
         /// <summary>
-        /// 
+        /// write componenet to xml file 
         /// </summary>
         public void Write(System.IO.StreamWriter stream) // need one with different indent
         {

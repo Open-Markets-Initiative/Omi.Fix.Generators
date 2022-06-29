@@ -9,5 +9,9 @@
         public string Value;
 
         public string Description;
+
+        public override string ToString()
+         => $"{Value} = {Description}";
+
     }
 }

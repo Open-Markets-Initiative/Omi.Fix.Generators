@@ -5,7 +5,6 @@
     /// <summary>
     ///  Normalized Fix Specification Child Field Element
     /// </summary>
-
     public class Field 
     {
         public string Name { get; set;}

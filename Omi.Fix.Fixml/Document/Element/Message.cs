@@ -3,14 +3,11 @@
     using System.Linq;
 
     /// <summary>
-    ///  
+    ///  Fixml Message
     /// </summary>
-
     public class Message {
 
-        /// <summary>
-        ///  
-        /// </summary>
+        #region Properties
         public string Name { get; set;}
 
         public string Type { get; set;}
@@ -19,8 +16,10 @@
 
         public List<IChild> Fields = new List<IChild>();
 
+        #endregion
+
         /// <summary>
-        /// 
+        /// Convert xml message to fixml format
         /// </summary>
         public static Message From(Xml.fixMessage element)
         {
@@ -41,7 +40,7 @@
         }
 
         /// <summary>
-        /// 
+        /// obtain fixml message from specification 
         /// </summary>
         public static Message From(Fix.Specification.Message element) {
             // verify values
@@ -62,7 +61,7 @@
 
 
         /// <summary>
-        /// 
+        /// write fixml mmessage to file
         /// </summary>
         public void Write(System.IO.StreamWriter stream) // need one with different indent
         {

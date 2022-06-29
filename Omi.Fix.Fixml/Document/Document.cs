@@ -31,7 +31,7 @@
         public Fields Fields = new Fields();
 
         /// <summary>
-        /// 
+        /// Obtain fixml document from specification document
         /// </summary>
         public static Document From(Fix.Specification.Document specification)
           => new Document {
@@ -43,7 +43,7 @@
             };
 
         /// <summary>
-        /// 
+        /// Obtain fixml document from xml file 
         /// </summary>
         public static Document From(Xml.fix xml)
           => new Document {
@@ -67,7 +67,7 @@
         ///  Write fixml file to stream
         /// </summary>
         public void Write(System.IO.StreamWriter stream) {
-            stream.WriteLine($"<fix major=\"{Major}\" minor=\"{Minor}\"/>"); // sp etc
+            stream.WriteLine($"<fix major=\"{Major}\" minor=\"{this.Minor}\">"); // sp etc
             
             Header.Write(stream); 
             Trailer.Write(stream);   
@@ -79,7 +79,7 @@
         }
 
         /// <summary>
-        /// 
+        /// write document to stream
         /// </summary>
         public void WriteTo(string path)
         {

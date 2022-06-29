@@ -33,7 +33,7 @@
         #endregion
 
         /// <summary>
-        /// 
+        /// Writes fixml field to stream
         /// </summary>
         public void Write(System.IO.StreamWriter stream)
         {
@@ -58,7 +58,7 @@
             => Enums.Any();
 
         /// <summary>
-        /// 
+        /// convert fixml Field to specification Type
         /// </summary>
         public Fix.Specification.Type ToSpecification()
             => new Fix.Specification.Type {
@@ -70,7 +70,7 @@
 
 
         /// <summary>
-        /// 
+        /// Display Fixml Field as string
         /// </summary>
         public override string ToString()
             => $"{Number} {Name} : {Type}"; // need enums

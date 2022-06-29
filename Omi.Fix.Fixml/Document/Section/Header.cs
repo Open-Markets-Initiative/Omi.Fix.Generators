@@ -7,7 +7,7 @@
     public class Header : List<Child.Field>
     {
         /// <summary>
-        /// 
+        /// Heaader components from xml file
         /// </summary>
         public static Header From(Xml.fix xml)
         {
@@ -44,7 +44,7 @@
         }
 
         /// <summary>
-        /// 
+        /// Fix Header from Specification Header
         /// </summary>
         public static Header From(Fix.Specification.Header header)
         {

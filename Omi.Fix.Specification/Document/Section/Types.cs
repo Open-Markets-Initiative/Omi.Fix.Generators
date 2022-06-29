@@ -5,7 +5,7 @@
     ///  Normalized Fix Specification Field Types List
     /// </summary>
 
-    public class Types : Dictionary<string, Type>
+    public class Types : List<Type> 
     {
     }
 }

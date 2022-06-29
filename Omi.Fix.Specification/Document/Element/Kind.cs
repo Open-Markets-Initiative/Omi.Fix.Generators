@@ -3,7 +3,6 @@
     /// <summary>
     ///  Normalized Fix Specification Child Field Kind
     /// </summary>
-
     public enum Kind
     {
         Field,

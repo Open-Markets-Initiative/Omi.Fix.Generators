@@ -1,0 +1,37 @@
+FIX Major = 4, Minor = 2
+
+FixVersion:enum:FIX40=FIX.4.0,FIX41=FIX.4.1,FIX42=FIX.4.2,FIX44=FIX.4.4
+FixMsgType:enum:Heartbeat=0,Logon=A,TestRequest=1,ResendRequest=2,Reject=3,SequenceReset=4,Logout=5,IndicationOfInterest=6,NewOrderSingle=D,ExecutionReport=8,OrderCancelReject=9,NewOrderMultileg=AB,BusinessReject=j,OrderMassCancelRequest=q,OrderMassCancelReport=r,NewOrderCross=s,TradeCancelCorrect=UCC,NewOrderMultilegCBOE=UAA,NewOrderMultilegLightSpeed=UAB,MultilegCancelReplace=AC,CacheQueryRequest=UFQ,NewOrderList=E,DontKnowTrade=Q,NewOrderBoxPIP=PI,NewOrderCrossMiax=Us,ListExecute=L,NewOrderCrossMultileg=As,QuoteStatusRequest=a,QuoteAcknowledgement=b,SecurityDefinitionReq=c,SecurityDefinition=d,QuoteRequest=R,QuoteResponse=AJ,NewOrderParent=PD,CancelReplaceParent=PXD,SRExecReport=X8,SRCancelRequest=XF,SRCancelReject=X9,SRAuctionNotice=UAN,SRDarkCrossNotice=UDN,SRDarkQuote=UDQ,SRDarkQuoteExp=UQE,SRDarkExpRequest=UDR,IceTraderLogin=CG,IceTraderLogut=CH,News=B,IceTraderLoginAck=CI,IceTraderLogoutAck=CJ,IceUserDefinedSecurity=UDS,SRSecurityDefinitionReq=Uc,SRSecurityDefinition=Ud,SRDontKnowTrade=XQ,SessionFlush=UCQ,ApplMsgReq=BW,ApplMsgReqAck=BX,ApplMsgReport=BY,SRNewOrderSingle=D,OrderCancelRequest=F,OrderCancelReplaceRequest=G,AllocationInstruction=J,AllocationInstructionAck=P,MassQuote=i,MassQuoteAck=b,DarkQuote=S,DarkQuoteAck=AI,QuoteCancel=Z,AggGroupReport=UAG,XmlMessage=n,OrderMassActionRequest=CA,OrderMassActionReport=BZ
+Bool:enum:True=Y,False=N # this is a comment
+CommType:enum:PerShare=1,Percentage=2,Absolute=3
+### comment comment comment 
+ExecTransType:enum:New=0,Cancel=1,Correct=2,Status=3
+OrdStatus:enum:New=0,PartialFill=1,Filled=2,DoneForDay=3,Canceled=4,Replaced=5,PendingCxl=6,Stopped=7,Rejected=8,Suspended=9,PendingNew=A,Calculated=B,Expired=C,Accepted=D,PendingRpl=E,CmeTradeCxl=H,PendingCls=Y,Closed=Z,PendingTrg=T
+OrdType:enum:Market=1,Limit=2,Stop=3,StopLimit=4,MarketOnClose=5,LimitOnClose=B,Pegged=P,PdgqRef=R,BoxMarket=V,MarketOnOpen=Y,LimitOnOpen=Z,LekMarketOnOpen=A
+
+
+
+### --- Standard FIX 4.2/4.4 Tags ---
+
+1:Account:string
+6:AvgPx:price
+7:BeginSeqNo:int
+8:BeginString:string
+9:BodyLength:int
+10:CheckSum:string
+11:ClOrdID:string
+12:Commission:amt
+13:CommType:char
+14:CumQty:qty
+15:Currency:currency
+16:EndSeqNo:int
+17:ExecID:string
+18:ExecInst:MultipleValueString
+19:ExecRefID:string
+20:ExecTransType:char
+34:MsgSeqNum:int
+
+
+### --- Messages --- 
+NewOrderSingle:admin:D: ClOrdID(required), ClientID, ExecBroker, Account, NoAllocs(required)[AllocAccount(required), AllocShares]
+TestRequest:admin:1:TestReqID(required)

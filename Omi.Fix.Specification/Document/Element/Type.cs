@@ -3,7 +3,6 @@
     /// <summary>
     ///  Fix Field Type Declaration
     /// </summary>
-
     public class Type
     {
         /// <summary>
@@ -20,10 +19,10 @@
 
         public Enums Enums = new Enums();
 
-
-
         public bool IsEnum
             => Enums.Exist;
+        public override string ToString()
+        => $"{Tag} => {Name}, {Underlying}";
 
     }
 }

@@ -3,9 +3,8 @@
     using System.Linq;
 
     /// <summary>
-    /// 
+    /// List of enum values for a Field
     /// </summary>
-
     public class Enums : List<Enum>
     {
         /// <summary>
@@ -15,7 +14,7 @@
         { }
 
         /// <summary>
-        /// 
+        /// Constructs enums from an IEnumerable
         /// </summary>
         public Enums(IEnumerable<Enum> enums)
         { 
@@ -36,7 +35,7 @@
 
 
         /// <summary>
-        /// 
+        /// Convert enums from specification to fixml format
         /// </summary>
         public static Enums From(Fix.Specification.Type type)
         {

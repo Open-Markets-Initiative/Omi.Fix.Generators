@@ -9,13 +9,13 @@
     public class Components : List<Component> {
 
         /// <summary>
-        /// 
+        /// default constructor
         /// </summary>
         public Components()
         { }
 
         /// <summary>
-        /// 
+        /// Constructor from IEnumerable
         /// </summary>
         public Components(IEnumerable<Component> components)
         { 
@@ -23,13 +23,13 @@
         }
 
         /// <summary>
-        /// 
+        /// convert from xml  to fixml component 
         /// </summary>
         public static Components From(Xml.fix xml)
             => new Components(ListFrom(xml).Select(Component.From));
 
         /// <summary>
-        /// 
+        /// FixComponent from xml file
         /// </summary>
         public static Xml.fixComponent[] ListFrom(Xml.fix xml)
             => xml.components ?? new Xml.fixComponent[0];

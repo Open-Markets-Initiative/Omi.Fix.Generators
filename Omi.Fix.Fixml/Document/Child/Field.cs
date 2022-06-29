@@ -5,7 +5,6 @@
     /// <summary>
     ///  Fix Xml Field Element
     /// </summary>
-
     public class Field : IChild {
 
         public string Name { get; set;}
@@ -13,10 +12,10 @@
         public bool Required { get; set;}
 
         /// <summary>
-        /// 
+        /// Obtain child from any objecy
         /// </summary>
         public static IChild From(object item) {
-            // verify format
+            // verify format and return child of given type
             if (item.GetType() == typeof(Fixml.Xml.fixChildField))
             {
                 var field = (Fixml.Xml.fixChildField)item;
@@ -40,7 +39,7 @@
         }
 
         /// <summary>
-        /// 
+        /// Convert from specification to xml format
         /// </summary>
         public static IChild From(Fix.Specification.Field field) {
             switch (field.Kind) {
@@ -60,7 +59,7 @@
 
 
         /// <summary>
-        /// 
+        /// Obtain field from child
         /// </summary>
         public static Field From(Xml.fixChildField field)
         {
@@ -73,14 +72,14 @@
         }
 
         /// <summary>
-        /// 
+        /// write field to stream
         /// </summary>
         public void Write(System.IO.StreamWriter stream) { // indent 
             stream.WriteLine($"    <field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
         }
 
         /// <summary>
-        /// 
+        /// Convert field to specification
         /// </summary>
         public Omi.Fix.Specification.Field ToSpecification()
             => new Omi.Fix.Specification.Field { Kind = Kind.Field, Name = Name, Required = Required };

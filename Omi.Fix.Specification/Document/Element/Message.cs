@@ -4,12 +4,9 @@
     /// <summary>
     ///  Normalized Fix Specification Message
     /// </summary>
-
     public class Message
     {
-        /// <summary>
-        ///  
-        /// </summary>
+
         public string Name { get; set;}
 
         public string Type { get; set;}

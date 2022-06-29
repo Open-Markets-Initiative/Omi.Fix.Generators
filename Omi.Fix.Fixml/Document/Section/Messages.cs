@@ -4,7 +4,7 @@ using System.Linq;
 namespace Omi.Fixml {
 
     /// <summary>
-    ///  
+    ///  List of messsages in fixml file
     /// </summary>
 
     public class Messages : List<Message>
@@ -16,7 +16,7 @@ namespace Omi.Fixml {
         { }
 
         /// <summary>
-        /// 
+        /// Messages from IEnumerable
         /// </summary>
         public Messages(IEnumerable<Message> messages)
         { 
