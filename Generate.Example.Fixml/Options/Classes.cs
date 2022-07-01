@@ -1,5 +1,7 @@
 ﻿namespace Fixml.Generator.Xml
 {
+    #pragma warning disable CS8618
+
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
