@@ -35,9 +35,9 @@
         /// </summary>
         public static Group From(string pair)
         {
-
+            pair = pair.Trim();    
             // if string has square bracket, children exist
-            var children = new Omi.Fix.Txt.Children();
+            var children = new Children();
             if (pair.Contains("["))
             {
                 if (!pair.Contains("]"))
@@ -51,7 +51,7 @@
 
                 var childstring = pair.Substring(start, end - start);
 
-                children = Omi.Fix.Txt.Children.From(childstring);
+                children = Txt.Children.From(childstring);
             }
 
             // default for requirement is false
@@ -87,7 +87,7 @@
         /// <summary>
         /// Obtain specification for group
         /// </summary>
-        public Fix.Specification.Field ToSpecification()
+        public Specification.Field ToSpecification()
         {
             var field = new Specification.Field();
             field.Name = this.Name;
@@ -95,11 +95,11 @@
 
             // convert each child to specification 
             var child = this.Children;
-            var children = new List<Omi.Fix.Specification.Field>();
+            var children = new List<Specification.Field>();
 
-            foreach (var chi in child)
+            foreach (var childelement in child)
             {
-                children.Add(chi.ToSpecification());
+                children.Add(childelement.ToSpecification());
             }
 
             field.Children = children;

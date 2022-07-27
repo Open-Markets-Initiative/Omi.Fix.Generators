@@ -70,9 +70,9 @@
         /// <summary>
         /// Obtain Fix specification from message
         /// </summary>
-        public Fix.Specification.Messages ToSpecification()
+        public Specification.Messages ToSpecification()
         {
-            var messages = new Fix.Specification.Messages();
+            var messages = new Specification.Messages();
             foreach (var message in this)
             {
                 messages.Add(message.ToSpecification());

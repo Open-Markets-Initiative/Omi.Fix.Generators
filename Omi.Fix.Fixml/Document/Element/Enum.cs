@@ -5,7 +5,6 @@
     /// <summary>
     /// Contains value and data for a fix enumerator
     /// </summary>
-
     public class Enum
     {
         public string Value;

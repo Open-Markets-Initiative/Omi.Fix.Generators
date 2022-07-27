@@ -1,4 +1,5 @@
 ﻿namespace Omi.Fixml.Child {
+    
     using Omi.Fix.Specification;
 
     public class Component : IChild
@@ -23,27 +24,34 @@
         }
 
         /// <summary>
+        /// Write child component to stream with appropriate indent 
+        /// </summary>
+        public void Write(StreamWriter stream, IChild child)
+        {
+            stream.WriteLine($"      <component name=\"{child.Name}\"/>");
+        }
+
+        /// <summary>
         /// Constructs component from field element
         /// </summary>
         public static Component From(Fix.Specification.Field element)
-            => new Component 
-            {
+            => new () {
                 Name = element.Name,
             };
 
         /// <summary>
         /// Writes component to XML file
         /// </summary>
-        public void Write(System.IO.StreamWriter stream) // need one with different indent
+        public void Write(StreamWriter stream) 
         {
-            stream.WriteLine($"    <component name=\"{Name}\"/>");
+            stream.WriteLine($"      <component name=\"{Name}\"/>");
         }
 
         /// <summary>
         /// Converts component to specification
         /// </summary>
-        public Omi.Fix.Specification.Field ToSpecification()
-            => new Omi.Fix.Specification.Field 
+        public Fix.Specification.Field ToSpecification()
+            => new Fix.Specification.Field 
             {
                 Kind = Kind.Component,
                 Name = Name, 

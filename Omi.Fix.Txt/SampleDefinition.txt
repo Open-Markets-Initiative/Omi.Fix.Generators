@@ -9,7 +9,7 @@ ExecTransType:enum:New=0,Cancel=1,Correct=2,Status=3
 OrdStatus:enum:New=0,PartialFill=1,Filled=2,DoneForDay=3,Canceled=4,Replaced=5,PendingCxl=6,Stopped=7,Rejected=8,Suspended=9,PendingNew=A,Calculated=B,Expired=C,Accepted=D,PendingRpl=E,CmeTradeCxl=H,PendingCls=Y,Closed=Z,PendingTrg=T
 OrdType:enum:Market=1,Limit=2,Stop=3,StopLimit=4,MarketOnClose=5,LimitOnClose=B,Pegged=P,PdgqRef=R,BoxMarket=V,MarketOnOpen=Y,LimitOnOpen=Z,LekMarketOnOpen=A
 
-
+UnderlyingSecurityIDSource:enum:CUSIP=1,SEDOl=2,QUIK=3,ISIN_NUMBER=4,RIC_CODE=5,ISO_CURRENCY_CODE=6,ISO_COUNTRY_CODE=7,EXCHANGE_SYMBOL=8,CTA_SYMBOL=9,BLOOMBERG_SYMBOL=A,WERTPAPIER=B,DUTCH=C,VALORAN=D,SICOVAM=E,BELGIAN=F,COMMON=G,CLEARING_HOUSE=H,ISDA=I,OPTION_PRICE_REPORTING_AUTHORITY="J"
 
 ### --- Standard FIX 4.2/4.4 Tags ---
 

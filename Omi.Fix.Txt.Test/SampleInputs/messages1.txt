@@ -1,0 +1,4 @@
+
+### --- Messages --- 
+NewOrderSingle:admin:D: ClOrdID(required), ClientID, ExecBroker, Account, NoAllocs(required)[AllocAccount(required), AllocShares]
+TestRequest:admin:1:TestReqID(required)

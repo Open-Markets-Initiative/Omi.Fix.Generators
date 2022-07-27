@@ -81,13 +81,13 @@
         /// <summary>
         /// Convert fields to specification
         /// </summary>
-        public Fix.Specification.Types ToSpecification(Enums enums)
+        public Specification.Types ToSpecification(Enums enums)
         {
-            var fields = new Fix.Specification.Types();
+            var fields = new Specification.Types();
 
             foreach (var field in this)
             {
-                fields.Add(field.ToSpecification(enums));
+                fields.Add( field.Name , field.ToSpecification(enums));
             }
 
             return fields;

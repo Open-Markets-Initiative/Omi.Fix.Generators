@@ -1,6 +1,6 @@
-﻿namespace Omi.Fix.Sbe.V2.Xml {
+﻿namespace Omi.Fix.Sbe.Xml {
 
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
 
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -152,7 +152,7 @@
 
         private typesEnum[] enumField;
 
-        private typesSet[] setField;
+        private typesSet setField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("type")]
@@ -197,8 +197,7 @@
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("set")]
-        public typesSet[] set
+        public typesSet set
         {
             get
             {
@@ -472,13 +471,9 @@
 
         private string presenceField;
 
-        private long nullValueField;
+        private ulong nullValueField;
 
         private bool nullValueFieldSpecified;
-
-        private byte offsetField;
-
-        private bool offsetFieldSpecified;
 
         private string valueField;
 
@@ -582,7 +577,7 @@
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public long nullValue
+        public ulong nullValue
         {
             get
             {
@@ -605,34 +600,6 @@
             set
             {
                 this.nullValueFieldSpecified = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte offset
-        {
-            get
-            {
-                return this.offsetField;
-            }
-            set
-            {
-                this.offsetField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool offsetSpecified
-        {
-            get
-            {
-                return this.offsetFieldSpecified;
-            }
-            set
-            {
-                this.offsetFieldSpecified = value;
             }
         }
 
@@ -886,7 +853,7 @@
 
         private group[] groupField;
 
-        private data[] dataField;
+        private data dataField;
 
         private string nameField;
 
@@ -931,8 +898,8 @@
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("data", Namespace = "")]
-        public data[] data
+        [System.Xml.Serialization.XmlElementAttribute(Namespace = "")]
+        public data data
         {
             get
             {
@@ -1212,7 +1179,7 @@
 
         private string descriptionField;
 
-        private ushort blockLengthField;
+        private byte blockLengthField;
 
         private string dimensionTypeField;
 
@@ -1278,7 +1245,7 @@
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ushort blockLength
+        public byte blockLength
         {
             get
             {
@@ -1348,7 +1315,7 @@
 
         private string descriptionField;
 
-        private ushort offsetField;
+        private byte offsetField;
 
         private bool offsetFieldSpecified;
 
@@ -1412,7 +1379,7 @@
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ushort offset
+        public byte offset
         {
             get
             {
@@ -1541,7 +1508,5 @@
             }
         }
     }
-
-
 
 }

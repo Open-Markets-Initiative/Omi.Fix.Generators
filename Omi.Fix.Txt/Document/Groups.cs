@@ -66,9 +66,9 @@
         /// <summary>
         /// Obtain specification for fields associated with message
         /// </summary>
-        public List<Fix.Specification.Field> ToSpecification()
+        public List<Specification.Field> ToSpecification()
         {
-            var fields = new List<Fix.Specification.Field>(); 
+            var fields = new List<Specification.Field>(); 
             foreach (var field in this)
             {
                 fields.Add(field.ToSpecification());

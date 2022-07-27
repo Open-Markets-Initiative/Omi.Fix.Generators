@@ -1,0 +1,3 @@
+
+FixVersion:enum:FIX40=FIX.4.0,FIX41=FIX.4.1
+Bool:enum:True=Y,False=N # this is a comment

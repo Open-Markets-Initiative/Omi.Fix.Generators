@@ -1,0 +1,7 @@
+<fix major="4" minor="2">
+	<header>
+		<field name="BeginString" />
+		<field name="BodyLength" required="Y"/>
+		<field name="MsgType" required="Y"/>
+	</header>
+</fix>

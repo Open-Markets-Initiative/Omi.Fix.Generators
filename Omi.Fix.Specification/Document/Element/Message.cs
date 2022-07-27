@@ -15,5 +15,7 @@
 
         public List<Field> Fields = new List<Field>();
 
+        public Types Types = new Types();   
+
     }
 }

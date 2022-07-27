@@ -67,7 +67,7 @@
         /// <summary>
         ///  Write header out to Fixml
         /// </summary>
-        public void Write(System.IO.StreamWriter stream)
+        public void Write(StreamWriter stream)
         {
             if (this.Any())
             {

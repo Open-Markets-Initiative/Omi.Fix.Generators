@@ -82,7 +82,7 @@
         /// </summary>
         public Fix.Specification.Description ToSpecification()
         {
-            var desc = new Fix.Specification.Description();
+            var desc = new Specification.Description();
 
             desc.Major = this.Major;
             desc.Minor = this.Minor;

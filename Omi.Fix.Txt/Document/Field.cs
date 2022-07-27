@@ -265,7 +265,7 @@
         /// <summary>
         /// Converts enums to normalized fix specification
         /// </summary>
-        public Fix.Specification.Type ToSpecification(Enums enums)
+        public Specification.Type ToSpecification(Enums enums)
         {
             var type = new Fix.Specification.Type();
             type.Tag = (uint)Int16.Parse(Number);

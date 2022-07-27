@@ -23,7 +23,7 @@
                     Name = field.name,
                     Number = field.number,
                     Type = field.type,
-                    Enums = Enums.From(field)
+                    Enums = Enums.From(field),
                 };
             }
 
@@ -37,7 +37,9 @@
         {
             var section = new Fields();
 
-            foreach (var field in fields) // need ??
+            var fieldslist = fields.Select( f => f.Value).ToList();
+
+            foreach (var field in fieldslist) // need ??
             {
                 // verify field name exists // format
                 section[field.Name] = new Field
@@ -45,7 +47,10 @@
                     Name = field.Name,
                     Number = field.Tag,
                     Type = field.Underlying,
-                    Enums = Enums.From(field)
+                    Enums = Enums.From(field),
+                    Description = field.Description,
+                    Required = field.Required,  
+                    Version = field.Version,
                 };
             }
 
@@ -55,13 +60,12 @@
         /// <summary>
         /// Write fields to stream
         /// </summary>
-        public void Write(System.IO.StreamWriter stream)
+        public void Write(StreamWriter stream)
         {
             if (Values.Any())
             {
                 stream.WriteLine("  <fields>");
 
-                // need sort by tag
 
                 foreach (var field in Values)
                 {
@@ -83,9 +87,11 @@
         {
             var types = new Fix.Specification.Types();
 
-            foreach (var pair in this)
+            var fields = this.Select(f => f.Value).ToList();
+
+            foreach (var pair in fields)
             {
-                types.Add(pair.Value.ToSpecification());
+                types.Add(pair.Name , pair.ToSpecification());
             }
             
             return types;

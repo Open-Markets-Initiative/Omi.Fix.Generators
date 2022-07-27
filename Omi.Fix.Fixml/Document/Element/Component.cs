@@ -59,9 +59,9 @@
         /// <summary>
         /// write componenet to xml file 
         /// </summary>
-        public void Write(System.IO.StreamWriter stream) // need one with different indent
+        public void Write(StreamWriter stream)
         {
-            if (HasFields) // need indents
+            if (HasFields) 
             {
                 stream.WriteLine($"    <component name=\"{Name}\">");
                 

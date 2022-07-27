@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Omi.Fix.Specification\Omi.Fix.Specification.csproj" />
+  </ItemGroup>
+
 </Project>

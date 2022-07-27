@@ -15,6 +15,9 @@
 
         public List<Field> Children = new List<Field>();
 
+        /// <summary>
+        /// Convert field to string 
+        /// </summary>
         public override string ToString()
         {
             switch (Kind)

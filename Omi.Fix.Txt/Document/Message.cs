@@ -58,8 +58,8 @@
         /// Obtain Fix specification for message from text
         /// </summary>
         /// <returns></returns>
-        public Fix.Specification.Message ToSpecification()
-        => new Fix.Specification.Message
+        public Specification.Message ToSpecification()
+        => new Specification.Message
         {
             Name = Name,
             Type = Type,

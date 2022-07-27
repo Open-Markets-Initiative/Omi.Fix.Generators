@@ -23,8 +23,8 @@
         public static Enum From(string line)
             => new Enum
             {
-                Name = Enum.NameFrom(line),
-                Values = Enum.ValuesFrom(line)
+                Name = NameFrom(line),
+                Values = ValuesFrom(line)
             };
 
         /// <summary>
@@ -113,9 +113,9 @@
         /// <summary>
         /// get enum to specification 
         /// </summary>
-        public static Fix.Specification.Enum ToSpecification(Value line)
+        public static Specification.Enum ToSpecification(Value line)
         {
-            var enumiumie = new Fix.Specification.Enum();
+            var enumiumie = new Specification.Enum();
             enumiumie.Value = line.Data;
             enumiumie.Description = line.Name;
 

@@ -30,9 +30,9 @@
                 Required = Is.Required(element.required)
             };
 
-            foreach (var item in element.Items) // need ??
+            foreach (var item in element.Items) 
             {
-                group.Add(Child.Field.From(item));
+                group.Add(Field.From(item));
             }
 
             return group;
@@ -51,31 +51,34 @@
 
             foreach (var item in element.Children)
             {
-                group.Add(Child.Field.From(item));
+                group.Add(Field.From(item));
             }
 
             return group;
         }
-
+       public void Write(StreamWriter stream, IChild child)
+        {
+            stream.WriteLine($"        <{Extensions.ToSpecification(child).Kind.ToString().ToLower()} name=\"{child.Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+        }
         /// <summary>
         /// Write groups to xml file 
         /// </summary>
-        public void Write(System.IO.StreamWriter stream) // need one with different indent
+        public void Write(StreamWriter stream) // need one with different indent
         {
             if (HasFields) 
             {
-                stream.WriteLine($"    <group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
+                stream.WriteLine($"      <group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
                 
                 foreach (var child in this)
                 {
-                    child.Write(stream);
+                   Write(stream, child); 
                 }
 
-                stream.WriteLine("    </group>");
+                stream.WriteLine("      </group>");
             }
             else
             {
-                stream.WriteLine($"    <group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+                stream.WriteLine($"        <group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
             }
         }
 

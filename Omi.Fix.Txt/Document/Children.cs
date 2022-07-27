@@ -1,4 +1,4 @@
-﻿namespace Omi.Fix.Txt{
+﻿namespace Omi.Fix.Txt {
     using System.Collections.Generic;
     using System.Linq;
     using Omi.Fix.Specification;
@@ -36,9 +36,9 @@
         /// <summary>
         /// Convert children to fix specificiation
         /// </summary>
-        public List<Fix.Specification.Field> ToSpecification()
+        public List<Specification.Field> ToSpecification()
         {
-            var fields = new List<Fix.Specification.Field>(); 
+            var fields = new List<Specification.Field>(); 
 
             foreach (var field in this)
             {

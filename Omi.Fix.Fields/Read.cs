@@ -6,7 +6,6 @@
     /// <summary>
     ///  Load xml elements into generated object classes
     /// </summary>
-
     public static class Xml {
 
         /// <summary>

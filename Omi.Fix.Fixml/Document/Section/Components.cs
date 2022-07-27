@@ -5,7 +5,6 @@
     /// <summary>
     ///  Fixml Components Xml Element (Components Section)
     /// </summary>
-
     public class Components : List<Component> {
 
         /// <summary>
@@ -45,7 +44,7 @@
         /// <summary>
         ///  Write components out to Fixml
         /// </summary>
-        public void Write(System.IO.StreamWriter stream)
+        public void Write(StreamWriter stream)
         {
             if (this.Any())
             {

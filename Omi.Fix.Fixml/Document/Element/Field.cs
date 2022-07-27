@@ -30,12 +30,27 @@
         /// </summary>
         public Enums Enums = new Enums();
 
+        /// <summary>
+        /// description of field 
+        /// </summary>
+        public string Description;
+
+        /// <summary>
+        /// is field required?
+        /// </summary>
+        public bool Required;
+
+        /// <summary>
+        /// fix version of associated field
+        /// </summary>
+        public string Version;
+
         #endregion
 
         /// <summary>
         /// Writes fixml field to stream
         /// </summary>
-        public void Write(System.IO.StreamWriter stream)
+        public void Write(StreamWriter stream)
         {
             if (IsEnum)
             {
@@ -65,7 +80,10 @@
                 Tag = Number, 
                 Name = Name, 
                 Underlying = Type,
-                Enums = Enums.ToSpecification()
+                Enums = Enums.ToSpecification(),
+                Description = Description,
+                Required = Required,    
+                Version = Version
             };
 
 

@@ -22,12 +22,24 @@
         /// </summary>
         public Header Header = new Header();
 
+        /// <summary>
+        /// Fixml Trailer 
+        /// </summary>
         public Trailer Trailer = new Trailer();
 
+        /// <summary>
+        /// Fixml Messages
+        /// </summary>
         public Messages Messages = new Messages();
 
+        /// <summary>
+        /// Fixml components
+        /// </summary>
         public Components Components = new Components();
 
+        /// <summary>
+        /// Fixml Fields
+        /// </summary>
         public Fields Fields = new Fields();
 
         /// <summary>
@@ -47,26 +59,27 @@
         /// </summary>
         public static Document From(Xml.fix xml)
           => new Document {
-                Header = Fixml.Header.From(xml),
-                Trailer = Fixml.Trailer.From(xml),
-                Messages = Fixml.Messages.From(xml),
-                Components = Fixml.Components.From(xml),
-                Fields = Fixml.Fields.From(xml)
+                Header = Header.From(xml),
+                Trailer = Trailer.From(xml),
+                Messages = Messages.From(xml),
+                Components = Components.From(xml),
+                Fields = Fields.From(xml)
             };
 
         /// <summary>
         ///  Load fixml file from path 
         /// </summary>
         public static Document From(string path) {
-            var xml = Fixml.Load.From(path);
+            var xml = Load.From(path);
 
             return From(xml);
         }
 
+
         /// <summary>
         ///  Write fixml file to stream
         /// </summary>
-        public void Write(System.IO.StreamWriter stream) {
+        public void Write(StreamWriter stream) {
             stream.WriteLine($"<fix major=\"{Major}\" minor=\"{this.Minor}\">"); // sp etc
             
             Header.Write(stream); 

@@ -9,7 +9,9 @@
     {
         string Name { get;}
 
-        void Write(System.IO.StreamWriter stream);
+        void Write(StreamWriter stream);
+
+        void Write(StreamWriter stream, IChild child);
     }
 
     public static partial class Extensions

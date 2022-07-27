@@ -16,23 +16,23 @@
         /// </summary>
         public static IChild From(object item) {
             // verify format and return child of given type
-            if (item.GetType() == typeof(Fixml.Xml.fixChildField))
+            if (item.GetType() == typeof(Xml.fixChildField))
             {
-                var field = (Fixml.Xml.fixChildField)item;
+                var field = (Xml.fixChildField)item;
 
                 return Field.From(field);
             }
-            if (item.GetType() == typeof(Fixml.Xml.fixChildGroup))
+            if (item.GetType() == typeof(Xml.fixChildGroup))
             {
-                var field = (Fixml.Xml.fixChildGroup)item;
+                var field = (Xml.fixChildGroup)item;
 
                 return Group.From(field);  
             }
-            if (item.GetType() == typeof(Fixml.Xml.fixChildComponent))
+            if (item.GetType() == typeof(Xml.fixChildComponent))
             {
-                var field = (Fixml.Xml.fixChildComponent)item;
+                var field = (Xml.fixChildComponent)item;
 
-                return Child.Component.From(field);  
+                return Component.From(field);  
             }
 
             throw new ArgumentOutOfRangeException();
@@ -74,15 +74,23 @@
         /// <summary>
         /// write field to stream
         /// </summary>
-        public void Write(System.IO.StreamWriter stream) { // indent 
-            stream.WriteLine($"    <field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+        public void Write(StreamWriter stream) { 
+            stream.WriteLine($"      <field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+        }
+
+        /// <summary>
+        /// Write child field component to stream
+        /// </summary>
+        public void Write(StreamWriter stream, IChild child)
+        { 
+            stream.WriteLine($"    <field name=\"{child.Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
         }
 
         /// <summary>
         /// Convert field to specification
         /// </summary>
-        public Omi.Fix.Specification.Field ToSpecification()
-            => new Omi.Fix.Specification.Field { Kind = Kind.Field, Name = Name, Required = Required };
+        public Fix.Specification.Field ToSpecification()
+            => new Fix.Specification.Field { Kind = Kind.Field, Name = Name, Required = Required };
 
         /// <summary>
         ///  Display Fixml child field as string

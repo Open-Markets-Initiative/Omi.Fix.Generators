@@ -12,6 +12,12 @@
 
         public string Name;
 
+        public string Description;
+
+        public bool Required;
+
+        public string Version;
+
         /// <summary>
         ///  Fix Field Underlying Type
         /// </summary>
@@ -19,8 +25,6 @@
 
         public Enums Enums = new Enums();
 
-        public bool IsEnum
-            => Enums.Exist;
         public override string ToString()
         => $"{Tag} => {Name}, {Underlying}";
 

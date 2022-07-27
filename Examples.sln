@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generate.Example.Fixml", "Generate.Example.Fixml\Generate.Example.Fixml.csproj", "{39E13C1D-C365-4505-BB0D-BABD8340979E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{00F538E0-D455-4E08-B79E-B6C9ADB0BBB1} = {00F538E0-D455-4E08-B79E-B6C9ADB0BBB1}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Omi.Fix.Specification", "Omi.Fix.Specification\Omi.Fix.Specification.csproj", "{A221E9DB-69B8-4A95-8415-0437025E4C3B}"
 EndProject
@@ -13,7 +16,28 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Omi.Fix.Sbe", "Omi.Fix.Sbe\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Omi.Fix.Txt", "Omi.Fix.Txt\Omi.Fix.Txt.csproj", "{103C76A1-4BC0-408D-B3F9-89195B1D1E37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omi.Fix.Fields", "Omi.Fix.Fields\Omi.Fix.Fields.csproj", "{00F538E0-D455-4E08-B79E-B6C9ADB0BBB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Omi.Fix.Fields", "Omi.Fix.Fields\Omi.Fix.Fields.csproj", "{00F538E0-D455-4E08-B79E-B6C9ADB0BBB1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{103C76A1-4BC0-408D-B3F9-89195B1D1E37} = {103C76A1-4BC0-408D-B3F9-89195B1D1E37}
+		{48318EB0-2731-4665-833E-9EDE33CD9942} = {48318EB0-2731-4665-833E-9EDE33CD9942}
+		{516B9D70-7578-429A-AE82-07A894183CB8} = {516B9D70-7578-429A-AE82-07A894183CB8}
+		{A221E9DB-69B8-4A95-8415-0437025E4C3B} = {A221E9DB-69B8-4A95-8415-0437025E4C3B}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generate.Example.Txt", "Generate.Example.Txt\Generate.Example.Txt.csproj", "{20CFA0C6-4A13-465D-B573-0EBA338C5EEC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{00F538E0-D455-4E08-B79E-B6C9ADB0BBB1} = {00F538E0-D455-4E08-B79E-B6C9ADB0BBB1}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omi.Fix.Fields.Test", "Omi.Fix.Fields.Test\Omi.Fix.Fields.Test.csproj", "{BB7BF44F-5891-417F-A101-B92B83D6EA9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omi.Fix.Fixml.Test", "Omi.Fix.Fixml.Test\Omi.Fix.Fixml.Test.csproj", "{8B569AC2-3663-4790-9142-2634F5C895C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omi.Fix.Sbe.Test", "Omi.Fix.Sbe.Test\Omi.Fix.Sbe.Test.csproj", "{A49A58E2-CDCA-4F3C-81F5-A733DE00301B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omi.Fix.Specification.Test", "Omi.Fix.Specification.Test\Omi.Fix.Specification.Test.csproj", "{426117E7-17E1-4E6A-B141-6A68E6509A12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omi.Fix.Txt.Test", "Omi.Fix.Txt.Test\Omi.Fix.Txt.Test.csproj", "{0FFA4E18-B176-409E-B6C7-16705C2DB695}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +69,30 @@ Global
 		{00F538E0-D455-4E08-B79E-B6C9ADB0BBB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00F538E0-D455-4E08-B79E-B6C9ADB0BBB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00F538E0-D455-4E08-B79E-B6C9ADB0BBB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20CFA0C6-4A13-465D-B573-0EBA338C5EEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20CFA0C6-4A13-465D-B573-0EBA338C5EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20CFA0C6-4A13-465D-B573-0EBA338C5EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20CFA0C6-4A13-465D-B573-0EBA338C5EEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB7BF44F-5891-417F-A101-B92B83D6EA9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB7BF44F-5891-417F-A101-B92B83D6EA9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB7BF44F-5891-417F-A101-B92B83D6EA9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB7BF44F-5891-417F-A101-B92B83D6EA9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B569AC2-3663-4790-9142-2634F5C895C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B569AC2-3663-4790-9142-2634F5C895C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B569AC2-3663-4790-9142-2634F5C895C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B569AC2-3663-4790-9142-2634F5C895C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A49A58E2-CDCA-4F3C-81F5-A733DE00301B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A49A58E2-CDCA-4F3C-81F5-A733DE00301B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A49A58E2-CDCA-4F3C-81F5-A733DE00301B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A49A58E2-CDCA-4F3C-81F5-A733DE00301B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{426117E7-17E1-4E6A-B141-6A68E6509A12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{426117E7-17E1-4E6A-B141-6A68E6509A12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{426117E7-17E1-4E6A-B141-6A68E6509A12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{426117E7-17E1-4E6A-B141-6A68E6509A12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FFA4E18-B176-409E-B6C7-16705C2DB695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FFA4E18-B176-409E-B6C7-16705C2DB695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FFA4E18-B176-409E-B6C7-16705C2DB695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FFA4E18-B176-409E-B6C7-16705C2DB695}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

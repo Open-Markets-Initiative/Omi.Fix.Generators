@@ -59,7 +59,12 @@
             // build enum from each valid line and add to list of enums
             foreach (var line in validlines)
             {
-                Enum enumerator = Enum.From(line);
+                var trimline = line;
+                if (line.Contains("#") && !line[0].Equals("#"))
+                {
+                    trimline = line.Substring(0, line.IndexOf("#"));
+                }
+                Enum enumerator = Enum.From(trimline);
                 enums.Add( enumerator.Name, enumerator); 
             }
 
@@ -69,7 +74,7 @@
         /// <summary>
         ///  Convert fixml enums to normalized fix specification enums for a given field name
         /// </summary>
-        public Fix.Specification.Enums ToSpecification(string key)
+        public Specification.Enums ToSpecification(string key)
         {
             var enums = new Fix.Specification.Enums();
                 
