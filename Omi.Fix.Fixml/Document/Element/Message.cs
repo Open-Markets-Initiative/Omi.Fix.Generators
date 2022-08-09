@@ -24,7 +24,7 @@
         /// </summary>
         public static Message From(Xml.fixMessage element)
         {
-            // verify values
+            // Verify values
             var message = new Message
             {
                 Name = element.name,
@@ -41,10 +41,10 @@
         }
 
         /// <summary>
-        /// obtain fixml message from specification 
+        /// Obtain fixml message from specification 
         /// </summary>
         public static Message From(Fix.Specification.Message element) {
-            // verify values
+            // Verify values
             var message = new Message
             {
                 Name = element.Name,
@@ -62,7 +62,7 @@
 
 
         /// <summary>
-        /// write fixml mmessage to file
+        /// Write fixml mmessage to file
         /// </summary>
         public void Write(StreamWriter stream) 
         {

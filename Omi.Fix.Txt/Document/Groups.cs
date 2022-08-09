@@ -4,28 +4,28 @@
     using Omi.Fix.Specification;
     
     /// <summary>
-    /// A list of the fields associated with a message
+    /// List of the fields associated with a message
     /// </summary>
     public class Groups : List<Group>
     {
         /// <summary>
-        /// default constructor
+        /// Default constructor
         /// </summary>
         public Groups()
         { }
 
         /// <summary>
-        /// constructs groups from string
+        /// Constructs groups from string
         /// </summary>
         public static Groups From(string groups)
         {
-            // parse string for each individual group
+            // Parse string for each individual group
             var netgroups = groups.Split(",");
             var grouplist = new List<string>();
             int delindex;
 
-            // if string had square bracket, children exist
-            // parse individual groups for children and attach to parent string
+            // If string had square bracket, children exist
+            // Parse individual groups for children and attach to parent string
             for (var count = 0; count < netgroups.Length; count += delindex)
             {
                 delindex = 1;
@@ -33,13 +33,13 @@
 
                 if (netgroups[count].Contains("["))
                 {
-                    // assume no group has morethan 1 million children, near-infinite loop
+                    // Assume no group has morethan 1 million children, near-infinite loop
                     for (var i = 1; i < 1000000; i++) 
                     {
-                        // keep adding to parent until end of repeating groups is found
+                        // Keep adding to parent until end of repeating groups is found
                         tempGroup = string.Concat(tempGroup, "," + netgroups[count + i]);
 
-                        //skip groups that were added as children, break from loop
+                        // Skip groups that were added as children, break from loop
                         if (netgroups[count + i].Contains("]"))
                         {
                             delindex += i;
@@ -53,7 +53,7 @@
 
             var grupos = new Groups();
 
-            //create group from each group in list
+            // Create group from each group in list
             foreach (var group in grouplist)
             {
                 var grupo = Group.From(group);

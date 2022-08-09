@@ -15,7 +15,7 @@
 
             foreach (var field in xml.header) // need ??
             {
-                // verify format
+                // Verify format
 
                 var name = field.name;
                 bool required;

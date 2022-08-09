@@ -15,7 +15,8 @@
         /// Obtain child from any objecy
         /// </summary>
         public static IChild From(object item) {
-            // verify format and return child of given type
+            
+            // Verify format and return child of given type
             if (item.GetType() == typeof(Xml.fixChildField))
             {
                 var field = (Xml.fixChildField)item;

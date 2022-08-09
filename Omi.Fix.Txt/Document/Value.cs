@@ -33,7 +33,7 @@
         /// </summary>
         public static Value From(string pair)
         {
-            // check valid input
+            // Check valid input
             if (string.IsNullOrWhiteSpace(pair))  
             {
                 throw new ArgumentException(nameof(pair));
@@ -45,7 +45,7 @@
                 throw new ArgumentException(nameof(pair));  
             }
 
-            // trim whitespace from string and find where name and data are split
+            // Trim whitespace from string and find where name and data are split
             var pairnowhite = String.Concat(pair.Where(c => !Char.IsWhiteSpace(c)));
             var name = pairnowhite.Substring(0, pairnowhite.IndexOf("="));
 

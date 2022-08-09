@@ -4,7 +4,9 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+
         #pragma warning disable CS8618
+
     /// <summary>
     ///  Load fixml field elements into generated object classes
     /// </summary>
@@ -16,24 +18,24 @@
         public static Xml.messageSchema XmlFrom(string xml)
         => iLink.Read.MessageSchema.As<Xml.messageSchema>(xml);
 
-            /// <summary>
-            ///  Load fields from file path and generate a specification document 
-            /// </summary>
-            public static Specification.Document From(string xml)
+        /// <summary>
+        ///  Load fields from file path and generate a specification document 
+        /// </summary>
+        public static Specification.Document From(string xml)
+        {
+            var schema = iLink.Read.MessageSchema.As<Xml.messageSchema>(xml);
+
+
+            return new Specification.Document
             {
-                var schema = iLink.Read.MessageSchema.As<Xml.messageSchema>(xml);
-
-
-                return new Specification.Document
-                {
-                    Description = new Specification.Description(),
-                    Header = new Specification.Header(),
-                    Trailer = new Specification.Trailer(),
-                    Messages = MessageFrom(schema),
-                    Components = new Specification.Components(),
-                    Fields = FieldsFrom(schema)
-                };
-            }
+                Description = new Specification.Description(),
+                Header = new Specification.Header(),
+                Trailer = new Specification.Trailer(),
+                Messages = MessageFrom(schema),
+                Components = new Specification.Components(),
+                Fields = FieldsFrom(schema)
+            };
+        }
 
         /// <summary>
         /// Obtain message from xml
@@ -77,15 +79,16 @@
             }
             return messageFields;
         }
-            /// <summary>
-            ///  Load fields from file
-            /// </summary>
-            public static Specification.Types FieldsFrom(Xml.messageSchema xml)
+
+        /// <summary>
+        /// Load fields from file
+        /// </summary>
+        public static Specification.Types FieldsFrom(Xml.messageSchema xml)
         {
             var fields = new Specification.Types();
             var ids = new HashSet<int>();
 
-            // pull fields from messages
+            // Pull fields from messages
 
             foreach (var message in xml.message) 
             {
@@ -104,7 +107,7 @@
                         });
 
                     }
-                    // repeating group fields  
+                    // Repeating group fields  
                     if (message.group != null)
                     {
                         foreach (var group in message.group)
@@ -142,10 +145,10 @@
                 }
             }
                 return fields;
-            }
+        }
 
         /// <summary>
-        /// obtains and concats all fields from the given xml files 
+        /// Obtains and concats all fields from the given xml files 
         /// </summary>
         public static Specification.Types ConcatenateFields(string xml2, string xml3, string xml4, string xml5, string xml6, string xml7, string xml8)
         {

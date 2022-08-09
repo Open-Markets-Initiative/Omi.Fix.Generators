@@ -37,13 +37,13 @@
         /// </summary>
         public static Description From(IEnumerable<string> lines)
         {
-            // default description 
+            // Default description 
             var major = "4";
             var minor = "2";
 
             string line = "";
 
-            //parse lines for description
+            // Parse lines for description
             foreach (var descriptionline in lines)
             {
                 if (descriptionline.StartsWith("#") || string.IsNullOrWhiteSpace(descriptionline))
@@ -57,7 +57,7 @@
 
             }
 
-            //clean up line to obtain major and minor versions
+            // Clean up line to obtain major and minor versions
             if (string.IsNullOrWhiteSpace(line))
             {
                 return From(major, minor);
@@ -68,7 +68,7 @@
                 line = line.Substring(0, line.IndexOf("#"));
             }
 
-             line = String.Concat(line.Where(c => !Char.IsWhiteSpace(c)));
+            line = String.Concat(line.Where(c => !Char.IsWhiteSpace(c)));
             
 
             major = line.Substring(line.IndexOf("Major=") + 6, 1);
@@ -80,7 +80,7 @@
         /// <summary>
         /// Converts description to specification
         /// </summary>
-        public Fix.Specification.Description ToSpecification()
+        public Specification.Description ToSpecification()
         {
             var desc = new Specification.Description();
 

@@ -22,7 +22,7 @@
         /// </summary>
         public static Component From(Xml.fixComponent element)
         {
-            // verify values
+            // Verify values
             var component = new Component
             {
                 Name = element.name,
@@ -41,7 +41,7 @@
         /// </summary>
         public static Component From(Fix.Specification.Component element)
         {
-            // verify values
+            // Verify values
             var component = new Component
             {
                 Name = element.Name,
@@ -57,7 +57,7 @@
 
 
         /// <summary>
-        /// write componenet to xml file 
+        /// Write componenet to xml file 
         /// </summary>
         public void Write(StreamWriter stream)
         {

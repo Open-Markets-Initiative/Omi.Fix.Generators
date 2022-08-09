@@ -43,7 +43,7 @@
 
             foreach (var @enum in type.Enums)
             {
-                // check values
+                // Check values
                 enums.Add(new Enum
                 {
                     Value = @enum.Value,

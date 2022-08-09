@@ -92,7 +92,7 @@
         }
 
         /// <summary>
-        /// write document to stream
+        /// Write document to stream
         /// </summary>
         public void WriteTo(string path)
         {

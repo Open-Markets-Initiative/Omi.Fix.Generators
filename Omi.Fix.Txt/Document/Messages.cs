@@ -32,7 +32,7 @@
         {
             var messages = new List<string>();
 
-            // check if line contains message information, then process 
+            // Check if line contains message information, then process 
             foreach (var line in lines)
             {
                 if (string.IsNullOrWhiteSpace(line))

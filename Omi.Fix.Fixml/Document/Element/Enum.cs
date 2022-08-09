@@ -12,7 +12,7 @@
         public string Description;
 
         /// <summary>
-        /// constructs an enum from a field value
+        /// Constructs an enum from a field value
         /// </summary>
         public static Enum From(Xml.fixFieldValue @enum)
             => new Enum {
@@ -22,7 +22,7 @@
         
 
         /// <summary>
-        /// places Enum in specification format
+        /// Places Enum in specification format
         /// </summary>
         public Fix.Specification.Enum ToSpecification()
             => new Fix.Specification.Enum {

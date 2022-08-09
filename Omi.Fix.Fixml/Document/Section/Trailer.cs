@@ -15,7 +15,7 @@
 
             foreach (var field in xml.trailer) // need ??
             {
-                // verify format
+                // Verify format
 
                 var name = field.name;
                 bool required;
@@ -44,7 +44,7 @@
         }
 
         /// <summary>
-        /// fixml trailer from specification trailer
+        /// Fixml trailer from specification trailer
         /// </summary>
         public static Trailer From(Fix.Specification.Trailer trailer)
         {
@@ -52,7 +52,7 @@
 
             foreach (var field in trailer)
             {
-                // verify format
+                // Verify format
 
                 section.Add(new Child.Field
                 {

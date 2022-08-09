@@ -3,7 +3,7 @@
     using System.Linq;
 
     /// <summary>
-    /// dictionary of the Enum(s) found in a file, with its name as the index
+    /// Dictionary of the Enum(s) found in a file, with its name as the index
     /// </summary>
     public class Enums : Dictionary<string, Enum>
     {
@@ -36,7 +36,7 @@
 
             var enums = new List<string>();
 
-            // check that line contains enums
+            // Check that line contains enums
             foreach (var line in lines)
             {
                 if (line.Contains(":enum:") && !line[0].Equals("#"))
@@ -56,7 +56,7 @@
             var enums = new Enums();
             var validlines = lines.ToList().Where( l => !l.StartsWith("#"));
 
-            // build enum from each valid line and add to list of enums
+            // Build enum from each valid line and add to list of enums
             foreach (var line in validlines)
             {
                 var trimline = line;
@@ -64,6 +64,7 @@
                 {
                     trimline = line.Substring(0, line.IndexOf("#"));
                 }
+
                 Enum enumerator = Enum.From(trimline);
                 enums.Add( enumerator.Name, enumerator); 
             }
@@ -78,13 +79,13 @@
         {
             var enums = new Fix.Specification.Enums();
                 
-            // different names for beginstring and fixversion
+            // Different names for beginstring and fixversion
             if (key.Contains("BeginString"))
             {
                 key = "FixVersion";
             }
 
-            // check for field name in enums
+            // Check for field name in enums
             if (!this.ContainsKey(key))
             {
                 return enums;
@@ -97,7 +98,7 @@
                 return enums;
             }
 
-            // if enums exist, return in correct specification
+            // If enums exist, return in correct specification
             foreach (var line in enumerator)
             {
                 var enumline = Enum.ToSpecification(line);

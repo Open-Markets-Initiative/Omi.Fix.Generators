@@ -10,11 +10,11 @@
         public string Name { get; set;}
 
         /// <summary>
-        /// obtains child components from Xml element
+        /// Obtains child components from Xml element
         /// </summary>
         public static Component From(Xml.fixChildComponent element)
         {
-            // verify values
+            // Verify values
             var component = new Component
             {
                 Name = element.name,

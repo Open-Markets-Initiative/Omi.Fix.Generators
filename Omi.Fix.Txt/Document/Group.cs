@@ -36,7 +36,7 @@
         public static Group From(string pair)
         {
             pair = pair.Trim();    
-            // if string has square bracket, children exist
+            // If string has square bracket, children exist
             var children = new Children();
             if (pair.Contains("["))
             {
@@ -45,7 +45,7 @@
                     throw new ArgumentException(pair, "invalid group format");
                 }
 
-                // trim substring containing children and obtain children
+                // Trim substring containing children and obtain children
                 int start = pair.IndexOf("[") + 1;
                 int end = pair.IndexOf("]", start);
 
@@ -54,11 +54,11 @@
                 children = Txt.Children.From(childstring);
             }
 
-            // default for requirement is false
+            // Default for requirement is false
             var required = false;
             string name;
 
-            // check if group required, parse for name
+            // Check if group required, parse for name
             if (pair.Contains("("))
             {
                 name = pair.Substring(0, pair.IndexOf("("));

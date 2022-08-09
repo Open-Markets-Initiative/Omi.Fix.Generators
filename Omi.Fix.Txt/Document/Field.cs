@@ -61,14 +61,14 @@
 
             if (Field.IsValidLine(line))
             {
-                // trim line to only contain field properties
+                // Trim line to only contain field properties
                 if (line.Contains("#"))
                 {
                     var cutString = line.Substring(0, line.IndexOf("#"));
                     shorten = String.Concat(cutString.Where(c => !Char.IsWhiteSpace(c)));  
                 }
 
-                // split properties as a colon seperated list, throw an exception for invalid lines
+                // Split properties as a colon seperated list, throw an exception for invalid lines
                 var split = shorten.Split(':');
 
                 if (split.Length != 3)
@@ -96,14 +96,14 @@
 
             if (IsValidLine(line))
             {
-                // trim line to only contain field properties
+                // Trim line to only contain field properties
                 if (line.Contains("#"))
                 {
                     var cutString = line.Substring(0, line.IndexOf("#"));
                     shorten = String.Concat(cutString.Where(c => !Char.IsWhiteSpace(c))); 
                 }
 
-                // split properties as a colon seperated list, throw exception on invalid lines
+                // Split properties as a colon seperated list, throw exception on invalid lines
                 var split = shorten.Split(':');
 
                 if (split.Length != 3)
@@ -130,14 +130,14 @@
 
             if (IsValidLine(line))
             {
-                // trim line to only contain field properties
+                // Trim line to only contain field properties
                 if (line.Contains("#"))
                 {
                     var cutString = line.Substring(0, line.IndexOf("#"));
                     shorten = String.Concat(cutString.Where(c => !Char.IsWhiteSpace(c)));  
                 }
 
-                // split properties as a colon seperated list, except invalid lines
+                // Split properties as a colon seperated list, except invalid lines
                 var split = shorten.Split(':');
 
                 if (split.Length != 3)
@@ -147,7 +147,7 @@
 
                 var type = split[2];
 
-                // convert type to valid fix
+                // Convert type to valid fix
                 if (type.Contains("datetime"))
                 {
                     type = "UTCTimeStamp";
@@ -157,16 +157,16 @@
                     type = "Boolean";
                 }
 
-                // if type is valid, return type
+                // If type is valid, return type
                 if (IsValidType(type))
                 {
                     return type;
                 }
 
-                // for invalid types, check if type exists among enums
+                // For invalid types, check if type exists among enums
                 if (enums.ContainsKey(type) && !IsValidType(type))
                 {
-                    // infer type from enum values
+                    // Infer type from enum values
                     var enumtypes = enums[type];
                     type = GetTypeFromEnum(enumtypes);
                     return type;
@@ -184,26 +184,26 @@
         }
 
         /// <summary>
-        /// check that line contains field properties
+        /// Check that line contains field properties
         /// </summary>
         public static bool IsValidLine(string line)
         {
             var idx = line.IndexOf(":enum:"); 
 
-            // line is empty
+            // Line is empty
             if (String.IsNullOrWhiteSpace(line))
             {
                 throw new ArgumentException(nameof(line));
             }
 
-            // line is an enum
+            // Line is an enum
             if (idx > 0)
             {
 
                 throw new ArgumentException(nameof(line));  
             }
 
-            // line is a comment
+            // Line is a comment
             if (line[0].Equals("#"))
             {
                 throw new ArgumentException(nameof(line));
@@ -216,7 +216,7 @@
         public static bool IsValidType(string type)
         {
             var validtypes = new List<string>();
-            var lines = File.ReadLines(@"D:\git_users\Sophia\fixgenerators\Omi.Fix.Txt\ValidTypes.txt");
+            var lines = File.ReadLines(@"..\..\..\..\..\fixgenerators\Omi.Fix.Txt\ValidTypes.txt");
 
             foreach (var line in lines)
             {
@@ -236,7 +236,7 @@
         /// </summary>
         public static string GetTypeFromEnum(Enum enumerator)
         {
-            // only checks if int or not an int
+            // Only checks if int or not an int
             var type = "string";
             var values = enumerator.Values;
             var maybeint = false;

@@ -3,7 +3,7 @@
     using System.Linq;
 
     /// <summary>
-    /// a List of all the fields found in a text file
+    /// List of all the fields found in a text file
     /// </summary>
     public class Fields : List<Field>
     {
@@ -64,7 +64,7 @@
                     continue;
                 }
 
-                //field lines begin with an int
+                // Field lines begin with an int
                 var fieldID = line[0].ToString();
                 if (!Int32.TryParse(fieldID, out var value))
                 {

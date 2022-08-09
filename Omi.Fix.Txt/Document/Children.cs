@@ -4,26 +4,26 @@
     using Omi.Fix.Specification;
 
     /// <summary>
-    /// a list of the groups associated with a section 
+    /// List of the groups associated with a section 
     /// </summary>
     public class Children : List<Group>
     {
         /// <summary>
-        /// default constructor
+        /// Default constructor
         /// </summary>
         public Children()
         { }
 
         /// <summary>
-        /// returns all the children associated with a field
+        /// Returns all the children associated with a field
         /// </summary>
         public static Children From(string groups)
         {
-            // split a comma seperated list of groups
+            // Split a comma seperated list of groups
             var grouplist = groups.Split(",");
             var children = new Children();
 
-            //convert each string to group
+            // Convert each string to group
             foreach (var group in grouplist)
             {
                 var child = Group.From(group);

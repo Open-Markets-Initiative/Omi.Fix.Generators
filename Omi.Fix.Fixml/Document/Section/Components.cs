@@ -8,7 +8,7 @@
     public class Components : List<Component> {
 
         /// <summary>
-        /// default constructor
+        /// Default constructor
         /// </summary>
         public Components()
         { }
@@ -22,13 +22,13 @@
         }
 
         /// <summary>
-        /// convert from xml  to fixml component 
+        /// Convert from xml  to fixml component 
         /// </summary>
         public static Components From(Xml.fix xml)
             => new Components(ListFrom(xml).Select(Component.From));
 
         /// <summary>
-        /// FixComponent from xml file
+        /// Fix Component from xml file
         /// </summary>
         public static Xml.fixComponent[] ListFrom(Xml.fix xml)
             => xml.components ?? new Xml.fixComponent[0];

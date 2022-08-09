@@ -31,17 +31,17 @@
         public Enums Enums = new Enums();
 
         /// <summary>
-        /// description of field 
+        /// Description of field 
         /// </summary>
         public string Description;
 
         /// <summary>
-        /// is field required?
+        /// Is field required?
         /// </summary>
         public bool Required;
 
         /// <summary>
-        /// fix version of associated field
+        /// Fix version of associated field
         /// </summary>
         public string Version;
 
@@ -73,7 +73,7 @@
             => Enums.Any();
 
         /// <summary>
-        /// convert fixml Field to specification Type
+        /// Convert fixml Field to specification Type
         /// </summary>
         public Fix.Specification.Type ToSpecification()
             => new Fix.Specification.Type {

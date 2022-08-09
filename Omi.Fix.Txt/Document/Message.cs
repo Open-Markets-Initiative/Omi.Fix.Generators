@@ -9,7 +9,7 @@
     public class Message
     {
     
-        //Message Properties
+        // Message Properties
         public string Name;
 
         public string Type;
@@ -36,14 +36,14 @@
         {
             var message = new Message();
             
-            // check for validitry and trim line
+            // Check for validitry and trim line
             if (line.Contains("#"))
             {
                 var cutString = line.Substring(0, line.IndexOf("#"));
                 line = String.Concat(cutString.Where(c => !Char.IsWhiteSpace(c)));
             }
 
-            // split line by colon and obtain properties
+            // Split line by colon and obtain properties
             var msgarray = line.Split(':');
 
             var name = msgarray[0];

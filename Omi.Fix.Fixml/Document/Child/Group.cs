@@ -9,21 +9,21 @@
     public class Group : List<IChild>, IChild {
 
         /// <summary>
-        /// name of Parent 
+        /// Name of Parent 
         /// </summary>
         public string Name { get; set;}
 
         /// <summary>
-        /// true if tag is required in message, false otherwise
+        /// True if tag is required in message, false otherwise
         /// </summary>
         public bool Required { get; set;}
 
         /// <summary>
-        /// obtain group from children
+        /// Obtain group from children
         /// </summary>
         public static Group From(Xml.fixChildGroup element)
         {
-            // verify values
+            // Verify values
             var group = new Group
             {
                 Name = element.name,
@@ -39,7 +39,7 @@
         }
 
         /// <summary>
-        /// obtain group from field 
+        /// Obtain group from field 
         /// </summary>
         public static Group From(Fix.Specification.Field element)
         {
@@ -56,6 +56,10 @@
 
             return group;
         }
+
+        /// <summary>
+        /// Write child component to xml file
+        /// </summary>
        public void Write(StreamWriter stream, IChild child)
         {
             if (Extensions.ToSpecification(child).Kind.ToString().ToLower() == "component" )
@@ -68,10 +72,11 @@
             }
             
         }
+
         /// <summary>
         /// Write groups to xml file 
         /// </summary>
-        public void Write(StreamWriter stream) // need one with different indent
+        public void Write(StreamWriter stream) 
         {
             if (HasFields) 
             {
@@ -97,7 +102,7 @@
             => this.Any();
 
         /// <summary>
-        /// converts group tp fix specification
+        /// Converts group tp fix specification
         /// </summary>
         public Fix.Specification.Field ToSpecification()
         {

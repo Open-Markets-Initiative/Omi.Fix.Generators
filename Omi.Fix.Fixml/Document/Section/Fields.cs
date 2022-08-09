@@ -17,7 +17,7 @@
 
             foreach (var field in xml.fields) // need ??
             {
-                // verify field name exists // format
+                // Verify field name exists // format
                 section[field.name] = new Field
                 {
                     Name = field.name,
@@ -41,7 +41,7 @@
 
             foreach (var field in fieldslist) // need ??
             {
-                // verify field name exists // format
+                // Verify field name exists // format
                 section[field.Name] = new Field
                 {
                     Name = field.Name,
