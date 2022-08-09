@@ -58,7 +58,15 @@
         }
        public void Write(StreamWriter stream, IChild child)
         {
-            stream.WriteLine($"        <{Extensions.ToSpecification(child).Kind.ToString().ToLower()} name=\"{child.Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+            if (Extensions.ToSpecification(child).Kind.ToString().ToLower() == "component" )
+            {
+                stream.WriteLine($"        <component name=\"{child.Name}\"/>");
+            }
+            else
+            {
+                stream.WriteLine($"        <field name=\"{child.Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+            }
+            
         }
         /// <summary>
         /// Write groups to xml file 

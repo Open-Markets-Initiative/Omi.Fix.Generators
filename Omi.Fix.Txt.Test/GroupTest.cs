@@ -38,7 +38,7 @@ namespace Omi.Fix.Txt.Test
         [Test]
         public void VerifyMessageFromPath() {
 
-            var messages = Messages.From(@"D:\git_users\Sophia\Omi.Fix.Generators\Omi.Fix.Txt.Test\SampleInputs\messages1.txt");
+            var messages = Messages.From(@".\SampleInputs\messages1.txt");
 
             var specification = messages[0].ToSpecification();
 

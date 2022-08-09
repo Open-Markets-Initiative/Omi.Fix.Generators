@@ -7,7 +7,7 @@ namespace Omi.Fix.Txt.Test
         [Test]
         public void VerifyEnumsFromPath() {
 
-            var expected = Enums.From(@"D:\git_users\Sophia\Omi.Fix.Generators\Omi.Fix.Txt.Test\SampleInputs\enums1.txt")["Bool"].Values[1].Data;
+            var expected = Enums.From(@".\SampleInputs\enums1.txt")["Bool"].Values[1].Data;
 
             var actual = "N";
             Assert.AreEqual(expected, actual, "Verify enums correctly formed from path");  
@@ -86,8 +86,8 @@ namespace Omi.Fix.Txt.Test
         [Test]
         public void VerifyFieldsAndEnumsBuiltinParallel() {
 
-            var text = Fields.From(@"D:\git_users\Sophia\Omi.Fix.Generators\Omi.Fix.Txt.Test\SampleInputs\fieldandenums1.txt");
-            var specification = text.ToSpecification(Enums.From(@"D:\git_users\Sophia\Omi.Fix.Generators\Omi.Fix.Txt.Test\SampleInputs\fieldandenums1.txt"));
+            var text = Fields.From(@".\SampleInputs\fieldandenums1.txt");
+            var specification = text.ToSpecification(Enums.From(@".\SampleInputs\fieldandenums1.txt"));
 
             var expected = specification["ExecTransType"].Enums[2].Description;
             var actual = "Correct";
