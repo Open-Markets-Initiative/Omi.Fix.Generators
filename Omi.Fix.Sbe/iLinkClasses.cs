@@ -8,7 +8,6 @@
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.fixprotocol.org/ns/simple/1.0", IsNullable = false)]
     public partial class messageSchema
     {
-
         private types typesField;
 
         private messageSchemaMessage[] messageField;

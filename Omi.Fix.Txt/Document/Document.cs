@@ -7,7 +7,6 @@ namespace Omi.Fix.Txt {
     /// </summary>
     public class Document
     {
-
         /// <summary>
         ///  Fix Major and Minor Version
         /// </summary>
@@ -17,7 +16,6 @@ namespace Omi.Fix.Txt {
         /// Fix Txt elements
         /// </summary>
         public Fields Fields = new Fields();  
-
 
         /// <summary>
         /// Fix txt elements

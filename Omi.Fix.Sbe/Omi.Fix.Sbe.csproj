@@ -10,4 +10,28 @@
     <ProjectReference Include="..\Omi.Fix.Specification\Omi.Fix.Specification.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.3.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.4.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.5.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.6.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.7.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.8.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
