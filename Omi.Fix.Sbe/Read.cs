@@ -1,4 +1,4 @@
-﻿namespace Omi.Fix.iLink.Read {
+﻿namespace Omi.Fix.Sbe {
     using System.IO;
     using System.Xml;
     using System.Xml.Serialization;
@@ -6,7 +6,7 @@
     /// <summary>
     ///  Load xml elements into generated object classes
     /// </summary>
-    public static class MessageSchema {
+    public static class Read {
 
         /// <summary>
         ///  Load classes from file path

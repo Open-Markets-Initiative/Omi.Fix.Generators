@@ -1,16 +1,12 @@
-namespace Omi.Fix.Sbe.Test
-{
+namespace Omi.Fix.Sbe.Test {
+    using NUnit.Framework;
+
     public class Tests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+            Assert.Pass(); // TODO
         }
     }
 }

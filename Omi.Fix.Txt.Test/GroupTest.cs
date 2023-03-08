@@ -1,5 +1,6 @@
-namespace Omi.Fix.Txt.Test
-{
+namespace Omi.Fix.Txt.Test {
+    using NUnit.Framework;
+
     public class MessageTests
     {
 

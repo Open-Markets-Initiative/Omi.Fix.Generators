@@ -1,134 +1,65 @@
-﻿namespace Omi.Fix.Sbe
-{
+﻿namespace Omi.Fix.Sbe {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-#pragma warning disable CS8618
-
-    public enum SortDirection
-    {
-        Ascending,
-        Descending
-    }
-
     /// <summary>
-    ///  Load fixml field elements into generated object classes
+    ///  Load sbe xml elements into generated object classes
     /// </summary>
+
     public static class Load {
 
         /// <summary>
-        ///  Load fixml messages from xml file
+        ///  Load sbe xml file
         /// </summary>
-        public static Xml.messageSchema XmlFrom(string xml)
-            => iLink.Read.MessageSchema.As<Xml.messageSchema>(xml);
+        public static Xml.messageSchema SbeXmlFrom(string xml)
+            => Read.As<Xml.messageSchema>(xml);
 
         /// <summary>
-        ///  Load fields from schema and generate a specification document 
+        ///  Load fix specification document from sbe xml path
+        /// </summary>
+        public static Specification.Document From(string xml) {
+            var schema = SbeXmlFrom(xml);
+
+            return From(schema);
+        }
+
+        /// <summary>
+        ///  Load fix specification document from sbe xml
         /// </summary>
         public static Specification.Document From(Xml.messageSchema schema)
-        {
-            return new Specification.Document
+            => new Specification.Document
             {
                 Description = new Specification.Description(),
                 Header = new Specification.Header(),
                 Trailer = new Specification.Trailer(),
-                Messages = MessageFrom(schema),
+                Messages = MessagesFrom(schema),
                 Components = new Specification.Components(),
                 Fields = FieldsFrom(schema)
             };
-        }
 
         /// <summary>
-        ///  Load fields from file path and generate a specification document 
+        ///  Obtain sbe fix message from xml
         /// </summary>
-        public static Specification.Document From(string xml)
-        {
-            var schema = iLink.Read.MessageSchema.As<Xml.messageSchema>(xml);
-
-            return new Specification.Document {
-                Description = new Specification.Description(),
-                Header = new Specification.Header(),
-                Trailer = new Specification.Trailer(),
-                Messages = MessageFrom(schema),
-                Components = new Specification.Components(),
-                Fields = FieldsFrom(schema)
-            };
-        }
-
-        /// <summary>
-        ///  Generate specification documents for all stored xml files 
-        /// </summary>
-        public static List<Specification.Document> iLink3Specifications()
-        {
-            var xmlFiles = XmlIO.iLink3();
-            
-            var specifications = new List<Specification.Document>(xmlFiles.Length);
-
-            foreach (var xmlFile in xmlFiles ?? Array.Empty<string>())
-            {
-                specifications.Add(From(xmlFile));
-            }
-
-            return specifications; 
-        }
-
-        /// <summary>
-        ///  Generate specification documents for all stored xml files sorted by version
-        /// </summary>
-        public static List<Specification.Document> iLink3Specifications(SortDirection sortDirection)
-        {
-            var xmlFiles = XmlIO.iLink3();
-
-            var schemas = new List<Xml.messageSchema>(xmlFiles.Length);
-            foreach (var xmlFile in xmlFiles ?? Array.Empty<string>())
-            {
-                schemas.Add(XmlFrom(xmlFile));
-            }
-
-            // sort schemas
-            List<Xml.messageSchema> sortedSchemas = new();
-            if (sortDirection == SortDirection.Ascending)
-            {
-                sortedSchemas = schemas.OrderBy(schema => schema.id).ThenBy(schema => schema.version).ToList();
-            }
-            else
-            {
-                sortedSchemas = schemas.OrderByDescending(schema => schema.id).ThenByDescending(schema => schema.version).ToList();
-            }
-
-            var specifications = new List<Specification.Document>(sortedSchemas.Count);
-            foreach (var schema in sortedSchemas)
-            {
-                specifications.Add(From(schema));
-            }
-
-            return specifications;
-        }
-
-        /// <summary>
-        ///  Obtain message from xml
-        /// </summary>
-        public static Specification.Messages MessageFrom(Xml.messageSchema xml)
-        {
+        public static Specification.Messages MessagesFrom(Xml.messageSchema xml) {
             var messages = new Specification.Messages(); 
 
             foreach (var message in xml.message ?? Array.Empty<Xml.messageSchemaMessage>())
             {
                 messages.Add(new Fix.Specification.Message
                 {
-                    Name = message.description, 
+                    Name = message.description, // make a method for this
                     Type = message.semanticType,
                     Types = FieldsFrom(message.field), 
                     Category = message.id.ToString(), 
-
                 });
             }
+
             return messages;
         }
 
         /// <summary>
-        ///  Obtain Specification fields from iLink fields
+        ///  Obtain Specification types from iLink fields
         /// </summary>
         public static Specification.Types FieldsFrom(Xml.field[] fields)
         {
@@ -209,7 +140,8 @@
                     }
                 }
             }
-                return fields;
+
+            return fields;
         }
     }
 }
