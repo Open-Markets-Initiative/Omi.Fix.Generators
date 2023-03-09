@@ -7,7 +7,7 @@
     public static class Load { 
 
         /// <summary>
-        ///  Load classes from file path
+        ///  Load fixml xml into classes from file path
         /// </summary>
         public static Xml.fix From(string xml) 
             => Fix.Load.From<Xml.fix>(xml);

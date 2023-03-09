@@ -10,25 +10,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.2.xml">
+    <None Update="Library\Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.3.xml">
+    <None Update="Library\Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.3.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.4.xml">
+    <None Update="Library\Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.4.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.5.xml">
+    <None Update="Library\Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.5.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.6.xml">
+    <None Update="Library\Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.6.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.7.xml">
+    <None Update="Library\Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.7.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.8.xml">
+    <None Update="Library\Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.8.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,16 +1,16 @@
-﻿namespace Omi.Fix.Sbe {
+﻿namespace Omi.Fix.Sbe.Library {
 
     /// <summary>
     ///  Sbe File Library
     /// </summary>
 
-    public static class Library
+    public static class iLink3
     {
         /// <summary>
         /// 
         /// </summary>
-        public static string[] iLink3Files() {
-            var directory = Path.Combine(Directory.GetCurrentDirectory(), "Cme.iLink3");
+        public static string[] Files() {
+            var directory = Path.Combine(Directory.GetCurrentDirectory(), "Library\\Cme.iLink3");
 
             return Directory.GetFiles(directory, "*.xml");
         }
@@ -18,8 +18,8 @@
         /// <summary>
         /// 
         /// </summary>
-        public static List<Xml.messageSchema> iLink3Xmls() {
-            var files = iLink3Files();
+        public static List<Xml.messageSchema> Xmls() {
+            var files = Files();
 
             var xmls = new List<Xml.messageSchema>();
             foreach (var file in files ?? Array.Empty<string>()) {
@@ -32,8 +32,8 @@
         /// <summary>
         ///  Generate normalized fix specifications for all ilink3 xml files in library sorted by version
         /// </summary>
-        public static List<Specification.Document> iLink3Specifications(SortDirection sort = SortDirection.Descending) {
-            var xmls = Library.iLink3Xmls();
+        public static List<Specification.Document> Specifications(SortDirection sort = SortDirection.Descending) {
+            var xmls = Xmls();
 
             // sort schemas
             var schemas = new List<Xml.messageSchema>();
@@ -59,9 +59,8 @@
         /// <summary>
         /// Combine a fix specification from all available iLink versions
         /// </summary>
-        public static Specification.Document iLink3Combined()
-        {
-            var iLinkSpecs = Library.iLink3Specifications();
+        public static Specification.Document Combined() {
+            var iLinkSpecs = Specifications();
 
             var merged = new Specification.Document();
 

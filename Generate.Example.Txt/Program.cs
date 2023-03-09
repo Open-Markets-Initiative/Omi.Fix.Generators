@@ -1,19 +1,11 @@
-﻿
-// Creates a fixml document from two seperate text files
+﻿// Load example fix txt
+var file = @"D:\git_users\Sophia\fixgenerators\Omi.Fix.Txt\SampleDefinition.txt";
+var document = Omi.Fix.Txt.Document.From(file);
+var specification = document.ToSpecification();
 
+// Convert to fixml (set version manually) 
+var fixml = Omi.Fixml.Document.From(specification);
+  fixml.Major = "4";
+  fixml.Minor = "2";
 
-// read in lines into an superlist from desired files, and then create the spec 
-
-var Lines = File.ReadLines(@"D:\git_users\Sophia\fixgenerators\Omi.Fix.Txt\SampleDefinition.txt");
-
-var fixtext = Omi.Fix.Txt.Document.From(Lines);
-var texttoSpec = fixtext.ToSpecification();
-
-
-// specify document header manually 
-var specFIX = Omi.Fixml.Document.From(texttoSpec);
-specFIX.Major = "4";
-specFIX.Minor = "2";
-
-// write to fixml file format
-specFIX.WriteTo("fixfromtxt.xml");
+fixml.WriteTo("example.xml");

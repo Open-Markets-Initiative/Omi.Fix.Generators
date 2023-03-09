@@ -1,7 +1,6 @@
 ﻿namespace Omi.Fix.Sbe {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     /// <summary>
     ///  Load sbe xml elements into generated object classes
@@ -13,7 +12,7 @@
         ///  Load sbe xml file
         /// </summary>
         public static Xml.messageSchema SbeXmlFrom(string xml)
-            => Read.As<Xml.messageSchema>(xml);
+            => Fix.Load.From<Xml.messageSchema>(xml);
 
         /// <summary>
         ///  Load fix specification document from sbe xml path
@@ -28,8 +27,7 @@
         ///  Load fix specification document from sbe xml
         /// </summary>
         public static Specification.Document From(Xml.messageSchema schema)
-            => new Specification.Document
-            {
+            => new Specification.Document {
                 Description = new Specification.Description(),
                 Header = new Specification.Header(),
                 Trailer = new Specification.Trailer(),

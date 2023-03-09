@@ -18,10 +18,4 @@
     <ProjectReference Include="..\Omi.Fix.Txt\Omi.Fix.Txt.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Drop.v4.2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
