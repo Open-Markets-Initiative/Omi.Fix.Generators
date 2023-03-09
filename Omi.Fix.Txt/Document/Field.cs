@@ -1,10 +1,11 @@
-﻿namespace Omi.Fix.Txt
-{
+﻿namespace Omi.Fix.Txt {
+    using System;
     using System.Linq;
 
     /// <summary>
-    ///  Fix Field Declaration
+    ///  Fix Txt Field Record
     /// </summary>
+
     public class Field
     {
 
@@ -212,30 +213,41 @@
             return true;
         }
 
-        // Check that type is valid fix
-        public static bool IsValidType(string type)
-        {
-            var validtypes = new List<string>();
-            var lines = File.ReadLines(@"..\..\..\..\..\fixgenerators\Omi.Fix.Txt\ValidTypes.txt");
+        /// <summary>
+        ///  Check that type is valid fix
+        /// </summary>
+        public static bool IsValidType(string type) {
+            switch (type.Trim()) {
+                case "char":
+                case "Boolean":
+                case "data":
+                case "float":
+                case "Amt":
+                case "PriceOffset":
+                case "Qty":
+                case "int":
+                case "day-of-month":
+                case "String":
+                case "Currency":
+                case "exchange":
+                case "LocalMktDate":
+                case "month - year":
+                case "MultipleValueString":
+                case "UTCDate":
+                case "UTCTimeOnly":
+                case "UTCTimeStamp":
+                case "long":
+                    return true;
 
-            foreach (var line in lines)
-            {
-                validtypes.Add(line.ToLower().Trim());   
+                default:
+                    return true;
             }
-
-            if (validtypes.Contains(type.ToLower()))
-            {
-                return true;
-            }
-
-            return false;
         }
 
         /// <summary>
         /// Obtain type from associated enum
         /// </summary>
-        public static string GetTypeFromEnum(Enum enumerator)
-        {
+        public static string GetTypeFromEnum(Enum enumerator) {
             // Only checks if int or not an int
             var type = "string";
             var values = enumerator.Values;

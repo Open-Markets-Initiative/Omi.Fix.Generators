@@ -1,13 +1,13 @@
 ﻿namespace Omi.Fix.Sbe.Library {
 
     /// <summary>
-    ///  Sbe File Library
+    ///  Cme ilink3 File Library
     /// </summary>
 
-    public static class iLink3
-    {
+    public static class iLink3 {
+
         /// <summary>
-        /// 
+        ///  Gather all Cme ilink3 sbe xmls in library
         /// </summary>
         public static string[] Files() {
             var directory = Path.Combine(Directory.GetCurrentDirectory(), "Library\\Cme.iLink3");
@@ -55,24 +55,12 @@
             return specifications;
         }
 
-
         /// <summary>
-        /// Combine a fix specification from all available iLink versions
+        ///  Merge all iLink3 versions into one normalized fix specification
         /// </summary>
         public static Specification.Document Combined() {
-            var iLinkSpecs = Specifications();
-
-            var merged = new Specification.Document();
-
-            foreach (var specification in iLinkSpecs) { //move to merged
-                merged.Components.AddRange(specification.Components.Where(component => !merged.Components.Contains(component)));
-                merged.Header.AddRange(specification.Header.Where(header => !merged.Header.Contains(header)));
-                merged.Trailer.AddRange(specification.Trailer.Where(trailer => !merged.Trailer.Contains(trailer)));
-                merged.Messages.AddRange(specification.Messages.Where(message => !merged.Messages.Select(message => message.Name).Contains(message.Name)));
-                merged.Fields = Specification.Types.ToTypes(merged.Fields.Concat(specification.Fields.Where(field => !merged.Fields.Contains(field))));
-            }
-
-            return merged;
+            var specifications = Specifications();
+            return Fix.Specification.Merge.All(specifications);
         }
     }
 }

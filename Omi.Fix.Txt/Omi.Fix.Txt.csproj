@@ -13,13 +13,4 @@
     <ProjectReference Include="..\Omi.Fix.Specification\Omi.Fix.Specification.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="ValidTypes.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="SampleDefinition.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

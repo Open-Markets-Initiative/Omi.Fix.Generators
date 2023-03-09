@@ -5,7 +5,7 @@
     /// <summary>
     ///  Load fixml field elements into generated object classes
     /// </summary>
-
+    /// 
     public partial class ArrayOfFixFieldSpec
     {
         /// <summary>

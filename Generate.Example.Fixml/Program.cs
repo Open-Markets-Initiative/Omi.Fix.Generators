@@ -1,7 +1,7 @@
-﻿// Load standard fixml
-var fix42 = Omi.Fixml.Document.From(@"Library\Fixml\Fix.v4.2.xml");
+﻿// Load standard fixml from library
+var fixml = Omi.Fixml.Document.From(@"Library\Fixml\Fix.v4.2.xml");
 
-var specification = fix42.ToSpecification();
-var fixml = Omi.Fixml.Document.From(specification);
+// Convert to normalized specification
+var specification = fixml.ToSpecification();
 
-fixml.WriteTo(@"test.xml");
+

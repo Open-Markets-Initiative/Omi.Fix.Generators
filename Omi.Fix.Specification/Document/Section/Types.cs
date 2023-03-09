@@ -5,32 +5,27 @@
     ///  Normalized Fix Specification Field Types List
     /// </summary>
 
-    public class Types : Dictionary< string , Type> 
-    {
+    public class Types : Dictionary<string , Type> {
+
         public Types() 
         { }
 
         /// <summary>
-        /// Convert IEnumerable types to Dictionary 
+        ///  Intialize IEnumerable types 
         /// </summary>
-        public Types (IEnumerable<Type> types)
-        {
-            var types_ = new Types();
-            foreach (var type in types)
-            {
-                types_.Add(type.Name, type);    
+        public Types (IEnumerable<Type> types) {
+            foreach (var type in types) {
+                Add(type.Name, type);    
             }
         }
 
         /// <summary>
-        /// Convert Dictionary of types to Specification
+        ///  Convert Dictionary of types to Specification
         /// </summary>
-        public static Types ToTypes( Dictionary<string, Type> type)
-        {
+        public static Types ToTypes(Dictionary<string, Type> type) {
             var types = new Types();
 
-            foreach (var pair in type)
-            {
+            foreach (var pair in type) {
                 types.Add(pair.Key, pair.Value);
             }
 
@@ -40,8 +35,7 @@
         /// <summary>
         /// Convert Dictionary of types to Specification
         /// </summary>
-        public static Types ToTypes(IEnumerable<KeyValuePair<string , Type> > type)
-        {
+        public static Types ToTypes(IEnumerable<KeyValuePair<string , Type> > type) {
             var types = new Types();
 
             foreach (var pair in type)
@@ -56,9 +50,10 @@
             return types;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public  List<Type> ToList()
-        => Values.OrderBy(field => field.Tag).ToList();
-
-
+            => Values.OrderBy(field => field.Tag).ToList();
     }
 }

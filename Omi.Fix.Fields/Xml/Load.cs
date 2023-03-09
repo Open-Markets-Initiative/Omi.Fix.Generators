@@ -11,7 +11,7 @@
         ///  Load fields from file path
         /// </summary>
         public static Omi.Fix.Fields.Xml.ArrayOfFixFieldSpec From(string xml) 
-            => Read.Xml.As<ArrayOfFixFieldSpec>(xml);
+            => Fix.Load.From<ArrayOfFixFieldSpec>(xml);
     }
 
 }

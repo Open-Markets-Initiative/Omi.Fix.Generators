@@ -17,4 +17,10 @@
     <ProjectReference Include="..\Omi.Fix.Txt\Omi.Fix.Txt.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Example.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

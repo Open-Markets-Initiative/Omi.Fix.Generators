@@ -1,8 +1,9 @@
 ﻿namespace Omi.Fix.Specification {
 
     /// <summary>
-    ///  Fix Field Type Declaration
+    ///  Normalized Fix Field Type Declaration
     /// </summary>
+
     public class Type
     {
         /// <summary>
