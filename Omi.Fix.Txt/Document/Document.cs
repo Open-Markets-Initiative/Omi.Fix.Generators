@@ -56,7 +56,7 @@ namespace Omi.Fix.Txt {
                 Trailer = new Specification.Trailer(),
                 Messages = Messages.ToSpecification(),
                 Components = new Specification.Components(),
-                Fields = Fields.ToSpecification(Enums),
+                Types = Fields.ToSpecification(Enums),
             };
 
         /// <summary>

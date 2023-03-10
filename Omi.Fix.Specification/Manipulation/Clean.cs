@@ -74,7 +74,7 @@
             }
 
             var newFields = new Omi.Fix.Specification.Types();
-            foreach (var field in fixml.Fields.OrderBy(tag => tag.Value.Tag))
+            foreach (var field in fixml.Types.OrderBy(tag => tag.Value.Tag))
             {
                 if (saveFields.Contains(field.Key))
                 {
@@ -84,7 +84,7 @@
                 }
             }
 
-            fixml.Fields = newFields;
+            fixml.Types = newFields;
             
         }
 

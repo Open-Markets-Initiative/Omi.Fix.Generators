@@ -33,7 +33,7 @@
                 Trailer = new Specification.Trailer(),
                 Messages = MessagesFrom(schema),
                 Components = new Specification.Components(),
-                Fields = FieldsFrom(schema)
+                Types = FieldsFrom(schema)
             };
 
         /// <summary>

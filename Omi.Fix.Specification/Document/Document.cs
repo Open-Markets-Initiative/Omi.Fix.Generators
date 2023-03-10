@@ -34,7 +34,61 @@
         /// <summary>
         ///  Normalized Fix Specification Field Types
         /// </summary>
-        public Types Fields = new Types();
+        public Types Types = new Types();
+
+
+        public void Filter(Predicate<Message> predicate)
+            => Messages.RemoveAll(predicate);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Set(string name, uint tag, string type)
+        {
+            // add some checks?
+
+            Types.Add(name, new Type { Name = name, Tag = tag, Underlying = type });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SetNotRequired(string name)
+        {
+            // add some checks?
+            foreach(var message in Messages)
+            {
+                message.SetNotRequired(name);
+            }
+        }
+
+        /// <summary>
+        ///  Add field to message (need one with placement)
+        /// </summary>
+        public void AddField(string message, string name, bool required)
+        {
+            // add some checks?
+
+   
+        }
+
+        /// <summary>
+        ///  Try Get Message
+        /// </summary>
+        public bool TryGetMessage(string name, out Message message)
+        {
+            message = Messages.FirstOrDefault(current => current.Name == name);
+
+            return message != null;
+        }
+
+        /// <summary>
+        ///  Get Message by Name
+        /// </summary>
+        public Message GetMessage(string name)
+            => Messages.First(current => current.Name == name);
+
+
 
         /// <summary>
         ///  Display Fix Specification Information

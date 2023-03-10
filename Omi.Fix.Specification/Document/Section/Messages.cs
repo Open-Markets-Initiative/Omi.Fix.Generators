@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-namespace Omi.Fix.Specification {
+﻿namespace Omi.Fix.Specification {
 
     /// <summary>
-    ///  Normalized Fix Specification Header Fields List
+    ///  Normalized Fix Specification Messages List
     /// </summary>
 
     public class Messages : List<Message>

@@ -16,6 +16,20 @@
         public List<Field> Children = new List<Field>();
 
         /// <summary>
+        ///  Set field with parameter name to not required
+        /// </summary>
+        public void SetNotRequired(string name)
+        {
+            Required = false;
+
+            foreach (var field in Children) // make recursive optional
+            {
+                field.SetNotRequired(name);
+            }
+        }
+
+
+        /// <summary>
         /// Convert field to string 
         /// </summary>
         public override string ToString()

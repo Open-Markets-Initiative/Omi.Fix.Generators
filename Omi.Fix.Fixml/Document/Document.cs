@@ -51,7 +51,7 @@
                 Trailer = Fixml.Trailer.From(specification.Trailer),
                 Messages = Fixml.Messages.From(specification.Messages),
                 Components = Fixml.Components.From(specification.Components),
-                Fields = Fixml.Fields.From(specification.Fields),
+                Fields = Fixml.Fields.From(specification.Types),
             };
 
         /// <summary>
@@ -71,7 +71,6 @@
         /// </summary>
         public static Document From(string path) {
             var xml = Load.From(path);
-
             return From(xml);
         }
 
@@ -80,7 +79,7 @@
         ///  Write fixml file to stream
         /// </summary>
         public void Write(StreamWriter stream) {
-            stream.WriteLine($"<fix major=\"{Major}\" minor=\"{this.Minor}\">"); // sp etc
+            stream.WriteLine($"<fix major=\"{Major}\" minor=\"{Minor}\">"); // sp etc
             
             Header.Write(stream); 
             Trailer.Write(stream);   
@@ -94,13 +93,11 @@
         /// <summary>
         /// Write document to stream
         /// </summary>
-        public void WriteTo(string path)
-        {
-            using (var file = File.Create(path)) 
-            using (var stream = new StreamWriter(file)) 
-            {
-                Write(stream);
-            }
+        public void WriteTo(string path) {
+            using var file = File.Create(path);
+            using var stream = new StreamWriter(file);
+
+            Write(stream);
         }
 
         /// <summary>
@@ -113,7 +110,7 @@
                 Trailer = Trailer.ToSpecification(),
                 Messages = Messages.ToSpecification(),
                 Components = Components.ToSpecification(),
-                Fields = Fields.ToSpecification(),
+                Types = Fields.ToSpecification(),
             };
     }
 }

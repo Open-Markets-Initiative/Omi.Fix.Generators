@@ -4,8 +4,15 @@
     ///  Fixml File Library
     /// </summary>
 
-    public static class Library
-    {
+    public static class Library {
+
+        /// <summary>
+        ///  Standard Fix 4.2 Specification
+        /// </summary>
+        public static Document Fix42
+            => Document.From("Library\\Fixml\\Fix.v4.2.xml");
+
+
         /// <summary>
         ///  Gather Fixml files in library
         /// </summary>

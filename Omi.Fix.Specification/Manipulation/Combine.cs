@@ -26,7 +26,7 @@
             merged.Header.AddRange(specification.Header.Where(header => !merged.Header.Contains(header)));
             merged.Trailer.AddRange(specification.Trailer.Where(trailer => !merged.Trailer.Contains(trailer)));
             merged.Messages.AddRange(specification.Messages.Where(message => !merged.Messages.Select(message => message.Name).Contains(message.Name)));
-            merged.Fields = Specification.Types.ToTypes(merged.Fields.Concat(specification.Fields.Where(field => !merged.Fields.Contains(field))));
+            merged.Types = Specification.Types.ToTypes(merged.Types.Concat(specification.Types.Where(field => !merged.Types.Contains(field))));
         }
     }
 }

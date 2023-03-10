@@ -1,6 +1,10 @@
 namespace Omi.Fix.Specification.Test {
     using NUnit.Framework;
 
+    /// <summary>
+    ///  Regression tests for normalized fix specification merge
+    /// </summary>
+
     public class MergeTests {
 
         [Test]
@@ -8,13 +12,13 @@ namespace Omi.Fix.Specification.Test {
             // this is garbage...do better
             var specifications = new[] {
             new Fix.Specification.Document {
-                Fields = new Types(new[] {
+                Types = new Types(new[] {
                     new Type { Tag = 1, Name = "One" },
                     new Type { Tag = 2, Name = "Two" } }
                 )
             },
             new Fix.Specification.Document {
-                Fields = new Types(new[] {
+                Types = new Types(new[] {
                     new Type { Tag = 3, Name = "Three" },
                     new Type { Tag = 2, Name = "Two" } }
                 )
@@ -24,9 +28,9 @@ namespace Omi.Fix.Specification.Test {
             var specification = Merge.All(specifications);
 
             var expected = 3;
-            var actual = specification.Fields.Count;
+            var actual = specification.Types.Count;
 
-            Assert.That(actual, Is.EqualTo(expected), "Verify Specifcation field merge");
+            Assert.That(actual, Is.EqualTo(expected), "Verify specification types merge");
         }
     }
 }
