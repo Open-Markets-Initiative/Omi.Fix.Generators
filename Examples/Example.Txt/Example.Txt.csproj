@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <Version>1.4.2</Version>
-	  <Authors>Sophia</Authors>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+    <Version>1.4.2</Version>
+    <Authors>Omi Developers</Authors>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Omi.Fix.Fixml\Omi.Fix.Fixml.csproj" />
-    <ProjectReference Include="..\Omi.Fix.Txt\Omi.Fix.Txt.csproj" />
+    <ProjectReference Include="..\..\Omi.Fix.Fixml\Omi.Fix.Fixml.csproj" />
+    <ProjectReference Include="..\..\Omi.Fix.Txt\Omi.Fix.Txt.csproj" />
   </ItemGroup>
 
   <ItemGroup>

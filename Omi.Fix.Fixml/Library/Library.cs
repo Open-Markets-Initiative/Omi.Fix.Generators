@@ -7,11 +7,16 @@
     public static class Library {
 
         /// <summary>
-        ///  Standard Fix 4.2 Specification
+        ///  Standard Fix 4.2 fixml
         /// </summary>
         public static Document Fix42
             => Document.From("Library\\Fixml\\Fix.v4.2.xml");
 
+        /// <summary>
+        ///  Standard Fix 4.4 fixml
+        /// </summary>
+        public static Document Fix44
+            => Document.From("Library\\Fixml\\Fix.v4.4.xml");
 
         /// <summary>
         ///  Gather Fixml files in library

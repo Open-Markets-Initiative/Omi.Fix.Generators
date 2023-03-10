@@ -36,7 +36,9 @@
         /// </summary>
         public Types Types = new Types();
 
-
+        /// <summary>
+        ///  Filter
+        /// </summary>
         public void Filter(Predicate<Message> predicate)
             => Messages.RemoveAll(predicate);
 
