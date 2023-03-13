@@ -45,6 +45,18 @@
         }
 
         /// <summary>
+        ///  Convert types to fields list
+        /// </summary>
+        public List<Field> ToFields() {
+            var fields = new List<Field>();
+            foreach (var type in Values) {
+                fields.Add(type.ToField());
+            }
+
+            return fields;
+        }
+
+        /// <summary>
         /// Convert Dictionary of types to Specification
         /// </summary>
         public static Types ToTypes(IEnumerable<KeyValuePair<string , Type> > type) {

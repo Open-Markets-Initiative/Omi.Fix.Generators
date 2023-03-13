@@ -26,6 +26,16 @@
 
         public Enums Enums = new Enums();
 
+        /// <summary>
+        ///  Convert type to field
+        /// </summary>
+        public Field ToField()
+            => new () { 
+                Name = Name, 
+                Kind = Kind.Field, 
+                Required = Required 
+            };
+
         public override string ToString()
         => $"{Tag} => {Name}, {Underlying}";
 

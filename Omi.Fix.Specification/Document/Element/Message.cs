@@ -43,13 +43,10 @@
         }
 
         /// <summary>
-        ///  Add every type in a list to message
+        ///  Add fields to message end
         /// </summary>
-        public void AddFields(Types types, Kind kind = Kind.Field, bool required = false) {
-            foreach (var type in types.Values) { // this is kind of a hack (maybe should make a ToFields)
-                AddField(type.Name, kind, required);
-            }
-        }
+        public void Add(List<Field> fields)
+            => Fields.AddRange(fields); // should we remove duplicates?
 
         /// <summary>
         ///  Display normalized fix specification message as string

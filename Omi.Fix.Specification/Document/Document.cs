@@ -43,14 +43,11 @@
             => Messages.RemoveAll(predicate);
 
         /// <summary>
-        /// 
+        ///  Add Overwrite Type (minimal)
         /// </summary>
         public void Set(string name, uint tag, string type)
-        {
-            // add some checks?
-
-            Types.Add(name, new Type { Name = name, Tag = tag, Underlying = type });
-        }
+            => Types[name] = new Type { Name = name, Tag = tag, Underlying = type };
+        
 
         /// <summary>
         /// 
@@ -90,13 +87,11 @@
         public Message GetMessage(string name)
             => Messages.First(current => current.Name == name);
 
-
         /// <summary>
-        ///  Add Types
+        ///  Add/Overwrite Types
         /// </summary>
-        public void AddOverwrite(Types types)
+        public void Set(Types types)
             => Types.AddOverwrite(types);
-
 
         /// <summary>
         ///  Display Fix Specification Information

@@ -2,28 +2,23 @@
     using System.IO;
 
     /// <summary>
-    ///  Fixml C# Document
+    ///  Financial Information eXchange Fixml C# Document
     /// </summary>
 
     public class Document {
 
         /// <summary>
-        ///  Fixml Major Version
+        ///  Fixml Document Information
         /// </summary>
-        public string Major;
+        public Information Information = new Information();
 
         /// <summary>
-        ///  Fixml Minor Version
-        /// </summary>
-        public string Minor;
-
-        /// <summary>
-        ///  Fixml Header Element/Section
+        ///  Fixml Header Fields
         /// </summary>
         public Header Header = new Header();
 
         /// <summary>
-        /// Fixml Trailer 
+        /// Fixml Trailer Fields
         /// </summary>
         public Trailer Trailer = new Trailer();
 
@@ -46,7 +41,8 @@
         /// Obtain fixml document from specification document
         /// </summary>
         public static Document From(Fix.Specification.Document specification)
-          => new Document {
+          => new () {
+                Information = Fixml.Information.From(specification.Description),
                 Header = Fixml.Header.From(specification.Header),
                 Trailer = Fixml.Trailer.From(specification.Trailer),
                 Messages = Fixml.Messages.From(specification.Messages),
@@ -58,7 +54,8 @@
         /// Obtain fixml document from xml file 
         /// </summary>
         public static Document From(Xml.fix xml)
-          => new Document {
+            => new () {
+                Information = Information.From(xml),
                 Header = Header.From(xml),
                 Trailer = Trailer.From(xml),
                 Messages = Messages.From(xml),
@@ -74,13 +71,11 @@
             return From(xml);
         }
 
-
         /// <summary>
         ///  Write fixml file to stream
         /// </summary>
         public void Write(StreamWriter stream) {
-            stream.WriteLine($"<fix major=\"{Major}\" minor=\"{Minor}\">"); // sp etc
-            
+            Information.Write(stream);          
             Header.Write(stream); 
             Trailer.Write(stream);   
             Messages.Write(stream);    
@@ -106,8 +101,8 @@
         ///  Convert fixml to normalized fix specification
         /// </summary>
         public Fix.Specification.Document ToSpecification()
-            => new Fix.Specification.Document {
-                Description = {Major = Major, Minor = Minor}, 
+            => new () {
+                Description = Information.ToSpecification(), 
                 Header = Header.ToSpecification(),
                 Trailer = Trailer.ToSpecification(),
                 Messages = Messages.ToSpecification(),
