@@ -81,14 +81,15 @@
         /// <summary>
         /// Convert fields to specification
         /// </summary>
-        public Specification.Types ToSpecification(Enums enums)
-        {
+        public Specification.Types ToSpecification(Enums enums) {
             var fields = new Specification.Types();
 
             foreach (var field in this)
             {
-                fields.Add( field.Name , field.ToSpecification(enums));
+                fields.Add(field.Name , field.ToSpecification(enums));
             }
+
+            // what about enums with no field value?
 
             return fields;
         }

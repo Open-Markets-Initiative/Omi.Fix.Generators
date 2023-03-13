@@ -33,6 +33,18 @@
         }
 
         /// <summary>
+        ///  Add Types, overwrite in case of same name
+        /// </summary>
+        public void AddOverwrite(Types types) {
+            foreach (var type in types.Values)
+            {
+                // how to handle enums?
+
+                types[type.Name] = type;
+            }
+        }
+
+        /// <summary>
         /// Convert Dictionary of types to Specification
         /// </summary>
         public static Types ToTypes(IEnumerable<KeyValuePair<string , Type> > type) {

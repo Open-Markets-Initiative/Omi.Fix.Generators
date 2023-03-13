@@ -42,42 +42,11 @@
             var types = new Types();
             foreach (var type in specification.Types.Values.OrderBy(fix => fix.Tag)) {
                 if (required.Contains(type.Name)) {
-                    type.Underlying = FixFieldType(type.Underlying.ToUpper()); // refactor this
-
                     types.Add(type.Name, type);
                 }
             }
 
             specification.Types = types;        
-        }
-
-        /// <summary>
-        /// ChangeFix field type to be valid FIX
-        /// </summary>
-        public static string FixFieldType(string type) {
-
-            if (type == "AMT" || type == "PERCENTAGE" || type == "QTY" || type == "PRICE" || type == "PRICEOFFSET")
-            {
-               return "FLOAT";
-            }
-            if (type == "DAY-OF-MONTH" || type == "DAYOFMONTH" || type == "SEQNUM" || type == "LENGTH" || type == "NUMINGROUP" || type == "GROUPSIZE" )
-            {
-                return "INT";
-            }
-            if (type == "CHAR" || type == "BOOLEAN")
-            {
-               return "CHAR";
-            }
-            if (type == "LANGUAGE" || type == "MULTIPLESTRINGVALUE" || type == "TZTIMESTAMP" || type == "TZTIMEONLY" || type == "QUANTITY" || type == "CURRENCY" || type == "MULTIPLECHARVALUE" || type == "COUNTRY" || type == "UTCDATEONLY" || type == "MONTH-YEAR" || type == "MULTIPLEVALUESTRING" || type == "UTCTIMESTAMP" || type == "UTCTIMEONLY" || type == "LOCALMKTDATE" || type == "MONTHYEAR" || type == "EXCHANGE" || type == "LONG")
-            {
-                return "STRING";
-            }
-            if (type == "XMLDATA")
-            {
-                return "DATA";
-            }
-
-            return type;
         }
     }
 }

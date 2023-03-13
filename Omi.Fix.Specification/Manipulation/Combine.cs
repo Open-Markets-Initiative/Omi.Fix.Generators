@@ -28,5 +28,15 @@
             merged.Messages.AddRange(specification.Messages.Where(message => !merged.Messages.Select(message => message.Name).Contains(message.Name)));
             merged.Types = Specification.Types.ToTypes(merged.Types.Concat(specification.Types.Where(field => !merged.Types.Contains(field))));
         }
+
+
+        /// <summary>
+        /// Add a fix specification to a another
+        /// </summary>
+        public static Document Combine(Document merged, Document specification)
+        { // this can be better
+            merged.Add(specification);
+            return merged;
+        }
     }
 }

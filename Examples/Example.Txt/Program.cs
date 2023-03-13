@@ -1,4 +1,4 @@
-﻿// Load example fix txt
+﻿ // Load example fix txt
 var fixtxt = Omi.Fix.Txt.Document.From(@"Example.txt");
 var specification = fixtxt.ToSpecification();
 

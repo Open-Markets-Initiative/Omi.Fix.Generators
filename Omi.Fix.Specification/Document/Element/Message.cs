@@ -43,6 +43,15 @@
         }
 
         /// <summary>
+        ///  Add every type in a list to message
+        /// </summary>
+        public void AddFields(Types types, Kind kind = Kind.Field, bool required = false) {
+            foreach (var type in types.Values) { // this is kind of a hack (maybe should make a ToFields)
+                AddField(type.Name, kind, required);
+            }
+        }
+
+        /// <summary>
         ///  Display normalized fix specification message as string
         /// </summary>
         public override string ToString()

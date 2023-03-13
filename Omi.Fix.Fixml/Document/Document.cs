@@ -93,11 +93,13 @@
         /// <summary>
         /// Write document to stream
         /// </summary>
-        public void WriteTo(string path) {
+        public string WriteTo(string path) {
             using var file = File.Create(path);
             using var stream = new StreamWriter(file);
 
             Write(stream);
+
+            return file.Name;
         }
 
         /// <summary>

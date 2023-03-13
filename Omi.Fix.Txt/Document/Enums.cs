@@ -5,8 +5,9 @@
     /// <summary>
     /// Dictionary of the Enum(s) found in a file, with its name as the index
     /// </summary>
-    public class Enums : Dictionary<string, Enum>
-    {
+
+    public class Enums : Dictionary<string, Enum> {
+
         /// <summary>
         ///  Default constructor
         /// </summary>
@@ -22,8 +23,7 @@
         /// <summary>
         /// Returns enums from a text file
         /// </summary>
-        public static Enums From(string path)
-        {
+        public static Enums From(string path) {
             var lines = File.ReadLines(path);
 
             return From(lines);
@@ -51,22 +51,19 @@
         /// <summary>
         /// Process each enum line and return enums
         /// </summary>
-        public static Enums Process(IEnumerable<string> lines)
-        {
+        public static Enums Process(IEnumerable<string> lines) {
             var enums = new Enums();
             var validlines = lines.ToList().Where( l => !l.StartsWith("#"));
 
             // Build enum from each valid line and add to list of enums
-            foreach (var line in validlines)
-            {
+            foreach (var line in validlines) {
                 var trimline = line;
-                if (line.Contains("#") && !line[0].Equals("#"))
-                {
+                if (line.Contains("#") && !line[0].Equals("#")) {
                     trimline = line.Substring(0, line.IndexOf("#"));
                 }
 
-                Enum enumerator = Enum.From(trimline);
-                enums.Add( enumerator.Name, enumerator); 
+                var enumerator = Enum.From(trimline);
+                enums.Add(enumerator.Name, enumerator); 
             }
 
             return enums;
@@ -75,8 +72,7 @@
         /// <summary>
         ///  Convert fixml enums to normalized fix specification enums for a given field name
         /// </summary>
-        public Specification.Enums ToSpecification(string key)
-        {
+        public Specification.Enums ToSpecification(string key) {
             var enums = new Fix.Specification.Enums();
                 
             // Different names for beginstring and fixversion

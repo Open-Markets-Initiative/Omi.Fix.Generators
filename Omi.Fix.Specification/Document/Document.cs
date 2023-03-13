@@ -91,6 +91,12 @@
             => Messages.First(current => current.Name == name);
 
 
+        /// <summary>
+        ///  Add Types
+        /// </summary>
+        public void AddOverwrite(Types types)
+            => Types.AddOverwrite(types);
+
 
         /// <summary>
         ///  Display Fix Specification Information
