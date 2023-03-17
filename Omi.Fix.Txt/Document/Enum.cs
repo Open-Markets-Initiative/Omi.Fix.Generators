@@ -82,31 +82,32 @@
             }
 
             // Get string to a comma-seperated list of value pairs
-            string valuestring;
+            string text;
 
             // Comments are valid, but not the entire line
             if (line.Contains("#") && !line[0].Equals("#")) 
             {
-                var cutString = line.Substring(line.IndexOf(":enum:")+6, line.IndexOf("#"));
-                valuestring = String.Concat(cutString.Where(c => !Char.IsWhiteSpace(c)));  
+                text = line.Substring(line.IndexOf(":enum:")+6, line.IndexOf("#"));
             }
-
             else
             {
-                var cutString = line.Substring(line.IndexOf(":enum:")+6);
-                valuestring = String.Concat(cutString.Where(c => !Char.IsWhiteSpace(c)));
+                text = line.Substring(line.IndexOf(":enum:")+6);
             }
 
-            // Split string and add values to list 
-            var split = valuestring.Split(",");
-            var val = new List<Value>();
+            text = String.Concat(text.Where(c => !Char.IsWhiteSpace(c)));
 
-            foreach (var pair in split)  
+            // Split enums and add values to list 
+            var tokens = text.Split(",");
+
+            var values = new List<Value>();
+            foreach (var token in tokens)  
             {
-                val.Add(Value.From(pair));
+                if (!string.IsNullOrWhiteSpace(token)) {
+                    values.Add(Value.From(token));
+                }
             }
 
-            return val;
+            return values;
         }
 
         

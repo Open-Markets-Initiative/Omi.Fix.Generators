@@ -23,7 +23,7 @@
 
             var xmls = new List<Xml.messageSchema>();
             foreach (var file in files ?? Array.Empty<string>()) {
-                xmls.Add(Load.SbeXmlFrom(file));
+                xmls.Add(Xml.Load.SbeXmlFrom(file));
             }
 
             return xmls;
@@ -47,9 +47,8 @@
             }
 
             var specifications = new List<Specification.Document>();
-            foreach (var schema in schemas)
-            {
-                specifications.Add(Load.From(schema));
+            foreach (var schema in schemas) {
+                specifications.Add(Xml.Load.From(schema));
             }
 
             return specifications;

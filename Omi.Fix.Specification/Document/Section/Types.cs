@@ -40,7 +40,7 @@
             {
                 // how to handle enums?
 
-                types[type.Name] = type;
+                this[type.Name] = type;
             }
         }
 

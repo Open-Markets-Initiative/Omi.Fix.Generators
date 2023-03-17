@@ -5,7 +5,7 @@
     /// <summary>
     /// FIX major and minor
     /// </summary>
-    public class Description {
+    public class Information {
 
         /// <summary>
         /// 
@@ -25,8 +25,8 @@
         /// <summary>
         /// Set FIX major and minor version from string input
         /// </summary>
-        public static Description From(string major, string minor)
-            => new Description() {
+        public static Information From(string major, string minor)
+            => new Information() {
                 Major = major,
                 Minor = minor
             };
@@ -34,7 +34,7 @@
         /// <summary>
         /// Returns major and minor from path
         /// </summary>
-        public static Description From(string path) {
+        public static Information From(string path) {
             var lines = File.ReadLines(path);
             return From(lines);
         }
@@ -42,7 +42,7 @@
         /// <summary>
         /// Return major and minor from lines in text file
         /// </summary>
-        public static Description From(IEnumerable<string> lines) {
+        public static Information From(IEnumerable<string> lines) {
             // Default description 
             var major = "4";
             var minor = "2";
