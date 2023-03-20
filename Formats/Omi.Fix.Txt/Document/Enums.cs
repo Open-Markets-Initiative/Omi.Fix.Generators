@@ -68,11 +68,50 @@
 
             return enums;
         }
-        
+
         /// <summary>
-        ///  Convert fixml enums to normalized fix specification enums for a given field name
+        ///  Process enum type
         /// </summary>
-        public Specification.Enums ToSpecification(string key) {
+        public string TypeFor(string type) {
+            // First check if type has enum values
+            if (!TryGetValue(type, out var current)) {
+                return "STRING";
+            }
+
+            // first check if value is an int
+            bool isint = true;
+            foreach (var value in current.Values) {
+                if (!int.TryParse(value.Data, out var data)) {
+                    isint = false;
+                    break;
+                }
+            }
+
+            if (isint) {
+                return "INT";
+            }
+
+            // first check if value is an int
+            bool ischar = true;
+            foreach (var value in current.Values) {
+                if (!char.TryParse(value.Data, out var data)) {
+                    ischar = false;
+                    break;
+                }
+            }
+
+            if (ischar) {
+                return "CHAR";
+            }
+
+            return "STRING";
+        }
+
+
+/// <summary>
+///  Convert fixml enums to normalized fix specification enums for a given field name
+/// </summary>
+public Specification.Enums ToSpecification(string key) {
             var enums = new Fix.Specification.Enums();
                 
             // Different names for beginstring and fixversion
