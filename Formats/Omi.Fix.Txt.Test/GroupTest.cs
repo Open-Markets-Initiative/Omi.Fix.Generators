@@ -13,7 +13,7 @@ namespace Omi.Fix.Txt.Test {
             actual.Add(new Group { Name = "AllocAccount", Required = true });
             actual.Add(new Group { Name = "AllocShares", Required = false });
 
-            Assert.AreEqual(expected[1].Name, actual[1].Name, "Verify children from string");
+            Assert.That(actual[1].Name, Is.EqualTo(expected[1].Name), "Verify children from string");
         }
 
         [Test]

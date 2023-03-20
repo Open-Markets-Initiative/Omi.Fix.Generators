@@ -1,9 +1,8 @@
 ﻿namespace Omi.Fixml.Child {
-    
     using Omi.Fix.Specification;
 
-    public class Component : IChild
-    {
+    public class Component : IChild {
+
         /// <summary>
         ///  name of child component
         /// </summary>

@@ -7,15 +7,15 @@
 
     public interface IChild
     {
-        string Name { get;}
+        string Name { get; }
 
         void Write(StreamWriter stream);
 
         void Write(StreamWriter stream, IChild child);
     }
 
-    public static partial class Extensions
-    {
+    public static partial class Extensions {
+
         /// <summary>
         /// Put child in specification, dependant of object type
         /// </summary>

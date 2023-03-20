@@ -9,36 +9,32 @@ namespace Omi.Fix.Txt.Test {
 
         [Test]
         public void VerifyFieldNumberFromLine() {
-
             var expected = Field.NumberFrom("1:Account:string");
             var actual = "1";
 
-            Assert.AreEqual(expected, actual, "Verify field number from line");
+            Assert.That(actual, Is.EqualTo(expected), "Verify field number from line");
         }
 
         [Test]
-        public void VerifyFieldNameFromLine()
-        {
-
+        public void VerifyFieldNameFromLine() {
             var expected = Field.NameFrom("1:Account:string");
             var actual = "Account";
 
-            Assert.AreEqual(expected, actual, "Verify field name from line");
+            Assert.That(actual, Is.EqualTo(expected), "Verify field name from line");
         }
 
         [Test]
         public void VerifyFieldTypeFromLine() {
-
             var expected = Field.TypeFrom("1:Account:string", new Enums());
             var actual = "string";
 
-            Assert.AreEqual(expected, actual, "Verify field type from line");
+            Assert.That(actual, Is.EqualTo(expected), "Verify field type from line");
         }
 
         [Test]
         public void VerifyInvalidLineThrowsError()
         {
-            Assert.Throws<ArgumentException>( () => Field.From("1:Account:", new Enums()), "Verify Line missing type is invalid");
+            Assert.Throws<ArgumentException>(() => Field.From("1:Account:", new Enums()), "Verify Line missing type is invalid");
         }
 
         /*
