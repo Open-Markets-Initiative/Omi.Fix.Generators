@@ -50,7 +50,7 @@ namespace Omi.Fix.Txt {
         ///  Convert fix txt to normalized fix specification
         /// </summary>
         public Specification.Document ToSpecification()
-            => new Specification.Document {
+            => new () {
                 Description = Information.ToSpecification(),
                 Header = new Specification.Header(),
                 Trailer = new Specification.Trailer(),
