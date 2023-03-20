@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Formats\Omi.Fix.Fixml\Omi.Fix.Fixml.csproj" />
     <ProjectReference Include="..\..\Omi.Fix.Fixml\Omi.Fix.Fixml.csproj" />
   </ItemGroup>
 
