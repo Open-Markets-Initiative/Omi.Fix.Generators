@@ -1,4 +1,4 @@
-<FixFields xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<FixFields>
   <FixFieldSpec>
     <Tag>1</Tag>
     <Name>Account</Name>

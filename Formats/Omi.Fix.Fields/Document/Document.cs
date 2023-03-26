@@ -1,49 +1,54 @@
 namespace Omi.Fix.Fields {
-    using System.IO;
 
     /// <summary>
     ///  Omi Fix Fields C# Document
     /// </summary>
 
     public class Document {
-/*
+
         /// <summary>
         ///  Fix Fields xml documention information
         /// </summary>
-        public Information Information = new Information();
+        public Information Information = new();
 
         /// <summary>
-        /// Fix fields
+        ///  Fix fields
         /// </summary>
-        public Fields Fields = new Fields();
+        public Fields Fields = new();
 
         /// <summary>
-        ///  Returns a document from records
+        /// Returns a document from path
         /// </summary>
-        public static Document From(Xml.ArrayOfFixFieldSpec xml)
+        public static Document From(string path) {
+            var elements = Load.From(path);
+            return From(elements);
+        }
+
+        /// <summary>
+        ///  Returns a document from xml records
+        /// </summary>
+        public static Document From(Xml.FixFields xml)
             => new () {
                 Information = Information.From(xml),
-                Enums = Enums.From(lines),
-                Fields = Fields.From(lines),
+                Fields = Fields.From(xml)
             };
 
         /// <summary>
         ///  Convert fix txt to normalized fix specification
         /// </summary>
         public Specification.Document ToSpecification()
-            => new Specification.Document {
+            => new () {
                 Description = Information.ToSpecification(),
                 Header = new Specification.Header(),
                 Trailer = new Specification.Trailer(),
-                Messages = Messages.ToSpecification(),
                 Components = new Specification.Components(),
-                Types = Fields.ToSpecification(),
+                Types = Fields.ToSpecification()
             };
 
         /// <summary>
         ///  Fix Fields xml description as string
         /// </summary>
         public override string ToString()
-            => $"{Information} fix fields";
-*/    }
+            => $"{Information} Fix Fields";
+    }
 }

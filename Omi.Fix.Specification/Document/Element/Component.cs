@@ -10,7 +10,7 @@
         /// <summary>
         ///  Name of Componenet
         /// </summary>
-        public string Name { get; set;}
+        public string Name = string.Empty;
 
         /// <summary>
         ///  Fields associated with component name

@@ -1,7 +1,7 @@
 ﻿namespace Omi.Fix.Fields.Xml {
 
 #pragma warning disable CS8618
-
+/*
     /// <summary>
     ///  Load fixml field elements into generated object classes
     /// </summary>
@@ -44,4 +44,5 @@
             return types;
         }
     }
+*/
 }

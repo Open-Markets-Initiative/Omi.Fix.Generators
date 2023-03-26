@@ -13,4 +13,10 @@
     <ProjectReference Include="..\..\Omi.Fix.Specification\Omi.Fix.Specification.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Library\Fields\Fix42.Fields.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

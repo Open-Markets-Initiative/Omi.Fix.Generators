@@ -1,5 +1,4 @@
-﻿namespace Omi.Fix.Fields.Xml
-{
+﻿namespace Omi.Fix.Fields.Xml {
 
     #pragma warning disable CS8618
 
@@ -7,7 +6,7 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-    public partial class ArrayOfFixFieldSpec
+    public partial class FixFields
     {
 
         private FixFieldsFixFieldSpec[] fixFieldSpecField;
@@ -49,6 +48,7 @@
         private bool isEnumTypeField;
 
         private FixFieldsFixFieldSpecFixEnumField[] enumPairsField;
+
         /// <remarks/>
         public ushort Tag
         {
@@ -153,9 +153,6 @@
                 this.enumPairsField = value;
             }
         }
-        
-        
-
     }
 
     /// <remarks/>
@@ -194,19 +191,8 @@
                 this.valueField = value;
             }
         }
-
-        /// <summary>
-        ///  Convert fixml enums to normalized fix specification enums
-        /// </summary>
-        public Fix.Specification.Enum ToSpecification()
-        {
-                var @enum = new Fix.Specification.Enum();
-                @enum.Value = this.Value;
-                @enum.Description = this.Key;
-
-            return @enum;
-        }
     }
+
 
 }
 

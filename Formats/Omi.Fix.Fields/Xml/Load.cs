@@ -1,4 +1,4 @@
-﻿namespace Omi.Fix.Fields.Xml {
+﻿namespace Omi.Fix.Fields {
 
     #pragma warning disable CS8618
 
@@ -10,8 +10,7 @@
         /// <summary>
         ///  Load fields from file path
         /// </summary>
-        public static Omi.Fix.Fields.Xml.ArrayOfFixFieldSpec From(string xml) 
-            => Fix.Load.From<ArrayOfFixFieldSpec>(xml);
+        public static Omi.Fix.Fields.Xml.FixFields From(string xml) 
+            => Fix.Load.From<Xml.FixFields>(xml);
     }
-
 }
