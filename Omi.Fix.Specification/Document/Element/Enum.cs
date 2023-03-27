@@ -7,6 +7,11 @@
     public class Enum {
 
         /// <summary>
+        ///  
+        /// </summary>
+        public string Name = string.Empty;
+
+        /// <summary>
         /// 
         /// </summary>
         public string Value = string.Empty;
@@ -19,7 +24,12 @@
         /// <summary>
         /// 
         /// </summary>
-        public override string ToString()
-            => $"{Value} = {Description}";
+        public override string ToString() {
+            if (string.IsNullOrEmpty(Description)){
+                return $"{Name} [{Value}]";
+            }
+
+            return $"{Name} [{Value}] {Description}";
+        }
     }
 }

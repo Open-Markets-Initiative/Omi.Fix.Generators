@@ -1,10 +1,9 @@
 ﻿namespace Omi.Fix.Fields {
-    using System;
-    using Omi.Fix.Specification;
 
     /// <summary>
     ///  Fix Field (Type) Element
     /// </summary>
+
     public class Field {
 
         /// <summary>
@@ -28,6 +27,11 @@
         public string Description = string.Empty;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public Enums Enums = new Enums();
+
+        /// <summary>
         ///  Convert Xml field element to document field
         /// </summary>
         public static Field From(Xml.FixFieldsFixFieldSpec field) {
@@ -36,6 +40,7 @@
             return new Field {
                 Name = field.Name,
                 Tag = field.Tag,
+                // others (enums etc)    
             };
         }
 

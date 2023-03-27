@@ -1,35 +1,42 @@
 ﻿namespace Omi.Fixml {
-    using System.Collections.Generic;
-    using System.Linq;
 
     /// <summary>
-    /// Contains value and data for a fix enumerator
+    ///  Fixml Enumerated Value
     /// </summary>
-    public class Enum
-    {
-        public string Value;
 
-        public string Description;
+    public class Enum {
 
         /// <summary>
-        /// Constructs an enum from a field value
+        ///  Fixml Enumerated value (enum attribute)
+        /// </summary>
+        public string Value = string.Empty;
+
+        /// <summary>
+        ///  Fixml Enumerated value Name (description attribute)
+        /// </summary>
+        public string Description = string.Empty;
+
+        /// <summary>
+        /// Convert fixml enum from a fixml element
         /// </summary>
         public static Enum From(Xml.fixFieldValue @enum)
-            => new Enum {
+            => new () {
                 Value = @enum.@enum,
                 Description = @enum.description
             };
         
-
         /// <summary>
-        /// Places Enum in specification format
+        ///  Convert to normalized fix specification enum
         /// </summary>
         public Fix.Specification.Enum ToSpecification()
-            => new Fix.Specification.Enum {
+            => new () {
                 Value = Value, 
-                Description = Description
+                Name = Description // name is called description in Fixml 
             };
 
+        /// <summary>
+        ///  Display enumerated value as string
+        /// </summary>
         public override string ToString()
            => $"{Value} = {Description}";
     }

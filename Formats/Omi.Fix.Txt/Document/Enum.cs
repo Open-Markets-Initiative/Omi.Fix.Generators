@@ -3,10 +3,11 @@
     using System.Linq;
 
     /// <summary>
-    /// Tag name and range of values
+    ///  Fix Txt Enumerated Value
     /// </summary>
-    public class Enum
-    {
+
+    public class Enum {
+
         /// <summary>
         /// The tag name associated with the Enum
         /// </summary>
@@ -112,18 +113,19 @@
 
         
         /// <summary>
-        /// Get enum to specification 
+        ///  Convert fix txt enum to normalized specification enum 
         /// </summary>
         public static Specification.Enum ToSpecification(Value line)
-        {
-            var enumiumie = new Specification.Enum();
-            enumiumie.Value = line.Data;
-            enumiumie.Description = line.Name;
+            =>  new () {
+                Value = line.Data,
+                Name = line.Name
+                // add description?
+            };
 
-            return enumiumie;
-        }
+        /// <summary>
+        ///  Display fix txt enum as string 
+        /// </summary>
         public override string ToString()
            => $"{Name} = {Values}";
-
     }
 }
