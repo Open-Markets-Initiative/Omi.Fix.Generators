@@ -3,10 +3,11 @@
     using System.Linq;
 
     /// <summary>
-    /// List of enum values for a Field
+    ///  Enumerated Field Values
     /// </summary>
-    public class Enums : List<Enum>
-    {
+
+    public class Enums : List<Enum> {
+
         /// <summary>
         ///  Default constructor
         /// </summary>
@@ -19,32 +20,29 @@
         public Enums(IEnumerable<Enum> enums) { 
             AddRange(enums);
         }
-/*
+
         /// <summary>
         ///  Gather enum values from fixml xml field
         /// </summary>
-        public static Enums From(Xml.FixFieldsFixFieldSpecFixEnumField field)
-            => new Enums(ListFrom(field).Select(Enum.From));
+        public static Enums From(Xml.FixFieldsFixFieldSpec field)
+            => new (ValuesFor(field).Select(Enum.From));
 
         /// <summary>
-        ///  Gather enum xml elements from fixml
+        ///  Gather enum xml elements from fix fields xml field
         /// </summary>
-        public static Xml.fixFieldValue[] ListFrom(Xml.FixFieldsFixFieldSpecFixEnumField field)
-            => field.value ?? new Xml.fixFieldValue[0];
-
+        public static Xml.FixFieldsFixFieldSpecFixEnumField[] ValuesFor(Xml.FixFieldsFixFieldSpec field)
+            => field.EnumPairs ?? Array.Empty<Xml.FixFieldsFixFieldSpecFixEnumField>();
 
         /// <summary>
-        /// Convert enums from specification to fixml format
+        /// Convert enums from specification to fix fields format
         /// </summary>
-        public static Enums From(Fix.Specification.Type type)
-        {
+        public static Enums From(Fix.Specification.Type type) {
             var enums = new Enums();
 
-            foreach (var @enum in type.Enums)
-            {
+            foreach (var @enum in type.Enums) {
                 // Check values
-                enums.Add(new Enum
-                {
+                enums.Add(new Enum { // make method
+                    Name = @enum.Name,
                     Value = @enum.Value,
                     Description = @enum.Description
                 });
@@ -52,15 +50,15 @@
 
             return enums;
         }
-*/
+
         /// <summary>
         ///  Convert fixml enums to normalized fix specification enums
         /// </summary>
         public Fix.Specification.Enums ToSpecification() {
             var enums = new Fix.Specification.Enums();
 
-            foreach (var component in this) {
-                enums.Add(component.ToSpecification());
+            foreach (var @enum in this) {
+                enums.Add(@enum.ToSpecification());
             }
             
             return enums;

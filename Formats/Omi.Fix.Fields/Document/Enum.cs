@@ -25,14 +25,14 @@
         ///  Convert field value
         /// </summary>
         public static Enum From(Xml.FixFieldsFixFieldSpecFixEnumField @enum)
-            => new Enum {
+            => new () {
                 Name = @enum.Key,
                 Value = @enum.Value,
-                //Description = @enum.
+                //Description = @enum // todo
             };
         
         /// <summary>
-        ///  Places Enum in specification format
+        ///  Convert fields enumerated vaue to normalized fix specification value
         /// </summary>
         public Fix.Specification.Enum ToSpecification()
             => new () {
@@ -42,9 +42,14 @@
             };
 
         /// <summary>
-        ///  Display as string
+        ///  Display enumerated value as string
         /// </summary>
-        public override string ToString()
-           => $"{Value} = {Description}";
+        public override string ToString() {
+            if (string.IsNullOrWhiteSpace(Description)) {
+                return $"{Name} = {Value}";
+            }
+
+            return $"{Name} = {Value}, {Description}";           
+        }
     }
 } 

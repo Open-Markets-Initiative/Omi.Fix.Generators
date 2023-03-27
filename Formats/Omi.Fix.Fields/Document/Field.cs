@@ -32,6 +32,11 @@
         public Enums Enums = new Enums();
 
         /// <summary>
+        ///  Is Field an Enum?
+        /// </summary>
+        public bool IsEnum => Enums.Any();
+
+        /// <summary>
         ///  Convert Xml field element to document field
         /// </summary>
         public static Field From(Xml.FixFieldsFixFieldSpec field) {
@@ -40,7 +45,8 @@
             return new Field {
                 Name = field.Name,
                 Tag = field.Tag,
-                // others (enums etc)    
+                Description = field.Description,  
+                Enums = Enums.From(field)  
             };
         }
 
@@ -56,7 +62,12 @@
         /// <summary>
         ///  Display Fix field as string
         /// </summary>
-        public override string ToString()
-            => $"{Name} [Field]";
+        public override string ToString() {
+            if (string.IsNullOrWhiteSpace(Description)) {
+                return $"{Name} : {Tag}";
+            }
+
+            return $"{Name} : {Tag}, {Description}"; // add if if enum
+        }
     }
 }
