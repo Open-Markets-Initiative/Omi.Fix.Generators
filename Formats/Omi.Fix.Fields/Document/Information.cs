@@ -5,20 +5,22 @@
     /// </summary>
 
     public class Information {
+
         /// <summary>
-        ///  Fixml Major Version
+        ///  Source File
         /// </summary>
         public string Source = string.Empty;
 
         /// <summary>
         ///  Obtain description from xml
         /// </summary>
-        public static Information From(Xml.FixFields xml)
-            => new () { // need more checks, defaults
+        public static Information From(Xml.FixFields xml, string path)
+            => new () {
+                Source = path
             };
 
         /// <summary>
-        /// Convert from specification Types to Xml Fields
+        ///  Convert normalized specification information to Xml Fields
         /// </summary>
         public static Information From(Fix.Specification.Description description)
             => new () {
@@ -29,8 +31,14 @@
         ///  Convert fix field declarations to normalized fix specification description
         /// </summary>
         public Fix.Specification.Description ToSpecification()
-            => new Fix.Specification.Description {
+            => new () {
                 // what to do here
                 };
+
+        /// <summary>
+        ///  Fix Fields inforrmation as string
+        /// </summary>
+        public override string ToString()
+            => $"{Source}";
     }
 }

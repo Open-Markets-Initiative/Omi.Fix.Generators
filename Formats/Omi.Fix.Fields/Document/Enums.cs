@@ -40,12 +40,7 @@
             var enums = new Enums();
 
             foreach (var @enum in type.Enums) {
-                // Check values
-                enums.Add(new Enum { // make method
-                    Name = @enum.Name,
-                    Value = @enum.Value,
-                    Description = @enum.Description
-                });
+                enums.Add(Enum.From(@enum));
             }
 
             return enums;

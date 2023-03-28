@@ -7,12 +7,12 @@
     public class Enum {
 
         /// <summary>
-        ///  Enum Value
+        ///  Enum name
         /// </summary>
         public string Name = string.Empty;
 
         /// <summary>
-        ///  Enum Value
+        ///  Enum value
         /// </summary>
         public string Value = string.Empty;
 
@@ -29,6 +29,16 @@
                 Name = @enum.Key,
                 Value = @enum.Value,
                 //Description = @enum // todo
+            };
+
+        /// <summary>
+        ///  Convert normalized enum value to fields enum
+        /// </summary>
+        public static Enum From(Fix.Specification.Enum @enum)
+            => new () {
+                Name = @enum.Name,
+                Value = @enum.Value,
+                Description = @enum.Description
             };
         
         /// <summary>

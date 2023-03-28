@@ -8,7 +8,7 @@
     public class Fields : Dictionary<string, Field> {
 
         /// <summary>
-        /// Obtain fields from xml
+        ///  Load Fields from xml
         /// </summary>
         public static Fields From(Xml.FixFields xml) {
             var fields = new Fields(); 

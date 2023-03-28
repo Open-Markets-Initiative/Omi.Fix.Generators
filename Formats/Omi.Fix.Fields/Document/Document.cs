@@ -17,19 +17,19 @@ namespace Omi.Fix.Fields {
         public Fields Fields = new();
 
         /// <summary>
-        /// Returns a document from path
+        ///  Construct a document from path
         /// </summary>
         public static Document From(string path) {
             var elements = Load.From(path);
-            return From(elements);
+            return From(elements, path);
         }
 
         /// <summary>
-        ///  Returns a document from xml records
+        ///  Construct a document from xml records
         /// </summary>
-        public static Document From(Xml.FixFields xml)
+        public static Document From(Xml.FixFields xml, string path)
             => new () {
-                Information = Information.From(xml),
+                Information = Information.From(xml, path),
                 Fields = Fields.From(xml)
             };
 
@@ -45,8 +45,10 @@ namespace Omi.Fix.Fields {
                 Types = Fields.ToSpecification()
             };
 
+        // TODO writer
+
         /// <summary>
-        ///  Fix Fields xml description as string
+        ///  Fix Fields xml as string
         /// </summary>
         public override string ToString()
             => $"{Information} Fix Fields";

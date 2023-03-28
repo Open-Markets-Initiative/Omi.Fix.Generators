@@ -7,29 +7,31 @@
     public class Field {
 
         /// <summary>
-        /// 
+        ///  Fix Field Tag/Number
         /// </summary>
         public uint Tag = 0;
 
         /// <summary>
-        /// 
+        ///  Fix Field Name
         /// </summary>
         public string Name = string.Empty;
 
         /// <summary>
-        ///  
+        ///  Fix Field Version
         /// </summary>
-        public string Version = string.Empty;
+        public string Version = string.Empty; // Maybe should be list
 
         /// <summary>
-        /// 
+        ///  Fix Field Description
         /// </summary>
         public string Description = string.Empty;
 
         /// <summary>
-        /// 
+        ///  Fix Field Enumerated Values
         /// </summary>
         public Enums Enums = new Enums();
+
+        // Add notes
 
         /// <summary>
         ///  Is Field an Enum?
