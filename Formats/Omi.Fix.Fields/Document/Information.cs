@@ -14,10 +14,15 @@
         /// <summary>
         ///  Obtain description from xml
         /// </summary>
-        public static Information From(Xml.FixFields xml, string path)
-            => new () {
+        public static Information From(Xml.FixFields xml, string path) {
+            if (string.IsNullOrEmpty(path)) {
+                path = string.Empty;     
+            }
+
+            return new () {
                 Source = path
             };
+        }
 
         /// <summary>
         ///  Convert normalized specification information to Xml Fields

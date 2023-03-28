@@ -27,7 +27,7 @@ namespace Omi.Fix.Fields {
         /// <summary>
         ///  Construct a document from xml records
         /// </summary>
-        public static Document From(Xml.FixFields xml, string path)
+        public static Document From(Xml.FixFields xml, string path = default)
             => new () {
                 Information = Information.From(xml, path),
                 Fields = Fields.From(xml)
