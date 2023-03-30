@@ -79,11 +79,11 @@
         }
 
         /// <summary>
-        ///  Recursively check for fields
+        ///  Recursively gather required fields
         /// </summary>
         public static void RequiredFieldsIn(Field field, HashSet<string> set) {
-            // gather 
-            if (field.Kind == Kind.Field) {
+            // fields and group count fields are required
+            if (field.Kind == Kind.Field || field.Kind == Kind.Group) {
                 set.Add(field.Name);
             }
 
