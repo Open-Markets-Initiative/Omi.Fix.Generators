@@ -5,60 +5,57 @@
     /// <summary>
     ///  Fixml Components Xml Element (Components Section)
     /// </summary>
-    public class Components : List<Component> {
 
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public Components()
-        { }
-
-        /// <summary>
-        /// Constructor from IEnumerable
-        /// </summary>
-        public Components(IEnumerable<Component> components)
-        { 
-            AddRange(components);
-        }
+    public class Components : Dictionary<string, Component> {
 
         /// <summary>
         /// Convert from xml  to fixml component 
         /// </summary>
-        public static Components From(Xml.fix xml)
-            => new Components(ListFrom(xml).Select(Component.From));
+        public static Components From(Xml.fix xml) {
+            var section = new Components();
+
+            foreach (var element in ListFrom(xml)) {
+                var component = Component.From(element);
+                section[component.Name] = component; 
+            }
+
+            return section;
+        }
 
         /// <summary>
         /// Fix Component from xml file
         /// </summary>
         public static Xml.fixComponent[] ListFrom(Xml.fix xml)
-            => xml.components ?? new Xml.fixComponent[0];
-
+            => xml.components ?? Array.Empty<Xml.fixComponent>();
 
         /// <summary>
-        ///  Gather fixml components list from normalized fix specification 
+        ///  Convert normalized fix specification components to fixml components 
         /// </summary>
-        public static Components From(Fix.Specification.Components components)
-            => new Components(components.Select(Component.From));
+        public static Components From(Fix.Specification.Components components) {  // make this a dictionary also
+            var section = new Components();
 
+            foreach (var element in components) {
+                var component = Component.From(element);
+                section[component.Name] = component;
+            }
+
+            return section;
+        }
 
         /// <summary>
         ///  Write components out to Fixml
         /// </summary>
-        public void Write(StreamWriter stream)
-        {
-            if (this.Any())
-            {
+        public void Write(StreamWriter stream) {
+            if (this.Any()) {
                 stream.WriteLine("  <components>");
 
-                foreach (var component in this)
-                {
+                foreach (var component in Values) { // should sort
                     component.Write(stream);
                 }
 
                 stream.WriteLine("  </components>"); 
             }
-            else
-            {
+            else {
                 stream.WriteLine("  <components/>");
             }
         }
@@ -66,12 +63,10 @@
         /// <summary>
         ///  Convert fixml components section to normalized fix specification components
         /// </summary>
-        public Fix.Specification.Components ToSpecification()
-        {
+        public Fix.Specification.Components ToSpecification() {
             var components = new Fix.Specification.Components();
 
-            foreach (var component in this)
-            {
+            foreach (var component in Values) {
                 components.Add(component.ToSpecification());
             }
             

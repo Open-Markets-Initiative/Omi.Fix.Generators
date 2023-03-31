@@ -4,8 +4,8 @@
     ///  Fixml Specification Information
     /// </summary>
 
-    public class Information
-    {
+    public class Information {
+
         /// <summary>
         ///  Fixml Major Version
         /// </summary>

@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Omi.Fixml {
+﻿namespace Omi.Fixml {
 
     /// <summary>
     ///  List of messsages in fixml file
     /// </summary>
 
-    public class Messages : List<Message>
-    {
+    public class Messages : List<Message> {
+
         /// <summary>
         ///  Default constructor
         /// </summary>
@@ -41,37 +38,32 @@ namespace Omi.Fixml {
         public static Messages From(Fix.Specification.Messages messages)
             => new Messages(messages.Select(Message.From));
 
-
         /// <summary>
         ///  Write header out to Fixml
         /// </summary>
-        public void Write(System.IO.StreamWriter stream)
-        {
-            if (!this.Any())
-            {
+        public void Write(StreamWriter stream) {
+            if (this.Any()) {
+                stream.WriteLine("  <messages>");
+
+                foreach (var message in this) {
+                    message.Write(stream);
+                }
+
+                stream.WriteLine("  </messages>");
+
+            }
+            else {
                 stream.WriteLine("  <messages/>");
-                return;
             }
-
-            stream.WriteLine("  <messages>");
-
-            foreach (var message in this)
-            {
-                message.Write(stream);
-            }
-
-            stream.WriteLine("  </messages>");
         }
 
         /// <summary>
         ///  Convert fixml trailer to normalized fix specification trailer
         /// </summary>
-        public Fix.Specification.Messages ToSpecification()
-        {
+        public Fix.Specification.Messages ToSpecification() {
             var messages = new Fix.Specification.Messages();
 
-            foreach (var message in this)
-            {
+            foreach (var message in this) {
                 messages.Add(message.ToSpecification());
             }
             

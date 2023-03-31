@@ -19,10 +19,15 @@
         public bool Required { get; set;}
 
         /// <summary>
-        /// Obtain group from children
+        ///  Does a group element contain child fields?
         /// </summary>
-        public static Group From(Xml.fixChildGroup element)
-        {
+        public bool HasFields
+            => this.Any();
+
+        /// <summary>
+        ///  Convert xml child group element to fixml group
+        /// </summary>
+        public static Group From(Xml.fixChildGroup element) {
             // Verify values
             var group = new Group
             {
@@ -30,8 +35,7 @@
                 Required = Is.Required(element.required)
             };
 
-            foreach (var item in element.Items) 
-            {
+            foreach (var item in element.Items) {
                 group.Add(Field.From(item));
             }
 
@@ -41,16 +45,13 @@
         /// <summary>
         /// Obtain group from field 
         /// </summary>
-        public static Group From(Fix.Specification.Field element)
-        {
-            var group = new Group
-            {
+        public static Group From(Fix.Specification.Field element) {
+            var group = new Group {
                 Name = element.Name,
                 Required = element.Required
             };
 
-            foreach (var item in element.Children)
-            {
+            foreach (var item in element.Children) {
                 group.Add(Field.From(item));
             }
 
@@ -58,63 +59,34 @@
         }
 
         /// <summary>
-        /// Write child component to xml file
-        /// </summary>
-       public void Write(StreamWriter stream, IChild child)
-        {
-            if (Extensions.ToSpecification(child).Kind.ToString().ToLower() == "component" )
-            {
-                stream.WriteLine($"        <component name=\"{child.Name}\"/>");
-            }
-            else
-            {
-                stream.WriteLine($"        <field name=\"{child.Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
-            }
-            
-        }
-
-        /// <summary>
         /// Write groups to xml file 
         /// </summary>
-        public void Write(StreamWriter stream) 
-        {
-            if (HasFields) 
-            {
+        public void Write(StreamWriter stream) {
+            if (HasFields) {
                 stream.WriteLine($"      <group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
                 
-                foreach (var child in this)
-                {
-                   Write(stream, child); 
+                foreach (var child in this) {
+                   child.Write(stream); 
                 }
 
-                stream.WriteLine("      </group>");
+                stream.WriteLine( "      </group>");
             }
-            else
-            {
+            else {
                 stream.WriteLine($"        <group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
             }
         }
 
         /// <summary>
-        /// True is group has associated fields, false otherwise
-        /// </summary>
-        public bool HasFields
-            => this.Any();
-
-        /// <summary>
         /// Converts group tp fix specification
         /// </summary>
-        public Fix.Specification.Field ToSpecification()
-        {
-            var group = new Fix.Specification.Field
-            {
+        public Fix.Specification.Field ToSpecification() {
+            var group = new Fix.Specification.Field {
                 Kind = Kind.Group, 
                 Name = Name, 
                 Required = Required
             };
 
-            foreach (var child in this)
-            {
+            foreach (var child in this) {
                 group.Children.Add(child.ToSpecification());
             }
 
@@ -122,9 +94,26 @@
         }
 
         /// <summary>
+        ///  Verify fixml field element
+        /// </summary>
+        public void Verify(Fields fields, Fixml.Components components) {
+            if (string.IsNullOrWhiteSpace(Name)) {
+                throw new Exception("Group name is missing");
+            }
+
+            if (!fields.ContainsKey(Name)) {
+                throw new Exception($"{Name}: Group is missing from dictionary");
+            }
+
+            foreach (var child in this) {
+                child.Verify(fields, components);
+            }
+        }
+
+        /// <summary>
         ///  Display Fixml child group as string
         /// </summary>
         public override string ToString()
-            => $"{Name} [Group : {this.Count}]";
+            => $"{Name} [Group : {Count}]";
     }
 }

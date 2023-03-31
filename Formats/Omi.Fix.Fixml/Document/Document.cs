@@ -10,7 +10,7 @@
         /// <summary>
         ///  Fixml Document Information
         /// </summary>
-        public Information Information = new Information();
+        public Information Information = new ();
 
         /// <summary>
         ///  Fixml Header Fields
@@ -20,34 +20,34 @@
         /// <summary>
         /// Fixml Trailer Fields
         /// </summary>
-        public Trailer Trailer = new Trailer();
+        public Trailer Trailer = new ();
 
         /// <summary>
         /// Fixml Messages
         /// </summary>
-        public Messages Messages = new Messages();
+        public Messages Messages = new ();
 
         /// <summary>
         /// Fixml components
         /// </summary>
-        public Components Components = new Components();
+        public Components Components = new ();
 
         /// <summary>
         /// Fixml Fields
         /// </summary>
-        public Fields Fields = new Fields();
+        public Fields Fields = new ();
 
         /// <summary>
-        /// Obtain fixml document from specification document
+        ///  Convert fixml document from specification document
         /// </summary>
         public static Document From(Fix.Specification.Document specification)
           => new () {
-                Information = Fixml.Information.From(specification.Description),
-                Header = Fixml.Header.From(specification.Header),
-                Trailer = Fixml.Trailer.From(specification.Trailer),
-                Messages = Fixml.Messages.From(specification.Messages),
-                Components = Fixml.Components.From(specification.Components),
-                Fields = Fixml.Fields.From(specification.Types),
+                Information = Information.From(specification.Description),
+                Header = Header.From(specification.Header),
+                Trailer = Trailer.From(specification.Trailer),
+                Messages = Messages.From(specification.Messages),
+                Components = Components.From(specification.Components),
+                Fields = Fields.From(specification.Types),
             };
 
         /// <summary>
@@ -74,7 +74,7 @@
         /// <summary>
         ///  Write fixml file to stream
         /// </summary>
-        public void Write(StreamWriter stream) {
+        public void WriteTo(StreamWriter stream) {
             Information.Write(stream);          
             Header.Write(stream); 
             Trailer.Write(stream);   
@@ -86,13 +86,13 @@
         }
 
         /// <summary>
-        /// Write document to stream
+        ///  Write fixml to path
         /// </summary>
         public string WriteTo(string path) {
             using var file = File.Create(path);
             using var stream = new StreamWriter(file);
 
-            Write(stream);
+            WriteTo(stream);
 
             return file.Name;
         }
@@ -109,5 +109,26 @@
                 Components = Components.ToSpecification(),
                 Types = Fields.ToSpecification(),
             };
+
+        /// <summary>
+        ///  Verify fixml
+        /// </summary>
+        public void Verify() {
+            // fixmls require version information
+            if (string.IsNullOrWhiteSpace(Information.Major)) {
+                throw new Exception("Missing Information");
+            }
+
+            // verify that all elements in Messages
+            foreach (var message in Messages) {
+                message.Verify(Fields, Components);
+            }
+        }
+
+        /// <summary>
+        ///  Fixml as string
+        /// </summary>
+        public override string ToString()
+            => $"{Information} Fixml";
     }
 }

@@ -5,32 +5,36 @@
     /// <summary>
     ///  Fix Xml Field Element
     /// </summary>
+
     public class Field : IChild {
 
+        /// <summary>
+        ///  Fixml Field name
+        /// </summary>
         public string Name { get; set;}
 
+        /// <summary>
+        ///  Is Fixml required?
+        /// </summary>
         public bool Required { get; set;}
 
         /// <summary>
-        /// Obtain child from any objecy
+        ///  Convert fixml child from any valid xml element
         /// </summary>
         public static IChild From(object item) {
             
             // Verify format and return child of given type
-            if (item.GetType() == typeof(Xml.fixChildField))
-            {
+            if (item.GetType() == typeof(Xml.fixChildField)) {
                 var field = (Xml.fixChildField)item;
 
                 return Field.From(field);
             }
-            if (item.GetType() == typeof(Xml.fixChildGroup))
-            {
-                var field = (Xml.fixChildGroup)item;
+            if (item.GetType() == typeof(Xml.fixChildGroup)) {
+                var group = (Xml.fixChildGroup)item;
 
-                return Group.From(field);  
+                return Group.From(group);  
             }
-            if (item.GetType() == typeof(Xml.fixChildComponent))
-            {
+            if (item.GetType() == typeof(Xml.fixChildComponent)) {
                 var field = (Xml.fixChildComponent)item;
 
                 return Component.From(field);  
@@ -58,15 +62,12 @@
             }
         }
 
-
         /// <summary>
         /// Obtain field from child
         /// </summary>
-        public static Field From(Xml.fixChildField field)
-        {
+        public static Field From(Xml.fixChildField field) {
             // verify values
-            return new Field
-            {
+            return new Field {
                 Name = field.name,
                 Required = Is.Required(field.required)
             };
@@ -80,18 +81,23 @@
         }
 
         /// <summary>
-        /// Write child field component to stream
-        /// </summary>
-        public void Write(StreamWriter stream, IChild child)
-        { 
-            stream.WriteLine($"    <field name=\"{child.Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
-        }
-
-        /// <summary>
         /// Convert field to specification
         /// </summary>
         public Fix.Specification.Field ToSpecification()
-            => new Fix.Specification.Field { Kind = Kind.Field, Name = Name, Required = Required };
+            => new () { Kind = Kind.Field, Name = Name, Required = Required };
+
+        /// <summary>
+        ///  Verify fixml field element
+        /// </summary>
+        public void Verify(Fields fields, Fixml.Components components) {
+            if (string.IsNullOrWhiteSpace(Name)) {
+                throw new Exception("Field name is missing");
+            }
+
+            if (!fields.ContainsKey(Name)) {
+                throw new Exception($"{Name}: Field is missing from dictionary");
+            }
+        }
 
         /// <summary>
         ///  Display Fixml child field as string

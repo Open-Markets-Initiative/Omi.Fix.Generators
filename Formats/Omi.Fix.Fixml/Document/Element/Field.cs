@@ -50,10 +50,8 @@
         /// <summary>
         /// Writes fixml field to stream
         /// </summary>
-        public void Write(StreamWriter stream)
-        {
-            if (IsEnum)
-            {
+        public void Write(StreamWriter stream) {
+            if (IsEnum) {
                 stream.WriteLine($"    <field number=\"{Number}\" name=\"{Name}\" type=\"{Type.ToUpper()}\">");
 
                 foreach (var @enum in Enums) // move to enums
@@ -69,6 +67,9 @@
             }
         }
 
+        /// <summary>
+        ///  Is field type an enum?
+        /// </summary>
         public bool IsEnum
             => Enums.Any();
 
@@ -76,7 +77,7 @@
         /// Convert fixml Field to specification Type
         /// </summary>
         public Fix.Specification.Type ToSpecification()
-            => new Fix.Specification.Type {
+            => new () {
                 Tag = Number, 
                 Name = Name, 
                 Underlying = Type,
@@ -85,7 +86,6 @@
                 Required = Required,    
                 Version = Version
             };
-
 
         /// <summary>
         /// Display Fixml Field as string

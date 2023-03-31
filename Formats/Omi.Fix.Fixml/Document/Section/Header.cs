@@ -2,15 +2,16 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Omi.Fix.Specification;
 
-    public class Header : List<Child.Field>
-    {
+    /// <summary>
+    ///  Fixml headers section
+    /// </summary>
+
+    public class Header : List<Child.Field> {
         /// <summary>
         /// Heaader components from xml file
         /// </summary>
-        public static Header From(Xml.fix xml)
-        {
+        public static Header From(Xml.fix xml) {
             var section = new Header();
 
             foreach (var field in xml.header) // need ??

@@ -6,28 +6,17 @@
         /// <summary>
         ///  name of child component
         /// </summary>
-        public string Name { get; set;}
+        public string Name { get; set;} // how to deal with this
 
         /// <summary>
-        /// Obtains child components from Xml element
+        ///  Convert child components from Xml element
         /// </summary>
-        public static Component From(Xml.fixChildComponent element)
-        {
+        public static Component From(Xml.fixChildComponent element) {
             // Verify values
-            var component = new Component
-            {
+
+            return new Component {
                 Name = element.name,
             };
-
-            return component;
-        }
-
-        /// <summary>
-        /// Write child component to stream with appropriate indent 
-        /// </summary>
-        public void Write(StreamWriter stream, IChild child)
-        {
-            stream.WriteLine($"      <component name=\"{child.Name}\"/>");
         }
 
         /// <summary>
@@ -39,22 +28,33 @@
             };
 
         /// <summary>
+        /// Converts component to specification
+        /// </summary>
+        public Fix.Specification.Field ToSpecification()
+            => new() {
+                Kind = Kind.Component,
+                Name = Name,
+            };
+
+        /// <summary>
         /// Writes component to XML file
         /// </summary>
-        public void Write(StreamWriter stream) 
-        {
+        public void Write(StreamWriter stream)  {
             stream.WriteLine($"      <component name=\"{Name}\"/>");
         }
 
         /// <summary>
-        /// Converts component to specification
+        ///  Verify fixml component element
         /// </summary>
-        public Fix.Specification.Field ToSpecification()
-            => new Fix.Specification.Field 
-            {
-                Kind = Kind.Component,
-                Name = Name, 
-            };
+        public void Verify(Fields fields, Fixml.Components components) {
+            if (string.IsNullOrWhiteSpace(Name)) {
+                throw new Exception("Component name is missing");
+            }
+
+            if (!components.ContainsKey(Name)) {
+                throw new Exception($"{Name}: Component is missing from dictionary");
+            }
+        }
 
         /// <summary>
         ///  Display Fixml child component as string

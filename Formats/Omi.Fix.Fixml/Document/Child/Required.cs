@@ -4,23 +4,21 @@
     /// <summary>
     ///  Child Field Traits
     /// </summary>
+
     public static class Is {
 
         /// <summary>
-        ///  Load classes from file path, determines requirement based on value
+        ///  Determines requirement based on value
         /// </summary>
-        public static bool Required(string value)
-        {
-            if (value  == "Y")
-            {
+        public static bool Required(string value) {
+            if (value  == "Y") {
                 return true;
             }
-            if (value == "N")
-            {
+            if (value == "N") {
                 return false;
             }
 
-            throw new ArgumentOutOfRangeException();
+            throw new ArgumentOutOfRangeException(nameof(value)); // do better
         }
     }
 }

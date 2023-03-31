@@ -2,15 +2,17 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Omi.Fix.Specification;
 
-    public class Trailer: List<Child.Field>
-    {
+    /// <summary>
+    ///  Fixml Trailer section
+    /// </summary>
+
+    public class Trailer: List<Child.Field> {
+
         /// <summary>
         /// Trailer from xml file
         /// </summary>
-        public static Trailer From(Xml.fix xml)
-        {
+        public static Trailer From(Xml.fix xml) {
             var section = new Trailer();
 
             foreach (var field in xml.trailer) // need ??

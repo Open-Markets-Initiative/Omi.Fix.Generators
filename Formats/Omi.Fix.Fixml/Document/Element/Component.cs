@@ -39,59 +39,54 @@
         /// <summary>
         /// Obtain fixml component from specification
         /// </summary>
-        public static Component From(Fix.Specification.Component element)
-        {
-            // Verify values
-            var component = new Component
-            {
+        public static Component From(Fix.Specification.Component element) {
+            // Verify values?
+            var component = new Component {
                 Name = element.Name,
             };
 
-            foreach (var item in element.Fields) // need ??
-            {
+            foreach (var item in element.Fields) {  // need ?? 
                 component.Fields.Add(Child.Field.From(item));
             }
 
             return component;
         }
 
-
         /// <summary>
         /// Write componenet to xml file 
         /// </summary>
-        public void Write(StreamWriter stream)
-        {
-            if (HasFields) 
-            {
+        public void Write(StreamWriter stream) {
+            if (HasFields) {
                 stream.WriteLine($"    <component name=\"{Name}\">");
                 
-                foreach (var child in Fields)
-                {
+                foreach (var child in Fields) {
                     child.Write(stream);
                 }
 
                 stream.WriteLine("    </component>");
             }
-            else
-            {
+            else {
                 stream.WriteLine($"    <component name=\"{Name}\"/>");
             }
         }
 
+        /// <summary>
+        ///  Does component have fields?
+        /// </summary>
         public bool HasFields
             => Fields.Any();
 
         /// <summary>
-        ///  Convert to standardized specification message
+        ///  Convert to standardized specification component
         /// </summary>
         public Fix.Specification.Component ToSpecification()
-            => new Fix.Specification.Component {
+            => new () {
                 Name = Name,
-                Fields = Fields.Select(field => field.ToSpecification()).ToList()
+                Fields = Fields.Select(field => field.ToSpecification()).ToList() // sub method
             };
 
         /// <summary>
-        ///  Display Fixml component as string
+        ///  Display fixml component as string
         /// </summary>
         public override string ToString()
             => $"{Name} [{Fields.Count}]";

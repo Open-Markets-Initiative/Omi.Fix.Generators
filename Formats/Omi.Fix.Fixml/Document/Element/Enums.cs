@@ -5,8 +5,9 @@
     /// <summary>
     /// List of enum values for a Field
     /// </summary>
-    public class Enums : List<Enum>
-    {
+
+    public class Enums : List<Enum> {
+
         /// <summary>
         ///  Default constructor
         /// </summary>
@@ -16,8 +17,7 @@
         /// <summary>
         /// Constructs enums from an IEnumerable
         /// </summary>
-        public Enums(IEnumerable<Enum> enums)
-        { 
+        public Enums(IEnumerable<Enum> enums) { 
             AddRange(enums);
         }
 
@@ -31,21 +31,17 @@
         ///  Gather enum xml elements from fixml
         /// </summary>
         public static Xml.fixFieldValue[] ListFrom(Xml.fixField2 field)
-            => field.value ?? new Xml.fixFieldValue[0];
-
+            => field.value ?? Array.Empty<Xml.fixFieldValue>();
 
         /// <summary>
         /// Convert enums from specification to fixml format
         /// </summary>
-        public static Enums From(Fix.Specification.Type type)
-        {
+        public static Enums From(Fix.Specification.Type type) {
             var enums = new Enums();
 
-            foreach (var @enum in type.Enums)
-            {
+            foreach (var @enum in type.Enums) {
                 // Check values
-                enums.Add(new Enum
-                {
+                enums.Add(new Enum { // sub method
                     Value = @enum.Value,
                     Description = @enum.Description
                 });
@@ -57,12 +53,10 @@
         /// <summary>
         ///  Convert fixml enums to normalized fix specification enums
         /// </summary>
-        public Fix.Specification.Enums ToSpecification()
-        {
+        public Fix.Specification.Enums ToSpecification() {
             var enums = new Fix.Specification.Enums();
 
-            foreach (var component in this)
-            {
+            foreach (var component in this) {
                 enums.Add(component.ToSpecification());
             }
             
