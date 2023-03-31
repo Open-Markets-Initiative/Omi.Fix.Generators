@@ -15,7 +15,7 @@
         /// <summary>
         ///  Fixml Header Fields
         /// </summary>
-        public Header Header = new Header();
+        public Header Header = new ();
 
         /// <summary>
         /// Fixml Trailer Fields

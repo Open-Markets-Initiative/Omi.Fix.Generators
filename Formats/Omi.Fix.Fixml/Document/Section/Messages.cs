@@ -69,5 +69,14 @@
             
             return messages;
         }
+
+        /// <summary>
+        ///  Verfify messages
+        /// </summary>
+        public void Verify(Fields fields, Components components) {
+            foreach (var message in this) {
+                message.Verify(fields, components);
+            }
+        }
     }
 }
