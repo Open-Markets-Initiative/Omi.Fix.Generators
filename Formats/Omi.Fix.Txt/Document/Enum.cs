@@ -9,7 +9,7 @@
     public class Enum {
 
         /// <summary>
-        /// The tag name associated with the Enum
+        /// The name associated with the Enum
         /// </summary>
         public string Name;
 
@@ -22,8 +22,7 @@
         /// Constructs an enum based on a line in the txt file
         /// </summary>
         public static Enum From(string line)
-            => new Enum
-            {
+            => new () {
                 Name = NameFrom(line),
                 Values = ValuesFrom(line)
             };
@@ -35,8 +34,7 @@
         public static string NameFrom(string line)
         {
             // Check if line is a comment
-            if (line[0].Equals("#"))
-            {
+            if (line[0].Equals("#")) {
                 throw new ArgumentException(nameof(line));
             }
 

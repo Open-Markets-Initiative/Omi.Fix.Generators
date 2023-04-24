@@ -73,37 +73,22 @@
         ///  Process enum type
         /// </summary>
         public string TypeFor(string type) {
-            // First check if type has enum values
-            if (!TryGetValue(type, out var current)) {
-                return "STRING";
-            }
+            if (TryGetValue(type, out var current)) {
+                // check if all values are single characters
+                bool ischar = true;
+                foreach (var value in current.Values) {
+                    if (!char.TryParse(value.Data, out var data)) {
+                        ischar = false;
+                        break;
+                    }
+                }
 
-            // first check if value is an int
-            bool isint = true;
-            foreach (var value in current.Values) {
-                if (!int.TryParse(value.Data, out var data)) {
-                    isint = false;
-                    break;
+                if (ischar) {
+                    return "CHAR";
                 }
             }
 
-            if (isint) {
-                return "INT";
-            }
-
-            // first check if value is an int
-            bool ischar = true;
-            foreach (var value in current.Values) {
-                if (!char.TryParse(value.Data, out var data)) {
-                    ischar = false;
-                    break;
-                }
-            }
-
-            if (ischar) {
-                return "CHAR";
-            }
-
+            // Use most general version
             return "STRING";
         }
 
@@ -131,8 +116,7 @@
             }
 
             // If enums exist, return in correct specification
-            foreach (var line in enumerator)
-            {
+            foreach (var line in enumerator) {
                 var enumline = Enum.ToSpecification(line);
                 enums.Add(enumline);   
             }

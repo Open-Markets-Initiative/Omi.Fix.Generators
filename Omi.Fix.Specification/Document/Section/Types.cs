@@ -36,8 +36,7 @@
         ///  Add Types, overwrite in case of same name
         /// </summary>
         public void AddOverwrite(Types types) {
-            foreach (var type in types.Values)
-            {
+            foreach (var type in types.Values) {
                 // how to handle enums?
 
                 this[type.Name] = type;

@@ -4,6 +4,7 @@
     /// <summary>
     ///  Normalized Fix Specification Message
     /// </summary>
+
     public class Message
     {
         public string Name { get; set;}
@@ -14,9 +15,9 @@
 
         public string Description { get; set; }
 
-        public List<Field> Fields = new List<Field>();
+        public List<Field> Fields = new ();
 
-        public Types Types = new Types();    // used for sbe? (need to redo)
+        public Types Types = new ();    // used for sbe? (need to redo)
 
         /// <summary>
         /// 

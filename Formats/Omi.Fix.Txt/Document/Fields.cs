@@ -84,8 +84,7 @@
         public Specification.Types ToSpecification(Enums enums) {
             var fields = new Specification.Types();
 
-            foreach (var field in this)
-            {
+            foreach (var field in this) {
                 fields.Add(field.Name , field.ToSpecification(enums));
             }
 
