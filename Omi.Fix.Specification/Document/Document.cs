@@ -45,18 +45,44 @@
         /// <summary>
         ///  Add Overwrite Type (minimal)
         /// </summary>
-        public void Set(string name, uint tag, string type)
-            => Types[name] = new Type { Name = name, Tag = tag, Underlying = type };
-        
+        public void Set(Type type)
+            => Types[type.Name] = type;
 
         /// <summary>
-        /// 
+        ///  Add Overwrite Type (minimal)
+        /// </summary>
+        public void Set(string name, uint tag, string type)
+            => Set(new Type { Name = name, Tag = tag, Underlying = type });
+
+        /// <summary>
+        ///  Add enumerated value to type
+        /// </summary>
+        public void Set(string field, string value, string name)
+        {
+            // add ability to order these
+
+            if (Types.TryGetValue(field, out var type))
+            {
+                var @enum = type.Enums.Find(e => e.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+                if (@enum != null)
+                {
+                    @enum.Name = name;
+                    @enum.Value = value;
+                }
+                else
+                {
+                    type.Enums.Add(new Enum { Name = name, Value = value });
+                }
+            }
+        }
+
+        /// <summary>
+        ///  Set a field to not required in all of specification
         /// </summary>
         public void SetNotRequired(string name)
         {
             // add some checks?
-            foreach(var message in Messages)
-            {
+            foreach(var message in Messages) {
                 message.SetNotRequired(name);
             }
         }
