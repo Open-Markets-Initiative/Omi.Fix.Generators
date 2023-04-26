@@ -3,8 +3,9 @@
     using System.Linq;
 
     /// <summary>
-    ///  Fixml Component (common collection of fields)
+    ///  Fixml Component (predefined collection of elements)
     /// </summary>
+
     public class Component {
 
         /// <summary>
@@ -20,8 +21,7 @@
         /// <summary>
         ///  Convert fixml component from xml
         /// </summary>
-        public static Component From(Xml.fixComponent element)
-        {
+        public static Component From(Xml.fixComponent element) {
             // Verify values
             var component = new Component
             {

@@ -2,7 +2,7 @@
     using System.Linq;
 
     /// <summary>
-    ///  Fix Field Declaration
+    ///  Fix Field Declaration (Type)
     /// </summary>
 
     public class Field {
@@ -18,12 +18,12 @@
         /// <summary>
         ///  Fix Field Name (PascalCase)
         /// </summary>
-        public string Name;
+        public string Name = string.Empty;
 
         /// <summary>
         ///  Fix Field Underlying Type (int/string/etc)
         /// </summary>
-        public string Type;
+        public string Type = string.Empty;
 
         /// <summary>
         ///  Enum Values for this fix field type
@@ -33,7 +33,7 @@
         /// <summary>
         /// Description of field 
         /// </summary>
-        public string Description;
+        public string Description = string.Empty;
 
         /// <summary>
         /// Is field required?
@@ -43,7 +43,7 @@
         /// <summary>
         /// Fix version of associated field
         /// </summary>
-        public string Version;
+        public string Version = string.Empty;
 
         #endregion
 
@@ -54,8 +54,7 @@
             if (IsEnum) {
                 stream.WriteLine($"    <field number=\"{Number}\" name=\"{Name}\" type=\"{Type.ToUpper()}\">");
 
-                foreach (var @enum in Enums) // move to enums
-                {
+                foreach (var @enum in Enums){
                     stream.WriteLine($"      <value enum=\"{@enum.Value}\" description=\"{@enum.Description}\"/>");
                 }
 
@@ -74,7 +73,7 @@
             => Enums.Any();
 
         /// <summary>
-        /// Convert fixml Field to specification Type
+        ///  Convert fixml Field to specification Type
         /// </summary>
         public Fix.Specification.Type ToSpecification()
             => new () {

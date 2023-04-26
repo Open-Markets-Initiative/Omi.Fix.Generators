@@ -14,7 +14,7 @@
         public string Name { get; set;}
 
         /// <summary>
-        ///  Is Fixml required?
+        ///  Is Fixml field required?
         /// </summary>
         public bool Required { get; set;}
 

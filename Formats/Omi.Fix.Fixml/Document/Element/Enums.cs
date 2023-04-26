@@ -3,7 +3,7 @@
     using System.Linq;
 
     /// <summary>
-    /// List of enum values for a Field
+    ///  List of enum values for a Field
     /// </summary>
 
     public class Enums : List<Enum> {

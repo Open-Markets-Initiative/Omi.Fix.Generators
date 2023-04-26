@@ -9,6 +9,7 @@
     public class Message {
 
         #region Properties
+        ///////////////////////////////////////////////////////
 
         /// <summary>
         ///  Fixml message name
@@ -26,46 +27,33 @@
         public string Category = string.Empty;
 
         /// <summary>
-        ///  Fixml message child fields list
+        ///  Fixml message child elements list (fields, groups, components)
         /// </summary>
-        public List<IChild> Fields = new List<IChild>();
+        public Elements Elements = new ();
 
         #endregion
 
         /// <summary>
-        /// Convert xml message to fixml format
+        ///  Convert xml element to fixml message 
         /// </summary>
-        public static Message From(Xml.fixMessage element) {
-            // Verify values
-            var message = new Message {
+        public static Message From(Xml.fixMessage element)
+            => new () {
                 Name = element.name,
                 Type = element.msgtype,
-                Category = element.msgcat
+                Category = element.msgcat,
+                Elements = Elements.From(element.Items)
             };
-
-            foreach (var item in element.Items) {  // need ?? 
-                message.Fields.Add(Child.Field.From(item));
-            }
-
-            return message;
-        }
 
         /// <summary>
-        /// Obtain fixml message from specification 
+        ///  Convert normalized specification messages to fixml messages 
         /// </summary>
-        public static Message From(Fix.Specification.Message element) {
-            var message = new Message {
+        public static Message From(Fix.Specification.Message element)
+            => new () {
                 Name = element.Name,
                 Type = element.Type,
-                Category = element.Category
+                Category = element.Category,
+                Elements = Elements.From(element.Fields)
             };
-
-            foreach (var item in element.Fields)  {
-                message.Fields.Add(Child.Field.From(item));
-            }
-
-            return message;
-        }
 
         /// <summary>
         /// Write fixml message to file
@@ -74,11 +62,11 @@
             if (HasFields) {
                 stream.WriteLine($"    <message name=\"{Name}\" msgtype=\"{Type}\" msgcat=\"{Category}\">");
 
-                foreach (var child in Fields) {
+                foreach (var child in Elements) {
                     child.Write(stream);
                 }
 
-                stream.WriteLine("    </message>");
+                stream.WriteLine( "    </message>");
             }
             else {
                 stream.WriteLine($"    <message name=\"{Name}\" msgtype=\"{Type}\" msgcat=\"{Category}\"/>");
@@ -86,10 +74,10 @@
         }
 
         /// <summary>
-        ///  Does message have fields
+        ///  Does message have fields?
         /// </summary>
         public bool HasFields
-            => Fields.Any();
+            => Elements.Any();
 
         /// <summary>
         ///  Convert to normalized fix specification message
@@ -99,11 +87,11 @@
                 Type = Type, 
                 Name = Name, 
                 Category = Category,
-                Fields = Fields.Select(field => field.ToSpecification()).ToList()
+                Fields = Elements.ToSpecification()
             };
 
         /// <summary>
-        ///  Verify message properties
+        ///  Verify fixml message properties
         /// </summary>
         public void Verify(Fields fields, Components components) {
             if (string.IsNullOrWhiteSpace(Name)) {
@@ -114,15 +102,13 @@
                 throw new Exception("Message type is missing");
             }
 
-            foreach (var field in Fields) {
-                field.Verify(fields, components);
-            }
+            Elements.Verify(fields, components);
         }
 
         /// <summary>
         ///  Display fixml message as string
         /// </summary>
         public override string ToString()
-            => $"{Name} [{Fields.Count}]";
+            => $"{Name} [{Elements.Count}]";
     }
 }

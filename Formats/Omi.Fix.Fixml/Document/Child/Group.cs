@@ -4,12 +4,13 @@
     using Omi.Fix.Specification;
 
     /// <summary>
-    /// Group of children associated with an element
+    ///  Fix Xml Group Element
     /// </summary>
+
     public class Group : List<IChild>, IChild {
 
         /// <summary>
-        /// Name of Parent 
+        ///  Name of Group 
         /// </summary>
         public string Name { get; set;}
 

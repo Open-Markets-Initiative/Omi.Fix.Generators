@@ -1,10 +1,14 @@
 ﻿namespace Omi.Fixml.Child {
     using Omi.Fix.Specification;
 
+    /// <summary>
+    ///  Fix Xml Component Element
+    /// </summary>
+
     public class Component : IChild {
 
         /// <summary>
-        ///  name of child component
+        ///  Name of child component
         /// </summary>
         public string Name { get; set;} // how to deal with this
 
@@ -28,16 +32,16 @@
             };
 
         /// <summary>
-        /// Converts component to specification
+        ///  Convert fixml component to normalized specification component
         /// </summary>
         public Fix.Specification.Field ToSpecification()
-            => new() {
+            => new () {
                 Kind = Kind.Component,
                 Name = Name,
             };
 
         /// <summary>
-        /// Writes component to XML file
+        ///  Writes component to fixml stream
         /// </summary>
         public void Write(StreamWriter stream)  {
             stream.WriteLine($"      <component name=\"{Name}\"/>");
