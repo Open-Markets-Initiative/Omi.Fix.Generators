@@ -3,7 +3,7 @@
     using System.Linq;
 
     /// <summary>
-    ///  List of enum values for a Field
+    ///  List of enum values for a Fixml field
     /// </summary>
 
     public class Enums : List<Enum> {
@@ -34,17 +34,13 @@
             => field.value ?? Array.Empty<Xml.fixFieldValue>();
 
         /// <summary>
-        /// Convert enums from specification to fixml format
+        ///  Convert normalized fix specification enums to fixml enums
         /// </summary>
         public static Enums From(Fix.Specification.Type type) {
             var enums = new Enums();
 
             foreach (var @enum in type.Enums) {
-                // Check values
-                enums.Add(new Enum { // sub method
-                    Value = @enum.Value,
-                    Description = @enum.Description
-                });
+                enums.Add(Enum.From(@enum));
             }
 
             return enums;

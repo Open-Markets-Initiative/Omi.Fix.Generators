@@ -1,12 +1,11 @@
 ﻿namespace Omi.Fixml {
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
     ///  Fixml Message
     /// </summary>
 
-    public class Message {
+    public class Message : IParent {
 
         #region Properties
         ///////////////////////////////////////////////////////
@@ -29,42 +28,48 @@
         /// <summary>
         ///  Fixml message child elements list (fields, groups, components)
         /// </summary>
-        public Elements Elements = new ();
+        public Elements Elements { get; set; } = new Elements();
 
         #endregion
 
         /// <summary>
         ///  Convert xml element to fixml message 
         /// </summary>
-        public static Message From(Xml.fixMessage element)
-            => new () {
+        public static Message From(Xml.fixMessage element) {
+            var message = new Message() {
                 Name = element.name,
                 Type = element.msgtype,
-                Category = element.msgcat,
-                Elements = Elements.From(element.Items)
+                Category = element.msgcat,                     
             };
+
+            message.Elements = Elements.From(element.Items, message);
+
+            return message;                        
+        }
 
         /// <summary>
         ///  Convert normalized specification messages to fixml messages 
         /// </summary>
-        public static Message From(Fix.Specification.Message element)
-            => new () {
+        public static Message From(Fix.Specification.Message element) {
+            var message = new Message() {
                 Name = element.Name,
                 Type = element.Type,
                 Category = element.Category,
-                Elements = Elements.From(element.Fields)
             };
 
+            message.Elements = Elements.From(element.Fields, message);
+
+            return message;
+        }
+
         /// <summary>
-        /// Write fixml message to file
+        ///  Write fixml message to stream
         /// </summary>
         public void Write(StreamWriter stream) {
             if (HasFields) {
                 stream.WriteLine($"    <message name=\"{Name}\" msgtype=\"{Type}\" msgcat=\"{Category}\">");
 
-                foreach (var child in Elements) {
-                    child.Write(stream);
-                }
+                Elements.Write(stream);
 
                 stream.WriteLine( "    </message>");
             }
@@ -108,7 +113,7 @@
         /// <summary>
         ///  Display fixml message as string
         /// </summary>
-        public override string ToString()
-            => $"{Name} [{Elements.Count}]";
+        public override string ToString() // need to update this for missing stuff
+            => $"{Name}, {Type}, Fields: {Elements.Count}]";
     }
 }

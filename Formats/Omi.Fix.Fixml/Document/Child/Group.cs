@@ -1,5 +1,4 @@
 ﻿namespace Omi.Fixml.Child {
-    using System.Collections.Generic;
     using System.Linq;
     using Omi.Fix.Specification;
 
@@ -7,7 +6,7 @@
     ///  Fix Xml Group Element
     /// </summary>
 
-    public class Group : List<IChild>, IChild {
+    public class Group : IParent, IChild {
 
         /// <summary>
         ///  Name of Group 
@@ -20,24 +19,34 @@
         public bool Required { get; set;}
 
         /// <summary>
+        ///  Component parent
+        /// </summary>
+        public IParent Parent { get; set; } // how to deal with this
+
+        /// <summary>
+        ///  Fixml group elements list (fields, groups, components)
+        /// </summary>
+        public Elements Elements { get; set; } = new Elements();
+
+        /// <summary>
         ///  Does a group element contain child fields?
         /// </summary>
         public bool HasFields
-            => this.Any();
+            => Elements.Any();
 
         /// <summary>
         ///  Convert xml child group element to fixml group
         /// </summary>
-        public static Group From(Xml.fixChildGroup element) {
+        public static Group From(Xml.fixChildGroup element, IParent parent) {
             // Verify values
-            var group = new Group
-            {
+            var group = new Group {
                 Name = element.name,
-                Required = Is.Required(element.required)
+                Required = Is.Required(element.required),
+                Parent = parent
             };
 
             foreach (var item in element.Items) {
-                group.Add(Field.From(item));
+                group.Elements.Add(Field.From(item, group));
             }
 
             return group;
@@ -46,14 +55,15 @@
         /// <summary>
         /// Obtain group from field 
         /// </summary>
-        public static Group From(Fix.Specification.Field element) {
+        public static Group From(Fix.Specification.Field element, IParent parent) {
             var group = new Group {
                 Name = element.Name,
-                Required = element.Required
+                Required = element.Required,
+                Parent = parent
             };
 
             foreach (var item in element.Children) {
-                group.Add(Field.From(item));
+                group.Elements.Add(Field.From(item, group));
             }
 
             return group;
@@ -66,9 +76,7 @@
             if (HasFields) {
                 stream.WriteLine($"      <group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
                 
-                foreach (var child in this) {
-                   child.Write(stream); 
-                }
+                Elements.Write(stream);
 
                 stream.WriteLine( "      </group>");
             }
@@ -84,10 +92,10 @@
             var group = new Fix.Specification.Field {
                 Kind = Kind.Group, 
                 Name = Name, 
-                Required = Required
+                Required = Required,
             };
 
-            foreach (var child in this) {
+            foreach (var child in Elements) { // nethod?
                 group.Children.Add(child.ToSpecification());
             }
 
@@ -106,15 +114,13 @@
                 throw new Exception($"{Name}: Group is missing from dictionary");
             }
 
-            foreach (var child in this) {
-                child.Verify(fields, components);
-            }
+            Elements.Verify(fields, components);
         }
 
         /// <summary>
         ///  Display Fixml child group as string
         /// </summary>
         public override string ToString()
-            => $"{Name} [Group : {Count}]";
+            => $"{Name} [Group : {Elements.Count}]";
     }
 }

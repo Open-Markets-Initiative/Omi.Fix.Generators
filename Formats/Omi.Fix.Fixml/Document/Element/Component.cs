@@ -1,36 +1,39 @@
 ﻿namespace Omi.Fixml {
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
     ///  Fixml Component (predefined collection of elements)
     /// </summary>
 
-    public class Component {
+    public class Component : IParent {
 
         /// <summary>
         ///  Fixml component name
         /// </summary>
-        public string Name { get; set;}
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        ///  Fixml component fields list
+        ///  Fixml component elements list (fields, groups, components)
         /// </summary>
-        public List<IChild> Fields = new List<IChild>();
+        public Elements Elements { get; set; } = new Elements();
 
         /// <summary>
-        ///  Convert fixml component from xml
+        ///  Does component have fields?
+        /// </summary>
+        public bool HasFields
+            => Elements.Any();
+
+        /// <summary>
+        ///  Convert xml component to fixml component
         /// </summary>
         public static Component From(Xml.fixComponent element) {
             // Verify values
-            var component = new Component
-            {
-                Name = element.name,
+            var component = new Component {
+                Name = element.name
             };
 
-            foreach (var item in element.Items) // need ??
-            {
-                component.Fields.Add(Child.Field.From(item));
+            foreach (var item in element.Items) { // need ??
+                component.Elements.Add(Child.Field.From(item, component));
             }
 
             return component;
@@ -42,26 +45,24 @@
         public static Component From(Fix.Specification.Component element) {
             // Verify values?
             var component = new Component {
-                Name = element.Name,
+                Name = element.Name
             };
 
             foreach (var item in element.Fields) {  // need ?? 
-                component.Fields.Add(Child.Field.From(item));
+                component.Elements.Add(Child.Field.From(item, component));
             }
 
             return component;
         }
 
         /// <summary>
-        /// Write componenet to xml file 
+        ///  Write componenet to xml file 
         /// </summary>
         public void Write(StreamWriter stream) {
             if (HasFields) {
                 stream.WriteLine($"    <component name=\"{Name}\">");
                 
-                foreach (var child in Fields) {
-                    child.Write(stream);
-                }
+                Elements.Write(stream);
 
                 stream.WriteLine("    </component>");
             }
@@ -71,24 +72,18 @@
         }
 
         /// <summary>
-        ///  Does component have fields?
-        /// </summary>
-        public bool HasFields
-            => Fields.Any();
-
-        /// <summary>
         ///  Convert to standardized specification component
         /// </summary>
         public Fix.Specification.Component ToSpecification()
             => new () {
                 Name = Name,
-                Fields = Fields.Select(field => field.ToSpecification()).ToList() // sub method
+                Fields = Elements.ToSpecification()
             };
 
         /// <summary>
         ///  Display fixml component as string
         /// </summary>
         public override string ToString()
-            => $"{Name} [{Fields.Count}]";
+            => $"{Name} [{Elements.Count}]";
     }
 }

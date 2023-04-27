@@ -1,44 +1,35 @@
 ﻿namespace Omi.Fixml {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
     ///  Fixml Trailer section
     /// </summary>
 
-    public class Trailer: List<Child.Field> {
+    public class Trailer : IParent {
 
         /// <summary>
-        /// Trailer from xml file
+        ///  Fixml trailer child elements list (fields, groups, components)
+        /// </summary>
+        public Elements Elements { get; set; } = new Elements();
+
+        /// <summary>
+        ///  Does fixml trailer have elements?
+        /// </summary>
+        public bool HasFields
+            => Elements.Any();
+
+        /// <summary>
+        ///  Convert xml file elements to fixml trailer
         /// </summary>
         public static Trailer From(Xml.fix xml) {
             var section = new Trailer();
 
-            foreach (var field in xml.trailer) // need ??
-            {
+            foreach (var field in xml.trailer) { // need ??
                 // Verify format
 
-                var name = field.name;
-                bool required;
-
-                if (field.required == "Y")
-                {
-                    required = true;
-                }
-                else if (field.required == "N")
-                {
-                    required = false;
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
-
-                section.Add(new Child.Field
-                {
-                    Name = name,
-                    Required = required,
+                section.Elements.Add(new Child.Field {
+                    Name = field.name,
+                    Required = Is.Required(field.required),
                 });
             }
 
@@ -46,18 +37,14 @@
         }
 
         /// <summary>
-        /// Fixml trailer from specification trailer
+        ///  Convert normalized specification trailer to fixml trailer
         /// </summary>
-        public static Trailer From(Fix.Specification.Trailer trailer)
-        {
+        public static Trailer From(Fix.Specification.Trailer trailer) {
             var section = new Trailer();
 
-            foreach (var field in trailer)
-            {
+            foreach (var field in trailer) {
                 // Verify format
-
-                section.Add(new Child.Field
-                {
+                section.Elements.Add(new Child.Field {
                     Name = field.Name,
                     Required = field.Required,
                 });
@@ -67,38 +54,29 @@
         }
 
         /// <summary>
-        ///  Write header out to Fixml
+        ///  Write trailer out to Fixml
         /// </summary>
-        public void Write(StreamWriter stream)
-        {
-            if (this.Any())
-            {
+        public void Write(StreamWriter stream) {
+            if (HasFields) {
                 stream.WriteLine("  <trailer>");
 
-                foreach (var field in this)
-                {
-                    field.Write(stream);
-                }
+                Elements.Write(stream);
 
                 stream.WriteLine("  </trailer>");
             }
-            else
-            {
+            else {
                 stream.WriteLine("  <trailer/>");
             }
         }
 
-
         /// <summary>
         ///  Convert fixml trailer to normalized fix specification trailer
         /// </summary>
-        public Fix.Specification.Trailer ToSpecification()
-        {
+        public Fix.Specification.Trailer ToSpecification() {
             var trailer = new Fix.Specification.Trailer();
 
-            foreach (var field in this)
-            {
-                trailer.Add(field.ToSpecification());
+            foreach (var element in Elements) {
+                trailer.Add(element.ToSpecification());
             }
             
             return trailer;

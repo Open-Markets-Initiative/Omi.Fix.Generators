@@ -23,11 +23,11 @@
         /// <summary>
         ///  Gather elements
         /// </summary>
-        public static Elements From(object[] items) {
+        public static Elements From(object[] items, IParent parent) {
             var elements = new Elements();
 
             foreach (var item in items ?? Array.Empty<object>()) {
-                elements.Add(Child.Field.From(item));
+                elements.Add(Child.Field.From(item, parent));
             }
 
             return elements;
@@ -36,12 +36,12 @@
         /// <summary>
         ///  Convert normalized specification fields to fixml elements
         /// </summary>
-        public static Elements From(List<Fix.Specification.Field> fields) {
+        public static Elements From(List<Fix.Specification.Field> fields, IParent parent) {
             var elements = new Elements();
 
             foreach (var element in fields) {
                 // Check values?
-                elements.Add(Child.Field.From(element));
+                elements.Add(Child.Field.From(element, parent));
             }
 
             return elements;

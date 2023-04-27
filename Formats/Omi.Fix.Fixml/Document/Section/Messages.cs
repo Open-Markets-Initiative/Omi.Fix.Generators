@@ -1,7 +1,7 @@
 ﻿namespace Omi.Fixml {
 
     /// <summary>
-    ///  List of messsages in fixml file
+    ///  List of fixml messsages
     /// </summary>
 
     public class Messages : List<Message> {
@@ -13,10 +13,9 @@
         { }
 
         /// <summary>
-        /// Messages from IEnumerable
+        ///  Construct messages from IEnumerable
         /// </summary>
-        public Messages(IEnumerable<Message> messages)
-        { 
+        public Messages(IEnumerable<Message> messages) { 
             AddRange(messages);
         }
 
@@ -30,7 +29,7 @@
         ///  Gather message xml elements from fixml
         /// </summary>
         public static Xml.fixMessage[] ListFrom(Xml.fix xml)
-            => xml.messages ?? new Xml.fixMessage[0];
+            => xml.messages ?? Array.Empty<Xml.fixMessage>();
 
         /// <summary>
         ///  Gather fixml components list from normalized fix specification 
@@ -50,7 +49,6 @@
                 }
 
                 stream.WriteLine("  </messages>");
-
             }
             else {
                 stream.WriteLine("  <messages/>");
@@ -58,7 +56,7 @@
         }
 
         /// <summary>
-        ///  Convert fixml trailer to normalized fix specification trailer
+        ///  Convert fixml messages list to normalized fix specification message
         /// </summary>
         public Fix.Specification.Messages ToSpecification() {
             var messages = new Fix.Specification.Messages();
@@ -68,15 +66,6 @@
             }
             
             return messages;
-        }
-
-        /// <summary>
-        ///  Verfify messages
-        /// </summary>
-        public void Verify(Fields fields, Components components) {
-            foreach (var message in this) {
-                message.Verify(fields, components);
-            }
         }
     }
 }

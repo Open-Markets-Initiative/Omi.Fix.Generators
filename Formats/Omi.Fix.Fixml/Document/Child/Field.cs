@@ -19,69 +19,76 @@
         public bool Required { get; set;}
 
         /// <summary>
+        ///  Field parent
+        /// </summary>
+        public IParent Parent { get; set; } // how to deal with this
+
+        /// <summary>
         ///  Convert fixml child from any valid xml element
         /// </summary>
-        public static IChild From(object item) {
+        public static IChild From(object item, IParent parent) {
             
             // Verify format and return child of given type
             if (item.GetType() == typeof(Xml.fixChildField)) {
                 var field = (Xml.fixChildField)item;
 
-                return Field.From(field);
+                return Field.From(field, parent);
             }
             if (item.GetType() == typeof(Xml.fixChildGroup)) {
                 var group = (Xml.fixChildGroup)item;
 
-                return Group.From(group);  
+                return Group.From(group, parent);  
             }
             if (item.GetType() == typeof(Xml.fixChildComponent)) {
                 var field = (Xml.fixChildComponent)item;
 
-                return Component.From(field);  
+                return Component.From(field, parent);  
             }
 
             throw new ArgumentOutOfRangeException();
         }
 
         /// <summary>
-        /// Convert from specification to xml format
+        /// Convert normalized specification field to fixml element
         /// </summary>
-        public static IChild From(Fix.Specification.Field field) {
+        public static IChild From(Fix.Specification.Field field, IParent parent) {
             switch (field.Kind) {
                 case Kind.Field:
                     return new Field {
                         Name = field.Name,
-                        Required = field.Required
+                        Required = field.Required,
+                        Parent = parent
                     };
                 case Kind.Component:
-                    return Component.From(field);
+                    return Component.From(field, parent);
                 case Kind.Group:
-                    return Group.From(field);
+                    return Group.From(field, parent);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
         /// <summary>
-        /// Obtain field from child
+        ///  Convert field from child
         /// </summary>
-        public static Field From(Xml.fixChildField field) {
+        public static Field From(Xml.fixChildField field, IParent parent) {
             // verify values
             return new Field {
                 Name = field.name,
-                Required = Is.Required(field.required)
+                Required = Is.Required(field.required),
+                Parent = parent
             };
         }
 
         /// <summary>
-        /// write field to stream
+        ///  Write field to stream
         /// </summary>
         public void Write(StreamWriter stream) { 
             stream.WriteLine($"      <field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
         }
 
         /// <summary>
-        /// Convert field to specification
+        ///  Convert fixml field to normalized fix specification field
         /// </summary>
         public Fix.Specification.Field ToSpecification()
             => new () { Kind = Kind.Field, Name = Name, Required = Required };
@@ -100,7 +107,7 @@
         }
 
         /// <summary>
-        ///  Display Fixml child field as string
+        ///  Display fixml child field as string
         /// </summary>
         public override string ToString()
             => $"{Name} [Field]";
