@@ -11,7 +11,7 @@
         /// <summary>
         ///  Name of Group 
         /// </summary>
-        public string Name { get; set;}
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         ///  True if tag is required, false otherwise

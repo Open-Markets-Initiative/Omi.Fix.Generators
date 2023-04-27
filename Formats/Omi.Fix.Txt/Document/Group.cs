@@ -1,14 +1,15 @@
-﻿namespace Omi.Fix.Txt
-{
+﻿namespace Omi.Fix.Txt {
+
     /// <summary>
-    /// Field asssociated with a message
+    ///  Fix Txt Group 
     /// </summary>
-    public class Group
-    {
+
+    public class Group {
+
         /// <summary>
         /// Name of group
         /// </summary>
-        public string Name;
+        public string Name = string.Empty;
 
         /// <summary>
         /// States whether a group is required in fix message

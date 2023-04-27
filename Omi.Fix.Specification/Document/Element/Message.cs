@@ -7,13 +7,13 @@
 
     public class Message
     {
-        public string Name { get; set;}
+        public string Name = string.Empty;
 
-        public string Type { get; set;}
+        public string Type = string.Empty;
 
-        public string Category { get; set;}
+        public string Category = string.Empty;
 
-        public string Description { get; set; }
+        public string Description = string.Empty;
 
         public List<Field> Fields = new ();
 

@@ -6,15 +6,16 @@
     /// <summary>
     /// Types of FIX messages in text file
     /// </summary>
-    public class Message
-    {
+    public class Message {
     
-        // Message Properties
-        public string Name;
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Name = string.Empty;
 
-        public string Type;
+        public string Type = string.Empty;
 
-        public string Category;
+        public string Category = string.Empty;
 
         public Groups Elements = new Groups();
 

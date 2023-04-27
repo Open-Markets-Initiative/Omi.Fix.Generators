@@ -4,25 +4,25 @@
     ///  Normalized Fix Field Type Declaration
     /// </summary>
 
-    public class Type
-    {
+    public class Type {
+
         /// <summary>
         ///  Fix Field Tag/Number
         /// </summary>
-        public uint Tag;
+        public uint Tag = 0;
 
-        public string Name;
+        public string Name = string.Empty;
 
-        public string Description;
+        public string Description = string.Empty;
 
         public bool Required;
 
-        public string Version;
+        public string Version = string.Empty;
 
         /// <summary>
         ///  Fix Field Underlying Type
         /// </summary>
-        public string Underlying;
+        public string Underlying = string.Empty;
 
         public Enums Enums = new Enums();
 

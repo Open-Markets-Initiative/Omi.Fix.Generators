@@ -10,17 +10,17 @@
         /// <summary>
         /// 
         /// </summary>
-        public string Major;
+        public string Major = string.Empty;
 
         /// <summary>
         /// 
         /// </summary>
-        public string Minor;
+        public string Minor = string.Empty;
 
         /// <summary>
         ///  Category
         /// </summary>
-        public string Category;
+        public string Category = string.Empty;
 
         /// <summary>
         /// Set FIX major and minor version from string input

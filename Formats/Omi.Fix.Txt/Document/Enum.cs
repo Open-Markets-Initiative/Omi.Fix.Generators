@@ -11,7 +11,7 @@
         /// <summary>
         /// The name associated with the Enum
         /// </summary>
-        public string Name;
+        public string Name = string.Empty;
 
         /// <summary>
         /// List of each enum present for a given tag 

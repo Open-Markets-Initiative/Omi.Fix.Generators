@@ -6,17 +6,17 @@
     /// <summary>
     /// Name and data of corresponing enum
     /// </summary>
-    public class Value
-    {
+    public class Value {
+
         /// <summary>
         /// Name of value
         /// </summary>
-        public string Name;
+        public string Name = string.Empty;
 
         /// <summary>
         /// Data or symbol for associated Name
         /// </summary>
-        public string Data;
+        public string Data = string.Empty;
 
         /// <summary>
         /// Contains Value from properties

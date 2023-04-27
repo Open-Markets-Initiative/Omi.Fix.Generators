@@ -4,10 +4,16 @@
     ///  Normalized Fix Specification Enumerated Value content
     /// </summary>
 
-    public class Value
-    {
-        public string Name;
+    public class Value {
 
-        public string Description;
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Name = string.Empty;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Description = string.Empty;
     }
 }
