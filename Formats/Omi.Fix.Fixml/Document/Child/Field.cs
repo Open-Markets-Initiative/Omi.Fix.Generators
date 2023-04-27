@@ -24,6 +24,12 @@
         public IParent Parent { get; set; } // how to deal with this
 
         /// <summary>
+        ///  Component depth in element tree
+        /// </summary>
+        public int Depth()
+            => Omi.Fixml.Depth.Of(this);
+
+        /// <summary>
         ///  Convert fixml child from any valid xml element
         /// </summary>
         public static IChild From(object item, IParent parent) {
@@ -81,10 +87,16 @@
         }
 
         /// <summary>
+        ///  Number of indent spaces
+        /// </summary>
+        public string Indent()
+            => Omi.Fixml.Indent.Count(Depth() + 2);
+
+        /// <summary>
         ///  Write field to stream
         /// </summary>
         public void Write(StreamWriter stream) { 
-            stream.WriteLine($"      <field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+            stream.WriteLine($"{Indent()}<field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
         }
 
         /// <summary>

@@ -18,6 +18,12 @@
         public IParent Parent { get; set; } // how to deal with this
 
         /// <summary>
+        ///  Component depth in element tree
+        /// </summary>
+        public int Depth()
+            => Omi.Fixml.Depth.Of(this);
+
+        /// <summary>
         ///  Convert child components from Xml element
         /// </summary>
         public static Component From(Xml.fixChildComponent element, IParent parent) {
@@ -48,10 +54,16 @@
             };
 
         /// <summary>
+        ///  Number of indent spaces
+        /// </summary>
+        public string Indent()
+            => Omi.Fixml.Indent.Count(Depth() + 2);
+
+        /// <summary>
         ///  Writes component to fixml stream
         /// </summary>
         public void Write(StreamWriter stream)  {
-            stream.WriteLine($"      <component name=\"{Name}\"/>");
+            stream.WriteLine($"{Indent()}<component name=\"{Name}\"/>");
         }
 
         /// <summary>

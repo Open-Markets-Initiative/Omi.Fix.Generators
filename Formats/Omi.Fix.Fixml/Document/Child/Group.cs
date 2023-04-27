@@ -14,7 +14,7 @@
         public string Name { get; set;}
 
         /// <summary>
-        /// True if tag is required in message, false otherwise
+        ///  True if tag is required, false otherwise
         /// </summary>
         public bool Required { get; set;}
 
@@ -22,6 +22,12 @@
         ///  Component parent
         /// </summary>
         public IParent Parent { get; set; } // how to deal with this
+
+        /// <summary>
+        ///  Component depth in element tree
+        /// </summary>
+        public int Depth()
+            => Omi.Fixml.Depth.Of(this);
 
         /// <summary>
         ///  Fixml group elements list (fields, groups, components)
@@ -53,7 +59,7 @@
         }
 
         /// <summary>
-        /// Obtain group from field 
+        ///  Convert normalized fix specification group to fixml group 
         /// </summary>
         public static Group From(Fix.Specification.Field element, IParent parent) {
             var group = new Group {
@@ -70,23 +76,29 @@
         }
 
         /// <summary>
+        ///  Number of indent spaces
+        /// </summary>
+        public string Indent()
+            => Omi.Fixml.Indent.Count(Depth() + 2);
+
+        /// <summary>
         /// Write groups to xml file 
         /// </summary>
         public void Write(StreamWriter stream) {
             if (HasFields) {
-                stream.WriteLine($"      <group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
+                stream.WriteLine($"{Indent()}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
                 
                 Elements.Write(stream);
 
-                stream.WriteLine( "      </group>");
+                stream.WriteLine($"{Indent()}</group>");
             }
             else {
-                stream.WriteLine($"        <group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+                stream.WriteLine($"{Indent()}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
             }
         }
 
         /// <summary>
-        /// Converts group tp fix specification
+        ///  Convert fixml group to normalized fix specification group
         /// </summary>
         public Fix.Specification.Field ToSpecification() {
             var group = new Fix.Specification.Field {

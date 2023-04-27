@@ -12,9 +12,19 @@
         string Name { get; }
 
         /// <summary>
+        ///  Element parent
+        /// </summary>
+        IParent Parent { get; }
+
+        /// <summary>
         ///  Verify fixml child element properties
         /// </summary>
         void Verify(Fields fields, Components components);
+
+        /// <summary>
+        ///  Number of levels deep in element tree
+        /// </summary>
+        int Depth();
 
         /// <summary>
         ///  Convert to specification field
