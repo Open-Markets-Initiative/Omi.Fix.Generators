@@ -50,9 +50,9 @@
         /// <summary>
         ///  Write fixml elements
         /// </summary>
-        public void Write(StreamWriter stream) {
+        public void Write(StreamWriter stream, int spaces = 0) {
             foreach (var element in this) {
-                element.Write(stream);
+                element.Write(stream, spaces);
             }
         }
 

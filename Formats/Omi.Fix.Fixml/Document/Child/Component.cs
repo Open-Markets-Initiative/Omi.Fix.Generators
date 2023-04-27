@@ -54,16 +54,10 @@
             };
 
         /// <summary>
-        ///  Number of indent spaces
+        ///  Write component to fixml stream
         /// </summary>
-        public string Indent()
-            => Omi.Fixml.Indent.Count(Depth() + 2);
-
-        /// <summary>
-        ///  Writes component to fixml stream
-        /// </summary>
-        public void Write(StreamWriter stream)  {
-            stream.WriteLine($"{Indent()}<component name=\"{Name}\"/>");
+        public void Write(StreamWriter stream, int spaces)  {
+            stream.WriteLine($"{Indent.Count(spaces)}<component name=\"{Name}\" />");
         }
 
         /// <summary>

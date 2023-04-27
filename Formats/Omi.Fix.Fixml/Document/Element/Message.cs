@@ -69,7 +69,7 @@
             if (HasFields) {
                 stream.WriteLine($"    <message name=\"{Name}\" msgtype=\"{Type}\" msgcat=\"{Category}\">");
 
-                Elements.Write(stream);
+                Elements.Write(stream, 4);
 
                 stream.WriteLine( "    </message>");
             }

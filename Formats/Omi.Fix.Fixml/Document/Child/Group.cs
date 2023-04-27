@@ -9,19 +9,19 @@
     public class Group : IParent, IChild {
 
         /// <summary>
-        ///  Name of Group 
+        ///  Fixml group name 
         /// </summary>
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        ///  True if tag is required, false otherwise
+        ///  True if group is required, false otherwise
         /// </summary>
         public bool Required { get; set;}
 
         /// <summary>
-        ///  Component parent
+        ///  Group parent
         /// </summary>
-        public IParent Parent { get; set; } // how to deal with this
+        public IParent Parent { get; set; } // how to deal with this?
 
         /// <summary>
         ///  Component depth in element tree
@@ -76,24 +76,18 @@
         }
 
         /// <summary>
-        ///  Number of indent spaces
-        /// </summary>
-        public string Indent()
-            => Omi.Fixml.Indent.Count(Depth() + 2);
-
-        /// <summary>
         /// Write groups to xml file 
         /// </summary>
-        public void Write(StreamWriter stream) {
+        public void Write(StreamWriter stream, int spaces) {
             if (HasFields) {
-                stream.WriteLine($"{Indent()}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
+                stream.WriteLine($"{Indent.Count(spaces)}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
                 
-                Elements.Write(stream);
+                Elements.Write(stream, spaces + 2);
 
-                stream.WriteLine($"{Indent()}</group>");
+                stream.WriteLine($"{Indent.Count(spaces)}</group>");
             }
             else {
-                stream.WriteLine($"{Indent()}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+                stream.WriteLine($"{Indent.Count(spaces)}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\" />");
             }
         }
 

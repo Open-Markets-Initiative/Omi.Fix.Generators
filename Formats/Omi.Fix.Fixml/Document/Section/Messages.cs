@@ -38,7 +38,7 @@
             => new Messages(messages.Select(Message.From));
 
         /// <summary>
-        ///  Write header out to Fixml
+        ///  Write fixml messages to stream
         /// </summary>
         public void Write(StreamWriter stream) {
             if (this.Any()) {

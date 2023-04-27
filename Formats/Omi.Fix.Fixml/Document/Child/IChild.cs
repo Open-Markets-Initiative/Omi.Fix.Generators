@@ -34,6 +34,6 @@
         /// <summary>
         ///  Write element to stream
         /// </summary>
-        void Write(StreamWriter stream);
+        void Write(StreamWriter stream, int spaces);
     }
 }

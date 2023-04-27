@@ -87,16 +87,10 @@
         }
 
         /// <summary>
-        ///  Number of indent spaces
-        /// </summary>
-        public string Indent()
-            => Omi.Fixml.Indent.Count(Depth() + 2);
-
-        /// <summary>
         ///  Write field to stream
         /// </summary>
-        public void Write(StreamWriter stream) { 
-            stream.WriteLine($"{Indent()}<field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+        public void Write(StreamWriter stream, int spaces) { 
+            stream.WriteLine($"{Indent.Count(spaces)}<field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\" />");
         }
 
         /// <summary>

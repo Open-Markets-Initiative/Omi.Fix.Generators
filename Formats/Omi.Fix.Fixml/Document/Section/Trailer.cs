@@ -54,13 +54,13 @@
         }
 
         /// <summary>
-        ///  Write trailer out to Fixml
+        ///  Write fixml trailer out to stream
         /// </summary>
         public void Write(StreamWriter stream) {
             if (HasFields) {
                 stream.WriteLine("  <trailer>");
 
-                Elements.Write(stream);
+                Elements.Write(stream, 2);
 
                 stream.WriteLine("  </trailer>");
             }
