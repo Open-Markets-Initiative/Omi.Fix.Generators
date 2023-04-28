@@ -45,19 +45,9 @@
         ///  Convert fixml field declarations to normalized fix specification description
         /// </summary>
         public Fix.Specification.Description ToSpecification()
-            => new Fix.Specification.Description {
+            => new () {
                 Major = Major,
                 Minor = Minor,
             };
-
-        /// <summary>
-        ///  Verify fixml information
-        /// </summary>
-        public void Verify() {
-            // fixmls require version information
-            if (string.IsNullOrWhiteSpace(Major)) {
-                throw new Exception("Missing Information");
-            }
-        }
     }
 }

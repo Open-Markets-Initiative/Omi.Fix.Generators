@@ -7,9 +7,6 @@
 
     public class Message : IParent {
 
-        #region Properties
-        ///////////////////////////////////////////////////////
-
         /// <summary>
         ///  Fixml message name
         /// </summary>
@@ -30,8 +27,6 @@
         /// </summary>
         public Elements Elements { get; set; } = new Elements();
 
-        #endregion
-
         /// <summary>
         ///  Convert xml element to fixml message 
         /// </summary>
@@ -42,7 +37,7 @@
                 Category = element.msgcat,                     
             };
 
-            message.Elements = Elements.From(element.Items, message);
+            message.Elements = Elements.From(element.Items, message); // need ??
 
             return message;                        
         }

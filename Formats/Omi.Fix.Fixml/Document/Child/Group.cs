@@ -87,7 +87,7 @@
                 stream.WriteLine($"{Indent.Count(spaces)}</group>");
             }
             else {
-                stream.WriteLine($"{Indent.Count(spaces)}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\" />");
+                stream.WriteLine($"{Indent.Count(spaces)}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
             }
         }
 

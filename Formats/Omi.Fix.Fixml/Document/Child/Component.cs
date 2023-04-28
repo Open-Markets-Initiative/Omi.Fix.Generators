@@ -8,12 +8,12 @@
     public class Component : IChild {
 
         /// <summary>
-        ///  Name of child component
+        ///  Fixml component name
         /// </summary>
         public string Name { get; set;} = string.Empty;
 
         /// <summary>
-        ///  Component parent
+        ///  Fixml component parent
         /// </summary>
         public IParent Parent { get; set; } // how to deal with this
 
@@ -24,7 +24,7 @@
             => Omi.Fixml.Depth.Of(this);
 
         /// <summary>
-        ///  Convert child components from Xml element
+        ///  Convert xml child component element to fixml document element 
         /// </summary>
         public static Component From(Xml.fixChildComponent element, IParent parent) {
             // Verify values
@@ -36,7 +36,7 @@
         }
 
         /// <summary>
-        /// Constructs component from field element
+        ///  Convert xml normalized fix specification to fixml document element 
         /// </summary>
         public static Component From(Fix.Specification.Field element, IParent parent)
             => new () {
@@ -54,10 +54,10 @@
             };
 
         /// <summary>
-        ///  Write component to fixml stream
+        ///  Write fixml component to stream
         /// </summary>
         public void Write(StreamWriter stream, int spaces)  {
-            stream.WriteLine($"{Indent.Count(spaces)}<component name=\"{Name}\" />");
+            stream.WriteLine($"{Indent.Count(spaces)}<component name=\"{Name}\"/>");
         }
 
         /// <summary>
@@ -74,7 +74,7 @@
         }
 
         /// <summary>
-        ///  Display Fixml child component as string
+        ///  Display fixml component element as string
         /// </summary>
         public override string ToString()
             => $"{Name} [Component]";

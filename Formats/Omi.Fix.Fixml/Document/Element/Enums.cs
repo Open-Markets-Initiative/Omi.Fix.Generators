@@ -24,13 +24,13 @@
         /// <summary>
         ///  Gather enum values from fixml xml field
         /// </summary>
-        public static Enums From(Xml.fixField2 field)
+        public static Enums From(Xml.fixField field)
             => new Enums(ListFrom(field).Select(Enum.From));
 
         /// <summary>
         ///  Gather enum xml elements from fixml
         /// </summary>
-        public static Xml.fixFieldValue[] ListFrom(Xml.fixField2 field)
+        public static Xml.fixFieldValue[] ListFrom(Xml.fixField field)
             => field.value ?? Array.Empty<Xml.fixFieldValue>();
 
         /// <summary>

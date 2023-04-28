@@ -9,15 +9,15 @@
     public partial class fix
     {
 
-        private fixField[] headerField;
+        private fixHeader headerField;
 
-        private fixField[] trailerField;
+        private fixTrailer trailerField;
 
         private fixMessage[] messagesField;
 
         private fixComponent[] componentsField;
 
-        private fixField2[] fieldsField;
+        private fixField[] fieldsField;
 
         private byte majorField;
 
@@ -28,8 +28,8 @@
         private byte minorField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("field", IsNullable = false)]
-        public fixField[] header
+        [System.Xml.Serialization.XmlElementAttribute("header", IsNullable = false)]
+        public fixHeader header
         {
             get
             {
@@ -42,8 +42,8 @@
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("field", IsNullable = false)]
-        public fixField[] trailer
+        [System.Xml.Serialization.XmlElementAttribute("trailer", IsNullable = false)]
+        public fixTrailer trailer
         {
             get
             {
@@ -85,7 +85,7 @@
 
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("field", IsNullable = false)]
-        public fixField2[] fields
+        public fixField[] fields
         {
             get
             {
@@ -158,38 +158,48 @@
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class fixField
+    public partial class fixHeader
     {
-
-        private string nameField;
-
-        private string requiredField;
+        private object[] itemsField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name
+        [System.Xml.Serialization.XmlElementAttribute("component", typeof(fixChildComponent))]
+        [System.Xml.Serialization.XmlElementAttribute("field", typeof(fixChildField))]
+        [System.Xml.Serialization.XmlElementAttribute("group", typeof(fixChildGroup))]
+        public object[] Items
         {
             get
             {
-                return this.nameField;
+                return this.itemsField;
             }
             set
             {
-                this.nameField = value;
+                this.itemsField = value;
             }
         }
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class fixTrailer
+    {
+        private object[] itemsField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string required
+        [System.Xml.Serialization.XmlElementAttribute("component", typeof(fixChildComponent))]
+        [System.Xml.Serialization.XmlElementAttribute("field", typeof(fixChildField))]
+        [System.Xml.Serialization.XmlElementAttribute("group", typeof(fixChildGroup))]
+        public object[] Items
         {
             get
             {
-                return this.requiredField;
+                return this.itemsField;
             }
             set
             {
-                this.requiredField = value;
+                this.itemsField = value;
             }
         }
     }
@@ -453,7 +463,7 @@
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class fixField2
+    public partial class fixField
     {
 
         private fixFieldValue[] valueField;

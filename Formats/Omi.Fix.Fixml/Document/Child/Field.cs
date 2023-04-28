@@ -9,7 +9,7 @@
     public class Field : IChild {
 
         /// <summary>
-        ///  Fixml Field name
+        ///  Fixml field name
         /// </summary>
         public string Name { get; set;} = string.Empty;
 
@@ -19,7 +19,7 @@
         public bool Required { get; set;}
 
         /// <summary>
-        ///  Field parent
+        ///  Fixml field parent
         /// </summary>
         public IParent Parent { get; set; } // how to deal with this
 
@@ -30,32 +30,26 @@
             => Omi.Fixml.Depth.Of(this);
 
         /// <summary>
-        ///  Convert fixml child from any valid xml element
+        ///  Convert xml child element to fixml document element
         /// </summary>
         public static IChild From(object item, IParent parent) {
-            
-            // Verify format and return child of given type
-            if (item.GetType() == typeof(Xml.fixChildField)) {
-                var field = (Xml.fixChildField)item;
+            switch (item) {
+                case Xml.fixChildField field:
+                    return Field.From(field, parent);
 
-                return Field.From(field, parent);
+                case Xml.fixChildGroup group:
+                    return Group.From(group, parent);
+
+                case Xml.fixChildComponent component:
+                    return Component.From(component, parent);
+
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-            if (item.GetType() == typeof(Xml.fixChildGroup)) {
-                var group = (Xml.fixChildGroup)item;
-
-                return Group.From(group, parent);  
-            }
-            if (item.GetType() == typeof(Xml.fixChildComponent)) {
-                var field = (Xml.fixChildComponent)item;
-
-                return Component.From(field, parent);  
-            }
-
-            throw new ArgumentOutOfRangeException();
         }
 
         /// <summary>
-        /// Convert normalized specification field to fixml element
+        ///  Convert normalized fix specification field to fixml element
         /// </summary>
         public static IChild From(Fix.Specification.Field field, IParent parent) {
             switch (field.Kind) {
@@ -75,7 +69,7 @@
         }
 
         /// <summary>
-        ///  Convert field from child
+        ///  Convert xml child field element to fixml document element 
         /// </summary>
         public static Field From(Xml.fixChildField field, IParent parent) {
             // verify values
@@ -87,10 +81,10 @@
         }
 
         /// <summary>
-        ///  Write field to stream
+        ///  Write fixml field to stream
         /// </summary>
         public void Write(StreamWriter stream, int spaces) { 
-            stream.WriteLine($"{Indent.Count(spaces)}<field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\" />");
+            stream.WriteLine($"{Indent.Count(spaces)}<field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
         }
 
         /// <summary>
@@ -113,7 +107,7 @@
         }
 
         /// <summary>
-        ///  Display fixml child field as string
+        ///  Display fixml field as string
         /// </summary>
         public override string ToString()
             => $"{Name} [Field]";

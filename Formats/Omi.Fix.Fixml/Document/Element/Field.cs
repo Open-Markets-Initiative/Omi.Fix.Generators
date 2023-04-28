@@ -7,9 +7,6 @@
 
     public class Field {
 
-        #region Properties
-        ///////////////////////////////////////////////////
-
         /// <summary>
         ///  Fix Field Tag/Number
         /// </summary>
@@ -44,8 +41,6 @@
         /// Fix version of associated field
         /// </summary>
         public string Version = string.Empty;
-
-        #endregion
 
         /// <summary>
         /// Writes fixml field to stream

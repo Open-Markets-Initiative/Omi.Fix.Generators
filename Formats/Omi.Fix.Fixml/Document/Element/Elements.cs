@@ -14,7 +14,7 @@
         { }
 
         /// <summary>
-        /// Construct elements from an IEnumerable
+        ///  Construct elements from an IEnumerable
         /// </summary>
         public Elements(IEnumerable<IChild> fields) { 
             AddRange(fields);

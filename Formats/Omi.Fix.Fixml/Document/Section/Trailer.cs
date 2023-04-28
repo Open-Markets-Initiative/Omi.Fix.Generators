@@ -24,17 +24,18 @@
         public static Trailer From(Xml.fix xml) {
             var section = new Trailer();
 
-            foreach (var field in xml.trailer) { // need ??
-                // Verify format
-
-                section.Elements.Add(new Child.Field {
-                    Name = field.name,
-                    Required = Is.Required(field.required),
-                });
+            foreach (var item in ElementsIn(xml)) {
+                section.Elements.Add(Child.Field.From(item, section));
             }
 
             return section;
         }
+
+        /// <summary>
+        ///  Array of trailer elements in fixml
+        /// </summary>
+        public static object[] ElementsIn(Xml.fix xml)
+            => xml?.trailer.Items ?? Array.Empty<object>();
 
         /// <summary>
         ///  Convert normalized specification trailer to fixml trailer
@@ -81,5 +82,11 @@
             
             return trailer;
         }
+
+        /// <summary>
+        ///  Display trailer as string
+        /// </summary>
+        public override string ToString()
+           => $"Count = {Elements.Count}";
     }
 }

@@ -1,4 +1,5 @@
 ﻿namespace Omi.Fixml {
+    using Omi.Fix.Specification;
     using System.Linq;
 
     /// <summary>
@@ -24,17 +25,19 @@
         public static Header From(Xml.fix xml) {
             var section = new Header();
 
-            foreach (var field in xml.header) {  // need ??
-                // Verify format
-                section.Elements.Add(new Child.Field { // can these be groups/components
-                    Name = field.name,
-                    Required = Is.Required(field.required),
-                    Parent = section
-                });
+            foreach (var item in ElementsIn(xml)) {
+                section.Elements.Add(Child.Field.From(item, section));
             }
 
             return section;
         }
+
+        /// <summary>
+        ///  Array of header elements in fixml
+        /// </summary>
+        public static object[] ElementsIn(Xml.fix xml)
+            => xml?.header.Items ?? Array.Empty<object>();
+
 
         /// <summary>
         ///  Convert normalized fix specification headers to fixml headers section
@@ -78,5 +81,11 @@
             
             return header;
         }
+
+        /// <summary>
+        ///  Display header as string
+        /// </summary>
+        public override string ToString()
+           => $"Count = {Elements.Count}";
     }
 }
