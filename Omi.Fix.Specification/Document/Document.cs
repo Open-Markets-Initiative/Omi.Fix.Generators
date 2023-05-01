@@ -1,40 +1,40 @@
 ﻿namespace Omi.Fix.Specification {
 
     /// <summary>
-    ///  Normalized Fix Specification
+    ///  Normalized Fix Specification Document
     /// </summary>
 
     public class Document {
 
         /// <summary>
-        ///  Normalized Fix Specification Identifing Information
+        ///  Normalized Fix Specification Information
         /// </summary>
-        public Description Description = new Description();
+        public Description Description = new ();
 
         /// <summary>
-        ///  Normalized Fix Specification Header fields
+        ///  Normalized Fix Specification Headers
         /// </summary>
-        public Header Header = new Header();
+        public Header Header = new ();
 
         /// <summary>
         ///  Normalized Fix Specification Trailers
         /// </summary>
-        public Trailer Trailer = new Trailer();
+        public Trailer Trailer = new ();
 
         /// <summary>
         ///  Normalized Fix Specification Messages
         /// </summary>
-        public Messages Messages = new Messages();
+        public Messages Messages = new ();
 
         /// <summary>
         ///  Normalized Fix Specification Components
         /// </summary>
-        public Components Components = new Components();
+        public Components Components = new ();
 
         /// <summary>
         ///  Normalized Fix Specification Field Types
         /// </summary>
-        public Types Types = new Types();
+        public Types Types = new ();
 
         /// <summary>
         ///  Filter
@@ -57,8 +57,7 @@
         /// <summary>
         ///  Add enumerated value to type
         /// </summary>
-        public void Set(string field, string value, string name)
-        {
+        public void Set(string field, string value, string name) {
             // add ability to order these
 
             if (Types.TryGetValue(field, out var type))
@@ -123,6 +122,6 @@
         ///  Display Fix Specification Information
         /// </summary>
         public override string ToString()
-            => $"{Description}";
+            => $"{Description}, Messages = {Messages.Count}";
     }
 }

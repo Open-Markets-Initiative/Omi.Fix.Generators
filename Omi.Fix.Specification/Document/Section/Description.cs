@@ -4,8 +4,10 @@
     ///  Normalized Fix Specification Information
     /// </summary>
 
-    public class Description
-    {
+    public class Description {
+
+        // Need to add a bunch more (organization, category, etc)
+
         /// <summary>
         ///  Fix Specification Major Version
         /// </summary>
@@ -16,5 +18,10 @@
         /// </summary>
         public string Minor = string.Empty;
 
+        /// <summary>
+        ///  Display Fix Specification Information
+        /// </summary>
+        public override string ToString()
+            => $" Version {Major}.{Minor}";
     }
 }
