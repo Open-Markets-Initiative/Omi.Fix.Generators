@@ -114,10 +114,7 @@
         ///  Verify fixml
         /// </summary>
         public void Verify() {
-            // fixmls require version information
-            if (string.IsNullOrWhiteSpace(Information.Major)) {
-                throw new Exception("Missing Information");
-            }
+            Information.Verify();
 
             // verify that all elements in Messages
             foreach (var message in Messages) {

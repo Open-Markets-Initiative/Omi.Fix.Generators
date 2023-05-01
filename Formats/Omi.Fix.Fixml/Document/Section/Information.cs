@@ -6,6 +6,8 @@
 
     public class Information {
 
+        // Need to add Service pack
+
         /// <summary>
         ///  Fixml Major Version
         /// </summary>
@@ -17,7 +19,7 @@
         public string Minor = string.Empty;
 
         /// <summary>
-        ///  Obtain description from xml
+        ///  Convert xml attributs to fixml information
         /// </summary>
         public static Information From(Xml.fix xml)
             => new () { // need more checks, defaults
@@ -49,5 +51,29 @@
                 Major = Major,
                 Minor = Minor,
             };
+
+        /// <summary>
+        ///  Verify fixml information
+        /// </summary>
+        public void Verify() {
+            if (string.IsNullOrWhiteSpace(Major)) {
+                throw new Exception("Missing Major Version");
+            }
+        }
+
+        /// <summary>
+        ///  Display fixml version information as string
+        /// </summary>
+        public override string ToString() {
+            if (!string.IsNullOrWhiteSpace(Minor)) {
+                return $"{Major}.{Minor}";
+            }
+            if (string.IsNullOrWhiteSpace(Major)) {
+                return $"{Major}";
+            }
+
+            return "UNSPECIFIED";
+        }
+
     }
 }
