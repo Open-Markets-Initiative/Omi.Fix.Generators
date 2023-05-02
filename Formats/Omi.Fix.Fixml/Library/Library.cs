@@ -19,6 +19,12 @@
             => Document.From("Library\\Fixml\\Fix.v4.4.xml");
 
         /// <summary>
+        ///  Standard Fix 5.0.SP2 fixml
+        /// </summary>
+        public static Document Fix50
+            => Document.From("Library\\Fixml\\Fix.v5.0.sp2.xml");
+
+        /// <summary>
         ///  Gather Fixml files in library
         /// </summary>
         public static string[] Files() {
