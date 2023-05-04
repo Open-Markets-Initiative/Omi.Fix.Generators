@@ -80,14 +80,14 @@
         /// </summary>
         public void Write(StreamWriter stream, int spaces) {
             if (HasFields) {
-                stream.WriteLine($"{Indent.Count(spaces)}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
+                stream.WriteLine($"{Indent.Spaces(spaces)}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
                 
                 Elements.Write(stream, spaces + 2);
 
-                stream.WriteLine($"{Indent.Count(spaces)}</group>");
+                stream.WriteLine($"{Indent.Spaces(spaces)}</group>");
             }
             else {
-                stream.WriteLine($"{Indent.Count(spaces)}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+                stream.WriteLine($"{Indent.Spaces(spaces)}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
             }
         }
 

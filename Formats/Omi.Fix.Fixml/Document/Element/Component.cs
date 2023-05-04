@@ -62,7 +62,7 @@
             if (HasFields) {
                 stream.WriteLine($"    <component name=\"{Name}\">");
                 
-                Elements.Write(stream);
+                Elements.Write(stream, 6);
 
                 stream.WriteLine("    </component>");
             }

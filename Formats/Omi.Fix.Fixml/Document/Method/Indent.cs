@@ -7,9 +7,9 @@
     public static class Indent {
 
         /// <summary>
-        ///  Number of 2 spaces indents
+        ///  Number of spaces
         /// </summary>
-        public static string Count(int count)
-            => new string(' ', 2*count);   
+        public static string Spaces(int count)
+            => new string(' ', count);   
     }
 }

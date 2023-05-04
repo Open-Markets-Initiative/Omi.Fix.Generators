@@ -57,7 +57,7 @@
         ///  Write fixml component to stream
         /// </summary>
         public void Write(StreamWriter stream, int spaces)  {
-            stream.WriteLine($"{Indent.Count(spaces)}<component name=\"{Name}\"/>");
+            stream.WriteLine($"{Indent.Spaces(spaces)}<component name=\"{Name}\"/>");
         }
 
         /// <summary>

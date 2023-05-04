@@ -59,7 +59,7 @@
             if (HasFields) {
                 stream.WriteLine("  <header>");
 
-                Elements.Write(stream, 2);
+                Elements.Write(stream, 4);
 
                 stream.WriteLine("  </header>");
             }

@@ -84,7 +84,7 @@
         ///  Write fixml field to stream
         /// </summary>
         public void Write(StreamWriter stream, int spaces) { 
-            stream.WriteLine($"{Indent.Count(spaces)}<field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+            stream.WriteLine($"{Indent.Spaces(spaces)}<field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
         }
 
         /// <summary>

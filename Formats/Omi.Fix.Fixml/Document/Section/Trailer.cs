@@ -61,7 +61,7 @@
             if (HasFields) {
                 stream.WriteLine("  <trailer>");
 
-                Elements.Write(stream, 2);
+                Elements.Write(stream, 4);
 
                 stream.WriteLine("  </trailer>");
             }
