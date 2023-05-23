@@ -85,7 +85,7 @@
         /// <summary>
         /// Converts fix txt description to specification
         /// </summary>
-        public Specification.Description ToSpecification()
+        public Specification.Information ToSpecification()
             => new () {
                 Major = Major,
                 Minor = Minor

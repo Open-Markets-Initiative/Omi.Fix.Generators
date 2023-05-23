@@ -30,7 +30,7 @@
         /// <summary>
         /// Convert from specification Types to Xml Fields
         /// </summary>
-        public static Information From(Fix.Specification.Description description)
+        public static Information From(Fix.Specification.Information description)
             => new () {
                 Major = description.Major,
                 Minor = description.Minor,
@@ -46,7 +46,7 @@
         /// <summary>
         ///  Convert fixml field declarations to normalized fix specification description
         /// </summary>
-        public Fix.Specification.Description ToSpecification()
+        public Fix.Specification.Information ToSpecification()
             => new () {
                 Major = Major,
                 Minor = Minor,

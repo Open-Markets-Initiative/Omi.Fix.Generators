@@ -7,13 +7,13 @@
     public class Components : List<Component> {
 
         /// <summary>
-        ///  Is 
+        ///  Is Component included?
         /// </summary>
         public bool IsIncluded(Component component)
             => this.Any(current => current.Name == component.Name);
 
         /// <summary>
-        ///  Is 
+        ///  Is Component Missing?
         /// </summary>
         public bool IsMissing(Component component)
             => !IsIncluded(component);

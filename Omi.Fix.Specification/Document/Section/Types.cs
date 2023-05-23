@@ -7,6 +7,9 @@
 
     public class Types : Dictionary<string , Type> {
 
+        /// <summary>
+        ///  Default Constructor
+        /// </summary>
         public Types() 
         { }
 
@@ -56,7 +59,7 @@
         }
 
         /// <summary>
-        /// Convert Dictionary of types to Specification
+        ///  Convert Dictionary of types to Specification Types
         /// </summary>
         public static Types ToTypes(IEnumerable<KeyValuePair<string , Type> > type) {
             var types = new Types();
@@ -74,7 +77,7 @@
         }
 
         /// <summary>
-        /// 
+        ///  Return types as ordered list
         /// </summary>
         public  List<Type> ToList()
             => Values.OrderBy(field => field.Tag).ToList();

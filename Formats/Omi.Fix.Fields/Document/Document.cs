@@ -38,7 +38,7 @@ namespace Omi.Fix.Fields {
         /// </summary>
         public Specification.Document ToSpecification()
             => new () {
-                Description = Information.ToSpecification(),
+                Information = Information.ToSpecification(),
                 Header = new Specification.Header(),
                 Trailer = new Specification.Trailer(),
                 Components = new Specification.Components(),

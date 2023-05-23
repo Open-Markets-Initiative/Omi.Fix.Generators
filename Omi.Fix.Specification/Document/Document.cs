@@ -6,10 +6,13 @@
 
     public class Document {
 
+        #region Properties
+        ///////////////////////////////////////////////////////
+
         /// <summary>
         ///  Normalized Fix Specification Information
         /// </summary>
-        public Description Description = new ();
+        public Information Information = new ();
 
         /// <summary>
         ///  Normalized Fix Specification Headers
@@ -35,6 +38,11 @@
         ///  Normalized Fix Specification Field Types
         /// </summary>
         public Types Types = new ();
+
+        #endregion
+
+        #region Operations
+        ///////////////////////////////////////////////////////
 
         /// <summary>
         ///  Filter
@@ -118,10 +126,17 @@
         public void Set(Types types)
             => Types.AddOverwrite(types);
 
+        #endregion
+
+        #region Implementation
+        ///////////////////////////////////////////////////////
+
         /// <summary>
-        ///  Display Fix Specification Information
+        ///  Display Normalized Fix Specification
         /// </summary>
         public override string ToString()
-            => $"{Description}, Messages = {Messages.Count}";
+            => $"{Information}, Messages = {Messages.Count}";
+
+        #endregion
     }
 }

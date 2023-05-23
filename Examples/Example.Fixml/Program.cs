@@ -5,5 +5,8 @@ var fixml = Omi.Fixml.Document.From(@"Library\Fixml\Fix.v4.2.xml");
 var specification = fixml.ToSpecification();
 
 // make a few edits
+specification.Information.Organization = "Omi";
+specification.SetNotRequired("ExecInst");
+
 
 

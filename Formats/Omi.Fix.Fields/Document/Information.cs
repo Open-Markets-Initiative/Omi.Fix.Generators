@@ -27,7 +27,7 @@
         /// <summary>
         ///  Convert normalized specification information to Xml Fields
         /// </summary>
-        public static Information From(Fix.Specification.Description description)
+        public static Information From(Fix.Specification.Information description)
             => new () {
                 // what to do here?
             };
@@ -35,7 +35,7 @@
         /// <summary>
         ///  Convert fix field declarations to normalized fix specification description
         /// </summary>
-        public Fix.Specification.Description ToSpecification()
+        public Fix.Specification.Information ToSpecification()
             => new () {
                 // what to do here
                 };

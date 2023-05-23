@@ -51,7 +51,7 @@ namespace Omi.Fix.Txt {
         /// </summary>
         public Specification.Document ToSpecification()
             => new () {
-                Description = Information.ToSpecification(),
+                Information = Information.ToSpecification(),
                 Header = new Specification.Header(),
                 Trailer = new Specification.Trailer(),
                 Messages = Messages.ToSpecification(),

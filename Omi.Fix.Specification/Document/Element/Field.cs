@@ -22,8 +22,7 @@
         /// <summary>
         ///  Set field with parameter name to not required
         /// </summary>
-        public void SetNotRequired(string name)
-        {
+        public void SetNotRequired(string name) {
             Required = false;
 
             foreach (var field in Children) // make recursive optional
@@ -34,18 +33,17 @@
 
 
         /// <summary>
-        /// Convert field to string 
+        ///  Convert normalized fix specification field to string 
         /// </summary>
-        public override string ToString()
-        {
-            switch (Kind)
-            {
+        public override string ToString(){
+            switch (Kind) {
                 case Kind.Field:
-                    return $"{Name} : {(Required ? "Required" : "")}";
+                    return $"{Name}{(Required ? " : Required" : "")}";
                 case Kind.Component:
                     return $"Component";
                 case Kind.Group:
                     return $"Group";
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }

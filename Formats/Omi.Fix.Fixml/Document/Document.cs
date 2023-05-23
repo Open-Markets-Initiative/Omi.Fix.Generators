@@ -42,7 +42,7 @@
         /// </summary>
         public static Document From(Fix.Specification.Document specification)
           => new () {
-                Information = Information.From(specification.Description),
+                Information = Information.From(specification.Information),
                 Header = Header.From(specification.Header),
                 Trailer = Trailer.From(specification.Trailer),
                 Messages = Messages.From(specification.Messages),
@@ -102,7 +102,7 @@
         /// </summary>
         public Fix.Specification.Document ToSpecification()
             => new () {
-                Description = Information.ToSpecification(), 
+                Information = Information.ToSpecification(), 
                 Header = Header.ToSpecification(),
                 Trailer = Trailer.ToSpecification(),
                 Messages = Messages.ToSpecification(),
@@ -114,7 +114,10 @@
         ///  Verify fixml
         /// </summary>
         public void Verify() {
-            Information.Verify();
+            // fixmls require version information
+            if (string.IsNullOrWhiteSpace(Information.Major)) {
+                throw new Exception("Missing Information");
+            }
 
             // verify that all elements in Messages
             foreach (var message in Messages) {

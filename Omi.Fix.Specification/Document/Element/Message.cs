@@ -5,10 +5,16 @@
     ///  Normalized Fix Specification Message
     /// </summary>
 
-    public class Message
-    {
+    public class Message {
+
+        /// <summary>
+        ///  Normalized Fix Specification Message Name
+        /// </summary>
         public string Name = string.Empty;
 
+        /// <summary>
+        ///  Normalized Fix Specification Message Type
+        /// </summary>
         public string Type = string.Empty;
 
         public string Category = string.Empty;
@@ -22,8 +28,7 @@
         /// <summary>
         /// 
         /// </summary>
-        public void SetNotRequired(string name)
-        {
+        public void SetNotRequired(string name) {
             foreach (var field in Fields)
             {
                 field.SetNotRequired(name); 

@@ -30,7 +30,7 @@
         public static Specification.Document From(messageSchema schema)
             => new Specification.Document
             {
-                Description = new Specification.Description(),
+                Information = new Specification.Information(),
                 Header = new Specification.Header(),
                 Trailer = new Specification.Trailer(),
                 Messages = MessagesFrom(schema),
