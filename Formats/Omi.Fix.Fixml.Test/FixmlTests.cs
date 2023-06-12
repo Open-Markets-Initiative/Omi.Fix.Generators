@@ -1,7 +1,9 @@
-namespace Omi.Fix.Fixml.Test {
+namespace Omi.Fix.Fixml.Test
+{
     using NUnit.Framework;
 
-    public class LibraryTests {
+    public class LibraryTests
+    {
 
         [Test]
         public void VerifyFixmlXmls() {
@@ -11,13 +13,14 @@ namespace Omi.Fix.Fixml.Test {
 
             Assert.That(actual, Is.EqualTo(expected), "Verify Fixml library count");
         }
-    }
-/*
-        [Test]
-        public void VerifyReadingInvalidFixmlThrowsException() {
+        /*
+                [Test]
+                public void VerifyReadingInvalidFixmlThrowsException() {
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => Omi.Fixml.Document.From(@".\SampleInput\fixmlmissingrequired.xml"), "Verify Line missing type is invalid");
-        }
+                    Assert.Throws<ArgumentOutOfRangeException>(() => Omi.Fixml.Document.From(@".\SampleInput\fixmlmissingrequired.xml"), "Verify Line missing type is invalid");
+                }
+            }
+        */
     }
-*/
+
 }

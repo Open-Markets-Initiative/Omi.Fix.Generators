@@ -45,18 +45,18 @@
         /// <summary>
         ///  Write components out to Fixml
         /// </summary>
-        public void Write(StreamWriter stream) {
+        public void Write(StreamWriter stream, Indent indent) {
             if (this.Any()) {
-                stream.WriteLine("  <components>");
+                stream.WriteLine($"{indent}<components>");
 
                 foreach (var component in Values) { // should sort
-                    component.Write(stream);
+                    component.Write(stream, indent.Increment());
                 }
 
-                stream.WriteLine("  </components>"); 
+                stream.WriteLine($"{indent}</components>"); 
             }
             else {
-                stream.WriteLine("  <components/>");
+                stream.WriteLine($"{indent}<components/>");
             }
         }
 

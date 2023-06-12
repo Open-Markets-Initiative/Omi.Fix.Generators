@@ -78,16 +78,16 @@
         /// <summary>
         /// Write groups to xml file 
         /// </summary>
-        public void Write(StreamWriter stream, int spaces) {
+        public void Write(StreamWriter stream, Indent indent) {
             if (HasFields) {
-                stream.WriteLine($"{Indent.Spaces(spaces)}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
+                stream.WriteLine($"{indent}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
                 
-                Elements.Write(stream, spaces + 2);
+                Elements.Write(stream, indent);
 
-                stream.WriteLine($"{Indent.Spaces(spaces)}</group>");
+                stream.WriteLine($"{indent}</group>");
             }
             else {
-                stream.WriteLine($"{Indent.Spaces(spaces)}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+                stream.WriteLine($"{indent}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
             }
         }
 
@@ -121,6 +121,24 @@
             }
 
             Elements.Verify(fields, components);
+        }
+
+        /// <summary>
+        ///  Report erroneous fixml field element
+        /// </summary>
+        public void Error(Fields fields, Fixml.Components components, List<string> Errors)
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                Errors.Add("Group name is missing");
+            }
+
+            if (!fields.ContainsKey(Name))
+            {
+               Errors.Add($"{Name}: Group is missing from dictionary");
+            }
+
+            Elements.Error(fields, components, Errors);
         }
 
         /// <summary>

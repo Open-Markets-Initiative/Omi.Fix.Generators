@@ -22,6 +22,11 @@
         void Verify(Fields fields, Components components);
 
         /// <summary>
+        ///  Report erroneous fixml child element properties
+        /// </summary>
+        void Error(Fields fields, Components components, List<string> Errors);
+
+        /// <summary>
         ///  Number of levels deep in element tree
         /// </summary>
         int Depth();
@@ -34,6 +39,6 @@
         /// <summary>
         ///  Write element to stream
         /// </summary>
-        void Write(StreamWriter stream, int spaces);
+        void Write(StreamWriter stream, Indent indent);
     }
 }

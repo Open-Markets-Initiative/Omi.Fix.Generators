@@ -62,6 +62,17 @@
         }
 
         /// <summary>
+        ///  Report errors in fixml information
+        /// </summary>
+        public void Error()
+        {
+            if (string.IsNullOrWhiteSpace(Minor))
+            {
+                Console.WriteLine("Missing Minor Version");
+            }
+        }
+
+        /// <summary>
         ///  Display fixml version information as string
         /// </summary>
         public override string ToString() {

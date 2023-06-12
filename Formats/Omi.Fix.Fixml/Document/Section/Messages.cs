@@ -40,18 +40,18 @@
         /// <summary>
         ///  Write fixml messages to stream
         /// </summary>
-        public void Write(StreamWriter stream) {
+        public void Write(StreamWriter stream, Indent indent) {
             if (this.Any()) {
-                stream.WriteLine("  <messages>");
+                stream.WriteLine($"{indent}<messages>");
 
                 foreach (var message in this) {
-                    message.Write(stream);
+                    message.Write(stream, indent);
                 }
 
-                stream.WriteLine("  </messages>");
+                stream.WriteLine($"{indent}</messages>");
             }
             else {
-                stream.WriteLine("  <messages/>");
+                stream.WriteLine($"{indent}<messages/>");
             }
         }
 

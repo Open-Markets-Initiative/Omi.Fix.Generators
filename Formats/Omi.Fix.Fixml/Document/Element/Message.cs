@@ -60,16 +60,16 @@
         /// <summary>
         ///  Write fixml message to stream
         /// </summary>
-        public void Write(StreamWriter stream) {
+        public void Write(StreamWriter stream, Indent indent) {
             if (HasFields) {
-                stream.WriteLine($"    <message name=\"{Name}\" msgtype=\"{Type}\" msgcat=\"{Category}\">");
+                stream.WriteLine($"{indent.Increment()}<message name=\"{Name}\" msgtype=\"{Type}\" msgcat=\"{Category}\">");
 
-                Elements.Write(stream, 6);
+                Elements.Write(stream, indent.Increment().Increment());
 
-                stream.WriteLine( "    </message>");
+                stream.WriteLine( $"{indent.Increment()}</message>");
             }
             else {
-                stream.WriteLine($"    <message name=\"{Name}\" msgtype=\"{Type}\" msgcat=\"{Category}\"/>");
+                stream.WriteLine($"{indent.Increment()}<message name=\"{Name}\" msgtype=\"{Type}\" msgcat=\"{Category}\"/>");
             }
         }
 
@@ -103,6 +103,37 @@
             }
 
             Elements.Verify(fields, components);
+        }
+
+        /// <summary>
+        ///  Report erroneous fixml message properties
+        /// </summary>
+        public void Error(Fields fields, Components components, List<string> Errors)
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                Errors.Add("Message name is missing");
+            }
+
+            if (string.IsNullOrWhiteSpace(Type))
+            {
+                Errors.Add("Message type is missing");
+            }
+
+            var repeats = Elements.GroupBy(x => x.Name)
+              .Where(g => g.Count() > 1)
+              .Select(y => y.Key)
+              .ToList();
+            if ( repeats.Any() )
+            {
+                foreach ( var repeat in repeats )
+                {
+                    Errors.Add( $"{repeat} : Tag occurs more than once in message");
+                }
+            }
+            
+
+            Elements.Error(fields, components, Errors);
         }
 
         /// <summary>

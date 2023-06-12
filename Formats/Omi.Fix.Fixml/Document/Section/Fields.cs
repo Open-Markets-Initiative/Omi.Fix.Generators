@@ -1,4 +1,5 @@
 ﻿namespace Omi.Fixml {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -52,18 +53,18 @@
         /// <summary>
         /// Write fields to stream
         /// </summary>
-        public void Write(StreamWriter stream) {
+        public void Write(StreamWriter stream, Indent indent) {
             if (Values.Any()) {
-                stream.WriteLine("  <fields>");
+                stream.WriteLine($"{indent}<fields>");
 
                 foreach (var field in Values) {
                     field.Write(stream);
                 }
 
-                stream.WriteLine("  </fields>");
+                stream.WriteLine($"{indent}</fields>");
             }
             else {
-                stream.WriteLine("  <fields/>");
+                stream.WriteLine($"{indent}<fields/>");
             }
         }
 

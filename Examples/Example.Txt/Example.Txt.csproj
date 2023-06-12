@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Formats\Omi.Fix.Fixml\Omi.Fix.Fixml.csproj" />
     <ProjectReference Include="..\..\Formats\Omi.Fix.Txt\Omi.Fix.Txt.csproj" />
+    <ProjectReference Include="..\Example.Fixml\Example.Fixml.csproj" />
   </ItemGroup>
 
   <ItemGroup>

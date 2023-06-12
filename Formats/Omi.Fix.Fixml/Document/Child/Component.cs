@@ -56,8 +56,8 @@
         /// <summary>
         ///  Write fixml component to stream
         /// </summary>
-        public void Write(StreamWriter stream, int spaces)  {
-            stream.WriteLine($"{Indent.Spaces(spaces)}<component name=\"{Name}\"/>");
+        public void Write(StreamWriter stream, Indent indent)  {
+            stream.WriteLine($"{indent}<component name=\"{Name}\"/>");
         }
 
         /// <summary>
@@ -70,6 +70,22 @@
 
             if (!components.ContainsKey(Name)) {
                 throw new Exception($"{Name}: Component is missing from dictionary");
+            }
+        }
+
+        /// <summary>
+        ///  Report erroneous fixml component element
+        /// </summary>
+        public void Error(Fields fields, Fixml.Components components, List<string> Errors)
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                Errors.Add("Component name is missing");
+            }
+
+            if (!components.ContainsKey(Name))
+            {
+                Errors.Add($"{Name}: Component is missing from dictionary");
             }
         }
 
