@@ -1,15 +1,27 @@
 ﻿namespace Omi.Fixml {
 
+    using System.Text;
+    using static System.Net.Mime.MediaTypeNames;
+
     /// <summary>
     ///  Indent methods
     /// </summary>
 
-    public static class Indent {
+    public class Indent {
+
+        public string Text ="  ";
+
+        public int Count = 1;
 
         /// <summary>
-        ///  Number of spaces
+        ///  Default
         /// </summary>
-        public static string Spaces(int count)
-            => new string(' ', count);   
+        public override string ToString()
+            => new StringBuilder(Text.Length * Count).Insert(0, Text, Count).ToString();
+
+        public Indent Increment()
+        => new(){ Text = Text, Count = Count+1 };
+
+
     }
 }

@@ -37,6 +37,29 @@
         /// </summary>
         public Fields Fields = new ();
 
+        public List<string> Errors { get
+            {
+                var errors = new List<string>();
+
+                // fixmls require version information
+                if (string.IsNullOrWhiteSpace(Information.Major))
+                {
+                    errors.Add("Missing Major Information");
+                }
+
+                // verify that all elements in Messages
+                foreach (var message in Messages)
+                {
+                    message.Error(Fields, Components, errors);
+                }
+
+                Header.Error(Fields, Components, errors);
+                Trailer.Error(Fields, Components, errors);
+
+                return errors;
+            } }
+
+
         /// <summary>
         ///  Convert fixml document from specification document
         /// </summary>
@@ -74,13 +97,19 @@
         /// <summary>
         ///  Write fixml file to stream
         /// </summary>
-        public void WriteTo(StreamWriter stream) {
+        public void WriteTo(StreamWriter stream)
+            => WriteTo(stream, new Indent { });
+
+        /// <summary>
+        ///  Write fixml file to stream
+        /// </summary>
+        public void WriteTo(StreamWriter stream, Indent indent) {
             Information.Write(stream);          
-            Header.Write(stream); 
-            Trailer.Write(stream);   
-            Messages.Write(stream);    
-            Components.Write(stream);        
-            Fields.Write(stream);
+            Header.Write(stream, indent); 
+            Trailer.Write(stream, indent);   
+            Messages.Write(stream, indent);
+            Components.Write(stream, indent);
+            Fields.Write(stream, indent);
 
             stream.WriteLine("</fix>");
         }

@@ -55,18 +55,39 @@
         /// <summary>
         ///  Write header out to Fixml
         /// </summary>
-        public void Write(StreamWriter stream) {
+        public void Write(StreamWriter stream, Indent indent) {
             if (HasFields) {
-                stream.WriteLine("  <header>");
+                stream.WriteLine($"{indent}<header>");
 
-                Elements.Write(stream, 4);
+                Elements.Write(stream, indent.Increment());
 
-                stream.WriteLine("  </header>");
+                stream.WriteLine($"{indent}</header>");
             }
             else
             {
-                stream.WriteLine("  <header/>");
+                stream.WriteLine($"{indent}<header/>");
             }
+        }
+
+        /// <summary>
+        ///  Report erroneous fixml header properties
+        /// </summary>
+        public void Error(Fields fields, Components components, List<string> Errors)
+        {
+
+            var repeats = Elements.GroupBy(x => x.Name)
+              .Where(g => g.Count() > 1)
+              .Select(y => y.Key)
+              .ToList();
+            if (repeats.Any())
+            {
+                foreach (var repeat in repeats)
+                {
+                    Errors.Add($"{repeat} : Tag occurs more than once in header");
+                }
+            }
+
+            Elements.Error(fields, components, Errors);
         }
 
         /// <summary>

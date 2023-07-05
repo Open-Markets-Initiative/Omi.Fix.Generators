@@ -57,17 +57,38 @@
         /// <summary>
         ///  Write fixml trailer out to stream
         /// </summary>
-        public void Write(StreamWriter stream) {
+        public void Write(StreamWriter stream, Indent indent) {
             if (HasFields) {
-                stream.WriteLine("  <trailer>");
+                stream.WriteLine($"{indent}<trailer>");
 
-                Elements.Write(stream, 4);
+                Elements.Write(stream, indent.Increment());
 
-                stream.WriteLine("  </trailer>");
+                stream.WriteLine($"{indent}</trailer>");
             }
             else {
-                stream.WriteLine("  <trailer/>");
+                stream.WriteLine($"{indent}<trailer/>");
             }
+        }
+
+        /// <summary>
+        ///  Report erroneous fixml trailer properties
+        /// </summary>
+        public void Error(Fields fields, Components components, List<string> Errors)
+        {
+
+            var repeats = Elements.GroupBy(x => x.Name)
+              .Where(g => g.Count() > 1)
+              .Select(y => y.Key)
+              .ToList();
+            if (repeats.Any())
+            {
+                foreach (var repeat in repeats)
+                {
+                    Errors.Add($"{repeat} : Tag occurs more than once in trailer");
+                }
+            }
+
+            Elements.Error(fields, components, Errors);
         }
 
         /// <summary>

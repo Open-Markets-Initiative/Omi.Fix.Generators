@@ -21,7 +21,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="SampleInput\fixmlmissingrequired.xml">
+    <None Update="Fixmls\Fix.v4.2.DuplicateHeaderTags.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Fixmls\Fix.v4.2.DuplicateMessageTags.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Fixmls\Fix.v4.2.DuplicateTrailerTags.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Fixmls\Fix.v4.2.MissingFromHeader.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Fixmls\Fix.v4.2.MissingFromMessage.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Fixmls\Fix.v4.2.MissingFromTrailer.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Fixmls\fixmlmissingrequired.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

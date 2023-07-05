@@ -50,9 +50,10 @@
         /// <summary>
         ///  Write fixml elements
         /// </summary>
-        public void Write(StreamWriter stream, int indents = 0) {
+        public void Write(StreamWriter stream, Indent indent) {
+           
             foreach (var element in this) {
-                element.Write(stream, indents);
+                element.Write(stream, indent.Increment());
             }
         }
 
@@ -75,6 +76,17 @@
         public void Verify(Fields fields, Components components) {
             foreach (var element in this) {
                 element.Verify(fields, components);
+            }
+        }
+
+        /// <summary>
+        ///  Report erroneous fixml elements
+        /// </summary>
+        public void Error(Fields fields, Components components, List<string> Errors)
+        {
+            foreach (var element in this)
+            {
+                element.Error(fields, components, Errors);
             }
         }
     }

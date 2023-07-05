@@ -58,16 +58,16 @@
         /// <summary>
         ///  Write componenet to xml file 
         /// </summary>
-        public void Write(StreamWriter stream) {
+        public void Write(StreamWriter stream, Indent indent) {
             if (HasFields) {
-                stream.WriteLine($"    <component name=\"{Name}\">");
+                stream.WriteLine($"{indent.Increment()}<component name=\"{Name}\">");
                 
-                Elements.Write(stream, 6);
+                Elements.Write(stream, indent.Increment().Increment());
 
-                stream.WriteLine("    </component>");
+                stream.WriteLine($"{indent}</component>");
             }
             else {
-                stream.WriteLine($"    <component name=\"{Name}\"/>");
+                stream.WriteLine($"{indent}<component name=\"{Name}\"/>");
             }
         }
 

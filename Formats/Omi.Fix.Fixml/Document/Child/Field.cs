@@ -83,8 +83,8 @@
         /// <summary>
         ///  Write fixml field to stream
         /// </summary>
-        public void Write(StreamWriter stream, int spaces) { 
-            stream.WriteLine($"{Indent.Spaces(spaces)}<field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+        public void Write(StreamWriter stream, Indent indent) { 
+            stream.WriteLine($"{indent}<field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
         }
 
         /// <summary>
@@ -104,6 +104,23 @@
             if (!fields.ContainsKey(Name)) {
                 throw new Exception($"{Name}: Field is missing from dictionary");
             }
+        }
+
+        /// <summary>
+        ///  Report erroneous fixml field element
+        /// </summary>
+        public void Error(Fields fields, Fixml.Components components, List<string> Errors)
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                Errors.Add("Field name is missing");
+            }
+
+            if (!fields.ContainsKey(Name))
+            {
+                Errors.Add($"{Name}: Field is missing from dictionary");
+            }
+
         }
 
         /// <summary>
