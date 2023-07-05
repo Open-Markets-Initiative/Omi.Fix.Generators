@@ -34,7 +34,7 @@
             => field.EnumPairs ?? Array.Empty<Xml.FixFieldsFixFieldSpecFixEnumField>();
 
         /// <summary>
-        /// Convert enums from specification to fix fields format
+        /// Convert enums from normalized fix specification to fix fields format
         /// </summary>
         public static Enums From(Fix.Specification.Type type) {
             var enums = new Enums();

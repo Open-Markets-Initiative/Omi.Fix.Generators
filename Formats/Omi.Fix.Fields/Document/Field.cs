@@ -53,6 +53,17 @@
         }
 
         /// <summary>
+        ///  Convert normalized fix type to xml field
+        /// </summary>
+        public static Field From(Fix.Specification.Type type)
+            => new () {
+                Name = type.Name,
+                Tag = type.Tag,
+                Description = type.Description,
+                Enums = Enums.From(type)
+            };
+
+        /// <summary>
         ///  Convert Xml field element to specification type
         /// </summary>
         public Specification.Type ToSpecification()
@@ -60,6 +71,25 @@
                 Name = Name,
                 Tag = Tag
             };
+
+        /// <summary>
+        /// Writes fix type field to stream
+        /// </summary>
+        public void Write(StreamWriter stream) {
+            stream.WriteLine($"  <Type>");
+            stream.WriteLine($"    <Name>{Name}</Name>");
+            stream.WriteLine($"    <Tag>{Tag}</Tag>");
+            stream.WriteLine($"    <Description>{Description}</Description>");
+
+            if (IsEnum) {
+                foreach (var @enum in Enums)
+                {
+
+                }
+            }
+
+            stream.WriteLine("  </Type>");
+        }
 
         /// <summary>
         ///  Display Fix field as string

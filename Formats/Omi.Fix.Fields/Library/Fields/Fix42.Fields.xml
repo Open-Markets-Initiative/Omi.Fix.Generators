@@ -13,7 +13,8 @@
     <Tag>2</Tag>
     <Name>AdvId</Name>
     <DataType>String</DataType>
-    <Description>Unique identifier of advertisement message.  (Prior to FIX 4.1 this field was of type int)</Description>
+    <Description>Unique identifier of advertisement message.  
+(Prior to FIX 4.1 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -23,7 +24,8 @@
     <Tag>3</Tag>
     <Name>AdvRefID</Name>
     <DataType>String</DataType>
-    <Description>Reference identifier used with CANCEL and REPLACE transaction types.(Prior to FIX 4.1 this field was of type int)</Description>
+    <Description>Reference identifier used with CANCEL and REPLACE transaction types.
+(Prior to FIX 4.1 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -33,7 +35,12 @@
     <Tag>4</Tag>
     <Name>AdvSide</Name>
     <DataType>Char</DataType>
-    <Description>Broker's side of advertised tradeValid values: B = Buy S = SellX = CrossT = Trade</Description>
+    <Description>Broker's side of advertised trade
+Valid values: 
+B = Buy 
+S = Sell
+X = Cross
+T = Trade</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -60,7 +67,11 @@
     <Tag>5</Tag>
     <Name>AdvTransType</Name>
     <DataType>String</DataType>
-    <Description>Identifies advertisement message transaction typeValid values:  N = NewC = CancelR = Replace</Description>
+    <Description>Identifies advertisement message transaction type
+Valid values:  
+N = New
+C = Cancel
+R = Replace</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -103,7 +114,9 @@
     <Tag>8</Tag>
     <Name>BeginString</Name>
     <DataType>String</DataType>
-    <Description>Identifies beginning of new message and protocol version.  ALWAYS FIRST FIELD IN MESSAGE. (Always unencrypted)Valid values:	FIX.4.2</Description>
+    <Description>Identifies beginning of new message and protocol version.  ALWAYS FIRST FIELD IN MESSAGE. (Always unencrypted)
+Valid values:
+	FIX.4.2</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -153,7 +166,11 @@
     <Tag>13</Tag>
     <Name>CommType</Name>
     <DataType>char</DataType>
-    <Description>Commission typeValid values:1	=	per share2 = percentage3 = absolute</Description>
+    <Description>Commission type
+Valid values:
+1	=	per share
+2 = percentage
+3 = absolute</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -176,7 +193,8 @@
     <Tag>14</Tag>
     <Name>CumQty</Name>
     <DataType>Qty</DataType>
-    <Description>Total number of shares filled.(Prior to FIX 4.2 this field was of type int)</Description>
+    <Description>Total number of shares filled.
+(Prior to FIX 4.2 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -206,7 +224,9 @@
     <Tag>17</Tag>
     <Name>ExecID</Name>
     <DataType>String</DataType>
-    <Description>Unique identifier of execution message as assigned by broker (will be 0 (zero) for ExecTransType=3 (Status)).  Uniqueness must be guaranteed within a single trading day or the life of a multi-day order.  Firms which accept multi-day orders should consider embedding a date within the ExecID field to assure uniqueness across days.(Prior to FIX 4.1 this field was of type int)</Description>
+    <Description>Unique identifier of execution message as assigned by broker (will be 0 (zero) for ExecTransType=3 (Status)).  
+Uniqueness must be guaranteed within a single trading day or the life of a multi-day order.  Firms which accept multi-day orders should consider embedding a date within the ExecID field to assure uniqueness across days.
+(Prior to FIX 4.1 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -216,7 +236,36 @@
     <Tag>18</Tag>
     <Name>ExecInst</Name>
     <DataType>MultipleValueString</DataType>
-    <Description>Instructions for order handling on exchange trading floor.  If more than one instruction is applicable to an order, this field can contain multiple instructions separated by space.Valid values:1 = Not held2 = Work3 = Go along4 = Over the day5 = Held6 = Participate don't initiate7 = Strict scale8 = Try to scale9 = Stay on bidside0 = Stay on offersideA = No cross (cross is forbidden)B = OK to crossC = Call firstD = Percent of volume “(indicates that the sender does not want to be all of the volume on the floor vs. a specific percentage)”E = Do not increase - DNIF = Do not reduce - DNRG = All or none - AONI = Institutions onlyL = Last peg (last sale)M = Mid-price peg (midprice of inside quote)N = Non-negotiableO = Opening pegP = Market pegR = Primary peg (primary market - buy at bid/sell at offer)S = SuspendT = Fixed Peg to Local best bid or offer at time of orderU = Customer Display Instruction (Rule11Ac1-1/4)V = Netting (for Forex)W = Peg to VWAP</Description>
+    <Description>Instructions for order handling on exchange trading floor.  If more than one instruction is applicable to an order, this field can contain multiple instructions separated by space.
+Valid values:
+1 = Not held
+2 = Work
+3 = Go along
+4 = Over the day
+5 = Held
+6 = Participate don't initiate
+7 = Strict scale
+8 = Try to scale
+9 = Stay on bidside
+0 = Stay on offerside
+A = No cross (cross is forbidden)
+B = OK to cross
+C = Call first
+D = Percent of volume “(indicates that the sender does not want to be all of the volume on the floor vs. a specific percentage)”
+E = Do not increase - DNI
+F = Do not reduce - DNR
+G = All or none - AON
+I = Institutions only
+L = Last peg (last sale)
+M = Mid-price peg (midprice of inside quote)
+N = Non-negotiable
+O = Opening pegP = Market peg
+R = Primary peg (primary market - buy at bid/sell at offer)
+S = Suspend
+T = Fixed Peg to Local best bid or offer at time of order
+U = Customer Display Instruction (Rule11Ac1-1/4)
+V = Netting (for Forex)
+W = Peg to VWAP</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -343,7 +392,8 @@
     <Tag>19</Tag>
     <Name>ExecRefID</Name>
     <DataType>String</DataType>
-    <Description>Reference identifier used with Cancel and Correct transaction types.(Prior to FIX 4.1 this field was of type int)</Description>
+    <Description>Reference identifier used with Cancel and Correct transaction types.
+(Prior to FIX 4.1 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -353,7 +403,12 @@
     <Tag>20</Tag>
     <Name>ExecTransType</Name>
     <DataType>char</DataType>
-    <Description>Identifies transaction typeValid values:  0 = New 1 = Cancel2 = Correct3 = Status</Description>
+    <Description>Identifies transaction type
+Valid values:  
+0 = New 
+1 = Cancel
+2 = Correct
+3 = Status</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -380,7 +435,11 @@
     <Tag>21</Tag>
     <Name>HandlInst</Name>
     <DataType>char</DataType>
-    <Description>Instructions for order handling on Broker trading floorValid values:1 = Automated execution order, private, no Broker intervention2 = Automated execution order, public, Broker intervention OK3 = Manual order, best execution</Description>
+    <Description>Instructions for order handling on Broker trading floor
+Valid values:
+1 = Automated execution order, private, no Broker intervention
+2 = Automated execution order, public, Broker intervention OK
+3 = Manual order, best execution</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -403,7 +462,19 @@
     <Tag>22</Tag>
     <Name>IDSource</Name>
     <DataType>String</DataType>
-    <Description>Identifies class of alternative SecurityIDValid values:1 = CUSIP2 = SEDOL3 = QUIK4 = ISIN number5 = RIC code6 = ISO Currency Code7 = ISO Country Code8 = Exchange Symbol9 = Consolidated Tape Association (CTA) Symbol (SIAC CTS/CQS line format)100+ are reserved for private security identifications</Description>
+    <Description>Identifies class of alternative SecurityID
+Valid values:
+1 = CUSIP
+2 = SEDOL
+3 = QUIK
+4 = ISIN number
+5 = RIC code
+6 = ISO Currency Code
+7 = ISO Country Code
+8 = Exchange Symbol
+9 = Consolidated Tape Association (CTA) Symbol (SIAC CTS/CQS line format)
+
+100+ are reserved for private security identifications</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -450,7 +521,8 @@
     <Tag>23</Tag>
     <Name>IOIid</Name>
     <DataType>String</DataType>
-    <Description>Unique identifier of IOI message.(Prior to FIX 4.1 this field was of type int)</Description>
+    <Description>Unique identifier of IOI message.
+(Prior to FIX 4.1 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -460,7 +532,11 @@
     <Tag>25</Tag>
     <Name>IOIQltyInd</Name>
     <DataType>char</DataType>
-    <Description>Relative quality of indicationValid values:L	=	LowM = MediumH	=	High</Description>
+    <Description>Relative quality of indication
+Valid values:
+L	=	Low
+M = Medium
+H	=	High</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -483,7 +559,8 @@
     <Tag>26</Tag>
     <Name>IOIRefID</Name>
     <DataType>String</DataType>
-    <Description>Reference identifier used with CANCEL and REPLACE, transaction types.(Prior to FIX 4.1 this field was of type int)</Description>
+    <Description>Reference identifier used with CANCEL and REPLACE, transaction types.
+(Prior to FIX 4.1 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -493,7 +570,12 @@
     <Tag>27</Tag>
     <Name>IOIShares</Name>
     <DataType>String</DataType>
-    <Description>Number of shares in numeric or relative size.Valid values:0 - 1000000000S	=	SmallM = MediumL = Large</Description>
+    <Description>Number of shares in numeric or relative size.
+Valid values:
+0 - 1000000000
+S	=	Small
+M = Medium
+L = Large</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -503,7 +585,11 @@
     <Tag>28</Tag>
     <Name>IOITransType</Name>
     <DataType>char</DataType>
-    <Description>Identifies IOI message transaction typeValid values:  N = NewC = CancelR = Replace</Description>
+    <Description>Identifies IOI message transaction type
+Valid values:  
+N = New
+C = Cancel
+R = Replace</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -526,7 +612,12 @@
     <Tag>29</Tag>
     <Name>LastCapacity</Name>
     <DataType>char</DataType>
-    <Description>Broker capacity in order executionValid values:  1 = Agent2 = Cross as agent3 = Cross as principal4 = Principal</Description>
+    <Description>Broker capacity in order execution
+Valid values:  
+1 = Agent
+2 = Cross as agent
+3 = Cross as principal
+4 = Principal</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -553,7 +644,9 @@
     <Tag>30</Tag>
     <Name>LastMkt</Name>
     <DataType>Exchange</DataType>
-    <Description>Market of execution for last fill  Valid values:  See Appendix C</Description>
+    <Description>Market of execution for last fill  
+Valid values:  
+See Appendix C</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -573,7 +666,8 @@
     <Tag>32</Tag>
     <Name>LastShares</Name>
     <DataType>Qty</DataType>
-    <Description>Quantity of shares bought/sold on this (last) fill. Field not required for ExecTransType = 3 (Status) (Prior to FIX 4.2 this field was of type int)</Description>
+    <Description>Quantity of shares bought/sold on this (last) fill. Field not required for ExecTransType = 3 (Status) 
+(Prior to FIX 4.2 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -603,7 +697,55 @@
     <Tag>35</Tag>
     <Name>MsgType</Name>
     <DataType>String</DataType>
-    <Description>Defines message type.    ALWAYS THIRD FIELD IN MESSAGE. (Always unencrypted)Note: A "U" as the first character in the MsgType field (i.e. U1, U2, etc) indicates that the  message format is privately defined between the sender and receiver.Valid values:  *** Note the use of lower case letters ***0	=	Heartbeat1	=	Test Request2	=	Resend Request3	=	Reject4	=	Sequence Reset5	=	Logout6	=	Indication of Interest7	=	Advertisement8	=	Execution Report9	=	Order Cancel RejectA	=	LogonB	=	NewsC	=	EmailD	=	Order – SingleE	=	Order – ListF	=	Order Cancel RequestG=	Order Cancel/Replace RequestH=	Order Status RequestJ	=	AllocationK	=	List Cancel RequestL	=	List ExecuteM = List Status RequestN	=	List StatusP = Allocation ACKQ = Don’t Know Trade (DK)R = Quote RequestS = QuoteT = Settlement InstructionsV = Market Data RequestW = Market Data-Snapshot/Full RefreshX = Market Data-Incremental RefreshY = Market Data Request RejectZ = Quote Cancela =  Quote Status Requestb =  Quote Acknowledgementc = Security Definition Requestd = Security Definitione = Security Status Requestf = Security Statusg = Trading Session Status Requesth = Trading Session Statusi = Mass Quotej = Business Message Rejectk = Bid Request l = Bid Response (lowercase L)m = List Strike Price</Description>
+    <Description>Defines message type.    ALWAYS THIRD FIELD IN MESSAGE. (Always unencrypted)
+Note: A "U" as the first character in the MsgType field (i.e. U1, U2, etc) indicates that the  message format is privately defined between the sender and receiver.
+Valid values:  *** Note the use of lower case letters ***
+0	=	Heartbeat
+1	=	Test Request
+2	=	Resend Request
+3	=	Reject
+4	=	Sequence Reset
+5	=	Logout
+6	=	Indication of Interest
+7	=	Advertisement
+8	=	Execution Report
+9	=	Order Cancel Reject
+A	=	Logon
+B	=	News
+C	=	Email
+D	=	Order – Single
+E	=	Order – List
+F	=	Order Cancel Request
+G=	Order Cancel/Replace Request
+H=	Order Status Request
+J	=	Allocation
+K	=	List Cancel Request
+L	=	List Execute
+M = List Status Request
+N	=	List Status
+P = Allocation ACK
+Q = Don’t Know Trade (DK)
+R = Quote Request
+S = Quote
+T = Settlement Instructions
+V = Market Data Request
+W = Market Data-Snapshot/Full Refresh
+X = Market Data-Incremental Refresh
+Y = Market Data Request Reject
+Z = Quote Cancel
+a =  Quote Status Request
+b =  Quote Acknowledgement
+c = Security Definition Request
+d = Security Definition
+e = Security Status Request
+f = Security Status
+g = Trading Session Status Request
+h = Trading Session Status
+i = Mass Quote
+j = Business Message Reject
+k = Bid Request 
+l = Bid Response (lowercase L)
+m = List Strike Price</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -633,7 +775,8 @@
     <Tag>38</Tag>
     <Name>OrderQty</Name>
     <DataType>Qty</DataType>
-    <Description>Number of shares ordered.  This represents the number of shares for equities or based on normal convention the number of contracts for options, futures, convertible bonds, etc.(Prior to FIX 4.2 this field was of type int)</Description>
+    <Description>Number of shares ordered.  This represents the number of shares for equities or based on normal convention the number of contracts for options, futures, convertible bonds, etc.
+(Prior to FIX 4.2 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -643,7 +786,22 @@
     <Tag>39</Tag>
     <Name>OrdStatus</Name>
     <DataType>char</DataType>
-    <Description>Identifies current status of order.  Valid values: 0 = New1 = Partially filled2 = Filled3 = Done for day4 = Canceled5 = Replaced6 = Pending Cancel (e.g. result of Order Cancel Request) 7 = Stopped8 = Rejected9 = SuspendedA = Pending NewB = CalculatedC = ExpiredD = Accepted for biddingE = Pending Replace (e.g. result of Order Cancel/Replace Request)</Description>
+    <Description>Identifies current status of order.  
+Valid values: 
+0 = New
+1 = Partially filled
+2 = Filled
+3 = Done for day
+4 = Canceled
+5 = Replaced
+6 = Pending Cancel (e.g. result of Order Cancel Request) 7 = Stopped
+8 = Rejected
+9 = Suspended
+A = Pending New
+B = Calculated
+C = Expired
+D = Accepted for bidding
+E = Pending Replace (e.g. result of Order Cancel/Replace Request)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -714,7 +872,27 @@
     <Tag>40</Tag>
     <Name>OrdType</Name>
     <DataType>char</DataType>
-    <Description>Order type.Valid values:  1 = Market2 = Limit3 = Stop4 = Stop limit5 = Market on close6 = With or without7 = Limit or better8 = Limit with or without9 = On basisA = On closeB = Limit on closeC =Forex - MarketD = Previously quotedE = Previously indicatedF = Forex - LimitG = Forex - SwapH = Forex - Previously QuotedI = Funari (Limit Day Order with unexecuted portion handled as Market On Close.   e.g. Japan)P = Pegged</Description>
+    <Description>Order type.
+Valid values:  
+1 = Market
+2 = Limit
+3 = Stop
+4 = Stop limit
+5 = Market on close
+6 = With or without
+7 = Limit or better
+8 = Limit with or without
+9 = On basis
+A = On close
+B = Limit on close
+C =Forex - Market
+D = Previously quoted
+E = Previously indicated
+F = Forex - Limit
+G = Forex - Swap
+H = Forex - Previously Quoted
+I = Funari (Limit Day Order with unexecuted portion handled as Market On Close.   e.g. Japan)
+P = Pegged</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -821,7 +999,10 @@
     <Tag>43</Tag>
     <Name>PossDupFlag</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates possible retransmission of message with this sequence numberValid values:Y = Possible duplicateN = Original transmission</Description>
+    <Description>Indicates possible retransmission of message with this sequence number
+Valid values:
+Y = Possible duplicate
+N = Original transmission</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -870,7 +1051,30 @@
     <Tag>47</Tag>
     <Name>Rule80A</Name>
     <DataType>char</DataType>
-    <Description>Note that the name of this field is changing to “OrderCapacity” as Rule80A is a very US market-specific term. Other world markets need to convey similar information, however, often a subset of the US values.  .  See the “Rule80A (aka OrderCapacity) Usage by Market” appendix for market-specific usage of this field.Valid values:A	=	Agency single orderB = Short exempt transaction (refer to A type)C = Program Order, non-index arb, for Member firm/orgD	=	Program Order, index arb, for Member firm/orgE = Registered Equity Market Maker tradesF = Short exempt transaction (refer to W type)H = Short exempt transaction (refer to I type)I 	= Individual Investor, single orderJ = Program Order, index arb, for individual customerK = Program Order, non-index arb, for individual customerL = Short exempt transaction for member competing market-maker affiliated with the firm clearing the trade (refer to P and O types)M = Program Order, index arb, for other memberN = Program Order, non-index arb, for other memberO = Competing dealer tradesP = PrincipalR = Competing dealer tradesS = Specialist tradesT = Competing dealer tradesU = Program Order, index arb, for other agencyW = All other orders as agent for other memberX = Short exempt transaction for member competing market-maker not affiliated with the firm clearing the trade (refer to W and T types)Y = Program Order, non-index arb, for other agencyZ = Short exempt transaction for non-member competing market-maker (refer to A and R types)</Description>
+    <Description>Note that the name of this field is changing to “OrderCapacity” as Rule80A is a very US market-specific term. Other world markets need to convey similar information, however, often a subset of the US values.  .  See the “Rule80A (aka OrderCapacity) Usage by Market” appendix for market-specific usage of this field.Valid values:
+A	=	Agency single order
+B = Short exempt transaction (refer to A type)
+C = Program Order, non-index arb, for Member firm/org
+D	=	Program Order, index arb, for Member firm/org
+E = Registered Equity Market Maker trades
+F = Short exempt transaction (refer to W type)
+H = Short exempt transaction (refer to I type)
+I 	= Individual Investor, single order
+J = Program Order, index arb, for individual customer
+K = Program Order, non-index arb, for individual customer
+L = Short exempt transaction for member competing market-maker affiliated with the firm clearing the trade (refer to P and O types)
+M = Program Order, index arb, for other member
+N = Program Order, non-index arb, for other member
+O = Competing dealer trades
+P = Principal
+R = Competing dealer trades
+S = Specialist trades
+T = Competing dealer trades
+U = Program Order, index arb, for other agency
+W = All other orders as agent for other member
+X = Short exempt transaction for member competing market-maker not affiliated with the firm clearing the trade (refer to W and T types)
+Y = Program Order, non-index arb, for other agency
+Z = Short exempt transaction for non-member competing market-maker (refer to A and R types)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1009,7 +1213,8 @@
     <Tag>53</Tag>
     <Name>Shares</Name>
     <DataType>Qty</DataType>
-    <Description>Number of shares (Prior to FIX 4.2 this field was of type int)</Description>
+    <Description>Number of shares 
+(Prior to FIX 4.2 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -1019,7 +1224,17 @@
     <Tag>54</Tag>
     <Name>Side</Name>
     <DataType>char</DataType>
-    <Description>Side of orderValid values:1	=	Buy2	=	Sell3	=	Buy minus4	=	Sell plus5	=	Sell short6	=	Sell short exempt7  = Undisclosed (valid for IOI and List Order messages only)8 = Cross (orders where counterparty is an exchange, valid for all messages except IOIs)9 = Cross short</Description>
+    <Description>Side of order
+Valid values:
+1	=	Buy
+2	=	Sell
+3	=	Buy minus
+4	=	Sell plus
+5	=	Sell short
+6	=	Sell short exempt
+7  = Undisclosed (valid for IOI and List Order messages only)
+8 = Cross (orders where counterparty is an exchange, valid for all messages except IOIs)
+9 = Cross short</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1096,7 +1311,8 @@
     <Tag>58</Tag>
     <Name>Text</Name>
     <DataType>String</DataType>
-    <Description>Free format text string(Note: this field does not have a specified maximum length)</Description>
+    <Description>Free format text string
+(Note: this field does not have a specified maximum length)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -1106,7 +1322,15 @@
     <Tag>59</Tag>
     <Name>TimeInForce</Name>
     <DataType>char</DataType>
-    <Description>Specifies how long the order remains in effect.  Absence of this field is interpreted as DAY.Valid values:  0	=	Day1	=	Good Till Cancel  (GTC)2	=	At the Opening  (OPG)3	=	Immediate or Cancel  (IOC)4	=	Fill or Kill  (FOK)5	=	Good Till Crossing  (GTX)6 = Good Till Date</Description>
+    <Description>Specifies how long the order remains in effect.  Absence of this field is interpreted as DAY.
+Valid values:  
+0	=	Day
+1	=	Good Till Cancel  (GTC)
+2	=	At the Opening  (OPG)
+3	=	Immediate or Cancel  (IOC)
+4	=	Fill or Kill  (FOK)
+5	=	Good Till Crossing  (GTX)
+6 = Good Till Date</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1155,7 +1379,11 @@
     <Tag>61</Tag>
     <Name>Urgency</Name>
     <DataType>char</DataType>
-    <Description>Urgency flagValid values:  0	=	Normal1	=	Flash2	=	Background</Description>
+    <Description>Urgency flag
+Valid values:  
+0	=	Normal
+1	=	Flash
+2	=	Background</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1188,7 +1416,18 @@
     <Tag>63</Tag>
     <Name>SettlmntTyp</Name>
     <DataType>char</DataType>
-    <Description>Indicates order settlement period.  Absence of this field is interpreted as Regular.  Regular is defined as the default settlement period for the particular security on the exchange of execution.Valid values:0 = Regular1 = Cash2 = Next Day3 = T+24 = T+35 = T+46 = Future7 = When Issued8 = Sellers Option9 = T+ 5</Description>
+    <Description>Indicates order settlement period.  Absence of this field is interpreted as Regular.  Regular is defined as the default settlement period for the particular security on the exchange of execution.
+Valid values:
+0 = Regular
+1 = Cash
+2 = Next Day
+3 = T+2
+4 = T+3
+5 = T+4
+6 = Future
+7 = When Issued
+8 = Sellers Option
+9 = T+ 5</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1249,7 +1488,9 @@
     <Tag>65</Tag>
     <Name>SymbolSfx</Name>
     <DataType>String</DataType>
-    <Description>Additional information about the security (e.g. preferred, warrants, etc.).   Note also see SecurityType.Valid values:		As defined in the NYSE Stock and bond Symbol Directory and in the AMEX Fitch Directory</Description>
+    <Description>Additional information about the security (e.g. preferred, warrants, etc.).   Note also see SecurityType.
+Valid values:
+		As defined in the NYSE Stock and bond Symbol Directory and in the AMEX Fitch Directory</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1279,7 +1520,9 @@
     <Tag>68</Tag>
     <Name>TotNoOrders</Name>
     <DataType>int</DataType>
-    <Description>Total number of list order entries across all messages. Should be the sum of all NoOrders in each message that has repeating list order entries related to the same ListID. Used to support fragmentation.(formerly named: ListNoOrds)(Prior to FIX 4.2 this field was named "ListNoOrds")</Description>
+    <Description>Total number of list order entries across all messages. Should be the sum of all NoOrders in each message that has repeating list order entries related to the same ListID. Used to support fragmentation.
+(formerly named: ListNoOrds)
+(Prior to FIX 4.2 this field was named "ListNoOrds")</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -1299,7 +1542,8 @@
     <Tag>70</Tag>
     <Name>AllocID</Name>
     <DataType>String</DataType>
-    <Description>Unique identifier for allocation message.(Prior to FIX 4.1 this field was of type int)</Description>
+    <Description>Unique identifier for allocation message.
+(Prior to FIX 4.1 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -1309,7 +1553,14 @@
     <Tag>71</Tag>
     <Name>AllocTransType</Name>
     <DataType>char</DataType>
-    <Description>Identifies allocation transaction typeValid values:0 = New1 = Replace2 = Cancel3 = Preliminary (without MiscFees and NetMoney)4 = Calculated (includes MiscFees and NetMoney)5 = Calculated without Preliminary (sent unsolicited by broker, includes MiscFees and NetMoney)</Description>
+    <Description>Identifies allocation transaction type
+Valid values:
+0 = New
+1 = Replace
+2 = Cancel
+3 = Preliminary (without MiscFees and NetMoney)
+4 = Calculated (includes MiscFees and NetMoney)
+5 = Calculated without Preliminary (sent unsolicited by broker, includes MiscFees and NetMoney)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1344,7 +1595,8 @@
     <Tag>72</Tag>
     <Name>RefAllocID</Name>
     <DataType>String</DataType>
-    <Description>Reference identifier to be used with Replace, Cancel, and Calculated AllocTransType messages.(Prior to FIX 4.1 this field was of type int)</Description>
+    <Description>Reference identifier to be used with Replace, Cancel, and Calculated AllocTransType messages.
+(Prior to FIX 4.1 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -1394,7 +1646,10 @@
     <Tag>77</Tag>
     <Name>OpenClose</Name>
     <DataType>char</DataType>
-    <Description>Indicates whether the resulting position after a  trade should be an opening position or closing position. Used for omnibus accounting - where accounts are held on a gross basis instead of being netted together.Valid Values:O=Open	C=Close</Description>
+    <Description>Indicates whether the resulting position after a  trade should be an opening position or closing position. Used for omnibus accounting - where accounts are held on a gross basis instead of being netted together.
+Valid Values:
+O=Open	
+C=Close</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1433,7 +1688,8 @@
     <Tag>80</Tag>
     <Name>AllocShares</Name>
     <DataType>Qty</DataType>
-    <Description>Number of shares to be allocated to specific sub-account (Prior to FIX 4.2 this field was of type int)</Description>
+    <Description>Number of shares to be allocated to specific sub-account 
+(Prior to FIX 4.2 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -1443,7 +1699,15 @@
     <Tag>81</Tag>
     <Name>ProcessCode</Name>
     <DataType>char</DataType>
-    <Description>Processing code for sub-account.  Absence of this field in AllocAccount / AllocPrice/AllocShares / ProcessCode instance indicates regular trade.Valid values:0 = regular1 = soft dollar2 = step-in3 = step-out4 = soft-dollar step-in5 = soft-dollar step-out6 = plan sponsor</Description>
+    <Description>Processing code for sub-account.  Absence of this field in AllocAccount / AllocPrice/AllocShares / ProcessCode instance indicates regular trade.
+Valid values:
+0 = regular
+1 = soft dollar
+2 = step-in
+3 = step-out
+4 = soft-dollar step-in
+5 = soft-dollar step-out
+6 = plan sponsor</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1502,7 +1766,8 @@
     <Tag>84</Tag>
     <Name>CxlQty</Name>
     <DataType>Qty</DataType>
-    <Description>Total number of shares canceled for this order. (Prior to FIX 4.2 this field was of type int)</Description>
+    <Description>Total number of shares canceled for this order. 
+(Prior to FIX 4.2 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -1512,7 +1777,12 @@
     <Tag>87</Tag>
     <Name>AllocStatus</Name>
     <DataType>int</DataType>
-    <Description>Identifies status of allocation.Valid values:0 = accepted (successfully processed)1 = rejected2 = partial accept3 = received (received, not yet processed)</Description>
+    <Description>Identifies status of allocation.
+Valid values:
+0 = accepted (successfully processed)
+1 = rejected
+2 = partial accept
+3 = received (received, not yet processed)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1539,7 +1809,16 @@
     <Tag>88</Tag>
     <Name>AllocRejCode</Name>
     <DataType>int</DataType>
-    <Description>Identifies reason for rejection.Valid values:0 = unknown account(s)1 = incorrect quantity2 = incorrect average price3 = unknown executing broker mnemonic4 = commission difference5 = unknown OrderID6 = unknown ListID7 = other</Description>
+    <Description>Identifies reason for rejection.
+Valid values:
+0 = unknown account(s)
+1 = incorrect quantity
+2 = incorrect average price
+3 = unknown executing broker mnemonic
+4 = commission difference
+5 = unknown OrderID
+6 = unknown ListID
+7 = other</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1632,7 +1911,11 @@
     <Tag>94</Tag>
     <Name>EmailType</Name>
     <DataType>char</DataType>
-    <Description>Email message type.Valid values:0 = New1 = Reply2 = Admin Reply</Description>
+    <Description>Email message type.
+Valid values:
+0 = New
+1 = Reply
+2 = Admin Reply</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1675,7 +1958,10 @@
     <Tag>97</Tag>
     <Name>PossResend</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates that message may contain information that has been sent under another sequence number.Valid Values:	Y=Possible resend	N=Original transmission</Description>
+    <Description>Indicates that message may contain information that has been sent under another sequence number.
+Valid Values:
+	Y=Possible resend
+	N=Original transmission</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1685,7 +1971,15 @@
     <Tag>98</Tag>
     <Name>EncryptMethod</Name>
     <DataType>int</DataType>
-    <Description>Method of encryption.Valid values:0 = None / other1 = PKCS (proprietary)2 = DES (ECB mode)3 = PKCS/DES (proprietary)4 = PGP/DES (defunct)5 = PGP/DES-MD5  (see app note on FIX web site)6 = PEM/DES-MD5  (see app note on FIX web site)</Description>
+    <Description>Method of encryption.
+Valid values:
+0 = None / other
+1 = PKCS (proprietary)
+2 = DES (ECB mode)
+3 = PKCS/DES (proprietary)
+4 = PGP/DES (defunct)
+5 = PGP/DES-MD5  (see app note on FIX web site)
+6 = PEM/DES-MD5  (see app note on FIX web site)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1734,7 +2028,9 @@
     <Tag>100</Tag>
     <Name>ExDestination</Name>
     <DataType>Exchange</DataType>
-    <Description>Execution destination as defined by institution when order is entered.Valid values:See Appendix C</Description>
+    <Description>Execution destination as defined by institution when order is entered.
+Valid values:
+See Appendix C</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1744,7 +2040,12 @@
     <Tag>102</Tag>
     <Name>CxlRejReason</Name>
     <DataType>int</DataType>
-    <Description>Code to identify reason for cancel rejection.Valid values:0 = Too late to cancel1 = Unknown order2 = Broker Option3 = Order already in Pending Cancel or Pending Replace status</Description>
+    <Description>Code to identify reason for cancel rejection.
+Valid values:
+0 = Too late to cancel
+1 = Unknown order
+2 = Broker Option
+3 = Order already in Pending Cancel or Pending Replace status</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1771,7 +2072,17 @@
     <Tag>103</Tag>
     <Name>OrdRejReason</Name>
     <DataType>int</DataType>
-    <Description>Code to identify reason for order rejection.Valid values:0 = Broker option1 = Unknown symbol2 = Exchange closed3 = Order exceeds limit4 = Too late to enter5 = Unknown Order6 = Duplicate Order (e.g. dupe ClOrdID)7 = Duplicate of a verbally communicated order8 = Stale Order</Description>
+    <Description>Code to identify reason for order rejection.
+Valid values:
+0 = Broker option
+1 = Unknown symbol
+2 = Exchange closed
+3 = Order exceeds limit
+4 = Too late to enter
+5 = Unknown Order
+6 = Duplicate Order (e.g. dupe ClOrdID)
+7 = Duplicate of a verbally communicated order
+8 = Stale Order</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1818,7 +2129,24 @@
     <Tag>104</Tag>
     <Name>IOIQualifier</Name>
     <DataType>char</DataType>
-    <Description>Code to qualify IOI use.Valid values:A = All or noneC = At the closeI = In touch withL = LimitM = More behindO = At the openP = Taking a positionQ = At the Market (previously called Current Quote)R = Ready to tradeS = Portfolio show-nT = Through the dayV = VersusW = Indication - Working awayX = Crossing opportunityY = At the MidpointZ = Pre-open</Description>
+    <Description>Code to qualify IOI use.
+Valid values:
+A = All or none
+C = At the close
+I = In touch with
+L = Limit
+M = More behind
+O = At the open
+P = Taking a position
+Q = At the Market (previously called Current Quote)
+R = Ready to trade
+S = Portfolio show-n
+T = Through the day
+V = Versus
+W = Indication - Working away
+X = Crossing opportunity
+Y = At the Midpoint
+Z = Pre-open</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1943,7 +2271,8 @@
     <Tag>110</Tag>
     <Name>MinQty</Name>
     <DataType>Qty</DataType>
-    <Description>Minimum quantity of an order to be executed. (Prior to FIX 4.2 this field was of type int)</Description>
+    <Description>Minimum quantity of an order to be executed. 
+(Prior to FIX 4.2 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -1953,7 +2282,8 @@
     <Tag>111</Tag>
     <Name>MaxFloor</Name>
     <DataType>Qty</DataType>
-    <Description>Maximum number of shares within an order to be shown on the exchange floor at any given time. (Prior to FIX 4.2 this field was of type int)</Description>
+    <Description>Maximum number of shares within an order to be shown on the exchange floor at any given time. 
+(Prior to FIX 4.2 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -1973,7 +2303,10 @@
     <Tag>113</Tag>
     <Name>ReportToExch</Name>
     <DataType>Boolean</DataType>
-    <Description>Identifies party of trade responsible for exchange reporting.Valid values:Y = Indicates that party receiving message must report tradeN = Indicates that party sending message will report trade</Description>
+    <Description>Identifies party of trade responsible for exchange reporting.
+Valid values:
+Y = Indicates that party receiving message must report trade
+N = Indicates that party sending message will report trade</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -1992,7 +2325,9 @@
     <Tag>114</Tag>
     <Name>LocateReqd</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates whether the broker is to locate the stock in conjunction with a short sell order.Valid values:Y = Indicates the broker is responsible for locating the stockN = Indicates the broker is not required to locate</Description>
+    <Description>Indicates whether the broker is to locate the stock in conjunction with a short sell order.Valid values:
+Y = Indicates the broker is responsible for locating the stock
+N = Indicates the broker is not required to locate</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2071,7 +2406,10 @@
     <Tag>121</Tag>
     <Name>ForexReq</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates request for forex accommodation trade to be executed along with security transaction.Valid values:Y = Execute Forex after security tradeN = Do not execute Forex after security trade</Description>
+    <Description>Indicates request for forex accommodation trade to be executed along with security transaction.
+Valid values:
+Y = Execute Forex after security trade
+N = Do not execute Forex after security trade</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2100,7 +2438,10 @@
     <Tag>123</Tag>
     <Name>GapFillFlag</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates that the Sequence Reset message is replacing administrative or application messages which will not be resent.Valid values:Y = Gap Fill message, MsgSeqNum field validN = Sequence Reset, ignore MsgSeqNum</Description>
+    <Description>Indicates that the Sequence Reset message is replacing administrative or application messages which will not be resent.
+Valid values:
+Y = Gap Fill message, MsgSeqNum field valid
+N = Sequence Reset, ignore MsgSeqNum</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2139,7 +2480,14 @@
     <Tag>127</Tag>
     <Name>DKReason</Name>
     <DataType>char</DataType>
-    <Description>Reason for execution rejection.Valid values:A =	 Unknown symbolB = Wrong sideC = Quantity exceeds orderD = No matching orderE = Price exceeds limitZ	= Other</Description>
+    <Description>Reason for execution rejection.
+Valid values:
+A =	 Unknown symbol
+B = Wrong side
+C = Quantity exceeds order
+D = No matching order
+E = Price exceeds limit
+Z	= Other</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2194,7 +2542,10 @@
     <Tag>130</Tag>
     <Name>IOINaturalFlag</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates that IOI is the result of an existing agency order or a facilitation position resulting from an agency order, not from principal trading or order solicitation activity.Valid values:Y = NaturalN = Not natural</Description>
+    <Description>Indicates that IOI is the result of an existing agency order or a facilitation position resulting from an agency order, not from principal trading or order solicitation activity.
+Valid values:
+Y = Natural
+N = Not natural</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2243,7 +2594,8 @@
     <Tag>134</Tag>
     <Name>BidSize</Name>
     <DataType>Qty</DataType>
-    <Description>Quantity of bid(Prior to FIX 4.2 this field was of type int)</Description>
+    <Description>Quantity of bid
+(Prior to FIX 4.2 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -2253,7 +2605,8 @@
     <Tag>135</Tag>
     <Name>OfferSize</Name>
     <DataType>Qty</DataType>
-    <Description>Quantity of offer(Prior to FIX 4.2 this field was of type int)</Description>
+    <Description>Quantity of offer
+(Prior to FIX 4.2 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -2293,7 +2646,17 @@
     <Tag>139</Tag>
     <Name>MiscFeeType</Name>
     <DataType>char</DataType>
-    <Description>Indicates type of miscellaneous fee.Valid values:1 = Regulatory (e.g. SEC)2 = Tax3 = Local Commission4 = Exchange Fees5 = Stamp6 = Levy7 = Other8 = Markup9 = Consumption Tax</Description>
+    <Description>Indicates type of miscellaneous fee.
+Valid values:
+1 = Regulatory (e.g. SEC)
+2 = Tax
+3 = Local Commission
+4 = Exchange Fees
+5 = Stamp
+6 = Levy
+7 = Other
+8 = Markup
+9 = Consumption Tax</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2350,7 +2713,10 @@
     <Tag>141</Tag>
     <Name>ResetSeqNumFlag</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates that the both sides of the FIX session should reset sequence numbers.Valid values:Y = Yes, reset sequence numbersN = No</Description>
+    <Description>Indicates that the both sides of the FIX session should reset sequence numbers.
+Valid values:
+Y = Yes, reset sequence numbers
+N = No</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2449,7 +2815,23 @@
     <Tag>150</Tag>
     <Name>ExecType</Name>
     <DataType>char</DataType>
-    <Description>Describes the specific ExecutionRpt (i.e. Pending Cancel) while OrdStatus will always identify the current order status (i.e. Partially Filled) Valid values: 0 = New1 = Partial fill2 = Fill3 = Done for day4 = Canceled5 = Replace6 = Pending Cancel  (e.g. result of Order Cancel Request)7 = Stopped8 = Rejected9 = SuspendedA = Pending NewB = CalculatedC = ExpiredD = Restated (ExecutionRpt sent unsolicited by sellside, with ExecRestatementReason set)E = Pending Replace (e.g. result of Order Cancel/Replace Request)</Description>
+    <Description>Describes the specific ExecutionRpt (i.e. Pending Cancel) while OrdStatus will always identify the current order status (i.e. Partially Filled) 
+Valid values: 
+0 = New
+1 = Partial fill
+2 = Fill
+3 = Done for day
+4 = Canceled
+5 = Replace
+6 = Pending Cancel  (e.g. result of Order Cancel Request)
+7 = Stopped
+8 = Rejected
+9 = Suspended
+A = Pending New
+B = Calculated
+C = Expired
+D = Restated (ExecutionRpt sent unsolicited by sellside, with ExecRestatementReason set)
+E = Pending Replace (e.g. result of Order Cancel/Replace Request)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2520,7 +2902,8 @@
     <Tag>151</Tag>
     <Name>LeavesQty</Name>
     <DataType>Qty</DataType>
-    <Description>Amount of shares open for further execution. If the OrdStatus is Canceled, DoneForTheDay, Expired, Calculated, or Rejected (in which case the order is no longer active) then LeavesQty could be 0, otherwise LeavesQty = OrderQty - CumQty.(Prior to FIX 4.2 this field was of type int)</Description>
+    <Description>Amount of shares open for further execution. If the OrdStatus is Canceled, DoneForTheDay, Expired, Calculated, or Rejected (in which case the order is no longer active) then LeavesQty could be 0, otherwise LeavesQty = OrderQty - CumQty.
+(Prior to FIX 4.2 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -2570,7 +2953,9 @@
     <Tag>156</Tag>
     <Name>SettlCurrFxRateCalc</Name>
     <DataType>char</DataType>
-    <Description>Specifies whether or not SettlCurrFxRate should be multiplied or divided.M=MultiplyD=Divide</Description>
+    <Description>Specifies whether or not SettlCurrFxRate should be multiplied or divided.
+M=Multiply
+D=Divide</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -2610,7 +2995,12 @@
     <Tag>160</Tag>
     <Name>SettlInstMode</Name>
     <DataType>char</DataType>
-    <Description>Indicates mode used for Settlement InstructionsValid values:  0 = Default1 = Standing Instructions Provided2 = Specific Allocation Account Overriding3 = Specific Allocation Account Standing</Description>
+    <Description>Indicates mode used for Settlement Instructions
+Valid values:  
+0 = Default
+1 = Standing Instructions Provided
+2 = Specific Allocation Account Overriding
+3 = Specific Allocation Account Standing</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2657,7 +3047,11 @@
     <Tag>163</Tag>
     <Name>SettlInstTransType</Name>
     <DataType>char</DataType>
-    <Description>Settlement Instructions message transaction typeValid values:  N = NewC = CancelR = Replace</Description>
+    <Description>Settlement Instructions message transaction type
+Valid values:  
+N = New
+C = Cancel
+R = Replace</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2690,7 +3084,10 @@
     <Tag>165</Tag>
     <Name>SettlInstSource</Name>
     <DataType>char</DataType>
-    <Description>Indicates source of Settlement InstructionsValid values:  1 = Broker’s Instructions2 = Institution’s Instructions</Description>
+    <Description>Indicates source of Settlement Instructions
+Valid values:  
+1 = Broker’s Instructions
+2 = Institution’s Instructions</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2709,7 +3106,15 @@
     <Tag>166</Tag>
     <Name>SettlLocation</Name>
     <DataType>String</DataType>
-    <Description>Identifies Settlement Depository or Country Code (ISITC spec)Valid values:   CED = CEDEL  DTC = Depository Trust Company  EUR = Euroclear  FED = Federal Book Entry  PNY= Physical  PTC = Participant Trust Company  ISO Country Code = Local Market Settle Location</Description>
+    <Description>Identifies Settlement Depository or Country Code (ISITC spec)
+Valid values: 
+  CED = CEDEL
+  DTC = Depository Trust Company
+  EUR = Euroclear
+  FED = Federal Book Entry
+  PNY= Physical
+  PTC = Participant Trust Company
+  ISO Country Code = Local Market Settle Location</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2748,7 +3153,41 @@
     <Tag>167</Tag>
     <Name>SecurityType</Name>
     <DataType>String</DataType>
-    <Description>Indicates type of security (ISITC spec)Valid values:  BA = Bankers AcceptanceCB = Convertible Bond (Note not part of ISITC spec)CD = Certificate Of DepositCMO = Collateralize Mortgage ObligationCORP = Corporate BondCP = Commercial PaperCPP = Corporate Private PlacementCS = Common StockFHA = Federal Housing AuthorityFHL = Federal Home LoanFN = Federal National Mortgage AssociationFOR = Foreign Exchange ContractFUT = FutureGN =  Government National Mortgage AssociationGOVT = Treasuries + Agency DebentureIET Mortgage IOETTEMF =  Mutual FundMIO = Mortgage Interest OnlyMPO = Mortgage Principal OnlyMPP = Mortgage Private PlacementMPT = Miscellaneous Pass-ThruMUNI = Municipal BondNONE = No ISITC Security TypeOPT = OptionPS = Preferred StockRP = Repurchase AgreementRVRP =  Reverse Repurchase AgreementSL = Student Loan Marketing AssociationTD = Time DepositUSTB = US Treasury BillWAR = WarrantZOO = Cats, Tigers &amp; Lions (a real code: US Treasury Receipts) ? = “Wildcard” entry (used on Security Definition Request message)</Description>
+    <Description>Indicates type of security (ISITC spec)
+Valid values:  
+BA = Bankers Acceptance
+CB = Convertible Bond (Note not part of ISITC spec)
+CD = Certificate Of Deposit
+CMO = Collateralize Mortgage Obligation
+CORP = Corporate Bond
+CP = Commercial Paper
+CPP = Corporate Private Placement
+CS = Common Stock
+FHA = Federal Housing Authority
+FHL = Federal Home Loan
+FN = Federal National Mortgage Association
+FOR = Foreign Exchange Contract
+FUT = Future
+GN =  Government National Mortgage Association
+GOVT = Treasuries + Agency Debenture
+IET Mortgage IOETTE
+MF =  Mutual Fund
+MIO = Mortgage Interest Only
+MPO = Mortgage Principal Only
+MPP = Mortgage Private Placement
+MPT = Miscellaneous Pass-Thru
+MUNI = Municipal Bond
+NONE = No ISITC Security Type
+OPT = Option
+PS = Preferred Stock
+RP = Repurchase Agreement
+RVRP =  Reverse Repurchase Agreement
+SL = Student Loan Marketing Association
+TD = Time Deposit
+USTB = US Treasury Bill
+WAR = Warrant
+ZOO = Cats, Tigers &amp; Lions (a real code: US Treasury Receipts) 
+? = “Wildcard” entry (used on Security Definition Request message)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2893,7 +3332,12 @@
     <Tag>169</Tag>
     <Name>StandInstDbType</Name>
     <DataType>int</DataType>
-    <Description>Identifies the Standing Instruction database usedValid values:  0 = Other1 = DTC SID2 = Thomson ALERT3 = A Global Custodian (StandInstDbName must be provided)</Description>
+    <Description>Identifies the Standing Instruction database used
+Valid values:  
+0 = Other
+1 = DTC SID
+2 = Thomson ALERT
+3 = A Global Custodian (StandInstDbName must be provided)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -2940,7 +3384,9 @@
     <Tag>172</Tag>
     <Name>SettlDeliveryType</Name>
     <DataType>int</DataType>
-    <Description>Identifies type of settlement0 = “Versus. Payment”: Deliver (if  Sell) or Receive (if Buy) vs. (Against) Payment 1 = “Free”: Deliver (if Sell) or Receive (if Buy) Free</Description>
+    <Description>Identifies type of settlement
+0 = “Versus. Payment”: Deliver (if  Sell) or Receive (if Buy) vs. (Against) Payment 
+1 = “Free”: Deliver (if Sell) or Receive (if Buy) Free</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -3190,7 +3636,10 @@
     <Tag>197</Tag>
     <Name>AllocLinkType</Name>
     <DataType>int</DataType>
-    <Description>Identifies the type of Allocation linkage when AllocLinkID is used.Valid values:  0 = F/X Netting1 = F/X Swap</Description>
+    <Description>Identifies the type of Allocation linkage when AllocLinkID is used.
+Valid values:  
+0 = F/X Netting
+1 = F/X Swap</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3229,7 +3678,9 @@
     <Tag>200</Tag>
     <Name>MaturityMonthYear</Name>
     <DataType>month-year</DataType>
-    <Description>Month and Year of the maturity for SecurityType=FUT or SecurityType=OPT. Required if MaturityDay is specified.Format:  YYYYMM       (i.e. 199903)</Description>
+    <Description>Month and Year of the maturity for SecurityType=FUT or SecurityType=OPT. Required if MaturityDay is specified.
+Format:  YYYYMM    
+   (i.e. 199903)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -3239,7 +3690,10 @@
     <Tag>201</Tag>
     <Name>PutOrCall</Name>
     <DataType>int</DataType>
-    <Description>Indicates whether an Option is for a put or call.Valid values:  0 = Put1 = Call</Description>
+    <Description>Indicates whether an Option is for a put or call.
+Valid values:  
+0 = Put
+1 = Call</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3268,7 +3722,10 @@
     <Tag>203</Tag>
     <Name>CoveredOrUncovered</Name>
     <DataType>int</DataType>
-    <Description>Used for optionsValid values:  0 = Covered1 = Uncovered</Description>
+    <Description>Used for options
+Valid values:  
+0 = Covered
+1 = Uncovered</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3287,7 +3744,10 @@
     <Tag>204</Tag>
     <Name>CustomerOrFirm</Name>
     <DataType>int</DataType>
-    <Description>Used for options when delivering the order to an execution system/exchange to specify if the order is for a customer or the firm placing the order itself.Valid values:  0 = Customer1 = Firm</Description>
+    <Description>Used for options when delivering the order to an execution system/exchange to specify if the order is for a customer or the firm placing the order itself.
+Valid values:  
+0 = Customer
+1 = Firm</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3306,7 +3766,9 @@
     <Tag>205</Tag>
     <Name>MaturityDay</Name>
     <DataType>day-of-month</DataType>
-    <Description>Day of month used in conjunction with MaturityMonthYear to specify the maturity date for SecurityType=FUT or SecurityType=OPT.Valid values:      1-31</Description>
+    <Description>Day of month used in conjunction with MaturityMonthYear to specify the maturity date for SecurityType=FUT or SecurityType=OPT.
+Valid values:  
+    1-31</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3316,7 +3778,15 @@
     <Tag>206</Tag>
     <Name>OptAttribute</Name>
     <DataType>char</DataType>
-    <Description>Can be used for SecurityType=OPT to identify a particular security.Valid values vary by SecurityExchange:      For Exchange: MONEP (Paris)       L = Long (a.k.a. “American”)       S = Short (a.k.a. “European”)   For Exchanges: DTB (Frankfurt), HKSE (Hong Kong), and SOFFEX (Zurich)      0-9 = single digit “version” number assigned by exchange following capital adjustments (0=current, 1=prior, 2=prior to 1, etc).</Description>
+    <Description>Can be used for SecurityType=OPT to identify a particular security.
+
+Valid values vary by SecurityExchange:  
+    For Exchange: MONEP (Paris)
+       L = Long (a.k.a. “American”)
+       S = Short (a.k.a. “European”)
+
+   For Exchanges: DTB (Frankfurt), HKSE (Hong Kong), and SOFFEX (Zurich)
+      0-9 = single digit “version” number assigned by exchange following capital adjustments (0=current, 1=prior, 2=prior to 1, etc).</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -3326,7 +3796,9 @@
     <Tag>207</Tag>
     <Name>SecurityExchange</Name>
     <DataType>Exchange</DataType>
-    <Description>Market used to help identify a security.Valid values:      See Appendix C</Description>
+    <Description>Market used to help identify a security.
+Valid values:  
+    See Appendix C</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3336,7 +3808,10 @@
     <Tag>208</Tag>
     <Name>NotifyBrokerOfCredit</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates whether or not details should be communicated to BrokerOfCredit (i.e. step-in broker).Valid values:      Y = Details should be communicated    N = Details should not be communicated</Description>
+    <Description>Indicates whether or not details should be communicated to BrokerOfCredit (i.e. step-in broker).
+Valid values:  
+    Y = Details should be communicated
+    N = Details should not be communicated</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3355,7 +3830,11 @@
     <Tag>209</Tag>
     <Name>AllocHandlInst</Name>
     <DataType>int</DataType>
-    <Description>Indicates how the receiver (i.e. third party) of Allocation message should handle/process the account details.Valid values:      1 = Match    2 = Forward    3 = Forward and Match</Description>
+    <Description>Indicates how the receiver (i.e. third party) of Allocation message should handle/process the account details.
+Valid values:  
+    1 = Match
+    2 = Forward
+    3 = Forward and Match</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3378,7 +3857,8 @@
     <Tag>210</Tag>
     <Name>MaxShow</Name>
     <DataType>Qty</DataType>
-    <Description>Maximum number of shares within an order to be shown  to other customers (i.e. sent via an IOI).(Prior to FIX 4.2 this field was of type int)</Description>
+    <Description>Maximum number of shares within an order to be shown  to other customers (i.e. sent via an IOI).
+(Prior to FIX 4.2 this field was of type int)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -3428,7 +3908,9 @@
     <Tag>215</Tag>
     <Name>NoRoutingIDs</Name>
     <DataType>int</DataType>
-    <Description>Number of repeating groups of RoutingID and RoutingType values.See Appendix L – Pre-Trade Message Targeting/Routing</Description>
+    <Description>Number of repeating groups of RoutingID and RoutingType values.
+
+See Appendix L – Pre-Trade Message Targeting/Routing</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -3438,7 +3920,12 @@
     <Tag>216</Tag>
     <Name>RoutingType</Name>
     <DataType>int</DataType>
-    <Description>Indicates the type of RoutingID specified.Valid values:      1 = Target Firm    2 = Target List    3 = Block Firm    4 = Block List</Description>
+    <Description>Indicates the type of RoutingID specified.
+Valid values:  
+    1 = Target Firm
+    2 = Target List
+    3 = Block Firm
+    4 = Block List</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3485,7 +3972,17 @@
     <Tag>219</Tag>
     <Name>Benchmark</Name>
     <DataType>char</DataType>
-    <Description>For Fixed Income.  Identifies the benchmark (e.g. used in conjunction with the SpreadToBenchmark field).Valid values:1 = CURVE2 = 5-YR3 = OLD-54 = 10-YR5 = OLD-106 = 30-YR7 = OLD-308 = 3-MO-LIBOR9 = 6-MO-LIBOR</Description>
+    <Description>For Fixed Income.  Identifies the benchmark (e.g. used in conjunction with the SpreadToBenchmark field).
+Valid values:
+1 = CURVE
+2 = 5-YR
+3 = OLD-5
+4 = 10-YR
+5 = OLD-10
+6 = 30-YR
+7 = OLD-30
+8 = 3-MO-LIBOR
+9 = 6-MO-LIBOR</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3562,7 +4059,11 @@
     <Tag>263</Tag>
     <Name>SubscriptionRequestType</Name>
     <DataType>char</DataType>
-    <Description>Subscription Request TypeValid values:0 = Snapshot1 = Snapshot + Updates (Subscribe)2 = Disable previous Snapshot + Update Request (Unsubscribe)</Description>
+    <Description>Subscription Request Type
+Valid values:
+0 = Snapshot
+1 = Snapshot + Updates (Subscribe)
+2 = Disable previous Snapshot + Update Request (Unsubscribe)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3585,7 +4086,11 @@
     <Tag>264</Tag>
     <Name>MarketDepth</Name>
     <DataType>int</DataType>
-    <Description>Depth of market for Book SnapshotValid values:0 = Full Book1 = Top of BookN&gt;1 = Report best N price tiers of data</Description>
+    <Description>Depth of market for Book Snapshot
+Valid values:
+0 = Full Book
+1 = Top of Book
+N&gt;1 = Report best N price tiers of data</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3595,7 +4100,10 @@
     <Tag>265</Tag>
     <Name>MDUpdateType</Name>
     <DataType>int</DataType>
-    <Description>Specifies the type of Market Data update.Valid values:0 = Full Refresh1 = Incremental Refresh</Description>
+    <Description>Specifies the type of Market Data update.
+Valid values:
+0 = Full Refresh
+1 = Incremental Refresh</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3614,7 +4122,11 @@
     <Tag>266</Tag>
     <Name>AggregatedBook</Name>
     <DataType>Boolean</DataType>
-    <Description>Specifies whether or not book entries should be aggregated.Valid values:Y = one book entry per side per priceN = Multiple entries per side per price allowed(Not specified) = broker option</Description>
+    <Description>Specifies whether or not book entries should be aggregated.
+Valid values:
+Y = one book entry per side per price
+N = Multiple entries per side per price allowed
+(Not specified) = broker option</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3653,7 +4165,18 @@
     <Tag>269</Tag>
     <Name>MDEntryType</Name>
     <DataType>char</DataType>
-    <Description>Type  Market Data entry.Valid values:0 = Bid1 = Offer2 = Trade3 = Index Value4 = Opening Price5 = Closing Price6 = Settlement Price7 = Trading Session High Price8 = Trading Session Low Price9 = Trading Session VWAP Price</Description>
+    <Description>Type  Market Data entry.
+Valid values:
+0 = Bid
+1 = Offer
+2 = Trade
+3 = Index Value
+4 = Opening Price
+5 = Closing Price
+6 = Settlement Price
+7 = Trading Session High Price
+8 = Trading Session Low Price
+9 = Trading Session VWAP Price</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3744,7 +4267,12 @@
     <Tag>274</Tag>
     <Name>TickDirection</Name>
     <DataType>char</DataType>
-    <Description>Direction of the "tick".Valid values:0 = Plus Tick1 = Zero-Plus Tick2 = Minus Tick3 = Zero-Minus Tick</Description>
+    <Description>Direction of the "tick".
+Valid values:
+0 = Plus Tick
+1 = Zero-Plus Tick
+2 = Minus Tick
+3 = Zero-Minus Tick</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3771,7 +4299,9 @@
     <Tag>275</Tag>
     <Name>MDMkt</Name>
     <DataType>Exchange</DataType>
-    <Description>Market posting quote / trade.  Valid values:See Appendix C</Description>
+    <Description>Market posting quote / trade.  
+Valid values:
+See Appendix C</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3781,7 +4311,17 @@
     <Tag>276</Tag>
     <Name>QuoteCondition</Name>
     <DataType>MultipleValueString</DataType>
-    <Description>Space-delimited list of conditions describing a quote.Valid values:A = Open / ActiveB = Closed / InactiveC = Exchange BestD = Consolidated BestE = LockedF = CrossedG = DepthH = Fast TradingI = Non-Firm</Description>
+    <Description>Space-delimited list of conditions describing a quote.
+Valid values:
+A = Open / Active
+B = Closed / Inactive
+C = Exchange Best
+D = Consolidated Best
+E = Locked
+F = Crossed
+G = Depth
+H = Fast Trading
+I = Non-Firm</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3828,7 +4368,22 @@
     <Tag>277</Tag>
     <Name>TradeCondition</Name>
     <DataType>MultipleValueString</DataType>
-    <Description>Space-delimited list of conditions describing a tradeValid values:A = Cash (only) MarketB = Average Price TradeC = Cash Trade (same day clearing)D = Next Day (only) MarketE = Opening / Reopening Trade DetailF = Intraday Trade DetailG = Rule 127 Trade (NYSE)H = Rule 155 Trade (Amex)I = Sold Last (late reporting)J = Next Day Trade (next day clearing)K = Opened (late report of opened trade)L = SellerM = Sold (out of sequence)N = Stopped Stock (guarantee of price but does not execute the order)</Description>
+    <Description>Space-delimited list of conditions describing a trade
+Valid values:
+A = Cash (only) Market
+B = Average Price Trade
+C = Cash Trade (same day clearing)
+D = Next Day (only) Market
+E = Opening / Reopening Trade Detail
+F = Intraday Trade Detail
+G = Rule 127 Trade (NYSE)
+H = Rule 155 Trade (Amex)
+I = Sold Last (late reporting)
+J = Next Day Trade (next day clearing)
+K = Opened (late report of opened trade)
+L = Seller
+M = Sold (out of sequence)
+N = Stopped Stock (guarantee of price but does not execute the order)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3905,7 +4460,11 @@
     <Tag>279</Tag>
     <Name>MDUpdateAction</Name>
     <DataType>char</DataType>
-    <Description>Type of Market Data update action.Valid values:0 = New1 = Change2 = Delete</Description>
+    <Description>Type of Market Data update action.
+Valid values:
+0 = New
+1 = Change
+2 = Delete</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -3938,7 +4497,17 @@
     <Tag>281</Tag>
     <Name>MDReqRejReason</Name>
     <DataType>char</DataType>
-    <Description>Reason for the rejection of a Market Data request.Valid values:0 = Unknown symbol1 = Duplicate MDReqID2 = Insufficient Bandwidth3 = Insufficient Permissions4 = Unsupported SubscriptionRequestType5 = Unsupported MarketDepth6 = Unsupported MDUpdateType7 = Unsupported AggregatedBook8 = Unsupported MDEntryType</Description>
+    <Description>Reason for the rejection of a Market Data request.
+Valid values:
+0 = Unknown symbol
+1 = Duplicate MDReqID
+2 = Insufficient Bandwidth
+3 = Insufficient Permissions
+4 = Unsupported SubscriptionRequestType
+5 = Unsupported MarketDepth
+6 = Unsupported MDUpdateType
+7 = Unsupported AggregatedBook
+8 = Unsupported MDEntryType</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4015,7 +4584,10 @@
     <Tag>285</Tag>
     <Name>DeleteReason</Name>
     <DataType>char</DataType>
-    <Description>Reason for deletion.Valid values:0 = Cancelation / Trade Bust1 = Error</Description>
+    <Description>Reason for deletion.
+Valid values:
+0 = Cancelation / Trade Bust
+1 = Error</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4034,7 +4606,11 @@
     <Tag>286</Tag>
     <Name>OpenCloseSettleFlag</Name>
     <DataType>char</DataType>
-    <Description>Flag that identifies a price.Valid values:0 = Daily Open / Close / Settlement price1 = Session Open / Close / Settlement price2 = Delivery Settlement price</Description>
+    <Description>Flag that identifies a price.
+Valid values:
+0 = Daily Open / Close / Settlement price
+1 = Session Open / Close / Settlement price
+2 = Delivery Settlement price</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4097,7 +4673,9 @@
     <Tag>291</Tag>
     <Name>FinancialStatus</Name>
     <DataType>char</DataType>
-    <Description>Identifies a firm’s financial status.Valid values:  1 = Bankrupt</Description>
+    <Description>Identifies a firm’s financial status.
+Valid values:
+  1 = Bankrupt</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4112,7 +4690,13 @@
     <Tag>292</Tag>
     <Name>CorporateAction</Name>
     <DataType>char</DataType>
-    <Description>Identifies the type of Corporate Action.Valid values:  A = Ex-Dividend  B = Ex-Distribution  C = Ex-Rights  D = New  E = Ex-Interest</Description>
+    <Description>Identifies the type of Corporate Action.
+Valid values:
+  A = Ex-Dividend
+  B = Ex-Distribution
+  C = Ex-Rights
+  D = New
+  E = Ex-Interest</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4183,7 +4767,14 @@
     <Tag>297</Tag>
     <Name>QuoteAckStatus</Name>
     <DataType>int</DataType>
-    <Description>Identifies the status of the quote acknowledgement.Valid values:  0-Accepted  1-Canceled for Symbol(s)  2-Canceled  for Security Type(s)  3-Canceled for Underlying  4-Canceled All  5-Rejected</Description>
+    <Description>Identifies the status of the quote acknowledgement.
+Valid values:
+  0-Accepted
+  1-Canceled for Symbol(s)
+  2-Canceled  for Security Type(s)
+  3-Canceled for Underlying
+  4-Canceled All
+  5-Rejected</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4193,7 +4784,12 @@
     <Tag>298</Tag>
     <Name>QuoteCancelType</Name>
     <DataType>int</DataType>
-    <Description>Identifies the type of  quote cancel.Valid Values:  1 – Cancel for Symbol(s)  2 – Cancel for Security Type(s)  3 – Cancel for Underlying Symbol  4 – Cancel All Quotes</Description>
+    <Description>Identifies the type of  quote cancel.
+Valid Values:
+  1 – Cancel for Symbol(s)
+  2 – Cancel for Security Type(s)
+  3 – Cancel for Underlying Symbol
+  4 – Cancel All Quotes</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4213,7 +4809,16 @@
     <Tag>300</Tag>
     <Name>QuoteRejectReason</Name>
     <DataType>int</DataType>
-    <Description>Reason Quote was rejected:Valid Values:  1 = Unknown symbol (Security)  2 = Exchange(Security) closed  3 = Quote Request exceeds limit  4 = Too late to enter  5 = Unknown Quote  6 = Duplicate Quote  7 = Invalid bid/ask spread  8 = Invalid price  9 = Not authorized to quote security</Description>
+    <Description>Reason Quote was rejected:
+Valid Values:
+  1 = Unknown symbol (Security)
+  2 = Exchange(Security) closed
+  3 = Quote Request exceeds limit
+  4 = Too late to enter
+  5 = Unknown Quote
+  6 = Duplicate Quote  7 = Invalid bid/ask spread
+  8 = Invalid price
+  9 = Not authorized to quote security</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4256,7 +4861,11 @@
     <Tag>301</Tag>
     <Name>QuoteResponseLevel</Name>
     <DataType>int</DataType>
-    <Description>Level of Response requested from receiver of quote messages.Valid Values:  0 – No Acknowledgement (Default)  1 – Acknowledge only negative or erroneous quotes  2 – Acknowledge each quote messages</Description>
+    <Description>Level of Response requested from receiver of quote messages.
+Valid Values:
+  0 – No Acknowledgement (Default)
+  1 – Acknowledge only negative or erroneous quotes
+  2 – Acknowledge each quote messages</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4276,7 +4885,10 @@
     <Tag>303</Tag>
     <Name>QuoteRequestType</Name>
     <DataType>int</DataType>
-    <Description>Indicates the type of Quote Request being generatedValid values:  1-Manual  2-Automatic</Description>
+    <Description>Indicates the type of Quote Request being generated
+Valid values:
+  1-Manual
+  2-Automatic</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4296,7 +4908,8 @@
     <Tag>305</Tag>
     <Name>UnderlyingIDSource</Name>
     <DataType>String</DataType>
-    <Description>Underlying security’s IDSource.  Valid values:   see IDSource field</Description>
+    <Description>Underlying security’s IDSource.
+  Valid values:   see IDSource field</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4306,7 +4919,8 @@
     <Tag>306</Tag>
     <Name>UnderlyingIssuer</Name>
     <DataType>String</DataType>
-    <Description>Underlying security’s Issuer.  See Issuer field for description</Description>
+    <Description>Underlying security’s Issuer.
+  See Issuer field for description</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -4316,7 +4930,8 @@
     <Tag>307</Tag>
     <Name>UnderlyingSecurityDesc</Name>
     <DataType>String</DataType>
-    <Description>Underlying security’s SecurityDesc.  See SecurityDesc field for description</Description>
+    <Description>Underlying security’s SecurityDesc.
+  See SecurityDesc field for description</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -4326,7 +4941,8 @@
     <Tag>308</Tag>
     <Name>UnderlyingSecurityExchange</Name>
     <DataType>Exchange</DataType>
-    <Description>Underlying security’s SecurityExchange.  Can be used to identify the underlying security.  Valid values:  see SecurityExchange</Description>
+    <Description>Underlying security’s SecurityExchange.  Can be used to identify the underlying security.
+  Valid values:  see SecurityExchange</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4336,7 +4952,8 @@
     <Tag>309</Tag>
     <Name>UnderlyingSecurityID</Name>
     <DataType>String</DataType>
-    <Description>Underlying security’s SecurityID.  See SecurityID field for description</Description>
+    <Description>Underlying security’s SecurityID.
+  See SecurityID field for description</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -4346,7 +4963,8 @@
     <Tag>310</Tag>
     <Name>UnderlyingSecurityType</Name>
     <DataType>String</DataType>
-    <Description>Underlying security’s SecurityType.  Valid values:   see SecurityType field</Description>
+    <Description>Underlying security’s SecurityType.
+  Valid values:   see SecurityType field</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4356,7 +4974,8 @@
     <Tag>311</Tag>
     <Name>UnderlyingSymbol</Name>
     <DataType>String</DataType>
-    <Description>Underlying security’s Symbol.  See Symbol field for description</Description>
+    <Description>Underlying security’s Symbol.
+  See Symbol field for description</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -4366,7 +4985,8 @@
     <Tag>312</Tag>
     <Name>UnderlyingSymbolSfx</Name>
     <DataType>String</DataType>
-    <Description>Underlying security’s SymbolSfx.  See SymbolSfx field for description</Description>
+    <Description>Underlying security’s SymbolSfx.
+  See SymbolSfx field for description</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -4376,7 +4996,8 @@
     <Tag>313</Tag>
     <Name>UnderlyingMaturityMonthYear</Name>
     <DataType>month-year</DataType>
-    <Description>Underlying security’s MaturityMonthYear. Required if UnderlyingMaturityDay is specified.  See MaturityMonthYear field for description</Description>
+    <Description>Underlying security’s MaturityMonthYear. Required if UnderlyingMaturityDay is specified.
+  See MaturityMonthYear field for description</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -4386,7 +5007,8 @@
     <Tag>314</Tag>
     <Name>UnderlyingMaturityDay</Name>
     <DataType>day-of-month</DataType>
-    <Description>Underlying security’s MaturityDay.  See MaturityDay field for description</Description>
+    <Description>Underlying security’s MaturityDay.
+  See MaturityDay field for description</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -4396,7 +5018,8 @@
     <Tag>315</Tag>
     <Name>UnderlyingPutOrCall</Name>
     <DataType>int</DataType>
-    <Description>Underlying security’s PutOrCall.  See PutOrCall field for description</Description>
+    <Description>Underlying security’s PutOrCall.
+  See PutOrCall field for description</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -4406,7 +5029,8 @@
     <Tag>316</Tag>
     <Name>UnderlyingStrikePrice</Name>
     <DataType>Price</DataType>
-    <Description>Underlying security’s StrikePrice.  See StrikePrice field for description</Description>
+    <Description>Underlying security’s StrikePrice.
+  See StrikePrice field for description</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -4416,7 +5040,8 @@
     <Tag>317</Tag>
     <Name>UnderlyingOptAttribute</Name>
     <DataType>char</DataType>
-    <Description>Underlying security’s OptAttribute.  See OptAttribute field for description</Description>
+    <Description>Underlying security’s OptAttribute.
+  See OptAttribute field for description</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -4426,7 +5051,8 @@
     <Tag>318</Tag>
     <Name>UnderlyingCurrency</Name>
     <DataType>Currency</DataType>
-    <Description>Underlying security’s Currency.  See Currency field for description and valid values</Description>
+    <Description>Underlying security’s Currency.
+  See Currency field for description and valid values</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -4456,7 +5082,12 @@
     <Tag>321</Tag>
     <Name>SecurityRequestType</Name>
     <DataType>int</DataType>
-    <Description>Type of Security Definition Request.Valid values:  0 = Request Security identity and specifications  1 = Request Security identity for the specifications provided (Name of the security is not supplied)  2 = Request List Security Types  3 = Request List Securities (Can be qualified with Symbol, SecurityType, TradingSessionID, SecurityExchange is provided then only list Securities for the specific type)</Description>
+    <Description>Type of Security Definition Request.
+Valid values:
+  0 = Request Security identity and specifications
+  1 = Request Security identity for the specifications provided (Name of the security is not supplied)
+  2 = Request List Security Types
+  3 = Request List Securities (Can be qualified with Symbol, SecurityType, TradingSessionID, SecurityExchange is provided then only list Securities for the specific type)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4493,7 +5124,14 @@
     <Tag>323</Tag>
     <Name>SecurityResponseType</Name>
     <DataType>int</DataType>
-    <Description>Type of Security Definition message response.Valid values:  1 = Accept security proposal as is  2 = Accept security proposal with revisions as indicated in the message  3 = List of security types returned per request   4 = List of securities returned per request  5 = Reject security proposal  6 = Can not match selection criteria</Description>
+    <Description>Type of Security Definition message response.
+Valid values:
+  1 = Accept security proposal as is
+  2 = Accept security proposal with revisions as indicated in the message
+  3 = List of security types returned per request 
+  4 = List of securities returned per request
+  5 = Reject security proposal
+  6 = Can not match selection criteria</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4538,7 +5176,10 @@
     <Tag>325</Tag>
     <Name>UnsolicitedIndicator</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates whether or not message is being sent as a result of a subscription request or not.Valid values:   Y = Message is being sent unsolicited   N = Message is being sent as a result of a prior request</Description>
+    <Description>Indicates whether or not message is being sent as a result of a subscription request or not.
+Valid values:
+   Y = Message is being sent unsolicited
+   N = Message is being sent as a result of a prior request</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4557,7 +5198,28 @@
     <Tag>326</Tag>
     <Name>SecurityTradingStatus</Name>
     <DataType>int</DataType>
-    <Description>Identifies the trading status applicable to the transaction.Valid values:  1 = Opening Delay  2 = Trading Halt  3 = Resume  4 = No Open/No Resume  5 = Price Indication  6 = Trading Range Indication  7 = Market Imbalance Buy  8 = Market Imbalance Sell  9 = Market On Close Imbalance Buy  10 = Market On Close Imbalance Sell  11 = (not assigned)  12 = No Market Imbalance  13 = No Market On Close Imbalance  14 = ITS Pre-Opening  15 = New Price Indication  16 = Trade Dissemination Time  17 = Ready to trade (start of session)  18 = Not Available for trading (end of session)  19 = Not Traded on this Market  20 = Unknown or Invalid</Description>
+    <Description>Identifies the trading status applicable to the transaction.
+Valid values:
+  1 = Opening Delay
+  2 = Trading Halt
+  3 = Resume
+  4 = No Open/No Resume
+  5 = Price Indication
+  6 = Trading Range Indication
+  7 = Market Imbalance Buy
+  8 = Market Imbalance Sell
+  9 = Market On Close Imbalance Buy
+  10 = Market On Close Imbalance Sell
+  11 = (not assigned)
+  12 = No Market Imbalance
+  13 = No Market On Close Imbalance
+  14 = ITS Pre-Opening
+  15 = New Price Indication
+  16 = Trade Dissemination Time
+  17 = Ready to trade (start of session)
+  18 = Not Available for trading (end of session)
+  19 = Not Traded on this Market
+  20 = Unknown or Invalid</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4648,7 +5310,14 @@
     <Tag>327</Tag>
     <Name>HaltReason</Name>
     <DataType>char</DataType>
-    <Description>Denotes the reason for the Opening Delay or Trading Halt.Valid values:  I = Order Imbalance  X = Equipment Changeover  P = News Pending  D = News Dissemination  E = Order Influx  M = Additional Information</Description>
+    <Description>Denotes the reason for the Opening Delay or Trading Halt.
+Valid values:
+  I = Order Imbalance
+  X = Equipment Changeover
+  P = News Pending
+  D = News Dissemination
+  E = Order Influx
+  M = Additional Information</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4683,7 +5352,10 @@
     <Tag>328</Tag>
     <Name>InViewOfCommon</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates whether or not the halt was due to Common Stock trading being halted.Valid values:  Y = Halt was due to common stock being halted  N = Halt was not related to a halt of the common stock</Description>
+    <Description>Indicates whether or not the halt was due to Common Stock trading being halted.
+Valid values:
+  Y = Halt was due to common stock being halted
+  N = Halt was not related to a halt of the common stock</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4702,7 +5374,10 @@
     <Tag>329</Tag>
     <Name>DueToRelated</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates whether or not the halt was due to the Related Security being halted.Valid values:  Y = Halt was due to related security being halted  N = Halt was not related to a halt of the related security</Description>
+    <Description>Indicates whether or not the halt was due to the Related Security being halted.
+Valid values:
+  Y = Halt was due to related security being halted
+  N = Halt was not related to a halt of the related security</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4761,7 +5436,11 @@
     <Tag>334</Tag>
     <Name>Adjustment</Name>
     <DataType>int</DataType>
-    <Description>Identifies the type of adjustment.Valid values:  1 = Cancel  2 = Error  3 = Correction</Description>
+    <Description>Identifies the type of adjustment.
+Valid values:
+  1 = Cancel
+  2 = Error
+  3 = Correction</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4794,7 +5473,9 @@
     <Tag>336</Tag>
     <Name>TradingSessionID</Name>
     <DataType>String</DataType>
-    <Description>Identifier for Trading SessionCan be used to represent a specific market trading session (e.g. “PRE-OPEN", "CROSS_2", "AFTER-HOURS", "TOSTNET1", "TOSTNET2", etc). Values should be bi-laterally agreed to between counterparties.</Description>
+    <Description>Identifier for Trading Session
+Can be used to represent a specific market trading session (e.g. “PRE-OPEN", "CROSS_2", "AFTER-HOURS", "TOSTNET1", "TOSTNET2", etc). 
+Values should be bi-laterally agreed to between counterparties.</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -4814,7 +5495,11 @@
     <Tag>338</Tag>
     <Name>TradSesMethod</Name>
     <DataType>int</DataType>
-    <Description>Method of tradingValid values:  1 = Electronic  2 = Open Outcry  3 = Two Party</Description>
+    <Description>Method of trading
+Valid values:
+  1 = Electronic
+  2 = Open Outcry
+  3 = Two Party</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4837,7 +5522,11 @@
     <Tag>339</Tag>
     <Name>TradSesMode</Name>
     <DataType>int</DataType>
-    <Description>Trading Session ModeValid values:  1 = Testing  2 = Simulated  3 = Production</Description>
+    <Description>Trading Session Mode
+Valid values:
+  1 = Testing
+  2 = Simulated
+  3 = Production</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4860,7 +5549,13 @@
     <Tag>340</Tag>
     <Name>TradSesStatus</Name>
     <DataType>int</DataType>
-    <Description>State of the trading session. Valid values:  1 = Halted  2 = Open  3 = Closed  4 = Pre-Open  5 = Pre-Close</Description>
+    <Description>State of the trading session.
+ Valid values:
+  1 = Halted
+  2 = Open
+  3 = Closed
+  4 = Pre-Open
+  5 = Pre-Close</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -4951,7 +5646,12 @@
     <Tag>347</Tag>
     <Name>MessageEncoding</Name>
     <DataType>String</DataType>
-    <Description>Type of message encoding (non-ASCII (non-English) characters) used in a message’s “Encoded” fields.Valid values:  ISO-2022-JP   (for using JIS)  EUC-JP           (for using EUC)  Shift_JIS         (for using SJIS)  UTF-8             (for using Unicode)</Description>
+    <Description>Type of message encoding (non-ASCII (non-English) characters) used in a message’s “Encoded” fields.
+Valid values:
+  ISO-2022-JP   (for using JIS)
+  EUC-JP           (for using EUC)
+  Shift_JIS         (for using SJIS)
+  UTF-8             (for using Unicode)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5161,7 +5861,17 @@
     <Tag>368</Tag>
     <Name>QuoteEntryRejectReason</Name>
     <DataType>int</DataType>
-    <Description>Reason Quote Entry was rejected:Valid values:  1 = Unknown symbol (Security)  2 = Exchange(Security) closed  3 = Quote exceeds limit  4 = Too late to enter  5 = Unknown Quote  6 = Duplicate Quote  7 = Invalid bid/ask spread  8 = Invalid price  9 = Not authorized to quote security</Description>
+    <Description>Reason Quote Entry was rejected:
+Valid values:
+  1 = Unknown symbol (Security)
+  2 = Exchange(Security) closed
+  3 = Quote exceeds limit
+  4 = Too late to enter
+  5 = Unknown Quote
+  6 = Duplicate Quote
+  7 = Invalid bid/ask spread
+  8 = Invalid price
+  9 = Not authorized to quote security</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5248,7 +5958,20 @@
     <Tag>373</Tag>
     <Name>SessionRejectReason</Name>
     <DataType>int</DataType>
-    <Description>Code to identify reason for a session-level Reject message.Valid values:0 = Invalid tag number1 = Required tag missing2 = Tag not defined for this message type3 = Undefined Tag4 = Tag specified without a value5 = Value is incorrect (out of range) for this tag6 = Incorrect data format for value7 = Decryption problem8 = Signature problem9 = CompID problem10 = SendingTime accuracy problem11  = Invalid MsgType</Description>
+    <Description>Code to identify reason for a session-level Reject message.
+Valid values:
+0 = Invalid tag number
+1 = Required tag missing
+2 = Tag not defined for this message type
+3 = Undefined Tag
+4 = Tag specified without a value
+5 = Value is incorrect (out of range) for this tag
+6 = Incorrect data format for value
+7 = Decryption problem
+8 = Signature problem
+9 = CompID problem
+10 = SendingTime accuracy problem
+11  = Invalid MsgType</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5307,7 +6030,10 @@
     <Tag>374</Tag>
     <Name>BidRequestTransType</Name>
     <DataType>char</DataType>
-    <Description>Identifies the Bid Request message type.Valid values:N = NewC = Cancel</Description>
+    <Description>Identifies the Bid Request message type.
+Valid values:
+N = New
+C = Cancel</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5346,7 +6072,10 @@
     <Tag>377</Tag>
     <Name>SolicitedFlag</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates whether or not the order was solicited.Valid values:Y = Was solcitiedN = Was not solicited</Description>
+    <Description>Indicates whether or not the order was solicited.
+Valid values:
+Y = Was solcitied
+N = Was not solicited</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5365,7 +6094,14 @@
     <Tag>378</Tag>
     <Name>ExecRestatementReason</Name>
     <DataType>int</DataType>
-    <Description>Code to identify reason for an ExecutionRpt message sent with ExecType=Restated or used when communicating an unsolicited cancel. Valid values:0 = GT Corporate action1 = GT renewal / restatement (no corporate action)2 = Verbal change3 = Repricing of order4 = Broker option5 = Partial decline of OrderQty (e.g. exchange-initiated partial cancel)</Description>
+    <Description>Code to identify reason for an ExecutionRpt message sent with ExecType=Restated or used when communicating an unsolicited cancel.
+ Valid values:
+0 = GT Corporate action
+1 = GT renewal / restatement (no corporate action)
+2 = Verbal change
+3 = Repricing of order
+4 = Broker option
+5 = Partial decline of OrderQty (e.g. exchange-initiated partial cancel)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5410,7 +6146,14 @@
     <Tag>380</Tag>
     <Name>BusinessRejectReason</Name>
     <DataType>int</DataType>
-    <Description>Code to identify reason for a Business Message Reject message.Valid values:0 = Other1 = Unkown ID2 = Unknown Security3 = Unsupported Message Type4 = Application not available5 = Conditionally Required Field Missing</Description>
+    <Description>Code to identify reason for a Business Message Reject message.
+Valid values:
+0 = Other
+1 = Unkown ID
+2 = Unknown Security
+3 = Unsupported Message Type
+4 = Application not available
+5 = Conditionally Required Field Missing</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5485,7 +6228,10 @@
     <Tag>385</Tag>
     <Name>MsgDirection</Name>
     <DataType>char</DataType>
-    <Description>Specifies the direction of the messsage.Valid values:S = SendR = Receive</Description>
+    <Description>Specifies the direction of the messsage.
+Valid values:
+S = Send
+R = Receive</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5524,7 +6270,14 @@
     <Tag>388</Tag>
     <Name>DiscretionInst</Name>
     <DataType>char</DataType>
-    <Description>Code to identify the price a DiscretionOffset is related to and should be mathematically added to.Valid values:0 = Related to displayed price1 = Related to market price2 = Related to primary price3 = Related to local primary price4 = Related to midpoint price5 = Related to last trade price</Description>
+    <Description>Code to identify the price a DiscretionOffset is related to and should be mathematically added to.
+Valid values:
+0 = Related to displayed price
+1 = Related to market price
+2 = Related to primary price
+3 = Related to local primary price
+4 = Related to midpoint price
+5 = Related to last trade price</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5609,7 +6362,11 @@
     <Tag>394</Tag>
     <Name>BidType</Name>
     <DataType>int</DataType>
-    <Description>Code to identify the type of Bid Request.Valid values:1 – “Non Disclosed” Style (e.g. US/European)2 – “Disclosed”  Style (e.g. Japanese)3 – No Bidding Process</Description>
+    <Description>Code to identify the type of Bid Request.
+Valid values:
+1 – “Non Disclosed” Style (e.g. US/European)
+2 – “Disclosed”  Style (e.g. Japanese)
+3 – No Bidding Process</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5659,7 +6416,11 @@
     <Tag>399</Tag>
     <Name>BidDescriptorType</Name>
     <DataType>int</DataType>
-    <Description>Code to identify the type of BidDescriptor.Valid values:1 – Sector2 – Country3 – Index</Description>
+    <Description>Code to identify the type of BidDescriptor.
+Valid values:
+1 – Sector
+2 – Country
+3 – Index</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5669,7 +6430,13 @@
     <Tag>400</Tag>
     <Name>BidDescriptor</Name>
     <DataType>String</DataType>
-    <Description>BidDescriptor value.  Usage depends upon BidDescriptorType.If BidDescriptorType =1 Industrials etc – Free textIf BidDescriptorType =2"FR" etc – ISO Country CodesIf BidDescriptorType =3FT100, FT250, STOX – Free text</Description>
+    <Description>BidDescriptor value.  Usage depends upon BidDescriptorType.
+If BidDescriptorType =1 
+Industrials etc – Free text
+If BidDescriptorType =2
+"FR" etc – ISO Country Codes
+If BidDescriptorType =3
+FT100, FT250, STOX – Free text</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -5679,7 +6446,10 @@
     <Tag>401</Tag>
     <Name>SideValueInd</Name>
     <DataType>int</DataType>
-    <Description>Code to identify which "SideValue" the value refers to.  SideValue1 and SideValue2 are used as opposed to Buy or Sell so that the basket can be quoted either way as Buy or Sell.Valid values:1 – SideValue12 – SideValue 2</Description>
+    <Description>Code to identify which "SideValue" the value refers to.  SideValue1 and SideValue2 are used as opposed to Buy or Sell so that the basket can be quoted either way as Buy or Sell.
+Valid values:
+1 – SideValue1
+2 – SideValue 2</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5759,7 +6529,12 @@
     <Tag>409</Tag>
     <Name>LiquidityIndType</Name>
     <DataType>int</DataType>
-    <Description>Code to identify the type of liquidity indicator.Valid values:1 – 5day moving average2 – 20 day moving average3 – Normal Market Size 4 – Other</Description>
+    <Description>Code to identify the type of liquidity indicator.
+Valid values:
+1 – 5day moving average
+2 – 20 day moving average
+3 – Normal Market Size 
+4 – Other</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5779,7 +6554,10 @@
     <Tag>411</Tag>
     <Name>ExchangeForPhysical</Name>
     <DataType>Boolean</DataType>
-    <Description>Indicates whether or not to exchange for phsyical.Valid values:   Y = True   N = False</Description>
+    <Description>Indicates whether or not to exchange for phsyical.
+Valid values:
+   Y = True
+   N = False</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5818,7 +6596,11 @@
     <Tag>414</Tag>
     <Name>ProgRptReqs</Name>
     <DataType>int</DataType>
-    <Description>Code to identify the desired frequency of progress reports.Valid values:1 – BuySide explicitly requests status using StatusRequest (Default) The sell-side firm can however, send a DONE status List Status Response in an unsolicited fashion2 – SellSide periodically sends status using ListStatus. Period optionally specified in ProgressPeriod3 – Real-time execution reports (to be discouraged)</Description>
+    <Description>Code to identify the desired frequency of progress reports.
+Valid values:
+1 – BuySide explicitly requests status using StatusRequest (Default) The sell-side firm can however, send a DONE status List Status Response in an unsolicited fashion
+2 – SellSide periodically sends status using ListStatus. Period optionally specified in ProgressPeriod
+3 – Real-time execution reports (to be discouraged)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5838,7 +6620,10 @@
     <Tag>416</Tag>
     <Name>IncTaxInd</Name>
     <DataType>int</DataType>
-    <Description>Code to represent whether value is net (inclusive of tax) or gross.Valid values:1 - Net2 - Gross</Description>
+    <Description>Code to represent whether value is net (inclusive of tax) or gross.
+Valid values:
+1 - Net
+2 - Gross</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5858,7 +6643,12 @@
     <Tag>418</Tag>
     <Name>TradeType</Name>
     <DataType>char</DataType>
-    <Description>Code to represent the type of trade.Valid values:R: Risk TradeG: VWAP GuaranteeA: AgencyJ: Guaranteed Close</Description>
+    <Description>Code to represent the type of trade.
+Valid values:
+R: Risk Trade
+G: VWAP Guarantee
+A: Agency
+J: Guaranteed Close</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5868,7 +6658,21 @@
     <Tag>419</Tag>
     <Name>BasisPxType</Name>
     <DataType>char</DataType>
-    <Description>Code to represent the basis price type.Valid values:2: Closing Price at morning session3: Closing Price4: Current price 5: SQ6: VWAP through a day7: VWAP through a morning session8: VWAP through an afternoon session9: VWAP through a day except YORIA: VWAP through a morning session except YORIB: VWAP through an afternoon session except YORIC: StrikeD: OpenZ: Others</Description>
+    <Description>Code to represent the basis price type.
+Valid values:
+2: Closing Price at morning session
+3: Closing Price
+4: Current price 
+5: SQ
+6: VWAP through a day
+7: VWAP through a morning session
+8: VWAP through an afternoon session
+9: VWAP through a day except YORI
+A: VWAP through a morning session except YORI
+B: VWAP through an afternoon session except YORI
+C: Strike
+D: Open
+Z: Others</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5908,7 +6712,11 @@
     <Tag>423</Tag>
     <Name>PriceType</Name>
     <DataType>int</DataType>
-    <Description>Code to represent the price type.Valid values:1 - Percentage2 - per share (e.g. cents per share)3 - Fixed Amount (absolute value)</Description>
+    <Description>Code to represent the price type.
+Valid values:
+1 - Percentage
+2 - per share (e.g. cents per share)
+3 - Fixed Amount (absolute value)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5948,7 +6756,11 @@
     <Tag>427</Tag>
     <Name>GTBookingInst</Name>
     <DataType>int</DataType>
-    <Description>Code to identify whether to book out executions on a part-filled GT order on the day of execution or to accumulate.Valid values:0 = book out all trades on day of execution1 = accumulate executions until order is filled or expires 2 = accumulate until verbally notified otherwise</Description>
+    <Description>Code to identify whether to book out executions on a part-filled GT order on the day of execution or to accumulate.
+Valid values:
+0 = book out all trades on day of execution
+1 = accumulate executions until order is filled or expires 
+2 = accumulate until verbally notified otherwise</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5981,7 +6793,14 @@
     <Tag>429</Tag>
     <Name>ListStatusType</Name>
     <DataType>int</DataType>
-    <Description>Code to represent the price type.Valid values:1 – Ack2 – Response3 – Timed4 – ExecStarted5 – AllDone6 – Alert</Description>
+    <Description>Code to represent the price type.
+Valid values:
+1 – Ack
+2 – Response
+3 – Timed
+4 – ExecStarted
+5 – AllDone
+6 – Alert</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -5991,7 +6810,10 @@
     <Tag>430</Tag>
     <Name>NetGrossInd</Name>
     <DataType>int</DataType>
-    <Description>Code to represent whether value is net (inclusive of tax) or gross.Valid values:1 - Net2 - Gross</Description>
+    <Description>Code to represent whether value is net (inclusive of tax) or gross.
+Valid values:
+1 - Net
+2 - Gross</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -6001,7 +6823,15 @@
     <Tag>431</Tag>
     <Name>ListOrderStatus</Name>
     <DataType>int</DataType>
-    <Description>Code to represent the status of a list order.Valid values:1 – InBiddingProcess2 – ReceivedForExecution3 – Executing4 – Canceling5 – Alert6 – All Done7 – Reject</Description>
+    <Description>Code to represent the status of a list order.
+Valid values:
+1 – InBiddingProcess
+2 – ReceivedForExecution
+3 – Executing
+4 – Canceling
+5 – Alert
+6 – All Done
+7 – Reject</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -6021,7 +6851,10 @@
     <Tag>433</Tag>
     <Name>ListExecInstType</Name>
     <DataType>char</DataType>
-    <Description>Identifies the type of ListExecInst. Valid values:1 - Immediate2 - Wait for Execute Instruction (e.g. a List Execute message or phone call before proceeding with execution of the list)</Description>
+    <Description>Identifies the type of ListExecInst.
+ Valid values:
+1 - Immediate
+2 - Wait for Execute Instruction (e.g. a List Execute message or phone call before proceeding with execution of the list)</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -6031,7 +6864,10 @@
     <Tag>434</Tag>
     <Name>CxlRejResponseTo</Name>
     <DataType>char</DataType>
-    <Description>Identifies the type of request that a Cancel Reject is in response to. Valid values:1 - Order Cancel Request2 - Order Cancel/Replace Request</Description>
+    <Description>Identifies the type of request that a Cancel Reject is in response to.
+ Valid values:
+1 - Order Cancel Request
+2 - Order Cancel/Replace Request</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
@@ -6041,7 +6877,8 @@
     <Tag>435</Tag>
     <Name>UnderlyingCouponRate</Name>
     <DataType>float</DataType>
-    <Description>Underlying security’s CouponRate.  See CouponRate field for description</Description>
+    <Description>Underlying security’s CouponRate.
+  See CouponRate field for description</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -6051,7 +6888,8 @@
     <Tag>436</Tag>
     <Name>UnderlyingContractMultiplier</Name>
     <DataType>float</DataType>
-    <Description>Underlying security’s ContractMultiplier.  See ContractMultiplier field for description</Description>
+    <Description>Underlying security’s ContractMultiplier.
+  See ContractMultiplier field for description</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>false</IsEnumType>
@@ -6111,7 +6949,11 @@
     <Tag>442</Tag>
     <Name>MultiLegReportingType</Name>
     <DataType>char</DataType>
-    <Description>Used to indicate what an Execution Report represents (e.g. used with multi-leg securiteis, such as option strategies, spreads, etc.).Valid Values:1 - Single Security (default if not specified)2 - Individual leg of a multi-leg security3 - Multi-leg security</Description>
+    <Description>Used to indicate what an Execution Report represents (e.g. used with multi-leg securiteis, such as option strategies, spreads, etc.).
+Valid Values:
+1 - Single Security (default if not specified)
+2 - Individual leg of a multi-leg security
+3 - Multi-leg security</Description>
     <Version>FIX42</Version>
     <IsRequired>false</IsRequired>
     <IsEnumType>true</IsEnumType>
