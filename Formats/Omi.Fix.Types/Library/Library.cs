@@ -1,4 +1,4 @@
-﻿namespace Omi.Fix.Fields {
+﻿namespace Omi.Fix.Types{
 
     /// <summary>
     ///  Fields Xml Library
@@ -29,7 +29,7 @@
 
             var xmls = new List<Xml.FixFields>();
             foreach (var file in files ?? Array.Empty<string>()) {
-                xmls.Add(Load.From(file));
+                xmls.Add(Load.FieldsXmlFrom(file));
             }
 
             return xmls;

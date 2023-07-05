@@ -1,7 +1,7 @@
-﻿namespace Omi.Fix.Fields {
+﻿namespace Omi.Fix.Types {
 
     /// <summary>
-    ///  Fix Field Enumerated Value
+    ///  Fix Type Enumerated Value
     /// </summary>
 
     public class Enum {

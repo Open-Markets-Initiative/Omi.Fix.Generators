@@ -1,4 +1,4 @@
-﻿namespace Omi.Fix.Fields {
+﻿namespace Omi.Fix.Types {
     using System.Collections.Generic;
     using System.Linq;
 

@@ -1,27 +1,31 @@
-﻿namespace Omi.Fix.Fields.Xml {
+﻿namespace Omi.Fix.Types.Xml {
 
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
 
+
+
+    // NOTE: Generated code may require at least .NET Framework 4.5 or .NET Core/Standard 2.0.
+    /// <remarks/>
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-    public partial class FixFields
+    public partial class FixTypes
     {
 
-        private FixFieldsFixFieldSpec[] fixFieldSpecField;
+        private FixTypesFixType[] fixTypeField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("FixFieldSpec")]
-        public FixFieldsFixFieldSpec[] FixFieldSpec
+        [System.Xml.Serialization.XmlElementAttribute("FixType")]
+        public FixTypesFixType[] FixType
         {
             get
             {
-                return this.fixFieldSpecField;
+                return this.fixTypeField;
             }
             set
             {
-                this.fixFieldSpecField = value;
+                this.fixTypeField = value;
             }
         }
     }
@@ -30,27 +34,27 @@
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class FixFieldsFixFieldSpec
+    public partial class FixTypesFixType
     {
 
-        private ushort tagField;
+        private byte tagField;
 
         private string nameField;
 
         private string dataTypeField;
 
+        private string typeField;
+
         private string descriptionField;
+
+        private string noteField;
 
         private string versionField;
 
-        private bool isRequiredField;
-
-        private bool isEnumTypeField;
-
-        private FixFieldsFixFieldSpecFixEnumField[] enumPairsField;
+        private FixTypesFixTypeEnum[] enumField;
 
         /// <remarks/>
-        public ushort Tag
+        public byte Tag
         {
             get
             {
@@ -89,6 +93,19 @@
         }
 
         /// <remarks/>
+        public string Type
+        {
+            get
+            {
+                return this.typeField;
+            }
+            set
+            {
+                this.typeField = value;
+            }
+        }
+
+        /// <remarks/>
         public string Description
         {
             get
@@ -98,6 +115,19 @@
             set
             {
                 this.descriptionField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string Note
+        {
+            get
+            {
+                return this.noteField;
+            }
+            set
+            {
+                this.noteField = value;
             }
         }
 
@@ -115,42 +145,16 @@
         }
 
         /// <remarks/>
-        public bool IsRequired
+        [System.Xml.Serialization.XmlElementAttribute("Enum")]
+        public FixTypesFixTypeEnum[] Enum
         {
             get
             {
-                return this.isRequiredField;
+                return this.enumField;
             }
             set
             {
-                this.isRequiredField = value;
-            }
-        }
-
-        /// <remarks/>
-        public bool IsEnumType
-        {
-            get
-            {
-                return this.isEnumTypeField;
-            }
-            set
-            {
-                this.isEnumTypeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("FixEnumField", IsNullable = false)]
-        public FixFieldsFixFieldSpecFixEnumField[] EnumPairs
-        {
-            get
-            {
-                return this.enumPairsField;
-            }
-            set
-            {
-                this.enumPairsField = value;
+                this.enumField = value;
             }
         }
     }
@@ -159,23 +163,23 @@
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class FixFieldsFixFieldSpecFixEnumField
+    public partial class FixTypesFixTypeEnum
     {
 
-        private string keyField;
+        private string nameField;
 
         private string valueField;
 
         /// <remarks/>
-        public string Key
+        public string Name
         {
             get
             {
-                return this.keyField;
+                return this.nameField;
             }
             set
             {
-                this.keyField = value;
+                this.nameField = value;
             }
         }
 

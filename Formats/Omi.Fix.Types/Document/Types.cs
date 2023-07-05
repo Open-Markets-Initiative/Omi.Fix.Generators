@@ -1,19 +1,19 @@
-﻿namespace Omi.Fix.Fields {
+﻿namespace Omi.Fix.Types {
     using System.Collections.Generic;
 
     /// <summary>
     ///  Fix Fields Xml Element (Fields Section)
     /// </summary>
 
-    public class Fields : Dictionary<string, Field> {
+    public class Types : Dictionary<string, Type> {
 
         /// <summary>
-        ///  Load Fields from xml
+        ///  Load fix field types from fields xml
         /// </summary>
-        public static Fields From(Xml.FixFields xml) {
-            var fields = new Fields(); 
+        public static Types From(Xml.FixFields xml) {
+            var fields = new Types(); 
             foreach (var element in xml.FixFieldSpec) {
-                var field = Field.From(element);
+                var field = Type.From(element);
                 fields[field.Name] = field; 
             }
 
@@ -21,12 +21,12 @@
         }
 
         /// <summary>
-        ///  Load Fields from xml
+        ///  Load fix field types from xml
         /// </summary>
-        public static Fields From(Fix.Specification.Types types) {
-            var fields = new Fields();
+        public static Types From(Fix.Specification.Types types) {
+            var fields = new Types();
             foreach (var element in types.Values) {
-                var field = Field.From(element);
+                var field = Type.From(element);
                 fields[field.Name] = field;
             }
 

@@ -1,36 +1,53 @@
-namespace Omi.Fix.Fields {
+namespace Omi.Fix.Types {
 
     /// <summary>
-    ///  Omi Fix Fields C# Document
+    ///  Omi Fix Types C# Document
     /// </summary>
 
     public class Document {
 
         /// <summary>
-        ///  Fix Fields xml documention information
+        ///  Fix types xml documention information
         /// </summary>
         public Information Information = new();
 
         /// <summary>
-        ///  Fix fields
+        ///  Fix types
         /// </summary>
-        public Fields Fields = new();
+        public Types Fields = new();
 
         /// <summary>
-        ///  Construct a document from path
+        ///  Construct a document from path to a fields xml
         /// </summary>
-        public static Document From(string path) {
-            var elements = Load.From(path);
+        public static Document From(string path) { // this one should be general
+            var elements = Load.FieldsXmlFrom(path);
             return From(elements, path);
         }
 
         /// <summary>
-        ///  Construct a document from xml records
+        ///  Construct a document from path to a types xml
+        /// </summary>
+        public static Document FromTypesXml(string path) {
+            var elements = Load.TypesXmlFrom(path);
+            return From(elements, path);
+        }
+
+        /// <summary>
+        ///  Construct a document from xml fields records
         /// </summary>
         public static Document From(Xml.FixFields xml, string path = default)
             => new () {
                 Information = Information.From(xml, path),
-                Fields = Fields.From(xml)
+                Fields = Types.From(xml)
+            };
+
+        /// <summary>
+        ///  Construct a document from xml types records
+        /// </summary>
+        public static Document From(Xml.FixTypes xml, string path = default)
+            => new() {
+//                Information = Information.From(xml, path), TODO
+//                Fields = Types.From(xml)                   TODO
             };
 
         /// <summary>
@@ -39,7 +56,7 @@ namespace Omi.Fix.Fields {
         public static Document From(Fix.Specification.Document specification)
           => new () {
               Information = Information.From(specification.Information),
-              Fields = Fields.From(specification.Types),
+              Fields = Types.From(specification.Types),
           };
 
         /// <summary>
@@ -77,9 +94,9 @@ namespace Omi.Fix.Fields {
         // TODO writer
 
         /// <summary>
-        ///  Fix Fields xml as string
+        ///  Fix Types xml as string
         /// </summary>
         public override string ToString()
-            => $"{Information} Fix Fields";
+            => $"{Information} Fix Types";
     }
 }

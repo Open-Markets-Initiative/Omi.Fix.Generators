@@ -1,4 +1,4 @@
-﻿namespace Omi.Fix.Fields {
+﻿namespace Omi.Fix.Types {
 
     /// <summary>
     ///  Fix Fields Specification Information

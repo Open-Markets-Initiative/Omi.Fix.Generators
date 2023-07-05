@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Omi.Fix.Fields\Omi.Fix.Fields.csproj" />
+    <ProjectReference Include="..\Omi.Fix.Types\Omi.Fix.Types.csproj" />
   </ItemGroup>
 
 </Project>

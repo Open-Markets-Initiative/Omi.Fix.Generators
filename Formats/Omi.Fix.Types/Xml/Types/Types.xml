@@ -1,0 +1,59 @@
+<FixTypes>
+  <FixType>
+    <Tag>1</Tag>
+    <Name>Account</Name>
+    <Type>String</Type>
+    <Description>Account mnemonic as agreed between broker and institution</Description>
+    <Version>FIX42</Version>
+  </FixType>
+  <FixType>
+    <Tag>2</Tag>
+    <Name>AdvId</Name>
+    <DataType>String</DataType>
+    <Description>Unique identifier of advertisement message</Description>
+    <Note>Prior to FIX 4.1 this field was of type int</Note>
+    <Version>FIX42</Version>
+  </FixType>
+  <FixType>
+    <Tag>4</Tag>
+    <Name>AdvSide</Name>
+    <DataType>Char</DataType>
+    <Description> Broker's side of advertised trade</Description>
+    <Version>FIX42</Version>
+    <Enum>
+      <Name>BUY</Name>
+      <Value>B</Value>
+    </Enum>
+    <Enum>
+      <Name>SELL</Name>
+      <Value>S</Value>
+    </Enum>
+    <Enum>
+      <Name>CROSS</Name>
+      <Value>X</Value>
+    </Enum>
+    <Enum>
+      <Name>TRADE</Name>
+      <Value>T</Value>
+    </Enum>
+  </FixType>
+  <FixType>
+    <Tag>5</Tag>
+    <Name>AdvTransType</Name>
+    <DataType>String</DataType>
+    <Description>Identifies advertisement message transaction type</Description>
+    <Version>FIX42</Version>
+    <Enum>
+      <Name>NEW</Name>
+      <Value>N</Value>
+    </Enum>
+    <Enum>
+      <Name>CANCEL</Name>
+      <Value>C</Value>
+    </Enum>
+    <Enum>
+      <Name>REPLACE</Name>
+      <Value>R</Value>
+    </Enum>
+  </FixType>
+</FixTypes>

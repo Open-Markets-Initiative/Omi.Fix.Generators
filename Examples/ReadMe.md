@@ -4,4 +4,4 @@ Fixml: Load fixml and change a few components using the normalized fix specifica
 
 Fix Txt: Load a fix txt file and convert to fixml
 
-Fix Txt: Load a fix fields xml f
+Fix Types: Load a fix types xml

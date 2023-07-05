@@ -1,4 +1,4 @@
-﻿namespace Omi.Fix.Fields.Xml {
+﻿namespace Omi.Fix.Types.Xml {
 
 #pragma warning disable CS8618
 /*
