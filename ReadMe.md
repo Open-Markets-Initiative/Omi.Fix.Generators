@@ -4,9 +4,9 @@ Composable FIX components for source generation.
 
 Supported Formats:
 
--Fixml
--Sbe Fix
--Fix Fields Xml
--Fix Txt
+Fixml
+Sbe Fix
+Fix Txt
+Fix Fields Xml
 
 More documentation to follow.
