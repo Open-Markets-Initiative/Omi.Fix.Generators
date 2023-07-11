@@ -64,10 +64,8 @@
         /// <summary>
         ///  Report errors in fixml information
         /// </summary>
-        public void Error()
-        {
-            if (string.IsNullOrWhiteSpace(Minor))
-            {
+        public void Error() {
+            if (string.IsNullOrWhiteSpace(Minor)) {
                 Console.WriteLine("Missing Minor Version");
             }
         }

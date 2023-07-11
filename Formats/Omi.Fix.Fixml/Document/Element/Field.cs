@@ -55,8 +55,7 @@
 
                 stream.WriteLine("    </field>");
             }
-            else
-            {
+            else {
                 stream.WriteLine($"    <field number=\"{Number}\" name=\"{Name}\" type=\"{Type.ToUpper()}\"/>");
             }
         }
