@@ -25,11 +25,24 @@
         }
 
         /// <summary>
+        ///  Obtain description from xml
+        /// </summary>
+        public static Information From(Xml.FixTypes xml, string path) {
+            if (string.IsNullOrEmpty(path)) {
+                path = string.Empty;
+            }
+
+            return new() {
+                Source = path
+            };
+        }
+
+        /// <summary>
         ///  Convert normalized specification information to Xml Fields
         /// </summary>
         public static Information From(Fix.Specification.Information description)
             => new () {
-                // what to do here?
+                Source = description.Source,
             };
 
         /// <summary>
@@ -37,7 +50,7 @@
         /// </summary>
         public Fix.Specification.Information ToSpecification()
             => new () {
-                // what to do here
+                Source = Source,
                 };
 
         /// <summary>

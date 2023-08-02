@@ -26,6 +26,11 @@
         /// </summary>
         public string Minor = string.Empty;
 
+        /// <summary>
+        ///  Normalized Fix Specification Source File
+        /// </summary>
+        public string Source = string.Empty;
+
         #endregion
 
         #region Implementation

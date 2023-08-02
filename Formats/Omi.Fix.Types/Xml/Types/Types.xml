@@ -7,9 +7,9 @@
     <Version>FIX42</Version>
   </FixType>
   <FixType>
-    <Tag>2</Tag>
+    <Tag>20000</Tag>
     <Name>AdvId</Name>
-    <DataType>String</DataType>
+    <Type>String</Type>
     <Description>Unique identifier of advertisement message</Description>
     <Note>Prior to FIX 4.1 this field was of type int</Note>
     <Version>FIX42</Version>
@@ -17,7 +17,7 @@
   <FixType>
     <Tag>4</Tag>
     <Name>AdvSide</Name>
-    <DataType>Char</DataType>
+    <Type>Char</Type>
     <Description> Broker's side of advertised trade</Description>
     <Version>FIX42</Version>
     <Enum>
@@ -40,7 +40,7 @@
   <FixType>
     <Tag>5</Tag>
     <Name>AdvTransType</Name>
-    <DataType>String</DataType>
+    <Type>String</Type>
     <Description>Identifies advertisement message transaction type</Description>
     <Version>FIX42</Version>
     <Enum>

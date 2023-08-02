@@ -46,8 +46,8 @@ namespace Omi.Fix.Types {
         /// </summary>
         public static Document From(Xml.FixTypes xml, string path = default)
             => new() {
-//                Information = Information.From(xml, path), TODO
-//                Fields = Types.From(xml)                   TODO
+                Information = Information.From(xml, path),
+                Fields = Types.From(xml)                   
             };
 
         /// <summary>
@@ -90,8 +90,6 @@ namespace Omi.Fix.Types {
 
             return file.Name;
         }
-
-        // TODO writer
 
         /// <summary>
         ///  Fix Types xml as string

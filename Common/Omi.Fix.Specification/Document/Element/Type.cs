@@ -13,6 +13,8 @@
 
         public string Name = string.Empty;
 
+        public string DataType = string.Empty;
+
         public string Description = string.Empty;
 
         public bool Required;

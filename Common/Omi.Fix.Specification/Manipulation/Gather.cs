@@ -10,6 +10,16 @@
         public static HashSet<string> RequiredComponentsIn(Document specification) {
             var set = new HashSet<string>();
 
+            // Add all headers
+            foreach (var header in specification.Header) {
+                RequiredComponentsIn(header, set);               
+            }
+
+            // Add all trailers
+            foreach (var trailer in specification.Trailer) {
+                RequiredComponentsIn(trailer, set);
+            }
+
             // Add components in messages
             foreach (var message in specification.Messages) {
                 foreach (var field in message.Fields) {
@@ -53,12 +63,12 @@
 
             // add required header
             foreach (var header in specification.Header) {
-                set.Add(header.Name);
+                RequiredFieldsIn(header, set);
             }
 
             // add required trailer
             foreach (var trailer in specification.Trailer) {
-                set.Add(trailer.Name);
+                RequiredFieldsIn(trailer, set); ;
             }
 
             // add fields in messages

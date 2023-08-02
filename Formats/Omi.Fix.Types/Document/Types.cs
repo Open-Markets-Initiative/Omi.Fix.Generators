@@ -21,6 +21,19 @@
         }
 
         /// <summary>
+        ///  Load fix field types from types xml
+        /// </summary>
+        public static Types From(Xml.FixTypes xml) {
+            var fields = new Types();
+            foreach (var element in xml.FixType) {
+                var field = Type.From(element);
+                fields[field.Name] = field;
+            }
+
+            return fields;
+        }
+
+        /// <summary>
         ///  Load fix field types from xml
         /// </summary>
         public static Types From(Fix.Specification.Types types) {
@@ -39,7 +52,9 @@
         public Fix.Specification.Types ToSpecification() {
             var types = new Fix.Specification.Types();
 
-            foreach (var field in Values) {
+            var fields = this.Select(f => f.Value).ToList();
+
+            foreach (var field in fields) {
                 types.Add(field.Name, field.ToSpecification());
             }
             

@@ -32,6 +32,16 @@
             };
 
         /// <summary>
+        ///  Convert type value
+        /// </summary>
+        public static Enum From(Xml.FixTypesFixTypeEnum @enum)
+            => new() {
+                Name = @enum.Name,
+                Value = @enum.Value,
+                //Description = @enum // todo
+            };
+
+        /// <summary>
         ///  Convert normalized enum value to fields enum
         /// </summary>
         public static Enum From(Fix.Specification.Enum @enum)
@@ -42,7 +52,7 @@
             };
         
         /// <summary>
-        ///  Convert fields enumerated vaue to normalized fix specification value
+        ///  Convert fields enumerated value to normalized fix specification value
         /// </summary>
         public Fix.Specification.Enum ToSpecification()
             => new () {
@@ -50,6 +60,16 @@
                 Value = Value, 
                 Description = Description
             };
+
+        /// <summary>
+        /// Write fix type enum to stream
+        /// </summary>
+        public void Write(StreamWriter stream) {
+            stream.WriteLine($"    <Enum>");
+            stream.WriteLine($"      <Name>{Name}</Name>");
+            stream.WriteLine($"      <Value>{Value}</Value>");
+            stream.WriteLine($"    </Enum>");
+        }
 
         /// <summary>
         ///  Display enumerated value as string
