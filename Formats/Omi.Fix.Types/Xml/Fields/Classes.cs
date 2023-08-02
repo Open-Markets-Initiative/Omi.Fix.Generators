@@ -6,21 +6,17 @@
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-    public partial class FixFields
-    {
+    public partial class FixFields {
 
         private FixFieldsFixFieldSpec[] fixFieldSpecField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("FixFieldSpec")]
-        public FixFieldsFixFieldSpec[] FixFieldSpec
-        {
-            get
-            {
+        public FixFieldsFixFieldSpec[] FixFieldSpec {
+            get {
                 return this.fixFieldSpecField;
             }
-            set
-            {
+            set {
                 this.fixFieldSpecField = value;
             }
         }
@@ -30,8 +26,7 @@
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class FixFieldsFixFieldSpec
-    {
+    public partial class FixFieldsFixFieldSpec {
 
         private ushort tagField;
 
@@ -50,106 +45,82 @@
         private FixFieldsFixFieldSpecFixEnumField[] enumPairsField;
 
         /// <remarks/>
-        public ushort Tag
-        {
-            get
-            {
+        public ushort Tag {
+            get {
                 return this.tagField;
             }
-            set
-            {
+            set {
                 this.tagField = value;
             }
         }
 
         /// <remarks/>
-        public string Name
-        {
-            get
-            {
+        public string Name {
+            get {
                 return this.nameField;
             }
-            set
-            {
+            set {
                 this.nameField = value;
             }
         }
 
         /// <remarks/>
-        public string DataType
-        {
-            get
-            {
+        public string DataType {
+            get {
                 return this.dataTypeField;
             }
-            set
-            {
+            set {
                 this.dataTypeField = value;
             }
         }
 
         /// <remarks/>
-        public string Description
-        {
-            get
-            {
+        public string Description {
+            get {
                 return this.descriptionField;
             }
-            set
-            {
+            set {
                 this.descriptionField = value;
             }
         }
 
         /// <remarks/>
-        public string Version
-        {
-            get
-            {
+        public string Version {
+            get {
                 return this.versionField;
             }
-            set
-            {
+            set {
                 this.versionField = value;
             }
         }
 
         /// <remarks/>
-        public bool IsRequired
-        {
-            get
-            {
+        public bool IsRequired {
+            get {
                 return this.isRequiredField;
             }
-            set
-            {
+            set {
                 this.isRequiredField = value;
             }
         }
 
         /// <remarks/>
-        public bool IsEnumType
-        {
-            get
-            {
+        public bool IsEnumType {
+            get {
                 return this.isEnumTypeField;
             }
-            set
-            {
+            set {
                 this.isEnumTypeField = value;
             }
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("FixEnumField", IsNullable = false)]
-        public FixFieldsFixFieldSpecFixEnumField[] EnumPairs
-        {
-            get
-            {
+        public FixFieldsFixFieldSpecFixEnumField[] EnumPairs {
+            get {
                 return this.enumPairsField;
             }
-            set
-            {
+            set {
                 this.enumPairsField = value;
             }
         }
@@ -159,40 +130,31 @@
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class FixFieldsFixFieldSpecFixEnumField
-    {
+    public partial class FixFieldsFixFieldSpecFixEnumField {
 
         private string keyField;
 
         private string valueField;
 
         /// <remarks/>
-        public string Key
-        {
-            get
-            {
+        public string Key {
+            get {
                 return this.keyField;
             }
-            set
-            {
+            set {
                 this.keyField = value;
             }
         }
 
         /// <remarks/>
-        public string Value
-        {
-            get
-            {
+        public string Value {
+            get {
                 return this.valueField;
             }
-            set
-            {
+            set {
                 this.valueField = value;
             }
         }
     }
-
-
 }
 
