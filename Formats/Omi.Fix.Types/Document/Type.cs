@@ -86,46 +86,16 @@ namespace Omi.Fix.Types {
         /// </summary>
         public static Type From(Fix.Specification.Type type) {
 
-            //var descriptionConstruct = new StringBuilder();
-            //var noteConstruct = new StringBuilder();
+            var dataType = type.DataType;
 
-            //for (var i = 0; i < type.Description.Length; i++) {
-            //    if (!descriptionConstruct.ToString().Contains("  ")) {
-            //        if (type.Description[i] == '\n') {
-            //            descriptionConstruct.Append("  ");
-            //            continue;
-            //        }
-
-            //        descriptionConstruct.Append(type.Description[i]);
-            //    }
-
-            //    else {
-            //        if (type.Description[i] == '\n' && noteConstruct.Length == 0) {
-            //            continue;
-            //        }
-            //        else if (type.Description[i] == '<') {
-            //            noteConstruct.Append("&lt;");
-            //            continue;
-            //        }
-            //        else if (type.Description[i] == '>' && noteConstruct.ToString().Contains("&lt;")) {
-            //            noteConstruct.Append("&gt;");
-            //            continue;
-            //        }
-            //        else if (type.Description[i] == '&') {
-            //            noteConstruct.Append("&amp;");
-            //            continue;
-            //        }
-
-            //        noteConstruct.Append(type.Description[i]);
-            //    }
-            //}
-
-            //descriptionConstruct.Replace("  ", "");
+            if (String.IsNullOrWhiteSpace(type.DataType)) {
+                dataType = type.Underlying;
+            }
 
             return new Type {
                 Name = type.Name,
                 Tag = type.Tag,
-                DataType = type.DataType,
+                DataType = dataType,
                 Description = type.Description,
                 Version = type.Version,
                 Enums = Enums.From(type)
@@ -155,9 +125,9 @@ namespace Omi.Fix.Types {
             stream.WriteLine($"    <Type>{DataType}</Type>");
             stream.WriteLine($"    <Description>{Description}</Description>");
 
-            //if (!String.IsNullOrWhiteSpace(Note)) {
-            //    stream.WriteLine($"    <Note>{Note}</Note>");
-            //}
+            if (!String.IsNullOrWhiteSpace(Note)) {
+                stream.WriteLine($"    <Note>{Note}</Note>");
+            }
 
             stream.WriteLine($"    <Version>{Version}</Version>");
 

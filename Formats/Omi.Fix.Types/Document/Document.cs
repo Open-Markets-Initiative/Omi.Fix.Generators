@@ -53,11 +53,21 @@ namespace Omi.Fix.Types {
         /// <summary>
         ///  Convert normalized fix specification to fix fields
         /// </summary>
-        public static Document From(Fix.Specification.Document specification)
-          => new () {
-              Information = Information.From(specification.Information),
-              Fields = Types.From(specification.Types),
-          };
+        public static Document From(Fix.Specification.Document specification) {
+
+            var document = new Document();
+
+            document.Information = Information.From(specification.Information);
+            document.Fields = Types.From(specification.Types);
+
+            foreach (var pair in document.Fields) {
+                if (String.IsNullOrWhiteSpace(pair.Value.Version)) {
+                    pair.Value.Version = $"FIX{specification.Information.Major}{specification.Information.Minor}";
+                }
+            }
+
+            return document;
+        }
 
         /// <summary>
         ///  Convert fix fields document to normalized fix specification

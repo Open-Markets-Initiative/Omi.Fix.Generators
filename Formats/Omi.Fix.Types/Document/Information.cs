@@ -12,6 +12,16 @@
         public string Source = string.Empty;
 
         /// <summary>
+        ///  Major version
+        /// </summary>
+        public string Major = string.Empty;
+
+        /// <summary>
+        ///  Minor version
+        /// </summary>
+        public string Minor = string.Empty;
+
+        /// <summary>
         ///  Obtain description from xml
         /// </summary>
         public static Information From(Xml.FixFields xml, string path) {
@@ -43,6 +53,8 @@
         public static Information From(Fix.Specification.Information description)
             => new () {
                 Source = description.Source,
+                Major = description.Major,
+                Minor = description.Minor,
             };
 
         /// <summary>

@@ -21,9 +21,6 @@
 
         public string Version = string.Empty;
 
-        /// <summary>
-        ///  Fix Field Underlying Type
-        /// </summary>
         public string Underlying = string.Empty;
 
         public Enums Enums = new Enums();

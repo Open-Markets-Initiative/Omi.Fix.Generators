@@ -68,6 +68,11 @@
             stream.WriteLine($"    <Enum>");
             stream.WriteLine($"      <Name>{Name}</Name>");
             stream.WriteLine($"      <Value>{Value}</Value>");
+
+            if (!string.IsNullOrEmpty(Description)) {
+                stream.WriteLine($"      <Description>{Description}</Description>");
+            }
+
             stream.WriteLine($"    </Enum>");
         }
 
