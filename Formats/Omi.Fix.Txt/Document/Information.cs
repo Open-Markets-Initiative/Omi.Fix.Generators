@@ -8,12 +8,12 @@
     public class Information {
 
         /// <summary>
-        /// 
+        /// Fix major version
         /// </summary>
         public string Major = string.Empty;
 
         /// <summary>
-        /// 
+        /// Fix minior version
         /// </summary>
         public string Minor = string.Empty;
 
