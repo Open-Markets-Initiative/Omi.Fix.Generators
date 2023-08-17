@@ -115,10 +115,10 @@ namespace Omi.Fix.Types {
                 Enums = Enums.ToSpecification()
             };
 
-            /// <summary>
-            /// Writes fix type field to stream
-            /// </summary>
-            public void Write(StreamWriter stream) {
+        /// <summary>
+        /// Writes fix type field to stream
+        /// </summary>
+        public void Write(StreamWriter stream) {
             stream.WriteLine($"  <FixType>");
             stream.WriteLine($"    <Name>{Name}</Name>");
             stream.WriteLine($"    <Tag>{Tag}</Tag>");

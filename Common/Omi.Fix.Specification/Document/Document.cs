@@ -68,16 +68,13 @@
         public void Set(string field, string value, string name) {
             // add ability to order these
 
-            if (Types.TryGetValue(field, out var type))
-            {
+            if (Types.TryGetValue(field, out var type)) {
                 var @enum = type.Enums.Find(e => e.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
-                if (@enum != null)
-                {
+                if (@enum != null) {
                     @enum.Name = name;
                     @enum.Value = value;
                 }
-                else
-                {
+                else {
                     type.Enums.Add(new Enum { Name = name, Value = value });
                 }
             }
@@ -97,8 +94,7 @@
         /// <summary>
         ///  Add field to message (need one with placement)
         /// </summary>
-        public void AddField(string message, string name, bool required)
-        {
+        public void AddField(string message, string name, bool required) {
             // add some checks?
 
    
@@ -107,8 +103,7 @@
         /// <summary>
         ///  Try Get Message
         /// </summary>
-        public bool TryGetMessage(string name, out Message message)
-        {
+        public bool TryGetMessage(string name, out Message message) {
             message = Messages.FirstOrDefault(current => current.Name == name);
 
             return message != null;
