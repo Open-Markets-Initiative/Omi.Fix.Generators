@@ -17,19 +17,29 @@ namespace Omi.Fix.Txt.Test {
 
         [Test]
         public void VerifyFieldNameFromLine() {
-            var expected = Field.NameFrom("1:Account:string");
-            var actual = "Account";
+            var expected = "Account";
+            var actual = Field.NameFrom("1:Account:string");
 
             Assert.That(actual, Is.EqualTo(expected), "Verify field name from line");
         }
 
         [Test]
-        public void VerifyFieldTypeFromLine() {
-            var expected = Field.TypeFrom("1:Account:string", new Enums());
-            var actual = "string";
+        public void VerifyFieldTypeStringFromLine() {
+            var expected = "String";
+            var actual = Field.TypeFrom("1:Account:string", new Enums());
 
-            Assert.That(actual, Is.EqualTo(expected), "Verify field type from line");
+            Assert.That(actual, Is.EqualTo(expected), "Verify field type String from line");
         }
+
+        [Test]
+        public void VerifyFieldTypeCommentFromLine()
+        {
+            var expected = Field.From("1:Account:string", new Enums()).ToString();
+            var actual = Field.From("1:Account:string #Comment", new Enums()).ToString();
+
+            Assert.That(actual, Is.EqualTo(expected), "Verify field comment from line");
+        }
+
 
         [Test]
         public void VerifyInvalidLineThrowsError()

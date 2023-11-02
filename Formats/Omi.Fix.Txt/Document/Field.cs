@@ -50,94 +50,99 @@
         /// <summary>
         /// Returns field number from line
         /// </summary>
-        public static string NumberFrom(string line){
-            string shorten = line;
-
-            if (IsValidLine(line)) {
-
-                // Trim line to only contain field properties
-                if (line.Contains("#")) {
-                    var cutString = line.Substring(0, line.IndexOf("#"));
-                    shorten = String.Concat(cutString.Where(c => !Char.IsWhiteSpace(c)));  
-                }
-
-                // Split properties as a colon seperated list, throw an exception for invalid lines
-                var split = shorten.Split(':');
-
-                if (split.Length != 3) {
-                    throw new Exception("Invalid Field Values");
-                }
-
-                var numero = split[0];
-                return numero;
+        public static string NumberFrom(string line)
+        {
+            if (!IsValidLine(line))
+            {
+                throw new ArgumentException($"Invalid line: {line}");
             }
-            else {
-                throw new Exception("invalid line");
+            
+            var tokens = TrimLine(line).Split(':');
+
+            if (InvalidSplit(tokens))
+            {
+                throw new ArgumentException($"Invalid field record: {line}");
             }
+
+            return tokens[0];
         }
 
         /// <summary>
         /// Returns field name from line
         /// </summary>
-        public static string NameFrom(string line) {
-            string shorten = line;
-
-            if (IsValidLine(line))
+        public static string NameFrom(string line)
+        {
+            if (!IsValidLine(line))
             {
-                // Trim line to only contain field properties
-                if (line.Contains("#"))
-                {
-                    var cutString = line.Substring(0, line.IndexOf("#"));
-                    shorten = String.Concat(cutString.Where(c => !Char.IsWhiteSpace(c))); 
-                }
-
-                // Split properties as a colon seperated list, throw exception on invalid lines
-                var split = shorten.Split(':');
-
-                if (split.Length != 3)
-                {
-                    throw new Exception("missing field values");
-                }
-
-                var nombre = split[1];
-                return nombre;
+                throw new ArgumentException($"Invalid line: {line}");
             }
 
-            else
+            var tokens = TrimLine(line).Split(':');
+
+            if (InvalidSplit(tokens))
             {
-                throw new Exception("invalid line");
+                throw new ArgumentException($"Invalid field record: {line}");
             }
+
+            return tokens[1];
         }
 
         /// <summary>
         /// Returns field type from line
         /// </summary>
-        public static string TypeFrom(string line, Enums enums) {
-            string shorten = line;
-
-            if (IsValidLine(line)) {
-                // Trim line to only contain field properties
-                if (line.Contains("#")) {
-                    var cutString = line.Substring(0, line.IndexOf("#"));
-                    shorten = String.Concat(cutString.Where(c => !Char.IsWhiteSpace(c)));  
-                }
-
-                // Split properties as a colon seperated list, except invalid lines
-                var split = shorten.Split(':');
-
-                if (split.Length != 3)
-                {
-                    throw new Exception("missing field values");
-                }
-
-                return ConvertType(split[2]);
-            }
-            else
+        public static string TypeFrom(string line, Enums enums)
+        {
+            if (!IsValidLine(line))
             {
-                throw new Exception("invalid line");
+                throw new ArgumentException($"Invalid line: {line}");
             }
+            
+            var tokens = TrimLine(line).Split(':');
+
+            if (InvalidSplit(tokens))
+            {
+                throw new ArgumentException($"Invalid field record: {line}");
+            }
+
+            return ConvertType(tokens[2]);
         }
 
+        ///<summary>
+        /// Removes comments and white space from line.
+        /// </summary>
+        public static string TrimLine(string line)
+        {
+            var index = line.IndexOf("#");
+
+            if (index > 0)
+            {
+                line = String.Concat(line[..index].Where(c => !Char.IsWhiteSpace(c)));
+            }
+            return line;
+        }
+
+        ///<summary>
+        ///Checks that string array is valid
+        ///</summary>
+        public static bool InvalidSplit(string[] split)
+        {
+            if(split.Length != 3)
+            {
+                return true;
+            }
+
+            foreach(string field in split){
+
+                if (string.IsNullOrWhiteSpace(field))
+                {
+                    return true;
+                }
+
+            }
+
+            return false;
+        }
+        
         /// <summary>
         /// Check that line contains field properties
         /// </summary>
@@ -166,7 +171,7 @@
         ///  Check that type is valid fix (TODO full list...add underlying type)
         /// </summary>
         public static string ConvertType(string text) {
-            var type = text.Trim(); ;
+            var type = text.Trim();
 
             switch (type) {
                 case "datetime":
@@ -192,7 +197,7 @@
                 case "UTCDate":
                 case "UTCTimeOnly":
                 case "long":
-                    return text.Trim();
+                    return type;
 
                 default:
                     return "String";
