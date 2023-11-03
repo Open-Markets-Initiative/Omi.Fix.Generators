@@ -1,6 +1,4 @@
 ﻿// Load example fix types xml
-using System.Globalization;
-using System.Text;
 
 var xml = Omi.Fix.Types.Library.Fix42;
 var specification = xml.ToSpecification();

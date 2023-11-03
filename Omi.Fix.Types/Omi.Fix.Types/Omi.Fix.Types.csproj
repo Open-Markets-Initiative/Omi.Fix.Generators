@@ -8,17 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Omi.Fix.Specification\Omi.Fix.Specification.csproj" />
+    <ProjectReference Include="..\..\Omi.Fix.Specification\Omi.Fix.Specification\Omi.Fix.Specification.csproj" />
   </ItemGroup>
-  
+
   <ItemGroup>
-    <None Update="Library\Fixml\Fix.v4.2.xml">
+    <None Update="Library\Fields\Fix42.Fields.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Library\Fixml\Fix.v4.4.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Library\Fixml\Fix.v5.0.sp2.xml">
+    <None Update="Xml\Types\Types.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

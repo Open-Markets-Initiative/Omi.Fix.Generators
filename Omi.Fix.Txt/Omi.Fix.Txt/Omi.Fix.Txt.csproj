@@ -2,14 +2,13 @@
 
   <PropertyGroup>
     <Authors>Omi Developers</Authors>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Formats\Omi.Fix.Fixml\Omi.Fix.Fixml.csproj" />
+    <ProjectReference Include="..\..\Omi.Fix.Specification\Omi.Fix.Specification\Omi.Fix.Specification.csproj" />
   </ItemGroup>
 
 </Project>
