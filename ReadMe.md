@@ -12,6 +12,8 @@ Fix Txt: Simplified txt for fix information
 
 Fix Types: Stores detailed field type information 
 
+For more information: [Fix Trading Community](https://www.fixtrading.org "Fix Trading Community")
+
 ## Open Markets Initiative
 
 The Open Markets Initiative (Omi) is a group of technologists dedicated to enhancing the stability of electronic financial markets using modern development methods.
