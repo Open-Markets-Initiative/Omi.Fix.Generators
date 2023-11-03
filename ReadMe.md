@@ -1,5 +1,7 @@
 # Omi Fix Source Generators
 
+[![FIX](https://github.com/Open-Markets-Initiative/Directory/blob/main/Organizations/Fix/fix.png)](https://https://www.fixtrading.org/)
+
 Composable platform for [FIX](https://en.wikipedia.org/wiki/Financial_Information_eXchange "Financial Information eXchange") source generation.
 
 Supported Formats:
