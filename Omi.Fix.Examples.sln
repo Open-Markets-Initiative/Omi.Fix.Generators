@@ -27,6 +27,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Omi.Fix.Specification.Test", "Omi.Fix.Specification\Omi.Fix.Specification.Test\Omi.Fix.Specification.Test.csproj", "{7535F0EB-6AD6-4AA9-B257-7F634D290B9E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Omi.Fix.Txt", "Omi.Fix.Txt", "{232D1918-3F35-4AD2-AEDF-A00A4F46E165}"
+	ProjectSection(SolutionItems) = preProject
+		Omi.Fix.Txt\ReadMe.md = Omi.Fix.Txt\ReadMe.md
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Txt", "Omi.Fix.Txt\Example.Txt\Example.Txt.csproj", "{E4D026CA-80B3-40EE-B5D2-B389901AC489}"
 EndProject
