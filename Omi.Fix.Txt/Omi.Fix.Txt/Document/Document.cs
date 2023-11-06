@@ -10,25 +10,25 @@ namespace Omi.Fix.Txt {
         /// <summary>
         ///  Fix txt documention information
         /// </summary>
-        public Information Information = new Information();
+        public Information Information = new();
 
         /// <summary>
-        /// Fix txt fields
+        ///  Fix txt fields
         /// </summary>
-        public Fields Fields = new Fields();
+        public Fields Fields = new();
 
         /// <summary>
-        /// Fix txt enum values
+        ///  Fix txt enum values
         /// </summary>
-        public Enums Enums = new Enums();
+        public Enums Enums = new();
 
         /// <summary>
-        /// Fix txt messages
+        ///  Fix txt messages
         /// </summary>
-        public Messages Messages = new Messages();
+        public Messages Messages = new();
 
         /// <summary>
-        /// Returns a document from path to text file
+        ///  Fix Txt document from path
         /// </summary>
         public static Document From(string path) {
             var lines = File.ReadLines(path);
@@ -36,10 +36,10 @@ namespace Omi.Fix.Txt {
         }
 
         /// <summary>
-        ///  Returns a document from records
+        ///  Fix Txt document from records
         /// </summary>
-        public static Document From(IEnumerable<string> lines)  // remove this...make a merge
-            => new () {
+        public static Document From(IEnumerable<string> lines)
+            => new () { // need to parse these in order 
                 Information = Information.From(lines),
                 Enums = Enums.From(lines),
                 Fields = Fields.From(lines),
@@ -60,7 +60,7 @@ namespace Omi.Fix.Txt {
             };
 
         /// <summary>
-        ///  Fix txt description as string
+        ///  Fix Txt description as string
         /// </summary>
         public override string ToString()
             => $"{Information} fix txt";
