@@ -1,15 +1,12 @@
 ﻿namespace Omi.Fix.Txt {
     using System;
     using System.Linq;
-    using System.Security.AccessControl;
-    using static System.Net.Mime.MediaTypeNames;
 
     /// <summary>
-    ///  Fix Txt Field Record
+    ///  Fix Txt Type
     /// </summary>
 
     public class Field {
-
 
         /// <summary>
         ///  Fix Field Tag/Number
@@ -26,16 +23,36 @@
         /// </summary>
         public string Type = string.Empty;
 
-
         /// <summary>
-        /// Returns fix Field from string
+        ///  Parse fix field (type) from string
         /// </summary>
-        public static Field From(string line, Enums enums)
-         => new () {
-             Number = NumberFrom(line),
-             Name = NameFrom(line),
-             Type = TypeFrom(line, enums)
-         };
+        public static Field From(string line, Enums enums) { // add line index
+            // validate field record
+            if (!IsValidLine(line)) {
+                throw new ArgumentException($"Invalid line: {line}");
+            }
+            
+            var tokens = TrimLine(line).Split(':');
+
+            if (InvalidSplit(tokens)) {
+                throw new ArgumentException($"Invalid field record: {line}");
+            }
+
+            // parse type elements
+            if (!TryParseTag(tokens, out var tag)) {
+                throw new ArgumentException($"Invalid record, tag: {line}");
+            }
+
+            if (!TryParseName(tokens, out var name)) {
+                throw new ArgumentException($"Invalid record, name: {line}");
+            }
+
+            if (!TryParseType(tokens, out var type)) {
+                throw new ArgumentException($"Invalid record, type: {line}");
+            }
+
+            return From(tag, name, type);
+         }
 
         /// <summary>
         /// Returns fix field from properties
@@ -48,96 +65,61 @@
          };
 
         /// <summary>
-        /// Returns field number from line
+        ///  Try parse Fix tag from tokenized record
         /// </summary>
-        public static string NumberFrom(string line)
-        {
-            if (!IsValidLine(line))
-            {
-                throw new ArgumentException($"Invalid line: {line}");
-            }
-            
-            var tokens = TrimLine(line).Split(':');
+        public static bool TryParseTag(string[] tokens, out string tag) {
 
-            if (InvalidSplit(tokens))
-            {
-                throw new ArgumentException($"Invalid field record: {line}");
-            }
+            tag = tokens[0];
 
-            return tokens[0];
+            return true;
+        }
+
+
+        /// <summary>
+        ///  Try parse Fix field name from tokenized record
+        /// </summary>
+        public static bool TryParseName(string[] tokens, out string name) {
+
+            name = tokens[1];
+
+            return true;
         }
 
         /// <summary>
-        /// Returns field name from line
+        ///  Try parse Fix field name from tokenized record
         /// </summary>
-        public static string NameFrom(string line)
-        {
-            if (!IsValidLine(line))
-            {
-                throw new ArgumentException($"Invalid line: {line}");
-            }
+        public static bool TryParseType(string[] tokens, out string type) {
 
-            var tokens = TrimLine(line).Split(':');
+            type = ConvertType(tokens[2]);
 
-            if (InvalidSplit(tokens))
-            {
-                throw new ArgumentException($"Invalid field record: {line}");
-            }
-
-            return tokens[1];
-        }
-
-        /// <summary>
-        /// Returns field type from line
-        /// </summary>
-        public static string TypeFrom(string line, Enums enums)
-        {
-            if (!IsValidLine(line))
-            {
-                throw new ArgumentException($"Invalid line: {line}");
-            }
-            
-            var tokens = TrimLine(line).Split(':');
-
-            if (InvalidSplit(tokens))
-            {
-                throw new ArgumentException($"Invalid field record: {line}");
-            }
-
-            return ConvertType(tokens[2]);
+            return true;
         }
 
         ///<summary>
-        /// Removes comments and white space from line.
+        ///  Removes comments and white space from field record
         /// </summary>
-        public static string TrimLine(string line)
-        {
+        public static string TrimLine(string line) {
             var index = line.IndexOf("#");
 
-            if (index > 0)
-            {
+            if (index > 0) {
                 line = String.Concat(line[..index].Where(c => !Char.IsWhiteSpace(c)));
             }
+
             return line;
         }
 
         ///<summary>
-        ///Checks that string array is valid
+        /// Checks that string array is valid
         ///</summary>
-        public static bool InvalidSplit(string[] split)
-        {
-            if(split.Length != 3)
-            {
+        public static bool InvalidSplit(string[] split) {
+            if (split.Length != 3) {
                 return true;
             }
 
-            foreach(string field in split){
-
-                if (string.IsNullOrWhiteSpace(field))
-                {
+            foreach(string field in split) {
+                if (string.IsNullOrWhiteSpace(field)) {
                     return true;
                 }
-
             }
 
             return false;

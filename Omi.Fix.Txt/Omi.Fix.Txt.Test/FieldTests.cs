@@ -2,76 +2,51 @@ namespace Omi.Fix.Txt.Test {
     using NUnit.Framework;
 
     /// <summary>
-    ///  Regression tests for fix txt fields
+    ///  Regression tests for fix text field records
     /// </summary>
 
     public class FieldTests {
 
         [Test]
         public void VerifyFieldNumberFromLine() {
-            var expected = Field.NumberFrom("1:Account:string");
-            var actual = "1";
+            var field = Field.From("1:Account:string", new Enums());
 
-            Assert.That(actual, Is.EqualTo(expected), "Verify field number from line");
+            var expected = "1";
+            var actual = field.Number;
+
+            Assert.That(actual, Is.EqualTo(expected), "Verify field tag number from text record");
         }
 
         [Test]
         public void VerifyFieldNameFromLine() {
-            var expected = "Account";
-            var actual = Field.NameFrom("1:Account:string");
+            var field = Field.From("1:Account:string", new Enums());
 
-            Assert.That(actual, Is.EqualTo(expected), "Verify field name from line");
+            var expected = "Account";
+            var actual = field.Name;
+
+            Assert.That(actual, Is.EqualTo(expected), "Verify field name from text record");
         }
 
         [Test]
         public void VerifyFieldTypeStringFromLine() {
-            var expected = "String";
-            var actual = Field.TypeFrom("1:Account:string", new Enums());
+            var field = Field.From("1:Account:string", new Enums());
 
-            Assert.That(actual, Is.EqualTo(expected), "Verify field type String from line");
+            var expected = "String";
+            var actual = field.Type;
+
+            Assert.That(actual, Is.EqualTo(expected), "Verify field type from text record (String)");
         }
 
         [Test]
-        public void VerifyFieldTypeCommentFromLine()
-        {
+        public void VerifyFieldTypeCommentFromLine() {
             var expected = Field.From("1:Account:string", new Enums()).ToString();
             var actual = Field.From("1:Account:string #Comment", new Enums()).ToString();
 
-            Assert.That(actual, Is.EqualTo(expected), "Verify field comment from line");
+            Assert.That(actual, Is.EqualTo(expected), "Verify field comments are trimmed for text record");
         }
-
 
         [Test]
         public void VerifyInvalidLineThrowsError()
-        {
-            Assert.Throws<ArgumentException>(() => Field.From("1:Account:", new Enums()), "Verify Line missing type is invalid");
-        }
-
-        /*
-
-        [Test]
-        public void VerifyFieldsAndEnumsBuiltinParallel() {
-
-            var text = Fields.From(@".\SampleInputs\fieldandenums1.txt");
-            var specification = text.ToSpecification(Enums.From(@".\SampleInputs\fieldandenums1.txt"));
-
-            var expected = specification["ExecTransType"].Enums[2].Description;
-            var actual = "Correct";
-
-            Assert.AreEqual(expected, actual, "Verify field matches enums in specification from text");
-        }
-
-        [Test]
-        public void VerifyFieldsAndEnumsBuiltinParallelNoEnums() {
-
-            var text = Fields.From(new List<string> { "14:CumQty:qty" });
-            var specification = text.ToSpecification(new Enums());
-
-            var expected = specification["CumQty"].Enums;
-
-            Assert.IsEmpty(expected, "verify empty enums for field without a match");
-        }
-
-         */
+            => Assert.Throws<ArgumentException>(() => Field.From("1:Account:", new Enums()), "Verify Line missing type is invalid");
     }
 }

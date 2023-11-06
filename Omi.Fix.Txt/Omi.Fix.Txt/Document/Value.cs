@@ -1,11 +1,10 @@
 ﻿namespace Omi.Fix.Txt{
-    using System.Collections.Generic;
     using System.Linq;
-    using Omi.Fix.Specification;
 
     /// <summary>
     /// Name and data of corresponing enum
     /// </summary>
+
     public class Value {
 
         /// <summary>
@@ -22,8 +21,7 @@
         /// Contains Value from properties
         /// </summary>
         public static Value From(string name, string data)
-            => new Value 
-            {
+            => new () {
                 Name = name,
                 Data = data
             };
@@ -31,8 +29,7 @@
         /// <summary>
         /// Contains Value from string
         /// </summary>
-        public static Value From(string pair)
-        {
+        public static Value From(string pair) {
             // Check valid input
             if (string.IsNullOrWhiteSpace(pair))  
             {
@@ -59,7 +56,9 @@
             return From(name, data);
         }
 
-
+        /// <summary>
+        ///  Display enumerated value
+        /// </summary>
         public override string ToString()
             => $"{Data} => {Name}";
     }
