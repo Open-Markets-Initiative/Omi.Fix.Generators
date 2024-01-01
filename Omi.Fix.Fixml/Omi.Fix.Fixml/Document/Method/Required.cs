@@ -5,7 +5,7 @@
     ///  Child Field Traits
     /// </summary>
 
-    public static class Is {
+    public static partial class Is {
 
         /// <summary>
         ///  Determines requirement based on value

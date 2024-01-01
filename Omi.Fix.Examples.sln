@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Omi.Fix.Types", "Omi.Fix.Ty
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Omi.Fix.Types.Test", "Omi.Fix.Types\Omi.Fix.Types.Test\Omi.Fix.Types.Test.csproj", "{A98B1A9A-3181-4734-A188-EE6CDB28C9D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omi.Fix.Specification.Example", "Omi.Fix.Specification\Omi.Fix.Specification.Example\Omi.Fix.Specification.Example.csproj", "{4A8D0B4D-582F-45E0-B824-FDAB0BAA5492}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{A98B1A9A-3181-4734-A188-EE6CDB28C9D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A98B1A9A-3181-4734-A188-EE6CDB28C9D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A98B1A9A-3181-4734-A188-EE6CDB28C9D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A8D0B4D-582F-45E0-B824-FDAB0BAA5492}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A8D0B4D-582F-45E0-B824-FDAB0BAA5492}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A8D0B4D-582F-45E0-B824-FDAB0BAA5492}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A8D0B4D-582F-45E0-B824-FDAB0BAA5492}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,6 +127,7 @@ Global
 		{68365D2F-5795-4131-9FF9-17F35706AD51} = {D04CE3A3-66BB-4497-926B-B73495F75318}
 		{1ACB7035-3049-478B-95B4-8B2D68FA26D8} = {D04CE3A3-66BB-4497-926B-B73495F75318}
 		{A98B1A9A-3181-4734-A188-EE6CDB28C9D4} = {D04CE3A3-66BB-4497-926B-B73495F75318}
+		{4A8D0B4D-582F-45E0-B824-FDAB0BAA5492} = {D194E812-9D37-44C7-9152-2686734ADE30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {685B1C7B-6F37-4CDA-9B91-02B100EA7248}

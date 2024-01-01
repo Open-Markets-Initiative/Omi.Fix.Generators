@@ -3,24 +3,31 @@
     using System.Linq;
 
     /// <summary>
-    ///  Fixml Components Xml Element (Components Section)
+    ///  Fixml Components (Components Section)
     /// </summary>
 
     public class Components : Dictionary<string, Component> {
 
         /// <summary>
-        /// Convert from xml  to fixml component 
+        ///  Default constructor
         /// </summary>
-        public static Components From(Xml.fix xml) {
-            var section = new Components();
+        public Components() {}
 
+        /// <summary>
+        ///  Load components in xml
+        /// </summary>
+        public Components(Xml.fix xml) {
             foreach (var element in ListFrom(xml)) {
                 var component = Component.From(element);
-                section[component.Name] = component; 
+                this[component.Name] = component; 
             }
-
-            return section;
         }
+
+        /// <summary>
+        ///  Load components in xml
+        /// </summary>
+        public static Components From(Xml.fix xml)
+            => new(xml);
 
         /// <summary>
         /// Fix Component from xml file
@@ -40,6 +47,17 @@
             }
 
             return section;
+        }
+
+        /// <summary>
+        ///  Remove unused components
+        /// </summary>
+        public void ReduceTo(HashSet<string> required) {
+            foreach (var component in Values) {
+                if (!required.Contains(component.Name)) {
+                    Remove(component.Name);
+                }
+            }
         }
 
         /// <summary>

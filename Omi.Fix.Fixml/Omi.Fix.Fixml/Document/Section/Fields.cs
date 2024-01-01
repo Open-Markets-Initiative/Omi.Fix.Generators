@@ -1,16 +1,15 @@
 ﻿namespace Omi.Fixml {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    ///  Fixml Fields Xml Element (Fields Section)
+    ///  Fixml Fields (Fields Section)
     /// </summary>
 
     public class Fields : Dictionary<string, Field> {
 
         /// <summary>
-        /// Obtain fields from xml
+        ///  Load fields in fixml
         /// </summary>
         public static Fields From(Xml.fix xml) {
             var section = new Fields(); 
@@ -48,6 +47,17 @@
             }
 
             return section;
+        }
+
+        /// <summary>
+        ///  Remove unused fields
+        /// </summary>
+        public void ReduceTo(HashSet<string> required) {
+            foreach (var field in Values) {
+                if (!required.Contains(field.Name)) {
+                    Remove(field.Name);
+                }
+            }
         }
 
         /// <summary>

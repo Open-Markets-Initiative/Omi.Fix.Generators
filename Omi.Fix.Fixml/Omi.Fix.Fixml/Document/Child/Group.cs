@@ -126,15 +126,12 @@
         /// <summary>
         ///  Report erroneous fixml field element
         /// </summary>
-        public void Error(Fields fields, Fixml.Components components, List<string> Errors)
-        {
-            if (string.IsNullOrWhiteSpace(Name))
-            {
+        public void Error(Fields fields, Fixml.Components components, List<string> Errors) {
+            if (string.IsNullOrWhiteSpace(Name)) {
                 Errors.Add("Group name is missing");
             }
 
-            if (!fields.ContainsKey(Name))
-            {
+            if (!fields.ContainsKey(Name)) {
                Errors.Add($"{Name}: Group is missing from dictionary");
             }
 

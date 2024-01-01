@@ -6,23 +6,43 @@
 
     public static class Library {
 
+        // Todo: universal seperators
+
         /// <summary>
         ///  Standard Fix 4.2 fixml
         /// </summary>
         public static Document Fix42
-            => Document.From("Library\\Fixml\\Fix.v4.2.xml");
+            => Load("Fix.v4.2.xml");
+
+        /// <summary>
+        ///  Standard Fix 4.2 fixml admin messages only
+        /// </summary>
+        public static Document Fix42Admin
+            => Load("Fix.v4.2.xml").Filter(Is.Admin);
 
         /// <summary>
         ///  Standard Fix 4.4 fixml
         /// </summary>
         public static Document Fix44
-            => Document.From("Library\\Fixml\\Fix.v4.4.xml");
+            => Load("Fix.v4.4.xml");
+
+        /// <summary>
+        ///  Standard Fix 4.4 fixml admin messages only
+        /// </summary>
+        public static Document Fix44Admin
+            => Load("Fix.v4.4.xml").Filter(Is.Admin);
 
         /// <summary>
         ///  Standard Fix 5.0.SP2 fixml
         /// </summary>
         public static Document Fix50
-            => Document.From("Library\\Fixml\\Fix.v5.0.sp2.xml");
+            => Load("Fix.v5.0.sp2.xml");
+
+        /// <summary>
+        ///  Load Library file into Fixml Document
+        /// </summary>
+        public static Document Load(string file) 
+            => Document.From($"Library\\Fixml\\{file}"); // need general seperator
 
         /// <summary>
         ///  Gather Fixml files in library
@@ -41,7 +61,7 @@
 
             var xmls = new List<Xml.fix>();
             foreach (var file in files ?? Array.Empty<string>()) {
-                xmls.Add(Load.From(file));
+                xmls.Add(Fixml.Load.From(file));
             }
 
             return xmls;

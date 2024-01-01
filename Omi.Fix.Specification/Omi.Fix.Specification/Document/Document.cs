@@ -45,10 +45,16 @@
         ///////////////////////////////////////////////////////
 
         /// <summary>
-        ///  Filter
+        ///  Filter messages 
         /// </summary>
         public void Filter(Predicate<Message> predicate)
             => Messages.RemoveAll(predicate);
+
+        /// <summary>
+        ///  Normalize/clean Fix Specification
+        /// </summary>
+        public void Normalize()
+            => Clean.Document(this);
 
         /// <summary>
         ///  Add Overwrite Type (minimal)

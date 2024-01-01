@@ -1,5 +1,4 @@
 ﻿namespace Omi.Fixml {
-    using Omi.Fix.Specification;
     using System.Linq;
 
     /// <summary>

@@ -10,52 +10,146 @@
         /// <summary>
         ///  Fixml Document Information
         /// </summary>
-        public Information Information = new ();
+        public Information Information = new();
 
         /// <summary>
         ///  Fixml Header Fields
         /// </summary>
-        public Header Header = new ();
+        public Header Header = new();
 
         /// <summary>
         /// Fixml Trailer Fields
         /// </summary>
-        public Trailer Trailer = new ();
+        public Trailer Trailer = new();
 
         /// <summary>
         /// Fixml Messages
         /// </summary>
-        public Messages Messages = new ();
+        public Messages Messages = new();
 
         /// <summary>
         /// Fixml components
         /// </summary>
-        public Components Components = new ();
+        public Components Components = new();
 
         /// <summary>
         /// Fixml Fields
         /// </summary>
-        public Fields Fields = new ();
+        public Fields Fields = new();
 
-        public List<string> Errors { get
-            {
-                var errors = new List<string>();
+        public List<string> Errors { get {
+            var errors = new List<string>();
 
-                // fixmls require version information
-                if (string.IsNullOrWhiteSpace(Information.Major)) {
-                    errors.Add("Missing Major Information");
+            // fixmls require version information
+            if (string.IsNullOrWhiteSpace(Information.Major)) {
+                errors.Add("Missing Major Information");
+            }
+
+            Header.Error(Fields, Components, errors);
+            Trailer.Error(Fields, Components, errors);
+
+            // verify that all elements in Messages
+            foreach (var message in Messages) {
+                message.Error(Fields, Components, errors);
+            }
+
+            return errors;
+        }}
+
+        /// <summary>
+        ///  Apply filter (predicate) to messages and normalize
+        /// </summary>
+        public Document Filter(Predicate<Message> predicate) {
+            // filter messages
+            Messages.RemoveAll(message => !predicate(message));
+
+            var msgtypes = new HashSet<string>();
+            foreach (var message in Messages) {
+                msgtypes.Add(message.Type);
+            }
+
+            // filter message types
+            if (Fields.TryGetValue("MsgType", out var msgtype)) {
+                var enums = new Enums();
+
+                foreach(var value in msgtype.Enums) {
+                    if (msgtypes.Contains(value.Value)) {
+                        enums.Add(value);
+                    }
                 }
 
-                // verify that all elements in Messages
-                foreach (var message in Messages) {
-                    message.Error(Fields, Components, errors);
+                msgtype.Enums = enums;
+            }
+
+            // filter fields
+            Normalize();
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Gather discrete lists of fields and components in the fixml document
+        /// </summary>
+        public void FieldsAndComponents(HashSet<string> fields, HashSet<string> components) {
+            // gather included header fields and components
+            foreach (var header in Header.Elements) {
+                FieldsAndComponentsIn(header, fields, components);
+            }
+
+            // gather included trailer fields and components
+            foreach (var trailer in Trailer.Elements) {
+                FieldsAndComponentsIn(trailer, fields, components);
+            }
+
+            // gather included fields and components in messages
+            foreach (var message in Messages) {
+                foreach (var element in message.Elements) {
+                    FieldsAndComponentsIn(element, fields, components);
                 }
+            }
 
-                Header.Error(Fields, Components, errors);
-                Trailer.Error(Fields, Components, errors);
+            // gather included fields and components in components list 
+            foreach (var name in components) { // list can change...is this a bug? 
+                if (Components.TryGetValue(name, out var component)) {
+                    foreach (var element in component.Elements) {
+                        FieldsAndComponentsIn(element, fields, components);
+                    }
+                }
+            }
+        }
 
-                return errors;
-            } 
+        /// <summary>
+        ///  Recursively gather required fields and components
+        /// </summary>
+        public static void FieldsAndComponentsIn(IChild element, HashSet<string> fields, HashSet<string> components) {
+            switch(element) {
+                case Child.Field field:
+                    fields.Add(field.Name);
+                    break;
+                case Child.Group group:
+                    fields.Add(group.Name);
+
+                    foreach (var child in group.Elements) {
+                        FieldsAndComponentsIn(child, fields, components);
+                    }
+                    break;
+                case Child.Component component: // does this work?
+                    components.Add(component.Name);
+                    break;
+            }
+        }
+
+        /// <summary>
+        ///  Normalize/clean Fix Specification
+        /// </summary>
+        public void Normalize() {
+            var fields = new HashSet<string>();
+            var components = new HashSet<string>();
+
+            FieldsAndComponents(fields, components);
+
+            Components.ReduceTo(components);
+            Fields.ReduceTo(fields);
         }
 
         /// <summary>

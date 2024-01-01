@@ -25,7 +25,7 @@
         /// <summary>
         ///  Enum Values for this fix field type
         /// </summary>
-        public Enums Enums = new Enums();
+        public Enums Enums = new();
 
         /// <summary>
         /// Description of field 

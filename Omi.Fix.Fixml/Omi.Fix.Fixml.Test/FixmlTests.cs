@@ -1,18 +1,16 @@
-namespace Omi.Fix.Fixml.Test
-{
+namespace Omi.Fix.Fixml.Test {
     using NUnit.Framework;
 
-    public class LibraryTests
-    {
+    public class LibraryTests {
 
         [Test]
-        public void VerifyFixmlXmls() {
-
+        public void VerifyFixmlCount() {
             var actual = Omi.Fixml.Library.Xmls().Count;
             var expected = 3;
 
             Assert.That(actual, Is.EqualTo(expected), "Verify Fixml library count");
         }
+
         /*
                 [Test]
                 public void VerifyReadingInvalidFixmlThrowsException() {

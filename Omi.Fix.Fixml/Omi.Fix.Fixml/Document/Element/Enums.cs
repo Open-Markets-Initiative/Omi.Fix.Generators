@@ -25,7 +25,7 @@
         ///  Gather enum values from fixml xml field
         /// </summary>
         public static Enums From(Xml.fixField field)
-            => new Enums(ListFrom(field).Select(Enum.From));
+            => new(ListFrom(field).Select(Enum.From));
 
         /// <summary>
         ///  Gather enum xml elements from fixml
