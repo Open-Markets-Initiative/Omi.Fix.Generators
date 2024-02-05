@@ -88,40 +88,102 @@
         }
 
         /// <summary>
-        ///  Gather discrete lists of fields and components in the fixml document
+        ///  Gather all fields from header, trailer, messages and included components
         /// </summary>
-        public void FieldsAndComponents(HashSet<string> fields, HashSet<string> components) {
-            // gather included header fields and components
+        public HashSet<string> GatherFields() {
+            var fields = new HashSet<string>();
+
+            // gather included fields in header
             foreach (var header in Header.Elements) {
-                FieldsAndComponentsIn(header, fields, components);
+                FieldsIn(header, fields);
             }
 
-            // gather included trailer fields and components
+            // gather included fields in trailer
             foreach (var trailer in Trailer.Elements) {
-                FieldsAndComponentsIn(trailer, fields, components);
+                FieldsIn(trailer, fields);
             }
 
-            // gather included fields and components in messages
+            // gather included fields in messages
             foreach (var message in Messages) {
                 foreach (var element in message.Elements) {
-                    FieldsAndComponentsIn(element, fields, components);
+                    FieldsIn(element, fields);
                 }
             }
 
-            // gather included fields and components in components list 
-            foreach (var name in components) { // list can change...is this a bug? 
-                if (Components.TryGetValue(name, out var component)) {
-                    foreach (var element in component.Elements) {
-                        FieldsAndComponentsIn(element, fields, components);
-                    }
+            // gather included fields in included components
+            foreach (var component in Components.Values)
+            {
+                foreach (var element in component.Elements)
+                {
+                    FieldsIn(element, fields);
                 }
+            }
+            return fields;
+        }
+
+        /// <summary>
+        /// Gather all components in trailer, header and messages
+        /// </summary>
+        public HashSet<string> GatherComponents() {
+
+            var components = new HashSet<string>();
+
+            //Gather included components in header
+            foreach (var header in Header.Elements) {
+                ComponentsIn(header, components);
+            }
+
+            // gather included components in trailer
+            foreach (var trailer in Trailer.Elements) {
+                ComponentsIn(trailer, components);
+            }
+
+            // gather included components in messages
+            foreach (var message in Messages) {
+                foreach (var element in message.Elements) {
+                    ComponentsIn(element, components);
+                }
+            }
+
+            // gather included components in included components
+
+            var nested = new HashSet<string>();
+
+            foreach (var name in components) {
+                if(Components.TryGetValue(name, out var component)) {
+                    foreach(var element in component.Elements)
+                    {
+                        ComponentsIn(element, nested);
+                    }
+                    
+                }
+            }
+
+            components.UnionWith(nested);
+            return components;
+        }
+
+        /// <summary>
+        /// Recursively gather required components
+        /// </summary>
+        public static void ComponentsIn(IChild element, HashSet<string> components) {
+            switch (element) {
+                case Child.Group group:
+                    foreach (var child in group.Elements) {
+                        ComponentsIn(child, components);
+                    }
+                    break;
+
+                case Child.Component component:
+                    components.Add(component.Name);
+                    break;
             }
         }
 
         /// <summary>
-        ///  Recursively gather required fields and components
+        ///  Recursively gather required fields
         /// </summary>
-        public static void FieldsAndComponentsIn(IChild element, HashSet<string> fields, HashSet<string> components) {
+        public static void FieldsIn(IChild element, HashSet<string> fields) {
             switch(element) {
                 case Child.Field field:
                     fields.Add(field.Name);
@@ -130,11 +192,8 @@
                     fields.Add(group.Name);
 
                     foreach (var child in group.Elements) {
-                        FieldsAndComponentsIn(child, fields, components);
+                        FieldsIn(child, fields);
                     }
-                    break;
-                case Child.Component component: // does this work?
-                    components.Add(component.Name);
                     break;
             }
         }
@@ -143,12 +202,12 @@
         ///  Normalize/clean Fix Specification
         /// </summary>
         public void Normalize() {
-            var fields = new HashSet<string>();
-            var components = new HashSet<string>();
-
-            FieldsAndComponents(fields, components);
-
+            //Gather and normalize components
+            var components = GatherComponents();
             Components.ReduceTo(components);
+
+            //Gather and normalize fields
+            var fields = GatherFields();
             Fields.ReduceTo(fields);
         }
 
