@@ -37,6 +37,9 @@
         /// </summary>
         public Fields Fields = new();
 
+        /// <summary>
+        /// Fixml Errors
+        /// </summary>
         public List<string> Errors { get {
             var errors = new List<string>();
 
@@ -88,74 +91,69 @@
         }
 
         /// <summary>
-        ///  Gather all fields from header, trailer, messages and included components
+        ///  Gather all required in fields in fixml document
         /// </summary>
         public HashSet<string> GatherFields() {
             var fields = new HashSet<string>();
 
-            // gather included fields in header
+            // Gather included fields in header
             foreach (var header in Header.Elements) {
                 FieldsIn(header, fields);
             }
 
-            // gather included fields in trailer
+            // Gather included fields in trailer
             foreach (var trailer in Trailer.Elements) {
                 FieldsIn(trailer, fields);
             }
 
-            // gather included fields in messages
+            // Gather included fields in messages
             foreach (var message in Messages) {
                 foreach (var element in message.Elements) {
                     FieldsIn(element, fields);
                 }
             }
 
-            // gather included fields in included components
-            foreach (var component in Components.Values)
-            {
-                foreach (var element in component.Elements)
-                {
+            // Gather included fields
+            foreach (var component in Components.Values) {
+                foreach (var element in component.Elements) {
                     FieldsIn(element, fields);
                 }
             }
+
             return fields;
         }
 
         /// <summary>
-        /// Gather all components in trailer, header and messages
+        ///  Gather all in use components 
         /// </summary>
         public HashSet<string> GatherComponents() {
-
             var components = new HashSet<string>();
 
-            //Gather included components in header
+            // Gather included components in header
             foreach (var header in Header.Elements) {
                 ComponentsIn(header, components);
             }
 
-            // gather included components in trailer
+            // Gather included components in trailer
             foreach (var trailer in Trailer.Elements) {
                 ComponentsIn(trailer, components);
             }
 
-            // gather included components in messages
+            // Gather included components in messages
             foreach (var message in Messages) {
                 foreach (var element in message.Elements) {
                     ComponentsIn(element, components);
                 }
             }
 
-            // gather included components in included components
-
+            // Gather nested included components
             var nested = new HashSet<string>();
 
             foreach (var name in components) {
-                if(Components.TryGetValue(name, out var component)) {
-                    foreach(var element in component.Elements)
-                    {
+                if (Components.TryGetValue(name, out var component)) {
+                    foreach (var element in component.Elements) {
                         ComponentsIn(element, nested);
-                    }
-                    
+                    }             
                 }
             }
 
@@ -202,11 +200,11 @@
         ///  Normalize/clean Fix Specification
         /// </summary>
         public void Normalize() {
-            //Gather and normalize components
+            // Reduce to only used components
             var components = GatherComponents();
             Components.ReduceTo(components);
 
-            //Gather and normalize fields
+            // Reduce to only used fields
             var fields = GatherFields();
             Fields.ReduceTo(fields);
         }
