@@ -28,7 +28,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Run NUnit Tests
-      run: dotnet test --configuration Release --no-build --logger "nunit;LogFilePath=test-results.xml"
+      run: dotnet test --configuration Release --no-build --logger "trx;LogFilePath=test-results.trx"
 
     - name: Upload test results
       if: env.JOB_STATUS == 'success'
