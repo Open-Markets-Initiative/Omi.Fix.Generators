@@ -5,11 +5,14 @@
 
     public class XmlTests {
 
+        public static FileInfo xml;
         messageSchema message;
 
         [OneTimeSetUp] 
         public void SetUp() {
-           message = iLink3.Xmls()[0];
+            xml = new FileInfo(Path.Combine(TestContext.CurrentContext.TestDirectory, "Library", "Cme.iLink3", "Cme.Futures.iLink3.Sbe.v8.2.xml"));
+            message = Xml.Load.SbeXmlFrom(xml.DirectoryName);
+
         }
 
         [Test]
