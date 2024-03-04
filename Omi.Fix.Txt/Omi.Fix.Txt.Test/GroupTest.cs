@@ -26,19 +26,19 @@ namespace Omi.Fix.Txt.Test {
         }
 
         [Test]
-        public void VerifyChildrenFromLine() {
+        public void VerifyChildrenFromEntry() {
             var groups = Groups.From("ClOrdID(required), ClientID, ExecBroker, Account, NoAllocs(required)[AllocAccount(required), AllocShares]");
             
-            var expected = groups[4].Children[1].Name;
-            var actual = "AllocShares";
+            var expected = "AllocShares";
+            var actual = groups[4].Children[1].Name;
 
             Assert.That(actual, Is.EqualTo(expected), "Verify children correctly read in from line");
         }
 
         [Test]
-        public void VerifyMessageFromPath() {
-
-            var messages = Messages.From(@".\SampleInputs\messages1.txt");
+        public void VerifyMessageFromTxt() {
+            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Samples", "Messages.txt");
+            var messages = Messages.From(path);
             var specification = messages[0].ToSpecification();
 
             var expected = specification.Fields[4].Children[1].Name;
