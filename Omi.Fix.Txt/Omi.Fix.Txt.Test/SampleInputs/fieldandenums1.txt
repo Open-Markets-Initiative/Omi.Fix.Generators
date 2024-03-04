@@ -1,4 +1,0 @@
-
-ExecTransType:enum:New=0,Cancel=1,Correct=2,Status=3
-20:ExecTransType:char
-

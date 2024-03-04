@@ -8,10 +8,11 @@ namespace Omi.Fix.Txt.Test {
     public class EnumTests {
 
         [Test]
-        public void VerifyEnumsFromPath() {
+        public void VerifyEnumsFromTxt() {
+            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Samples", "Enums.txt");
 
             var expected = "N";
-            var actual = Enums.From(@".\SampleInputs\enums1.txt")["Bool"].Values[1].Data; 
+            var actual = Enums.From(path)["Bool"].Values[1].Data; 
 
             Assert.That(actual, Is.EqualTo(expected), "Verify enums correctly parsed from file");  
         }
