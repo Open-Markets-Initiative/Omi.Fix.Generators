@@ -7,7 +7,8 @@
 
         [OneTimeSetUp] 
         public void SetUp() {
-            Account = Library.Fix42.Fields["Account"];
+            var document = Document.From(Path.Combine(TestContext.CurrentContext.TestDirectory,"Library","Fields","Fix42.Fields.xml"));
+            Account = document.Fields["Account"];
         }
 
         [Test]
