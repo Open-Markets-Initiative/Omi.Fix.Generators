@@ -4,17 +4,12 @@
 
     public class FilterTests {
 
-        Omi.Fixml.Document document;
-
-        [OneTimeSetUp]
-        public void SetUp()
-        {
-            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Library", "Fixml", "Fix.v5.0.sp2.xml");
-            document = Omi.Fixml.Document.From(path);
-        }
-
         [Test]
         public void VerifyFilterComponents() {
+
+            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Library", "Fixml", "Fix.v5.0.sp2.xml");
+            Omi.Fixml.Document document = Omi.Fixml.Document.From(path);
+        
             var components = document.Filter(message => message.Name.Equals("ExecutionReport"));
 
             var expected = 36;
@@ -24,9 +19,12 @@
         }
 
         [Test]
-        public void VerifyFilterFields()
-        {
-            var components = document.Filter(message => message.Name.Equals("ExecutionAcknowledgement"));
+        public void VerifyFilterFields() {
+
+            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Library", "Fixml", "Fix.v5.0.sp2.xml");
+            Omi.Fixml.Document document = Omi.Fixml.Document.From(path);
+
+            var fields = document.Filter(message => message.Name.Equals("ExecutionAcknowledgement"));
 
             var expected = 250;
             var actual = document.Fields.Count;
