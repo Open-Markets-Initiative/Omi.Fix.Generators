@@ -1,10 +1,20 @@
 ﻿namespace Omi.Fix.Fixml.Test {
     using NUnit.Framework;
+
+
     public class FilterTests {
+
+        Omi.Fixml.Document document;
+
+        [OneTimeSetUp]
+        public void SetUp()
+        {
+            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Library", "Fixml", "Fix.v5.0.sp2.xml");
+            document = Omi.Fixml.Document.From(path);
+        }
 
         [Test]
         public void VerifyFilterComponents() {
-            var document = Omi.Fixml.Library.Fix50;
             var components = document.Filter(message => message.Name.Equals("ExecutionReport"));
 
             var expected = 36;
@@ -16,7 +26,6 @@
         [Test]
         public void VerifyFilterFields()
         {
-            var document = Omi.Fixml.Library.Fix50;
             var components = document.Filter(message => message.Name.Equals("ExecutionAcknowledgement"));
 
             var expected = 250;
