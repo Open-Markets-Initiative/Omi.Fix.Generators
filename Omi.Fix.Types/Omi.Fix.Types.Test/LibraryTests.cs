@@ -10,7 +10,7 @@ namespace Omi.Fix.Types.Test {
         [Test]
         public void VerifyFieldsXmlsCount() {
 
-            var directory = Path.Combine(Directory.GetCurrentDirectory(), "Library\\Fields");
+            var directory = Path.Combine(Directory.GetCurrentDirectory(), "Library","Fields");
             var files = Directory.GetFiles(directory, "*.xml");
 
             var xmls = new List<Xml.FixFields>();
