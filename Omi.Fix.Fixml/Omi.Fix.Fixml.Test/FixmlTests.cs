@@ -5,7 +5,14 @@ namespace Omi.Fix.Fixml.Test {
 
         [Test]
         public void VerifyFixmlCount() {
-            var actual = Omi.Fixml.Library.Xmls().Count;
+            var directory = Path.Combine(TestContext.CurrentContext.TestDirectory, "Library","Fixml");
+            var files = Directory.GetFiles(directory, "*.xml");
+            var xmls = new List<Omi.Fixml.Xml.fix>();
+            foreach (var file in files ?? Array.Empty<string>())
+            {
+                xmls.Add(Omi.Fixml.Load.From(file));
+            }
+            var actual = xmls.Count;
             var expected = 3;
 
             Assert.That(actual, Is.EqualTo(expected), "Verify Fixml library count");

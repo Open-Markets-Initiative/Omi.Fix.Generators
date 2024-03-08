@@ -1,0 +1,38 @@
+name: C# NUnit Regression Testing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '7.0'  # Adjust the version as needed
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Run NUnit Tests
+      run: dotnet test --configuration Release --no-build --logger "trx;LogFilePath=test-results.trx"
+
+    - name: Upload test results
+      if: env.JOB_STATUS == 'success'
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: '**/test-results.trx'
