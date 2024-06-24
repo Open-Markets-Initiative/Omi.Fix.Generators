@@ -1,14 +1,14 @@
-﻿namespace Omi.Fixml {
+﻿namespace Omi.Fixml;
+
+/// <summary>
+///  Fixml Element Parent
+/// </summary>
+
+public interface IParent
+{
 
     /// <summary>
-    ///  Fixml Element Parent
+    ///  Elements list
     /// </summary>
-
-    public interface IParent {
-
-        /// <summary>
-        ///  Elements list
-        /// </summary>
-        Elements Elements { get; }
-    }
+    Elements Elements { get; }
 }

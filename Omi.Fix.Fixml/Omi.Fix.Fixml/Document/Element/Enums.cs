@@ -1,62 +1,66 @@
-﻿namespace Omi.Fixml {
+﻿namespace Omi.Fixml;
     using System.Collections.Generic;
     using System.Linq;
 
+/// <summary>
+///  List of enum values for a Fixml field
+/// </summary>
+
+public class Enums : List<Enum>
+{
+
     /// <summary>
-    ///  List of enum values for a Fixml field
+    ///  Default constructor
     /// </summary>
+    public Enums(){ }
 
-    public class Enums : List<Enum> {
+    /// <summary>
+    /// Constructs enums from an IEnumerable
+    /// </summary>
+    public Enums(IEnumerable<Enum> enums)
+    {
+        AddRange(enums);
+    }
 
-        /// <summary>
-        ///  Default constructor
-        /// </summary>
-        public Enums()
-        { }
+    /// <summary>
+    ///  Gather enum values from fixml xml field
+    /// </summary>
+    public static Enums From(Xml.fixField field)
+        => new(ListFrom(field).Select(Enum.From));
 
-        /// <summary>
-        /// Constructs enums from an IEnumerable
-        /// </summary>
-        public Enums(IEnumerable<Enum> enums) { 
-            AddRange(enums);
+    /// <summary>
+    ///  Gather enum xml elements from fixml
+    /// </summary>
+    public static Xml.fixFieldValue[] ListFrom(Xml.fixField field)
+        => field.value ?? Array.Empty<Xml.fixFieldValue>();
+
+    /// <summary>
+    ///  Convert normalized fix specification enums to fixml enums
+    /// </summary>
+    public static Enums From(Fix.Specification.Type type)
+    {
+        var enums = new Enums();
+
+        foreach (var @enum in type.Enums)
+        {
+            enums.Add(Enum.From(@enum));
         }
 
-        /// <summary>
-        ///  Gather enum values from fixml xml field
-        /// </summary>
-        public static Enums From(Xml.fixField field)
-            => new(ListFrom(field).Select(Enum.From));
+        return enums;
+    }
 
-        /// <summary>
-        ///  Gather enum xml elements from fixml
-        /// </summary>
-        public static Xml.fixFieldValue[] ListFrom(Xml.fixField field)
-            => field.value ?? Array.Empty<Xml.fixFieldValue>();
+    /// <summary>
+    ///  Convert fixml enums to normalized fix specification enums
+    /// </summary>
+    public Fix.Specification.Enums ToSpecification()
+    {
+        var enums = new Fix.Specification.Enums();
 
-        /// <summary>
-        ///  Convert normalized fix specification enums to fixml enums
-        /// </summary>
-        public static Enums From(Fix.Specification.Type type) {
-            var enums = new Enums();
-
-            foreach (var @enum in type.Enums) {
-                enums.Add(Enum.From(@enum));
-            }
-
-            return enums;
+        foreach (var component in this)
+        {
+            enums.Add(component.ToSpecification());
         }
 
-        /// <summary>
-        ///  Convert fixml enums to normalized fix specification enums
-        /// </summary>
-        public Fix.Specification.Enums ToSpecification() {
-            var enums = new Fix.Specification.Enums();
-
-            foreach (var component in this) {
-                enums.Add(component.ToSpecification());
-            }
-            
-            return enums;
-        }
+        return enums;
     }
 }

@@ -15,6 +15,7 @@ namespace Omi.Fix.Sbe.Test {
             var directory = Path.Combine(TestContext.CurrentContext.TestDirectory, "Library","Cme.iLink3");
             var files = Directory.GetFiles(directory, "*.xml");
             xmls = new List<Xml.messageSchema>();
+
             foreach (var file in files ?? Array.Empty<string>())
             {
                 xmls.Add(Xml.Load.SbeXmlFrom(file));

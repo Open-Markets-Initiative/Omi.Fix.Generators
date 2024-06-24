@@ -1,42 +1,43 @@
-﻿namespace Omi.Fix.Specification {
+﻿namespace Omi.Fix.Specification;
+
+/// <summary>
+///  Normalized Fix Field Type Declaration
+/// </summary>
+
+public class Type
+{
 
     /// <summary>
-    ///  Normalized Fix Field Type Declaration
+    ///  Fix Field Tag/Number
     /// </summary>
+    public uint Tag = 0;
 
-    public class Type {
+    public string Name = string.Empty;
 
-        /// <summary>
-        ///  Fix Field Tag/Number
-        /// </summary>
-        public uint Tag = 0;
+    public string DataType = string.Empty;
 
-        public string Name = string.Empty;
+    public string Description = string.Empty;
 
-        public string DataType = string.Empty;
+    public bool Required;
 
-        public string Description = string.Empty;
+    public string Version = string.Empty;
 
-        public bool Required;
+    public string Underlying = string.Empty;
 
-        public string Version = string.Empty;
+    public Enums Enums = new Enums();
 
-        public string Underlying = string.Empty;
+    /// <summary>
+    ///  Convert type to field
+    /// </summary>
+    public Field ToField()
+        => new()
+        {
+            Name = Name,
+            Kind = Kind.Field,
+            Required = Required
+        };
 
-        public Enums Enums = new Enums();
+    public override string ToString()
+    => $"{Tag} => {Name}, {Underlying}";
 
-        /// <summary>
-        ///  Convert type to field
-        /// </summary>
-        public Field ToField()
-            => new () { 
-                Name = Name, 
-                Kind = Kind.Field, 
-                Required = Required 
-            };
-
-        public override string ToString()
-        => $"{Tag} => {Name}, {Underlying}";
-
-    }
 }

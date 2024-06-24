@@ -1,10 +1,10 @@
-﻿namespace Omi.Fix.Specification {
+﻿namespace Omi.Fix.Specification;
 
-    /// <summary>
-    ///  Normalized Fix Specification Messages List
-    /// </summary>
+/// <summary>
+///  Normalized Fix Specification Messages List
+/// </summary>
 
-    public class Messages : List<Message>
-    {
-    }
+public class Messages : List<Message>
+{
+
 }

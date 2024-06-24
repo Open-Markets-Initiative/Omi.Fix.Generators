@@ -1,4 +1,4 @@
-﻿namespace Omi.Fix.Types.Xml {
+﻿namespace Omi.Fix.Types.Xml;
 
     #pragma warning disable CS8618
 
@@ -126,35 +126,40 @@
         }
     }
 
+/// <remarks/>
+[System.SerializableAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+public partial class FixFieldsFixFieldSpecFixEnumField
+{
+
+    private string keyField;
+
+    private string valueField;
+
     /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class FixFieldsFixFieldSpecFixEnumField {
-
-        private string keyField;
-
-        private string valueField;
-
-        /// <remarks/>
-        public string Key {
-            get {
-                return this.keyField;
-            }
-            set {
-                this.keyField = value;
-            }
+    public string Key
+    {
+        get
+        {
+            return this.keyField;
         }
+        set
+        {
+            this.keyField = value;
+        }
+    }
 
-        /// <remarks/>
-        public string Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
+    /// <remarks/>
+    public string Value
+    {
+        get
+        {
+            return this.valueField;
+        }
+        set
+        {
+            this.valueField = value;
         }
     }
 }
-

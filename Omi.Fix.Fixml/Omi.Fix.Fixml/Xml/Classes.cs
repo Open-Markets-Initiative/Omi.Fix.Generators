@@ -1,4 +1,4 @@
-﻿namespace Omi.Fixml.Xml {
+﻿namespace Omi.Fixml.Xml;
 
     #pragma warning disable CS8618
 
@@ -160,6 +160,7 @@
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public partial class fixHeader
     {
+
         private object[] itemsField;
 
         /// <remarks/>
@@ -185,6 +186,7 @@
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public partial class fixTrailer
     {
+
         private object[] itemsField;
 
         /// <remarks/>
@@ -531,43 +533,42 @@
         }
     }
 
+/// <remarks/>
+[System.SerializableAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+public partial class fixFieldValue
+{
+
+    private string enumField;
+
+    private string descriptionField;
+
     /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class fixFieldValue
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string @enum
     {
-
-        private string enumField;
-
-        private string descriptionField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string @enum
+        get
         {
-            get
-            {
-                return this.enumField;
-            }
-            set
-            {
-                this.enumField = value;
-            }
+            return this.enumField;
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string description
+        set
         {
-            get
-            {
-                return this.descriptionField;
-            }
-            set
-            {
-                this.descriptionField = value;
-            }
+            this.enumField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string description
+    {
+        get
+        {
+            return this.descriptionField;
+        }
+        set
+        {
+            this.descriptionField = value;
         }
     }
 }

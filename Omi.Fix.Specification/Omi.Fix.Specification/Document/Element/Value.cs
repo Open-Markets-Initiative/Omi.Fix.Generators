@@ -1,19 +1,19 @@
-﻿namespace Omi.Fix.Specification {
+﻿namespace Omi.Fix.Specification;
+
+/// <summary>
+///  Normalized Fix Specification Enumerated Value content
+/// </summary>
+
+public class Value
+{
 
     /// <summary>
-    ///  Normalized Fix Specification Enumerated Value content
+    /// 
     /// </summary>
+    public string Name = string.Empty;
 
-    public class Value {
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Name = string.Empty;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Description = string.Empty;
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public string Description = string.Empty;
 }
