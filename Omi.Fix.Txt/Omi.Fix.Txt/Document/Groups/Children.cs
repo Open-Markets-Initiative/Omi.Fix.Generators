@@ -1,51 +1,51 @@
-﻿namespace Omi.Fix.Txt {
+﻿namespace Omi.Fix.Txt;
     using System.Collections.Generic;
     using System.Linq;
     using Omi.Fix.Specification;
 
+/// <summary>
+/// List of the groups associated with a section 
+/// </summary>
+
+public class Children : List<Group>
+{
     /// <summary>
-    /// List of the groups associated with a section 
+    /// Default constructor
     /// </summary>
-    public class Children : List<Group>
+    public Children()
+    { }
+
+    /// <summary>
+    /// Returns all the children associated with a field
+    /// </summary>
+    public static Children From(string groups)
     {
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public Children()
-        { }
+        // Split a comma seperated list of groups
+        var grouplist = groups.Split(",");
+        var children = new Children();
 
-        /// <summary>
-        /// Returns all the children associated with a field
-        /// </summary>
-        public static Children From(string groups)
+        // Convert each string to group
+        foreach (var group in grouplist)
         {
-            // Split a comma seperated list of groups
-            var grouplist = groups.Split(",");
-            var children = new Children();
-
-            // Convert each string to group
-            foreach (var group in grouplist)
-            {
-                var child = Group.From(group);
-                children.Add(child);  
-            }
-
-            return children;  
+            var child = Group.From(group);
+            children.Add(child);
         }
-        
-        /// <summary>
-        /// Convert children to fix specificiation
-        /// </summary>
-        public List<Specification.Field> ToSpecification()
+
+        return children;
+    }
+
+    /// <summary>
+    /// Convert children to fix specificiation
+    /// </summary>
+    public List<Specification.Field> ToSpecification()
+    {
+        var fields = new List<Specification.Field>();
+
+        foreach (var field in this)
         {
-            var fields = new List<Specification.Field>(); 
-
-            foreach (var field in this)
-            {
-                fields.Add(field.ToSpecification());
-            }
-
-            return fields;
+            fields.Add(field.ToSpecification());
         }
+
+        return fields;
     }
 }

@@ -1,21 +1,21 @@
-﻿namespace Omi.Fix.Specification {
+﻿namespace Omi.Fix.Specification;
     using System.Collections.Generic;
 
+/// <summary>
+///  Normalized Fix Specification Component
+/// </summary>
+
+public class Component
+{
+
     /// <summary>
-    ///  Normalized Fix Specification Component
+    ///  Name of Componenet
     /// </summary>
+    public string Name = string.Empty;
 
-    public class Component {
+    /// <summary>
+    ///  Fields associated with component name
+    /// </summary>
+    public List<Field> Fields = new List<Field>();
 
-        /// <summary>
-        ///  Name of Componenet
-        /// </summary>
-        public string Name = string.Empty;
-
-        /// <summary>
-        ///  Fields associated with component name
-        /// </summary>
-        public List<Field> Fields = new List<Field>();
-
-    }
 }

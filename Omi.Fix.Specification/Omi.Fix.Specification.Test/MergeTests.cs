@@ -1,16 +1,18 @@
-namespace Omi.Fix.Specification.Test {
+namespace Omi.Fix.Specification.Test;
     using NUnit.Framework;
 
-    /// <summary>
-    ///  Regression tests for normalized fix specification merge
-    /// </summary>
+/// <summary>
+///  Regression tests for normalized fix specification merge
+/// </summary>
 
-    public class MergeTests {
+public class MergeTests
+{
 
-        [Test]
-        public void VerifySpecificationsMerged() {
-            // this is garbage...do better
-            var specifications = new[] {
+    [Test]
+    public void VerifySpecificationsMerged()
+    {
+        // this is garbage...do better
+        var specifications = new[] {
             new Fix.Specification.Document {
                 Types = new Types(new[] {
                     new Type { Tag = 1, Name = "One" },
@@ -25,12 +27,11 @@ namespace Omi.Fix.Specification.Test {
             }
             };
 
-            var specification = Merge.All(specifications);
+        var specification = Merge.All(specifications);
 
-            var expected = 3;
-            var actual = specification.Types.Count;
+        var expected = 3;
+        var actual = specification.Types.Count;
 
-            Assert.That(actual, Is.EqualTo(expected), "Verify specification types merge");
-        }
+        Assert.That(actual, Is.EqualTo(expected), "Verify specification types merge");
     }
 }

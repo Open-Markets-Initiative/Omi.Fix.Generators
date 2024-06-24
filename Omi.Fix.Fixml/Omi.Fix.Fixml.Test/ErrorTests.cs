@@ -5,10 +5,12 @@ namespace Omi.Fix.Fixml.Test;
 ///  Fixml Error regression tests
 /// </summary>
 
-public class ErrorTests {
+public class ErrorTests 
+{
 
     [Test]
-    public void VerifyFixmlMissingFromMessage() {
+    public void VerifyFixmlMissingFromMessage() 
+    {
         var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.2.MissingFromMessage.xml");
         var document = Omi.Fixml.Document.From(path);
 
@@ -19,7 +21,8 @@ public class ErrorTests {
     }
 
     [Test]
-    public void VerifyFixmlMissingFromHeader() {
+    public void VerifyFixmlMissingFromHeader() 
+    {
         var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.2.MissingFromHeader.xml");
         var document = Omi.Fixml.Document.From(path);
 
@@ -30,7 +33,8 @@ public class ErrorTests {
     }
 
     [Test]
-    public void VerifyFixmlMissingFromTrailer() {
+    public void VerifyFixmlMissingFromTrailer() 
+    {
         var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.2.MissingFromTrailer.xml");
         var document = Omi.Fixml.Document.From(path);
 
@@ -41,7 +45,8 @@ public class ErrorTests {
     }
 
     [Test]
-    public void VerifyFixmlErrorFromDuplicateMessageTags() {
+    public void VerifyFixmlErrorFromDuplicateMessageTags() 
+    {
         var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.2.DuplicateMessageTags.xml");
         var document = Omi.Fixml.Document.From(path);
 
@@ -52,7 +57,8 @@ public class ErrorTests {
     }
 
     [Test]
-    public void VerifyFixmlErrorFromDuplicateHeaderTags() {
+    public void VerifyFixmlErrorFromDuplicateHeaderTags() 
+    {
         var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.2.DuplicateHeaderTags.xml");
         var document = Omi.Fixml.Document.From(path);
 
@@ -63,7 +69,8 @@ public class ErrorTests {
     }
 
     [Test]
-    public void VerifyFixmlErrorFromDuplicateTrailerTags() {
+    public void VerifyFixmlErrorFromDuplicateTrailerTags() 
+    {
         var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.2.DuplicateTrailerTags.xml");
         var document = Omi.Fixml.Document.From(path);
 

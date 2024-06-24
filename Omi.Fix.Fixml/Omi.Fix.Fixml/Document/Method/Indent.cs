@@ -1,32 +1,32 @@
-﻿namespace Omi.Fixml {
+﻿namespace Omi.Fixml;
     using System.Text;
 
+/// <summary>
+///  Fixml indent information
+/// </summary>
+
+public class Indent
+{
+
     /// <summary>
-    ///  Fixml indent information
+    ///  Indent Text
     /// </summary>
+    public string Text = "  ";
 
-    public class Indent {
+    /// <summary>
+    ///  Number of indents to apply
+    /// </summary>
+    public int Count = 1;
 
-        /// <summary>
-        ///  Indent Text
-        /// </summary>
-        public string Text = "  ";
+    /// <summary>
+    ///  Increment indent count
+    /// </summary>
+    public Indent Increment()
+        => new() { Text = Text, Count = Count + 1 };
 
-        /// <summary>
-        ///  Number of indents to apply
-        /// </summary>
-        public int Count = 1;
-
-        /// <summary>
-        ///  Increment indent count
-        /// </summary>
-        public Indent Increment()
-            => new() { Text = Text, Count = Count + 1 };
-
-        /// <summary>
-        ///  fix this
-        /// </summary>
-        public override string ToString()
-            => new StringBuilder(Text.Length * Count).Insert(0, Text, Count).ToString();
-    }
+    /// <summary>
+    ///  fix this
+    /// </summary>
+    public override string ToString()
+        => new StringBuilder(Text.Length * Count).Insert(0, Text, Count).ToString();
 }

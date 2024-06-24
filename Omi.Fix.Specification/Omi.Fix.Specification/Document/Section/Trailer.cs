@@ -1,12 +1,11 @@
-﻿namespace Omi.Fix.Specification {
+﻿namespace Omi.Fix.Specification;
     using System.Collections.Generic;
 
-    /// <summary>
-    ///  Normalized Fix Specification Trailer Fields List
-    /// </summary>
+/// <summary>
+///  Normalized Fix Specification Trailer Fields List
+/// </summary>
 
-    public class Trailer: List<Field>
-    {
-        
-    }
+public class Trailer : List<Field>
+{
+
 }

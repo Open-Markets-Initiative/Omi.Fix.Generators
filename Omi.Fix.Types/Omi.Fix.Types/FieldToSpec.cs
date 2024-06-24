@@ -1,48 +1,47 @@
-﻿namespace Omi.Fix.Types.Xml {
+﻿namespace Omi.Fix.Types.Xml;
 
 #pragma warning disable CS8618
-/*
+/**
+/// <summary>
+///  Load fixml field elements into generated object classes
+/// </summary>
+/// 
+public partial class ArrayOfFixFieldSpec
+{
     /// <summary>
-    ///  Load fixml field elements into generated object classes
+    /// Convert field fixml file to Specification Types.
     /// </summary>
-    /// 
-    public partial class ArrayOfFixFieldSpec
+    public Specification.Types ToSpecification()
     {
-        /// <summary>
-        /// Convert field fixml file to Specification Types.
-        /// </summary>
-        public Specification.Types ToSpecification()
+        var types = new Fix.Specification.Types();
+        var help = this.fixFieldSpecField;
+
+        foreach (var field in help)
         {
-            var types = new Fix.Specification.Types();
-            var help = this.fixFieldSpecField;
+            var type = new Fix.Specification.Type();
 
-            foreach (var field in help)
+            type.Tag = field.Tag;
+            type.Name = field.Name;
+            type.Description = field.Description;
+            type.Version = field.Version;
+
+            var enums = new Fix.Specification.Enums();
+
+            foreach (var pair in field.EnumPairs)
             {
-                var type = new Fix.Specification.Type();
-
-                type.Tag = field.Tag;
-                type.Name = field.Name;
-                type.Description = field.Description;
-                type.Version = field.Version;
-
-                var enums = new Fix.Specification.Enums();
-
-                foreach (var pair in field.EnumPairs )
-                {
-                    var @enum = pair.ToSpecification();
-                    enums.Add(@enum);
-                }
-
-                type.Enums = enums;
-
-                type.Required = field.IsRequired;
-                type.Underlying = field.DataType;
-
-                types.Add(type.Name, type);
+                var @enum = pair.ToSpecification();
+                enums.Add(@enum);
             }
 
-            return types;
+            type.Enums = enums;
+
+            type.Required = field.IsRequired;
+            type.Underlying = field.DataType;
+
+            types.Add(type.Name, type);
         }
+
+        return types;
     }
-*/
 }
+*/

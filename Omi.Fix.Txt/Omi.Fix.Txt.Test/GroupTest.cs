@@ -1,55 +1,60 @@
-namespace Omi.Fix.Txt.Test {
+namespace Omi.Fix.Txt.Test;
     using NUnit.Framework;
 
-    /// <summary>
-    ///  Fix Txt Message Regression tests 
-    /// </summary>
+/// <summary>
+///  Fix Txt Message Regression tests 
+/// </summary>
 
-    public class MessageTests {
-        [Test]
-        public void VerifyChildrenFromGroups() {
-            var expected = new Children {
+public class MessageTests
+{
+    [Test]
+    public void VerifyChildrenFromGroups()
+    {
+        var expected = new Children {
                 new Group { Name = "AllocAccount", Required = true },
                 new Group { Name = "AllocShares", Required = false }
             };
-            var actual = Children.From("AllocAccount(required), AllocShares");
+        var actual = Children.From("AllocAccount(required), AllocShares");
 
-            Assert.That(actual[1].Name, Is.EqualTo(expected[1].Name), "Verify group children from record");
-        }
+        Assert.That(actual[1].Name, Is.EqualTo(expected[1].Name), "Verify group children from record");
+    }
 
-        [Test]
-        public void VerifyGroupFromString() {
-            var expected = Group.From("ClOrdID(required)");
-            var actual = new Group { Name = "ClOrdID", Required = true };
+    [Test]
+    public void VerifyGroupFromString()
+    {
+        var expected = Group.From("ClOrdID(required)");
+        var actual = new Group { Name = "ClOrdID", Required = true };
 
-            Assert.That(actual.Name, Is.EqualTo(expected.Name), "Verify group from string" );
-        }
+        Assert.That(actual.Name, Is.EqualTo(expected.Name), "Verify group from string");
+    }
 
-        [Test]
-        public void VerifyChildrenFromEntry() {
-            var groups = Groups.From("ClOrdID(required), ClientID, ExecBroker, Account, NoAllocs(required)[AllocAccount(required), AllocShares]");
-            
-            var expected = "AllocShares";
-            var actual = groups[4].Children[1].Name;
+    [Test]
+    public void VerifyChildrenFromEntry()
+    {
+        var groups = Groups.From("ClOrdID(required), ClientID, ExecBroker, Account, NoAllocs(required)[AllocAccount(required), AllocShares]");
 
-            Assert.That(actual, Is.EqualTo(expected), "Verify children correctly read in from line");
-        }
+        var expected = "AllocShares";
+        var actual = groups[4].Children[1].Name;
 
-        [Test]
-        public void VerifyMessageFromTxt() {
-            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Samples", "Messages.txt");
-            var messages = Messages.From(path);
-            var specification = messages[0].ToSpecification();
+        Assert.That(actual, Is.EqualTo(expected), "Verify children correctly read in from line");
+    }
 
-            var expected = specification.Fields[4].Children[1].Name;
-            var actual = "AllocShares";
+    [Test]
+    public void VerifyMessageFromTxt()
+    {
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Samples", "Messages.txt");
+        var messages = Messages.From(path);
+        var specification = messages[0].ToSpecification();
 
-            Assert.That(actual, Is.EqualTo(expected), "Verify children read in from text file");
-        }
+        var expected = specification.Fields[4].Children[1].Name;
+        var actual = "AllocShares";
 
-        [Test]
-        public void VerifyInvalidMessageFromLine() {
-            Assert.Throws<IndexOutOfRangeException>(() => Messages.From(new List<string> { "NewOrderSingle:admin:D: ClOrdID(required), ClientID, ExecBroker, Account, NoAllocs(required)[AllocAccount(required), AllocShares" }), "Verify Line missing type is invalid");
-        }
+        Assert.That(actual, Is.EqualTo(expected), "Verify children read in from text file");
+    }
+
+    [Test]
+    public void VerifyInvalidMessageFromLine()
+    {
+        Assert.Throws<IndexOutOfRangeException>(() => Messages.From(new List<string> { "NewOrderSingle:admin:D: ClOrdID(required), ClientID, ExecBroker, Account, NoAllocs(required)[AllocAccount(required), AllocShares" }), "Verify Line missing type is invalid");
     }
 }

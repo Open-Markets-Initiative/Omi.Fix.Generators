@@ -1,34 +1,35 @@
-﻿namespace Omi.Fix.Specification {
+﻿namespace Omi.Fix.Specification;
+
+/// <summary>
+///  Normalized Fix Specification Components List
+/// </summary>
+
+public class Components : List<Component>
+{
 
     /// <summary>
-    ///  Normalized Fix Specification Components List
+    ///  Is Component included?
     /// </summary>
+    public bool IsIncluded(Component component)
+        => this.Any(current => current.Name == component.Name);
 
-    public class Components : List<Component> {
-
-        /// <summary>
-        ///  Is Component included?
-        /// </summary>
-        public bool IsIncluded(Component component)
-            => this.Any(current => current.Name == component.Name);
-
-        /// <summary>
-        ///  Is Component Missing?
-        /// </summary>
-        public bool IsMissing(Component component)
-            => !IsIncluded(component);
+    /// <summary>
+    ///  Is Component Missing?
+    /// </summary>
+    public bool IsMissing(Component component)
+        => !IsIncluded(component);
 
 
-        /// <summary>
-        /// Add a fix specification to a another
-        /// </summary>
-        public void Add(Components components) {
-            // is there a better way to do this (without altering order)
-            var missing = components.Where(IsMissing).ToList();
+    /// <summary>
+    /// Add a fix specification to a another
+    /// </summary>
+    public void Add(Components components)
+    {
+        // is there a better way to do this (without altering order)
+        var missing = components.Where(IsMissing).ToList();
 
-            AddRange(missing);
-        }
-
-
+        AddRange(missing);
     }
+
+
 }

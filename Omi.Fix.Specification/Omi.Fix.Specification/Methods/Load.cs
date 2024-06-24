@@ -16,6 +16,7 @@
             using var reader = XmlReader.Create(xml);
 
             var serializer = XmlSerializer.FromTypes(new[] { typeof(T) })[0];
+
             return (T)serializer.Deserialize(reader);
         }
 
@@ -26,6 +27,7 @@
             using var reader = info.OpenRead();
 
             var serializer = XmlSerializer.FromTypes(new[] { typeof(T) })[0];
+
             return (T)serializer.Deserialize(reader);
         }
     }

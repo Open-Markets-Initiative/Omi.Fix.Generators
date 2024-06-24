@@ -1,44 +1,44 @@
-﻿namespace Omi.Fixml {
+﻿namespace Omi.Fixml;
+
+/// <summary>
+///  Fixml Child Element
+/// </summary>
+
+public interface IChild
+{
 
     /// <summary>
-    ///  Fixml Child Element
+    ///  Element name
     /// </summary>
+    string Name { get; }
 
-    public interface IChild {
+    /// <summary>
+    ///  Element parent
+    /// </summary>
+    IParent Parent { get; }
 
-        /// <summary>
-        ///  Element name
-        /// </summary>
-        string Name { get; }
+    /// <summary>
+    ///  Verify fixml child element properties
+    /// </summary>
+    void Verify(Fields fields, Components components);
 
-        /// <summary>
-        ///  Element parent
-        /// </summary>
-        IParent Parent { get; }
+    /// <summary>
+    ///  Report erroneous fixml child element properties
+    /// </summary>
+    void Error(Fields fields, Components components, List<string> Errors);
 
-        /// <summary>
-        ///  Verify fixml child element properties
-        /// </summary>
-        void Verify(Fields fields, Components components);
+    /// <summary>
+    ///  Number of levels deep in element tree
+    /// </summary>
+    int Depth();
 
-        /// <summary>
-        ///  Report erroneous fixml child element properties
-        /// </summary>
-        void Error(Fields fields, Components components, List<string> Errors);
+    /// <summary>
+    ///  Convert to specification field
+    /// </summary>
+    Fix.Specification.Field ToSpecification();
 
-        /// <summary>
-        ///  Number of levels deep in element tree
-        /// </summary>
-        int Depth();
-
-        /// <summary>
-        ///  Convert to specification field
-        /// </summary>
-        Fix.Specification.Field ToSpecification();
-
-        /// <summary>
-        ///  Write element to stream
-        /// </summary>
-        void Write(StreamWriter stream, Indent indent);
-    }
+    /// <summary>
+    ///  Write element to stream
+    /// </summary>
+    void Write(StreamWriter stream, Indent indent);
 }

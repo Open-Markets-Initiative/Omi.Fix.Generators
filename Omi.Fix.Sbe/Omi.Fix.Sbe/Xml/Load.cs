@@ -65,6 +65,7 @@
         public static Specification.Types FieldsFrom(field[] fields)
         {
             var messageFields = new Specification.Types();
+
             foreach (var field in fields ?? Array.Empty<field>())
             {
                 if (field != null)
@@ -106,6 +107,7 @@
                         });
 
                     }
+
                     // Repeating group fields  
                     if (message.group != null)
                     {
