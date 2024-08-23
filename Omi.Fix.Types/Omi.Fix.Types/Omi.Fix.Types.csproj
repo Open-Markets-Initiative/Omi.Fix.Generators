@@ -21,9 +21,6 @@
     <None Update="Library\Fields\Fix50SP2.Fields.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Xml\Types\Types.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
