@@ -88,6 +88,31 @@ public class Types : Dictionary<string, Type>
     }
 
     /// <summary>
+    ///  Convert Dictionary of types to Specification Types, using the updated name in updatedName if available
+    /// </summary>
+    public static Types ToTypes(IEnumerable<KeyValuePair<string, Type>> type, Dictionary<string, string> updatedNames)
+    {
+        var types = new Types();
+
+        foreach (var pair in type)
+        {
+            if (types.ContainsKey(pair.Key))
+            {
+                continue;
+            }
+            if (updatedNames.ContainsKey(pair.Key)){
+                types.Add(updatedNames[pair.Key], pair.Value);
+            }
+            else
+            {
+                types.Add(pair.Key, pair.Value);
+            }
+        }
+
+        return types;
+    }
+
+    /// <summary>
     ///  Return types as ordered list
     /// </summary>
     public List<Type> ToList()

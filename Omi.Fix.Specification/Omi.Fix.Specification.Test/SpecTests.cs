@@ -1,33 +1,28 @@
 namespace Omi.Fix.Specification.Test;
     using NUnit.Framework;
-using System.Collections;
-using System.Security.Cryptography;
+    using System.Collections;
 
 /// <summary>
 ///  Regression tests for normalized fix specification merge
 /// </summary>
 
-public class SpecTests
+public class SpecificationTests
 {
-
-    // ENUM TESTS
-
     [Test]
-    public void EnumToStringTest()
+    public void VerifyEnumToString()
     {
-        Enum e = new Enum();
-        e.Name = "NAME";
-        e.Value = "VALUE";
-        e.Description = "DESC";
+        var @enum = new Enum
+        {
+            Name = "Name",
+            Value = "VALUE",
+            Description = "Description"
+        };
 
-        var actual = e.ToString();
-        var expected = "NAME [VALUE] DESC";
+        var expected = "Name [VALUE] Description";
+        var actual = @enum.ToString();
 
         Assert.That(actual, Is.EqualTo(expected), "Verify Enum ToString() Method");
     }
-
-
-    // MESSAGE TESTS
 
     [Test]
     public void MessageAddFieldTest()
@@ -36,13 +31,10 @@ public class SpecTests
         message.AddField("newField", new Kind());
         message.AddField("newField", new Kind());
 
-        var actual = message.Fields.Count();
+        var actual = message.Fields.Count;
 
         Assert.That(actual, Is.EqualTo(2), "Verify Message AddField() Method");
     }
-
-
-    // TYPES TESTS
 
     [Test]
     public void TypeToFieldTest()
@@ -61,31 +53,33 @@ public class SpecTests
     }
 
 
-    // GATHER TESTS
-
     [Test]
-    public void GatherRequiredComponentsTest()
+    public void VerifyRequiredComponentsTest()
     {
-        Field field1 = new Field();
-        Field field2 = new Field();
-        Field field3 = new Field();
-        Field field4 = new Field();
-        field4.Kind = Kind.Component;
+        Field parent = new()
+        {
+            Name = "parent",
+            Required = true,
+        };
+        Field field = new()
+        {
+            Name = "field",
+            Required = false
+        };
+        Field component = new()
+        {
+            Name = "component",
+            Kind = Kind.Component
+        };
+        parent.Children = [field, component];
 
-        field1.Children = [field2, field3];
-        field3.Children = [field4];
+        HashSet<string> set = [];
+        Gather.RequiredComponentsIn(parent, set);
 
-        HashSet<string> set = new HashSet<string>();
-        Gather.RequiredComponentsIn(field1, set);
-
-        var actual = set.Count();
-        var expected = 1;
+        var actual = set.Count;
 
         Assert.That(actual, Is.EqualTo(expected), "Verify Gather RequiredComponentsIn() Method");
     }
-
-
-    //  NORMALIZE TESTS
 
     [Test]
     public void NormalizeUnderLyingTypesTest()
@@ -102,18 +96,16 @@ public class SpecTests
         Assert.That(actual, Is.EqualTo(expected), "Verify Normalize UnderlyingTypes() Method");
     }
 
-
-    //  CLEAN TESTS
-
     [Test]
-    public void CleanComponentsTest()
+    public void VerifyCleanComponentsTest()
     {
-        Components components = new Fix.Specification.Components();
-        components.Add(new Component() { Name = "field1" });
-        components.Add(new Component() { Name = "field2" });
+        // this is a strange test
+        Components components = [
+            new Component() { Name = "one" }, 
+            new Component() { Name = "required" }];
 
-        HashSet<string> required = new HashSet<string>();
-        required.Add("field2");
+        HashSet<string> required = ["required"];
+
         Document document = new Document() {Components = components };
 
         Clean.Components(document, required);
@@ -123,7 +115,8 @@ public class SpecTests
         {
             actual += comp.Name + ", ";
         }
-        var expected = "field2, ";
+
+        var expected = "required, ";
 
         Assert.That(actual, Is.EqualTo(expected), "Verify Clean Components() Method");
     }
