@@ -77,6 +77,7 @@ public class SpecificationTests
         Gather.RequiredComponentsIn(parent, set);
 
         var actual = set.Count;
+        var expected = 1;
 
         Assert.That(actual, Is.EqualTo(expected), "Verify Gather RequiredComponentsIn() Method");
     }
