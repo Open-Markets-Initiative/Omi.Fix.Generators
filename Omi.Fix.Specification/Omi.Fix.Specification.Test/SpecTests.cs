@@ -1,5 +1,6 @@
 namespace Omi.Fix.Specification.Test;
     using NUnit.Framework;
+    using System.Collections;
 
 /// <summary>
 ///  Regression tests for normalized fix specification merge
@@ -35,8 +36,6 @@ public class SpecificationTests
         Assert.That(actual, Is.EqualTo(2), "Verify Message AddField() Method");
     }
 
-    // TYPES TESTS
-
     [Test]
     public void TypeToFieldTest()
     {
@@ -52,6 +51,7 @@ public class SpecificationTests
 
         Assert.That(actual, Is.EqualTo(expected), "Verify Type ToField() Method");
     }
+
 
     [Test]
     public void VerifyRequiredComponentsTest()
@@ -77,7 +77,6 @@ public class SpecificationTests
         Gather.RequiredComponentsIn(parent, set);
 
         var actual = set.Count;
-        var expected = 1;
 
         Assert.That(actual, Is.EqualTo(expected), "Verify Gather RequiredComponentsIn() Method");
     }
@@ -106,6 +105,7 @@ public class SpecificationTests
             new Component() { Name = "required" }];
 
         HashSet<string> required = ["required"];
+
         Document document = new Document() {Components = components };
 
         Clean.Components(document, required);
@@ -115,6 +115,7 @@ public class SpecificationTests
         {
             actual += comp.Name + ", ";
         }
+
         var expected = "required, ";
 
         Assert.That(actual, Is.EqualTo(expected), "Verify Clean Components() Method");
