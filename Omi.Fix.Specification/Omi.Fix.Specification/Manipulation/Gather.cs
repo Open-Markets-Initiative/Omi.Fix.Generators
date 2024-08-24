@@ -56,7 +56,7 @@ public partial class Gather
     public static void RequiredComponentsIn(Field field, HashSet<string> set)
     {
         // gather 
-        if (field.Kind == Kind.Component)
+        if (field.Kind == Kind.Component && field.Required == true)
         {
             set.Add(field.Name);
         }

@@ -23,7 +23,7 @@ public class LibraryTests
         }
 
         var actual = xmls.Count;
-        var expected = 1;
+        var expected = 3;//There are 3 xmls in the specified directory
 
         Assert.That(actual, Is.EqualTo(expected), "Verify Fix Types library count");
     }

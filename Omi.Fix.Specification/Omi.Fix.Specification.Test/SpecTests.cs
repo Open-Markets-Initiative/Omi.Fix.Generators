@@ -67,16 +67,29 @@ public class SpecTests
     public void GatherRequiredComponentsTest()
     {
         Field field1 = new Field {
-            Name = "testing",
+            Name = "testing1",
+            Kind = Kind.Component,
             Required = true
         };
-        Field field2 = new Field();
-        field2.Name = "testing2";
-        Field field3 = new Field();
-        field3.Name = "testing3";
-        field3.Required = true;
-        Field field4 = new Field();
-        field2.Name = "testing4";
+        Field field2 = new Field
+        {
+            Name = "testing2",
+            Kind = Kind.Component,
+            Required = false
+        };
+        Field field3 = new Field
+        {
+            Name = "testing3",
+            Kind = Kind.Component,
+            Required = true
+        };
+        Field field4 = new Field
+        {
+            Name = "testing4",
+            Kind = Kind.Component,
+            Required = false
+        };
+
         List<Field> children = new List<Field>();
         children.Add(field2);
         children.Add(field3);
