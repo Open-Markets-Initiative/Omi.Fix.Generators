@@ -70,20 +70,20 @@ public partial class Gather
     /// <summary>
     ///  Obtain a list of the fields which are found in the messages
     /// </summary>
-    public static HashSet<string> RequiredFieldsIn(Document specification)
+    public static HashSet<string> DependentFieldsIn(Document specification)
     {
         var set = new HashSet<string>();
 
         // add required header
         foreach (var header in specification.Header)
         {
-            RequiredFieldsIn(header, set);
+            DependentFieldsIn(header, set);
         }
 
         // add required trailer
         foreach (var trailer in specification.Trailer)
         {
-            RequiredFieldsIn(trailer, set); ;
+            DependentFieldsIn(trailer, set); ;
         }
 
         // add fields in messages
@@ -91,7 +91,7 @@ public partial class Gather
         {
             foreach (var field in message.Fields)
             {
-                RequiredFieldsIn(field, set);
+                DependentFieldsIn(field, set);
             }
         }
 
@@ -100,7 +100,7 @@ public partial class Gather
         {
             foreach (var field in component.Fields)
             {
-                RequiredFieldsIn(field, set);
+                DependentFieldsIn(field, set);
             }
         }
 
@@ -110,7 +110,7 @@ public partial class Gather
     /// <summary>
     ///  Recursively gather required fields
     /// </summary>
-    public static void RequiredFieldsIn(Field field, HashSet<string> set)
+    public static void DependentFieldsIn(Field field, HashSet<string> set)
     {
         // fields and group count fields are required
         if (field.Kind == Kind.Field || field.Kind == Kind.Group)
@@ -120,7 +120,7 @@ public partial class Gather
 
         foreach (var child in field.Children)
         {
-            RequiredFieldsIn(child, set);
+            DependentFieldsIn(child, set);
         }
     }
 }
