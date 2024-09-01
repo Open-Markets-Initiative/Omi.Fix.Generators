@@ -13,7 +13,7 @@ public partial class Clean
         var components = Gather.RequiredComponentsIn(specification);
         Clean.Components(specification, components);
 
-        var fields = Gather.RequiredFieldsIn(specification);
+        var fields = Gather.DependentFieldsIn(specification);
         Clean.Types(specification, fields);
     }
 
