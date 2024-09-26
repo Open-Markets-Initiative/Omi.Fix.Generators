@@ -32,7 +32,7 @@ jobs:
 
     - name: Upload test results
       if: env.JOB_STATUS == 'success'
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: test-results
         path: '**/test-results.trx'
