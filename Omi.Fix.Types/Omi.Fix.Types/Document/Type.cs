@@ -119,6 +119,7 @@ public class Type
             DataType = DataType,
             Description = Description,
             Version = Version,
+            Underlying = Description.Contains("Valid values") ? "Enum" : "", // hack for now
             Enums = Enums.ToSpecification()
         };
 
