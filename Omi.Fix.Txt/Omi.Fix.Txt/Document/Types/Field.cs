@@ -27,7 +27,7 @@ public class Field
     /// <summary>
     ///  Parse fix field (type) from string
     /// </summary>
-    public static Field From(string line, Enums enums)
+    public static Field From(string line)
     { // add line index
       // validate field record
         if (!IsValidLine(line))
@@ -98,7 +98,7 @@ public class Field
     /// </summary>
     public static bool TryParseType(string[] tokens, out string type)
     {
-        type = ConvertType(tokens[2]);
+        type = tokens[2]; // could make this default to string
 
         return true;
     }
@@ -108,7 +108,7 @@ public class Field
     /// </summary>
     public static string TrimLine(string line)
     {
-        var index = line.IndexOf("#");
+        var index = line.IndexOf('#');
 
         if (index > 0)
         {
@@ -168,7 +168,44 @@ public class Field
     }
 
     /// <summary>
-    ///  Check that type is valid fix (TODO full list...add underlying type)
+    ///  Converts enums to normalized fix specification
+    /// </summary>
+    public Specification.Type ToSpecification(Enums enums)
+        => new()
+        {
+            Tag = NormalizeTag(Number),
+            Name = Name, // trim?
+            DataType = NormalizeType(Name, Type, enums),
+            Underlying = NormalizeUnderlying(Type),
+            Enums = enums.ToSpecification(Name, Type)
+        };
+
+    /// <summary>
+    ///  Normalize tag
+    /// </summary>
+    public static uint NormalizeTag(string text)
+        => uint.Parse(text);
+
+    /// <summary>
+    ///  Normalize type
+    /// </summary>
+    public static string NormalizeType(string name, string type, Enums enums)
+    {
+        if (enums.TryGetType(name, out var value))
+        {
+            return value;
+        }
+
+        if (enums.TryGetType(type, out value))
+        {
+            return value;
+        }
+
+        return ConvertType(type);
+    }
+
+    /// <summary>
+    ///  Check that type is valid fix 
     /// </summary>
     public static string ConvertType(string text)
     {
@@ -178,6 +215,7 @@ public class Field
         {
             case "datetime":
                 return "UTCTimeStamp";
+
             case "bool":
             case "Boolean":
                 return "Boolean";
@@ -186,8 +224,10 @@ public class Field
             case "data":
             case "float":
             case "Amt":
+            case "price":
             case "PriceOffset":
             case "Qty":
+            case "qty":
             case "int":
             case "day-of-month":
             case "String":
@@ -199,7 +239,7 @@ public class Field
             case "UTCDate":
             case "UTCTimeOnly":
             case "long":
-                return type;
+                return type.ToUpper(); // need all values here
 
             default:
                 return "String";
@@ -207,36 +247,26 @@ public class Field
     }
 
     /// <summary>
-    ///  Converts enums to normalized fix specification
+    ///  Underlying custom types
     /// </summary>
-    public Specification.Type ToSpecification(Enums enums)
-        => new()
-        {
-            Tag = NormalizeTag(Number),
-            Name = Name,
-            Underlying = NormalizeType(Name, Type, enums),
-            Enums = enums.ToSpecification(Name)
-        };
-
-    /// <summary>
-    ///  Normalize tag
-    /// </summary>
-    public uint NormalizeTag(string text)
-        => uint.Parse(text);
-
-    /// <summary>
-    ///  Normalize type
-    /// </summary>
-    public string NormalizeType(string name, string text, Enums enums)
+    public static string NormalizeUnderlying(string text)
     {
         var type = text.Trim();
 
-        if (enums.ContainsKey(name))
+        switch (type)
         {
-            return enums.TypeFor(name);
-        }
+            case "long": // allow overrides of some types
+            case "string":
+            case "int":
+            case "char":
+            case "hexlong":
+            case "data":
+            case "datalen":
+                return type;
 
-        return type.ToUpper();
+            default:
+                return "";
+        }
     }
 
     /// <summary>

@@ -1,6 +1,7 @@
 ﻿namespace Omi.Fix.Txt;
     using System.Collections.Generic;
     using System.Linq;
+using System.Xml.Linq;
 
 /// <summary>
 ///  Dictionary of the Enum(s) found in a file, with its name as the index
@@ -40,9 +41,8 @@ public class Enums : Dictionary<string, Enum>
     /// </summary>
     public static Enums From(IEnumerable<string> lines)
     {
-        var enums = new List<string>();
-
         // Check that line contains enums
+        var enums = new List<string>();
         foreach (var line in lines)
         {
             if (line.Contains(":enum:") && !line[0].Equals("#"))
@@ -80,11 +80,15 @@ public class Enums : Dictionary<string, Enum>
     }
 
     /// <summary>
-    ///  Process enum type
+    ///  Determine enum type if it exists
     /// </summary>
-    public string TypeFor(string type)
+    public bool TryGetType(string text, out string type)
     {
-        if (TryGetValue(type, out var current))
+        type = string.Empty;
+
+        var key = text.Trim();
+
+        if (TryGetValue(key, out var current))
         {
             // check if all values are single characters
             bool ischar = true;
@@ -100,46 +104,48 @@ public class Enums : Dictionary<string, Enum>
 
             if (ischar)
             {
-                return "CHAR";
+                type = "CHAR";
             }
+            else
+            {
+                type = "STRING";
+            }
+
+            return true;
         }
 
-        // Use most general version
-        return "STRING";
+        return false;
     }
-
 
     /// <summary>
     ///  Convert fixml enums to normalized fix specification enums for a given field name
     /// </summary>
-    public Specification.Enums ToSpecification(string key)
+    public Specification.Enums ToSpecification(string name, string type)
     {
         var enums = new Fix.Specification.Enums();
 
         // Different names for beginstring and fixversion
-        if (key.Contains("BeginString"))
+        if (name.Contains("BeginString"))
         {
-            key = "FixVersion";
+            name = "FixVersion";
         }
 
         // Check for field name in enums
-        if (!ContainsKey(key))
+        if (TryGetValue(name, out var @enum))
         {
-            return enums;
+            foreach (var line in @enum.Values)
+            {
+                var enumline = Enum.ToSpecification(line);
+                enums.Add(enumline);
+            }
         }
-
-        var enumerator = this[key].Values;
-
-        if (enumerator == null)
+        else if (TryGetValue(type, out @enum))
         {
-            return enums;
-        }
-
-        // If enums exist, return in correct specification
-        foreach (var line in enumerator)
-        {
-            var enumline = Enum.ToSpecification(line);
-            enums.Add(enumline);
+            foreach (var line in @enum.Values)
+            {
+                var enumline = Enum.ToSpecification(line);
+                enums.Add(enumline);
+            }
         }
 
         return enums;

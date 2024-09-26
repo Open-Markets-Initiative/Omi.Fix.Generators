@@ -21,19 +21,18 @@ public class Fields : List<Field>
     {
         var lines = File.ReadLines(path);
 
-        return From(lines);
+        return From(lines, Enums.From(lines));
     }
 
     /// <summary>
     /// Obtain lines in the path to our text file, returns fields
     /// </summary>
-    public static Fields From(IEnumerable<string> lines)
+    public static Fields From(IEnumerable<string> lines, Enums enums)
     {
         var fields = new List<string>();
 
         foreach (var line in lines)
         {
-
             if (string.IsNullOrWhiteSpace(line))
             {
                 continue;
@@ -47,7 +46,7 @@ public class Fields : List<Field>
             fields.Add(line);
         }
 
-        return Process(fields, Enums.From(lines));
+        return Process(fields, enums);
     }
 
     /// <summary>
@@ -72,7 +71,7 @@ public class Fields : List<Field>
                 continue;
             }
 
-            Field field = Field.From(line, enums);
+            Field field = Field.From(line);
             fields.Add(field);
         }
 

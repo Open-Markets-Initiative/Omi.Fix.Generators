@@ -41,13 +41,18 @@ public class Document
     ///  Fix Txt document from records
     /// </summary>
     public static Document From(IEnumerable<string> lines)
-        => new()
+    {
+        var enums = Enums.From(lines);
+
+        return new()
         { // need to parse these in order 
             Information = Information.From(lines),
-            Enums = Enums.From(lines),
-            Fields = Fields.From(lines),
+            Enums = enums,
+            Fields = Fields.From(lines, enums),
             Messages = Messages.From(lines)
         };
+    }
+
 
     /// <summary>
     ///  Convert fix txt to normalized fix specification

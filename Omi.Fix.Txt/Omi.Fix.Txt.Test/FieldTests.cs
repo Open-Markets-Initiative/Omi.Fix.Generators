@@ -7,50 +7,49 @@ namespace Omi.Fix.Txt.Test;
 
 public class FieldTests
 {
-
     [Test]
     public void VerifyFieldNumberFromLine()
     {
-        var field = Field.From("1:Account:string", new Enums());
+        var field = Field.From("1:Account:string");
 
         var expected = "1";
         var actual = field.Number;
 
-        Assert.That(actual, Is.EqualTo(expected), "Verify field tag number from text record");
+        Assert.That(actual, Is.EqualTo(expected), "Verify field tag number from FIX text field line");
     }
 
     [Test]
     public void VerifyFieldNameFromLine()
     {
-        var field = Field.From("1:Account:string", new Enums());
+        var field = Field.From("1:Account:string");
 
         var expected = "Account";
         var actual = field.Name;
 
-        Assert.That(actual, Is.EqualTo(expected), "Verify field name from text record");
+        Assert.That(actual, Is.EqualTo(expected), "Verify field name from FIX text field line");
     }
 
     [Test]
     public void VerifyFieldTypeStringFromLine()
     {
-        var field = Field.From("1:Account:string", new Enums());
+        var field = Field.From("1:Account:string");
 
-        var expected = "String";
+        var expected = "string";
         var actual = field.Type;
 
-        Assert.That(actual, Is.EqualTo(expected), "Verify field type from text record (String)");
+        Assert.That(actual, Is.EqualTo(expected), "Verify string field type for FIX text field line");
     }
 
     [Test]
     public void VerifyFieldTypeCommentFromLine()
     {
-        var expected = Field.From("1:Account:string", new Enums()).ToString();
-        var actual = Field.From("1:Account:string #Comment", new Enums()).ToString();
+        var expected = Field.From("1:Account:string").ToString();
+        var actual = Field.From("1:Account:string #Comment").ToString();
 
-        Assert.That(actual, Is.EqualTo(expected), "Verify field comments are trimmed for text record");
+        Assert.That(actual, Is.EqualTo(expected), "Verify field comments are trimmed for FIX text field line");
     }
 
     [Test]
     public void VerifyInvalidLineThrowsError()
-        => Assert.Throws<ArgumentException>(() => Field.From("1:Account:", new Enums()), "Verify Line missing type is invalid");
+        => Assert.Throws<ArgumentException>(() => Field.From("1:Account:"), "Verify Line missing type is invalid");
 }
