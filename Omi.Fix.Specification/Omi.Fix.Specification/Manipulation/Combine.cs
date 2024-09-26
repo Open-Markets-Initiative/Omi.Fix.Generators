@@ -53,6 +53,40 @@ public static class Merge
     }
 
     /// <summary>
+    ///  Discrete types list for a specifications
+    /// </summary>
+    public static List<Type> DiscreteTypesByTag(IEnumerable<Document> specifications)
+    {
+        var types = new Dictionary<uint, Type>();
+
+        foreach (var specification in specifications)
+        {
+            foreach (var type in specification.Types.Values)
+            {
+                if (type.Tag == 315)
+                {
+                    var yo = "";
+                }
+
+                if (types.TryGetValue(type.Tag, out var existing))
+                {
+                    if (type.Enums.Count > 0) // make a merge?
+                    {
+                        // resolve enums
+                        existing.Enums.Merge(type.Enums);
+                    }
+                }
+                else
+                {
+                    types.Add(type.Tag, type);
+                }
+            }
+        }
+
+        return types.Values.OrderBy(type => type.Tag).ToList();
+    }
+
+    /// <summary>
     /// Add a fix specification to a another
     /// </summary>
     public static void Add(this Document merged, Document specification)
@@ -61,7 +95,19 @@ public static class Merge
         merged.Header.AddRange(specification.Header.Where(header => !merged.Header.Contains(header)));
         merged.Trailer.AddRange(specification.Trailer.Where(trailer => !merged.Trailer.Contains(trailer)));
         merged.Messages.AddRange(specification.Messages.Where(message => !merged.Messages.Select(message => message.Name).Contains(message.Name)));
-        merged.Types = Specification.Types.ToTypes(merged.Types.Concat(specification.Types.Where(field => !merged.Types.Contains(field))));
+        merged.Types = Specification.Types.ToTypes(merged.Types.Concat(specification.Types.Where(type => !merged.Types.Contains(type))));
+    }
+
+    /// <summary>
+    /// Add a fix specification to a another
+    /// </summary>
+    public static void NoDuplicates(this Document merged, Document specification)
+    { // this can be better
+        merged.Components.AddRange(specification.Components.Where(component => !merged.Components.Contains(component)));
+        merged.Header.AddRange(specification.Header.Where(header => !merged.Header.Contains(header)));
+        merged.Trailer.AddRange(specification.Trailer.Where(trailer => !merged.Trailer.Contains(trailer)));
+        merged.Messages.AddRange(specification.Messages.Where(message => !merged.Messages.Select(message => message.Name).Contains(message.Name)));
+        merged.Types = Specification.Types.ToTypes(merged.Types.Concat(specification.Types.Where(type => !merged.Types.Contains(type))));
     }
 
 

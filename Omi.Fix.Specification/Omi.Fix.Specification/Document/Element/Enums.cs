@@ -8,10 +8,25 @@
 
 public class Enums : List<Enum>
 {
-
     /// <summary>
     ///  Does fix type have any enumerated values
     /// </summary>
     public bool Exist
         => this.Any();
+
+    /// <summary>
+    ///  Does fix type have any enumerated values
+    /// </summary>
+    public IEnumerable<string> Values()
+        => from @enum in this 
+           select @enum.Value;
+
+    /// <summary>
+    ///  
+    /// </summary>
+    public void Merge(Enums enums)
+    {
+        var intersection = new HashSet<string>(Values().Intersect(enums.Values()));
+        AddRange(enums.Where(@enum => !intersection.Contains(@enum.Value)));
+    }
 }
