@@ -117,14 +117,10 @@ public class Document
     ///  Try Get Message
     /// </summary>
     public bool TryGetMessage(string name, out Message message)
-    {
-        message = Messages.FirstOrDefault(current => current.Name == name);
-
-        return message != null;
-    }
+        => Messages.TryGetByName(name, out message);
 
     /// <summary>
-    ///  Get Message by Name
+    ///  Get message by name
     /// </summary>
     public Message GetMessage(string name)
         => Messages.First(current => current.Name == name);
@@ -134,11 +130,6 @@ public class Document
     /// </summary>
     public void Set(Types types)
         => Types.AddOverwrite(types);
-
-    #endregion
-
-    #region Implementation
-    ///////////////////////////////////////////////////////
 
     /// <summary>
     ///  Display Normalized Fix Specification
