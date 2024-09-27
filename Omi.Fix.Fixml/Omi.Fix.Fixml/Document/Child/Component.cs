@@ -15,7 +15,7 @@ public class Component : IChild
     /// <summary>
     ///  Fixml component parent
     /// </summary>
-    public IParent Parent { get; set; } // how to deal with this
+    public required IParent Parent { get; set; } // how to deal with this
 
     /// <summary>
     ///  Component depth in element tree

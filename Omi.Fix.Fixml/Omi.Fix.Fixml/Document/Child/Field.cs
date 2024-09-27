@@ -22,7 +22,7 @@ public class Field : IChild
     /// <summary>
     ///  Fixml field parent
     /// </summary>
-    public IParent Parent { get; set; } // how to deal with this
+    public required IParent Parent { get; set; } // how to deal with this
 
     /// <summary>
     ///  Component depth in element tree

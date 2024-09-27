@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fixml;
     using System.Linq;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 ///  Fixml Trailer section
@@ -52,6 +53,7 @@ public class Trailer : IParent
             // Verify format
             section.Elements.Add(new Child.Field
             {
+                Parent = section,
                 Name = field.Name,
                 Required = field.Required,
             });
