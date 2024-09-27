@@ -4,6 +4,8 @@
 
 Composable platform for [FIX](https://en.wikipedia.org/wiki/Financial_Information_eXchange "Financial Information eXchange") source generation.
 
+[![C# NUnit Regression Testing](https://github.com/Open-Markets-Initiative/Omi.Fix.Generators/actions/workflows/github-actions.yml/badge.svg)](https://github.com/Open-Markets-Initiative/Omi.Fix.Generators/actions/workflows/github-actions.yml)
+
 Supported Formats:
 
 Fixml: Industry standard Fix Xml format
