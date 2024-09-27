@@ -1,15 +1,11 @@
-﻿using System.Net.NetworkInformation;
-using System.Numerics;
-
-namespace Omi.Fix.Specification;
+﻿namespace Omi.Fix.Specification;
 
 /// <summary>
-///  Merge 
+///  Merge intermediate FIX specifications
 /// </summary>
 
 public static class Merge
 {
-
     /// <summary>
     /// Combine a list of specifications. Uses field in duplicates set if available to remove duplicates. Uses name in updatedNames if available.
     /// </summary>
@@ -53,7 +49,7 @@ public static class Merge
     }
 
     /// <summary>
-    ///  Discrete types list for a specifications
+    ///  Discrete types list for a list specifications (keep first tag, merge enum values)
     /// </summary>
     public static List<Type> DiscreteTypesByTag(IEnumerable<Document> specifications)
     {
@@ -63,16 +59,10 @@ public static class Merge
         {
             foreach (var type in specification.Types.Values)
             {
-                if (type.Tag == 315)
-                {
-                    var yo = "";
-                }
-
                 if (types.TryGetValue(type.Tag, out var existing))
                 {
                     if (type.Enums.Count > 0) // make a merge?
                     {
-                        // resolve enums
                         existing.Enums.Merge(type.Enums);
                     }
                 }
