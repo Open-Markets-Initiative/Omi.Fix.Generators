@@ -79,4 +79,68 @@ public class ErrorTests
 
         Assert.That(expected, Is.EqualTo(actual), "Verify Duplicate Tags in Trailer are Identified ");
     }
+
+    [Test]
+    public void VerifyGatherComponents()
+    {
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.4.ShortDefinition.xml");
+        var document = Omi.Fixml.Document.From(path);
+
+        var actual = document.GatherComponents();
+
+        var expected = new HashSet<string> {
+            "Component1",
+            "Component2",
+            "Component3",
+            "Component4",
+            "Component5"
+        };
+
+        Assert.That(actual, Is.EquivalentTo(expected), "Document Gathered in-use components improperly");
+    }
+
+    [Test]
+    public void VerifyTripleNestedComponentWithDeletingMiddleComponent()
+    {
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.4.ShortDefinition.xml");
+        var document = Omi.Fixml.Document.From(path);
+
+        document.Components.Remove("Component2");
+
+        var actual = document.GatherComponents();
+
+        var expected = new HashSet<string>();
+        expected.UnionWith(new[] {
+            "Component1",
+            "Component4",
+            "Component5"
+        });
+
+        Assert.That(actual, Is.EquivalentTo(expected), "Document Gathered in-use components improperly after removal");
+    }
+
+    [Test]
+    public void VerifyGatherFields()
+    {
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.4.ShortDefinition.xml");
+        var document = Omi.Fixml.Document.From(path);
+
+        var actual = document.GatherFields();
+
+        var expected = new HashSet<string>();
+        expected.UnionWith(new[] {
+            "BeginString",
+            "MsgType",
+            "CheckSum",
+            "AdvId",
+            "NoLegs",
+            "LegIOIQty",
+            "OrderQty",
+            "Account",
+            "SendingTime",
+            "SecurityDesc"
+        });
+
+        Assert.That(actual, Is.EquivalentTo(expected), "Document Gathered in-use fields improperly");
+    }
 }

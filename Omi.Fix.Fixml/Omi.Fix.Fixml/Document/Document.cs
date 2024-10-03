@@ -111,13 +111,13 @@ public class Document
         // Gather included fields in header
         foreach (var header in Header.Elements)
         {
-            FieldsIn(header, fields);
+            FieldsIn(header, Components, fields);
         }
 
         // Gather included fields in trailer
         foreach (var trailer in Trailer.Elements)
         {
-            FieldsIn(trailer, fields);
+            FieldsIn(trailer, Components, fields);
         }
 
         // Gather included fields in messages
@@ -125,16 +125,7 @@ public class Document
         {
             foreach (var element in message.Elements)
             {
-                FieldsIn(element, fields);
-            }
-        }
-
-        // Gather included fields
-        foreach (var component in Components.Values)
-        {
-            foreach (var element in component.Elements)
-            {
-                FieldsIn(element, fields);
+                FieldsIn(element, Components, fields);
             }
         }
 
@@ -149,15 +140,15 @@ public class Document
         var components = new HashSet<string>();
 
         // Gather included components in header
-        foreach (var header in Header.Elements)
+        foreach (var element in Header.Elements)
         {
-            ComponentsIn(header, components);
+            ComponentsIn(element, Components, components);
         }
 
         // Gather included components in trailer
-        foreach (var trailer in Trailer.Elements)
+        foreach (var element in Trailer.Elements)
         {
-            ComponentsIn(trailer, components);
+            ComponentsIn(element, Components, components);
         }
 
         // Gather included components in messages
@@ -165,25 +156,9 @@ public class Document
         {
             foreach (var element in message.Elements)
             {
-                ComponentsIn(element, components);
+                ComponentsIn(element, Components, components);
             }
         }
-
-        // Gather nested included components
-        var nested = new HashSet<string>();
-
-        foreach (var name in components)
-        {
-            if (Components.TryGetValue(name, out var component))
-            {
-                foreach (var element in component.Elements)
-                {
-                    ComponentsIn(element, nested);
-                }
-            }
-        }
-
-        components.UnionWith(nested);
 
         return components;
     }
@@ -191,19 +166,26 @@ public class Document
     /// <summary>
     /// Recursively gather required components
     /// </summary>
-    public static void ComponentsIn(IChild element, HashSet<string> components)
+    public static void ComponentsIn(IChild element, Components Components, HashSet<string> set)
     {
         switch (element)
         {
             case Child.Group group:
                 foreach (var child in group.Elements)
                 {
-                    ComponentsIn(child, components);
+                    ComponentsIn(child, Components, set);
                 }
                 break;
 
             case Child.Component component:
-                components.Add(component.Name);
+                if (Components.TryGetValue(component.Name, out var ComponentDef))
+                {
+                    set.Add(component.Name);
+                    foreach (var child in ComponentDef.Elements)
+                    {
+                        ComponentsIn(child, Components, set);
+                    }
+                }
                 break;
         }
     }
@@ -211,7 +193,7 @@ public class Document
     /// <summary>
     ///  Recursively gather required fields
     /// </summary>
-    public static void FieldsIn(IChild element, HashSet<string> fields)
+    public static void FieldsIn(IChild element, Components Components, HashSet<string> fields)
     {
         switch (element)
         {
@@ -224,7 +206,17 @@ public class Document
 
                 foreach (var child in group.Elements)
                 {
-                    FieldsIn(child, fields);
+                    FieldsIn(child, Components, fields);
+                }
+                break;
+
+            case Child.Component component:
+                if (Components.TryGetValue(component.Name, out var ComponentDef))
+                {
+                    foreach (var child in ComponentDef.Elements)
+                    {
+                        FieldsIn(child, Components, fields);
+                    }
                 }
                 break;
         }

@@ -38,6 +38,9 @@
     <None Update="Fixmls\Fix.v4.2.MissingFromTrailer.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+	  <None Update="Fixmls\Fix.v4.4.ShortDefinition.xml">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
     <None Update="Fixmls\fixmlmissingrequired.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

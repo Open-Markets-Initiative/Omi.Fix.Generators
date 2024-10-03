@@ -13,7 +13,7 @@ public class FilterTests
 
         var components = document.Filter(message => message.Name.Equals("ExecutionReport"));
 
-        var expected = 36;
+        var expected = 49;
         var actual = document.Components.Count;
 
         Assert.That(actual, Is.EqualTo(expected), "Document filter incorrectly normalized components");
@@ -27,7 +27,7 @@ public class FilterTests
 
         var fields = document.Filter(message => message.Name.Equals("ExecutionAcknowledgement"));
 
-        var expected = 250;
+        var expected = 275;
         var actual = document.Fields.Count;
 
         Assert.That(actual, Is.EqualTo(expected), "Document filter incorrectly normalized fields");

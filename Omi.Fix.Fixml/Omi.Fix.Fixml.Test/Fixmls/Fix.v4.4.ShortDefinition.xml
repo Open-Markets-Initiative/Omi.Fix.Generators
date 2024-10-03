@@ -1,0 +1,53 @@
+﻿<fix major="4" minor="4">
+	<header>
+		<field name="BeginString" required="Y"/>
+		<field name="MsgType" required="Y"/>
+	</header>
+	<trailer>
+		<field name="CheckSum" required="Y"/>
+	</trailer>
+	<messages>
+		<message name="Message1" msgtype="7" msgcat="app">
+			<field name="AdvId" required="Y" />
+			<group name="NoLegs" required="N">
+				<component name="Component1" required="N" />
+				<component name="Component4" required="N" />
+				<field name="LegIOIQty" required="N" />
+			</group>
+		</message>
+		<message name="Message2" msgtype="7" msgcat="app">	
+			<component name="Component5" required="N" />
+			<field name="CheckSum" required ="N" />
+		</message>
+	</messages>
+	<components>
+		<component name="Component1">
+			<field name="OrderQty" required="N" />
+			<component name="Component2" />
+		</component>
+		<component name="Component2">
+			<field name="Account" required="N" />
+			<component name="Component3" />
+		</component>
+		<component name="Component3">
+			<field name="SendingTime" required="N" />
+		</component>
+		<component name="Component4">
+			<field name="SecurityDesc" required="N" />
+		</component>
+		<component name="Component5">
+			<field name="SecurityDesc" required="N" />
+		</component>
+	</components>
+	<fields>
+		<field number="1" name="BeginString" required="Y"/>
+		<field number="2" name="MsgType" required="Y"/>
+		<field number="3" name="CheckSum" required="Y"/>
+		<field number="4" name="AdvId" required="Y" />
+		<field number="5" name="LegIOIQty" required="N" />
+		<field number="14" name="Account" type="QTY"/>
+		<field number="1" name="SendingTime" required="Y"/>
+		<field number="15" name="OrderQty" type="CURRENCY"/>
+		<field number="552" name="NoLegs" type="NumInGroup"/>		
+	</fields>
+</fix>
