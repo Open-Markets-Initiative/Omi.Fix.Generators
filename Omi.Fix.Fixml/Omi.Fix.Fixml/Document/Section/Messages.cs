@@ -20,6 +20,11 @@ public class Messages : List<Message>
     }
 
     /// <summary>
+    ///  Errors in the Messages
+    /// </summary>
+    public List<string> Errors = new List<string>();
+
+    /// <summary>
     ///  Gather messages from fixml xml
     /// </summary>
     public static Messages From(Xml.fix xml)

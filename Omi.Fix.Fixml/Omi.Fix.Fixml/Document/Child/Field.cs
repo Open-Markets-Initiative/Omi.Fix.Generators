@@ -129,11 +129,15 @@ public class Field : IChild
         if (string.IsNullOrWhiteSpace(Name))
         {
             Errors.Add("Field name is missing");
+
+            fields.Errors.Add("Field name is missing");
         }
 
         if (!fields.ContainsKey(Name))
         {
             Errors.Add($"{Name}: Field is missing from dictionary");
+
+            fields.Errors.Add($"{Name}: Field is missing from dictionary");
         }
 
     }

@@ -89,6 +89,8 @@ public class Component : IChild
         if (string.IsNullOrWhiteSpace(Name))
         {
             Errors.Add("Component name is missing");
+
+            components.Errors.Add("Component name is missing");
         }
 
         if (components.TryGetValue(Name, out var temp))
@@ -101,6 +103,8 @@ public class Component : IChild
         else
         {
             Errors.Add($"{Name}: Component is missing from dictionary");
+
+            components.Errors.Add($"{Name}: Component is missing from dictionary");
         }
     }
 

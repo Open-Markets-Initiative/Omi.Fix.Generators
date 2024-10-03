@@ -20,6 +20,11 @@ public class Header : IParent
         => Elements.Any();
 
     /// <summary>
+    ///  Errors in the Header
+    /// </summary>
+    public List<string> Errors = new List<string>();
+
+    /// <summary>
     /// Header components from xml file
     /// </summary>
     public static Header From(Xml.fix xml)
@@ -89,6 +94,8 @@ public class Header : IParent
             foreach (var repeat in repeats)
             {
                 Errors.Add($"{repeat} : Tag occurs more than once in header");
+
+                this.Errors.Add($"{repeat} : Tag occurs more than once in header");
             }
         }
 

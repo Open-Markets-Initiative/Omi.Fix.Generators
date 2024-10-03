@@ -33,6 +33,11 @@ public class Components : Dictionary<string, Component>
         => new(xml);
 
     /// <summary>
+    ///  Errors in the Components Section
+    /// </summary>
+    public List<string> Errors = new List<string>();
+
+    /// <summary>
     /// Fix Component from xml file
     /// </summary>
     public static Xml.fixComponent[] ListFrom(Xml.fix xml)

@@ -20,6 +20,11 @@ public class Information
     public string Minor = string.Empty;
 
     /// <summary>
+    ///  Errors in the Information
+    /// </summary>
+    public List<string> Errors = new List<string>();
+
+    /// <summary>
     ///  Convert xml attributs to fixml information
     /// </summary>
     public static Information From(Xml.fix xml)
@@ -71,11 +76,23 @@ public class Information
     /// <summary>
     ///  Report errors in fixml information
     /// </summary>
-    public void Error()
+    public void Error(Fields fields, Components components, List<string> Errors)
     {
+        if (string.IsNullOrWhiteSpace(Major))
+        {
+            Console.WriteLine("Missing Major Version");
+
+            Errors.Add("Missing Major Version");
+
+            this.Errors.Add("Missing Major Version");
+        }
         if (string.IsNullOrWhiteSpace(Minor))
         {
             Console.WriteLine("Missing Minor Version");
+
+            Errors.Add("Missing Minor Version");
+
+            this.Errors.Add("Missing Minor Version");
         }
     }
 

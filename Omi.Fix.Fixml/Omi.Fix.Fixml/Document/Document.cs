@@ -46,19 +46,14 @@ public class Document
         {
             var errors = new List<string>();
 
-            // fixmls require version information
-            if (string.IsNullOrWhiteSpace(Information.Major))
-            {
-                errors.Add("Missing Major Information");
-            }
-
+            Information.Error(Fields, Components, errors);
             Header.Error(Fields, Components, errors);
             Trailer.Error(Fields, Components, errors);
 
             // verify that all elements in Messages
             foreach (var message in Messages)
             {
-                message.Error(Fields, Components, errors);
+                message.Error(Fields, Components, errors, Messages);
             }
 
             return errors;

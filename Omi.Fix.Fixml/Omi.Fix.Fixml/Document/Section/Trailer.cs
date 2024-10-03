@@ -21,6 +21,11 @@ public class Trailer : IParent
         => Elements.Any();
 
     /// <summary>
+    ///  Errors in the Trailer
+    /// </summary>
+    public List<string> Errors = new List<string>();
+
+    /// <summary>
     ///  Convert xml file elements to fixml trailer
     /// </summary>
     public static Trailer From(Xml.fix xml)
@@ -96,6 +101,8 @@ public class Trailer : IParent
             foreach (var repeat in repeats)
             {
                 Errors.Add($"{repeat} : Tag occurs more than once in trailer");
+
+                this.Errors.Add($"{repeat} : Tag occurs more than once in trailer");
             }
         }
 

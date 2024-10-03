@@ -32,6 +32,11 @@ public class Fields : Dictionary<string, Field>
     }
 
     /// <summary>
+    ///  Errors in the Fields Section
+    /// </summary>
+    public List<string> Errors = new List<string>();
+
+    /// <summary>
     /// Convert from specification Types to Xml Fields
     /// </summary>
     public static Fields From(Fix.Specification.Types fields)
