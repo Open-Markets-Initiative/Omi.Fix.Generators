@@ -38,7 +38,7 @@ public class Document
     /// <summary>
     ///  Construct a document from xml fields records
     /// </summary>
-    public static Document From(Xml.FixFields xml, string path = default)
+    public static Document From(Xml.FixFields xml, string? path = default)
         => new()
         {
             Information = Information.From(xml, path),
@@ -48,7 +48,7 @@ public class Document
     /// <summary>
     ///  Construct a document from xml types records
     /// </summary>
-    public static Document From(Xml.FixTypes xml, string path = default)
+    public static Document From(Xml.FixTypes xml, string? path = default)
         => new()
         {
             Information = Information.From(xml, path),
