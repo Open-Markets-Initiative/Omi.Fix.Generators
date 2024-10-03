@@ -91,7 +91,14 @@ public class Component : IChild
             Errors.Add("Component name is missing");
         }
 
-        if (!components.ContainsKey(Name))
+        if (components.TryGetValue(Name, out var temp))
+        {
+            foreach (var child in temp.Elements)
+            {
+                child.Error(fields, components, Errors);
+            }
+        }
+        else
         {
             Errors.Add($"{Name}: Component is missing from dictionary");
         }

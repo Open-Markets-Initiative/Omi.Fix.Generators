@@ -1,0 +1,39 @@
+﻿<fix major="4" minor="4">
+	<header>
+		<field name="BeginString" required="Y"/>
+		<field name="MsgType" required="Y"/>
+	</header>
+	<trailer>
+		<field name="CheckSum" required="Y"/>
+	</trailer>
+	<messages>
+		<message name="Advertisement" msgtype="7" msgcat="app">
+			<field name="AdvId" required="Y" />
+			<group name="NoLegs" required="N">
+				<component name="Component1" required="N" />
+				<field name="LegIOIQty" required="N" />
+			</group>
+		</message>
+	</messages>
+	<components>
+		<component name="Component1">
+			<field name="OrderQty" required="N" />
+			<component name="Component2" />
+		</component>
+		<component name="Component2">
+			<field name="Account" required="N" />
+			<component name="Component3" />
+		</component>
+		<component name="Component3">
+			<field name="SecurityDesc" required="N" />
+		</component>
+	</components>
+	<fields>
+		<field number="1" name="BeginString" required="Y"/>
+		<field number="2" name="MsgType" required="Y"/>
+		<field number="3" name="CheckSum" required="Y"/>
+		<field number="14" name="Account" type="QTY"/>
+		<field number="15" name="OrderQty" type="CURRENCY"/>
+		<field number="552" name="NoLegs" type="NumInGroup"/>
+	</fields>
+</fix>

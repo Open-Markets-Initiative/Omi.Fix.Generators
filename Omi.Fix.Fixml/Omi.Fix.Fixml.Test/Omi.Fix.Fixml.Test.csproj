@@ -20,6 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Fixmls\Fix.v4.4.MissingFieldDefinition.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Fixmls\Fix.v4.4.MissingComponentDefinition.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Fixmls\Fix.v4.2.DuplicateHeaderTags.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

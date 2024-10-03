@@ -143,4 +143,40 @@ public class ErrorTests
 
         Assert.That(actual, Is.EquivalentTo(expected), "Document Gathered in-use fields improperly");
     }
+
+    [Test]
+    public void VerifyFieldMissingFromDictionary()
+    {
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.4.MissingFieldDefinition.xml");
+        var document = Omi.Fixml.Document.From(path);
+
+        var actual = document.Errors;
+
+        var expected = new List<string>
+        {
+            "AdvId: Field is missing from dictionary",
+            "SecurityDesc: Field is missing from dictionary",
+            "LegIOIQty: Field is missing from dictionary"
+        };
+
+        Assert.That(actual, Is.EquivalentTo(expected), "Document identified missing field definition improperly.");
+    }
+
+    [Test]
+    public void VerifyComponentMissingFromDictionary()
+    {
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.4.MissingComponentDefinition.xml");
+        var document = Omi.Fixml.Document.From(path);
+
+        var actual = document.Errors;
+
+        var expected = new List<string>
+        {
+            "Component0: Component is missing from dictionary",
+            "Component3: Component is missing from dictionary",
+            "Component4: Component is missing from dictionary"
+        };
+
+        Assert.That(actual, Is.EquivalentTo(expected), "Document identified missing component definition improperly.");
+    }
 }
