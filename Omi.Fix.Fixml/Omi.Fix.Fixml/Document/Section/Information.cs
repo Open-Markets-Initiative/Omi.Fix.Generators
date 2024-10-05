@@ -1,12 +1,11 @@
 ﻿namespace Omi.Fixml;
 
 /// <summary>
-///  Fixml Specification Information
+///  Fixml information
 /// </summary>
 
 public class Information
 {
-
     // Need to add Service pack
 
     /// <summary>

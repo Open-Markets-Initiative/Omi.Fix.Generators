@@ -2,7 +2,7 @@
     using System.IO;
 
 /// <summary>
-///  Financial Information eXchange Fixml C# Document
+///  Financial Information eXchange Fixml C# Document Object Model
 /// </summary>
 
 public class Document

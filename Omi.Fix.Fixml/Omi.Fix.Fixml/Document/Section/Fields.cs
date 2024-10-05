@@ -8,7 +8,6 @@
 
 public class Fields : Dictionary<string, Field>
 {
-
     /// <summary>
     ///  Load fields in fixml
     /// </summary>

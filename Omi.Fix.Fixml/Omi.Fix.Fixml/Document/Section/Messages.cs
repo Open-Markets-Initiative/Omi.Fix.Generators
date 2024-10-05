@@ -3,9 +3,9 @@
 /// <summary>
 ///  List of fixml messsages
 /// </summary>
+
 public class Messages : List<Message>
 {
-
     /// <summary>
     ///  Default constructor
     /// </summary>

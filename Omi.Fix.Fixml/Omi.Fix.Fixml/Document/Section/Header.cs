@@ -7,7 +7,6 @@
 
 public class Header : IParent
 {
-
     /// <summary>
     ///  Fixml header child elements list (fields, groups, components)
     /// </summary>

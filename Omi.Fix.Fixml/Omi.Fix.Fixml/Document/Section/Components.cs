@@ -8,7 +8,6 @@
 
 public class Components : Dictionary<string, Component>
 {
-
     /// <summary>
     ///  Default constructor
     /// </summary>

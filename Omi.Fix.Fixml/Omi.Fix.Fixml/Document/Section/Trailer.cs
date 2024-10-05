@@ -1,18 +1,16 @@
 ﻿namespace Omi.Fixml;
     using System.Linq;
-using System.Runtime.CompilerServices;
 
 /// <summary>
-///  Fixml Trailer section
+///  Fixml rrailers (Trailer section)
 /// </summary>
 
 public class Trailer : IParent
 {
-
     /// <summary>
     ///  Fixml trailer child elements list (fields, groups, components)
     /// </summary>
-    public Elements Elements { get; set; } = new Elements();
+    public Elements Elements { get; set; } = [];
 
     /// <summary>
     ///  Does fixml trailer have elements?
@@ -23,7 +21,7 @@ public class Trailer : IParent
     /// <summary>
     ///  Errors in the Trailer
     /// </summary>
-    public List<string> Errors = new List<string>();
+    public List<string> Errors = [];
 
     /// <summary>
     ///  Convert xml file elements to fixml trailer
