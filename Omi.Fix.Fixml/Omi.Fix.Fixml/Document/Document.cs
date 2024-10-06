@@ -2,18 +2,18 @@
     using System.IO;
 
 /// <summary>
-///  Financial Information eXchange Fixml C# Document Object Model
+///  Financial Information eXchange FIXML C# Document Object Model
 /// </summary>
 
 public class Document
 {
     /// <summary>
-    ///  Fixml Document Information
+    ///  FIXML document information
     /// </summary>
     public Information Information = new();
 
     /// <summary>
-    ///  Fixml Header Fields
+    ///  FIXML header fields
     /// </summary>
     public Header Header = new();
 
@@ -23,22 +23,22 @@ public class Document
     public Trailer Trailer = new();
 
     /// <summary>
-    /// Fixml Messages
+    /// FIXML messages
     /// </summary>
     public Messages Messages = new();
 
     /// <summary>
-    /// Fixml components
+    /// FIXML components
     /// </summary>
     public Components Components = new();
 
     /// <summary>
-    /// Fixml Fields
+    /// FIXML Fields
     /// </summary>
     public Fields Fields = new();
 
     /// <summary>
-    /// Fixml Errors
+    /// FIXML Errors
     /// </summary>
     public List<string> Errors
     {
@@ -97,53 +97,22 @@ public class Document
     }
 
     /// <summary>
-    ///  Gather all required in fields in fixml document
-    /// </summary>
-    public HashSet<string> GatherFields()
-    {
-        var fields = new HashSet<string>();
-
-        // Gather included fields in header
-        foreach (var header in Header.Elements)
-        {
-            FieldsIn(header, Components, fields);
-        }
-
-        // Gather included fields in trailer
-        foreach (var trailer in Trailer.Elements)
-        {
-            FieldsIn(trailer, Components, fields);
-        }
-
-        // Gather included fields in messages
-        foreach (var message in Messages)
-        {
-            foreach (var element in message.Elements)
-            {
-                FieldsIn(element, Components, fields);
-            }
-        }
-
-        return fields;
-    }
-
-    /// <summary>
-    ///  Gather all in use components 
+    ///  Gather set of included component identifiers in in FIXML document
     /// </summary>
     public HashSet<string> GatherComponents()
     {
-        var components = new HashSet<string>();
+        var set = new HashSet<string>();
 
         // Gather included components in header
         foreach (var element in Header.Elements)
         {
-            ComponentsIn(element, Components, components);
+            ComponentsIn(element, Components, set);
         }
 
         // Gather included components in trailer
         foreach (var element in Trailer.Elements)
         {
-            ComponentsIn(element, Components, components);
+            ComponentsIn(element, Components, set);
         }
 
         // Gather included components in messages
@@ -151,34 +120,34 @@ public class Document
         {
             foreach (var element in message.Elements)
             {
-                ComponentsIn(element, Components, components);
+                ComponentsIn(element, Components, set);
             }
         }
 
-        return components;
+        return set;
     }
 
     /// <summary>
-    /// Recursively gather required components
+    /// Recursively gather set of included component identifiers
     /// </summary>
-    public static void ComponentsIn(IChild element, Components Components, HashSet<string> set)
+    public static void ComponentsIn(IChild element, Components components, HashSet<string> set)
     {
         switch (element)
         {
             case Child.Group group:
                 foreach (var child in group.Elements)
                 {
-                    ComponentsIn(child, Components, set);
+                    ComponentsIn(child, components, set);
                 }
                 break;
 
             case Child.Component component:
-                if (Components.TryGetValue(component.Name, out var ComponentDef))
+                if (components.TryGetValue(component.Name, out var current))
                 {
                     set.Add(component.Name);
-                    foreach (var child in ComponentDef.Elements)
+                    foreach (var child in current.Elements)
                     {
-                        ComponentsIn(child, Components, set);
+                        ComponentsIn(child, components, set);
                     }
                 }
                 break;
@@ -186,31 +155,62 @@ public class Document
     }
 
     /// <summary>
-    ///  Recursively gather required fields
+    ///  Gather set of included field identifiers in FIXML document
     /// </summary>
-    public static void FieldsIn(IChild element, Components Components, HashSet<string> fields)
+    public HashSet<string> GatherFields()
+    {
+        var set = new HashSet<string>();
+
+        // Gather included fields in header
+        foreach (var header in Header.Elements)
+        {
+            FieldsIn(header, Components, set);
+        }
+
+        // Gather included fields in trailer
+        foreach (var trailer in Trailer.Elements)
+        {
+            FieldsIn(trailer, Components, set);
+        }
+
+        // Gather included fields in messages
+        foreach (var message in Messages)
+        {
+            foreach (var element in message.Elements)
+            {
+                FieldsIn(element, Components, set);
+            }
+        }
+
+        return set;
+    }
+
+    /// <summary>
+    ///  Recursively gather gather set of included field identifiers
+    /// </summary>
+    public static void FieldsIn(IChild element, Components components, HashSet<string> set)
     {
         switch (element)
         {
             case Child.Field field:
-                fields.Add(field.Name);
+                set.Add(field.Name);
                 break;
 
             case Child.Group group:
-                fields.Add(group.Name);
+                set.Add(group.Name);
 
                 foreach (var child in group.Elements)
                 {
-                    FieldsIn(child, Components, fields);
+                    FieldsIn(child, components, set);
                 }
                 break;
 
             case Child.Component component:
-                if (Components.TryGetValue(component.Name, out var ComponentDef))
+                if (components.TryGetValue(component.Name, out var current))
                 {
-                    foreach (var child in ComponentDef.Elements)
+                    foreach (var child in current.Elements)
                     {
-                        FieldsIn(child, Components, fields);
+                        FieldsIn(child, components, set);
                     }
                 }
                 break;
@@ -218,15 +218,15 @@ public class Document
     }
 
     /// <summary>
-    ///  Normalize/clean Fix Specification
+    ///  Normalize FIXML document
     /// </summary>
     public void Normalize()
     {
-        // Reduce to only used components
+        // Reduce to included components
         var components = GatherComponents();
         Components.ReduceTo(components);
 
-        // Reduce to only used fields
+        // Reduce to included fields
         var fields = GatherFields();
         Fields.ReduceTo(fields);
     }
@@ -246,7 +246,7 @@ public class Document
       };
 
     /// <summary>
-    /// Obtain fixml document from xml file 
+    ///  Load FIXML document from XML file 
     /// </summary>
     public static Document From(Xml.fix xml)
         => new()
@@ -260,7 +260,7 @@ public class Document
         };
 
     /// <summary>
-    ///  Load fixml file from path 
+    ///  Load FIXML file from path 
     /// </summary>
     public static Document From(string path)
     {
@@ -328,7 +328,7 @@ public class Document
             throw new Exception("Missing Information");
         }
 
-        // verify that all elements in Messages
+        // verify that all elements in messages
         foreach (var message in Messages)
         {
             message.Verify(Fields, Components);
@@ -336,7 +336,7 @@ public class Document
     }
 
     /// <summary>
-    ///  Fixml as string
+    ///  FIXML as string
     /// </summary>
     public override string ToString()
         => $"{Information} Fixml";
