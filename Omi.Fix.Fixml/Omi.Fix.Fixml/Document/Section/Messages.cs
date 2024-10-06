@@ -28,13 +28,28 @@ public class Messages : List<Message>
     ///  Gather messages from fixml xml
     /// </summary>
     public static Messages From(Xml.fix xml)
-        => new Messages(ListFrom(xml).Select(Message.From));
+        => new(ListFrom(xml).Select(Message.From));
 
     /// <summary>
     ///  Gather message xml elements from fixml
     /// </summary>
     public static Xml.fixMessage[] ListFrom(Xml.fix xml)
-        => xml.messages ?? Array.Empty<Xml.fixMessage>();
+        => xml.messages ?? [];
+
+    /// <summary>
+    ///  Gather msgtypes
+    /// </summary>
+    public HashSet<string> Types() 
+    {
+        var msgtypes = new HashSet<string>();
+
+        foreach (var message in this)
+        {
+            msgtypes.Add(message.Type);
+        }
+
+        return msgtypes;
+    }
 
     /// <summary>
     ///  Gather fixml components list from normalized fix specification 

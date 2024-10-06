@@ -65,33 +65,20 @@ public class Document
     /// </summary>
     public Document Filter(Predicate<Message> predicate)
     {
-        // filter messages
+        // Filter messages
         Messages.RemoveAll(message => !predicate(message));
 
-        var msgtypes = new HashSet<string>();
-        foreach (var message in Messages)
-        {
-            msgtypes.Add(message.Type);
-        }
+        // Reduce to included messages
+        var msgtypes = Messages.Types();
+        Fields.ReduceMsgTypesto(msgtypes);
 
-        // filter message types
-        if (Fields.TryGetValue("MsgType", out var msgtype))
-        {
-            var enums = new Enums();
+        // Reduce to included components
+        var components = GatherComponents();
+        Components.ReduceTo(components);
 
-            foreach (var value in msgtype.Enums)
-            {
-                if (msgtypes.Contains(value.Value))
-                {
-                    enums.Add(value);
-                }
-            }
-
-            msgtype.Enums = enums;
-        }
-
-        // filter fields
-        Normalize();
+        // Reduce to included fields
+        var fields = GatherFields();
+        Fields.ReduceTo(fields);
 
         return this;
     }
@@ -215,20 +202,6 @@ public class Document
                 }
                 break;
         }
-    }
-
-    /// <summary>
-    ///  Normalize FIXML document
-    /// </summary>
-    public void Normalize()
-    {
-        // Reduce to included components
-        var components = GatherComponents();
-        Components.ReduceTo(components);
-
-        // Reduce to included fields
-        var fields = GatherFields();
-        Fields.ReduceTo(fields);
     }
 
     /// <summary>

@@ -3,13 +3,13 @@
     using System.Linq;
 
 /// <summary>
-///  Fixml Fields (Fields Section)
+///  FIXML Fields (Fields Section)
 /// </summary>
 
 public class Fields : Dictionary<string, Field>
 {
     /// <summary>
-    ///  Load fields in fixml
+    ///  Load fields in FIXML
     /// </summary>
     public static Fields From(Xml.fix xml)
     {
@@ -63,14 +63,38 @@ public class Fields : Dictionary<string, Field>
     /// <summary>
     ///  Remove unused fields
     /// </summary>
-    public void ReduceTo(HashSet<string> required)
+    public void ReduceTo(HashSet<string> included)
     {
         foreach (var field in Values)
         {
-            if (!required.Contains(field.Name))
+            if (!included.Contains(field.Name))
             {
                 Remove(field.Name);
             }
+        }
+    }
+
+    /// <summary>
+    ///  Normalize MsgTypes
+    /// </summary>
+    public void ReduceMsgTypesto(HashSet<string> included)
+    {
+        // what if msgtypes doesnt exist?
+
+        // filter message types
+        if (TryGetValue("MsgType", out var msgtype))
+        {
+            var enums = new Enums();
+
+            foreach (var value in msgtype.Enums)
+            {
+                if (included.Contains(value.Value))
+                {
+                    enums.Add(value);
+                }
+            }
+
+            msgtype.Enums = enums;
         }
     }
 
@@ -79,7 +103,7 @@ public class Fields : Dictionary<string, Field>
     /// </summary>
     public void Write(StreamWriter stream, Indent indent)
     {
-        if (Values.Any())
+        if (Values.Count != 0)
         {
             stream.WriteLine($"{indent}<fields>");
 
@@ -97,7 +121,7 @@ public class Fields : Dictionary<string, Field>
     }
 
     /// <summary>
-    ///  Convert fixml field declarations to normalized fix specification types
+    ///  Convert FIXML field declarations to normalized fix specification types
     /// </summary>
     public Fix.Specification.Types ToSpecification()
     {
