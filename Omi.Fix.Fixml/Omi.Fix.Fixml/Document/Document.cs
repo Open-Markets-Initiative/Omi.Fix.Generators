@@ -93,13 +93,13 @@ public class Document
         // Gather included components in header
         foreach (var element in Header.Elements)
         {
-            ComponentsIn(element, Components, set);
+            Gather.ComponentsIn(element, Components, set);
         }
 
         // Gather included components in trailer
         foreach (var element in Trailer.Elements)
         {
-            ComponentsIn(element, Components, set);
+            Gather.ComponentsIn(element, Components, set);
         }
 
         // Gather included components in messages
@@ -107,38 +107,11 @@ public class Document
         {
             foreach (var element in message.Elements)
             {
-                ComponentsIn(element, Components, set);
+                Gather.ComponentsIn(element, Components, set);
             }
         }
 
         return set;
-    }
-
-    /// <summary>
-    /// Recursively gather set of included component identifiers
-    /// </summary>
-    public static void ComponentsIn(IChild element, Components components, HashSet<string> set)
-    {
-        switch (element)
-        {
-            case Child.Group group:
-                foreach (var child in group.Elements)
-                {
-                    ComponentsIn(child, components, set);
-                }
-                break;
-
-            case Child.Component component:
-                if (components.TryGetValue(component.Name, out var current))
-                {
-                    set.Add(component.Name);
-                    foreach (var child in current.Elements)
-                    {
-                        ComponentsIn(child, components, set);
-                    }
-                }
-                break;
-        }
     }
 
     /// <summary>
@@ -151,13 +124,13 @@ public class Document
         // Gather included fields in header
         foreach (var header in Header.Elements)
         {
-            FieldsIn(header, Components, set);
+            Gather.FieldsIn(header, Components, set);
         }
 
         // Gather included fields in trailer
         foreach (var trailer in Trailer.Elements)
         {
-            FieldsIn(trailer, Components, set);
+            Gather.FieldsIn(trailer, Components, set);
         }
 
         // Gather included fields in messages
@@ -165,43 +138,11 @@ public class Document
         {
             foreach (var element in message.Elements)
             {
-                FieldsIn(element, Components, set);
+                Gather.FieldsIn(element, Components, set);
             }
         }
 
         return set;
-    }
-
-    /// <summary>
-    ///  Recursively gather gather set of included field identifiers
-    /// </summary>
-    public static void FieldsIn(IChild element, Components components, HashSet<string> set)
-    {
-        switch (element)
-        {
-            case Child.Field field:
-                set.Add(field.Name);
-                break;
-
-            case Child.Group group:
-                set.Add(group.Name);
-
-                foreach (var child in group.Elements)
-                {
-                    FieldsIn(child, components, set);
-                }
-                break;
-
-            case Child.Component component:
-                if (components.TryGetValue(component.Name, out var current))
-                {
-                    foreach (var child in current.Elements)
-                    {
-                        FieldsIn(child, components, set);
-                    }
-                }
-                break;
-        }
     }
 
     /// <summary>
