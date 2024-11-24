@@ -70,6 +70,19 @@ public class Document
         => Set(new Type { Name = name, Tag = tag, Underlying = type });
 
     /// <summary>
+    ///  Add Overwrite Type (minimal)
+    /// </summary>
+    public void Set(string name, string type)
+    {
+        if (Types.TryGetValue(name, out var field))
+        { 
+            // check that it is a fundamentatl type first?
+
+            field.DataType = type;
+        }
+    }
+
+    /// <summary>
     ///  Add enumerated value to type
     /// </summary>
     public void Set(string field, string value, string name)

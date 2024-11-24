@@ -45,7 +45,7 @@ public class Fields : Dictionary<string, Field>
             {
                 Name = field.Name,
                 Number = field.Tag,
-                Type = field.Underlying,
+                Type = TypeFrom(field),
                 Enums = Enums.From(field),
                 Description = field.Description,
                 Required = field.Required,
@@ -54,6 +54,21 @@ public class Fields : Dictionary<string, Field>
         }
 
         return section;
+    }
+
+    /// <summary>
+    ///  Convert from specification type information to fixml type
+    /// </summary>
+    public static string TypeFrom(Fix.Specification.Type field)
+    {
+        // is this correct?
+
+        if (!string.IsNullOrEmpty(field.DataType))
+        {
+            return field.DataType;
+        }
+
+        return field.Underlying;
     }
 
     /// <summary>
