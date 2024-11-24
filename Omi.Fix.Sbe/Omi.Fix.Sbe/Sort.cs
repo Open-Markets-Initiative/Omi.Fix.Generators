@@ -1,12 +1,11 @@
-﻿namespace Omi.Fix.Sbe {
+﻿namespace Omi.Fix.Sbe;
 
-    /// <summary>
-    ///  Sort Direction
-    /// </summary>
+/// <summary>
+///  Sort Direction
+/// </summary>
 
-    public enum SortDirection
-    {
-        Ascending,
-        Descending
-    }
+public enum SortDirection
+{
+    Ascending,
+    Descending
 }

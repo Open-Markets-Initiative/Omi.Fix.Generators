@@ -6,7 +6,6 @@
 
 public static class iLink3
 {
-
     /// <summary>
     ///  Gather all Cme ilink3 sbe xmls in library
     /// </summary>
@@ -28,7 +27,9 @@ public static class iLink3
 
         foreach (var file in files ?? Array.Empty<string>())
         {
-            xmls.Add(Xml.Load.SbeXmlFrom(file));
+            var current = Xml.Load.SbeXmlFrom(file);
+
+            xmls.Add(current);
         }
 
         return xmls;
@@ -64,7 +65,7 @@ public static class iLink3
     }
 
     /// <summary>
-    ///  Merge all iLink3 versions into one normalized fix specification
+    ///  Merge all iLink3 versions into a single normalized fix specification
     /// </summary>
     public static Specification.Document Combined()
     {
