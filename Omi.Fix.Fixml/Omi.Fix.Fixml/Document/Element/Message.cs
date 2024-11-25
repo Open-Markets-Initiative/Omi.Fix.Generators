@@ -120,16 +120,20 @@ public class Message : IParent
     /// <summary>
     ///  Report erroneous fixml message properties
     /// </summary>
-    public void Error(Fields fields, Components components, List<string> Errors)
+    public void Error(Fields fields, Components components, List<string> Errors, Messages Messages)
     {
         if (string.IsNullOrWhiteSpace(Name))
         {
             Errors.Add("Message name is missing");
+
+            Messages.Errors.Add("Message name is missing");
         }
 
         if (string.IsNullOrWhiteSpace(Type))
         {
             Errors.Add("Message type is missing");
+
+            Messages.Errors.Add("Message type is missing");
         }
 
         var repeats = Elements.GroupBy(x => x.Name)
@@ -142,6 +146,8 @@ public class Message : IParent
             foreach (var repeat in repeats)
             {
                 Errors.Add($"{repeat} : Tag occurs more than once in message");
+
+                Messages.Errors.Add($"{repeat} : Tag occurs more than once in message");
             }
         }
 

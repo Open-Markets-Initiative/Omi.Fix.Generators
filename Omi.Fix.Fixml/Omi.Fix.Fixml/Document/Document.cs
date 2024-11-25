@@ -2,18 +2,18 @@
     using System.IO;
 
 /// <summary>
-///  Financial Information eXchange Fixml C# Document
+///  Financial Information eXchange FIXML C# Document Object Model
 /// </summary>
 
 public class Document
 {
     /// <summary>
-    ///  Fixml Document Information
+    ///  FIXML document information
     /// </summary>
     public Information Information = new();
 
     /// <summary>
-    ///  Fixml Header Fields
+    ///  FIXML header fields
     /// </summary>
     public Header Header = new();
 
@@ -23,22 +23,22 @@ public class Document
     public Trailer Trailer = new();
 
     /// <summary>
-    /// Fixml Messages
+    /// FIXML messages
     /// </summary>
     public Messages Messages = new();
 
     /// <summary>
-    /// Fixml components
+    /// FIXML components
     /// </summary>
     public Components Components = new();
 
     /// <summary>
-    /// Fixml Fields
+    /// FIXML Fields
     /// </summary>
     public Fields Fields = new();
 
     /// <summary>
-    /// Fixml Errors
+    /// FIXML Errors
     /// </summary>
     public List<string> Errors
     {
@@ -46,19 +46,14 @@ public class Document
         {
             var errors = new List<string>();
 
-            // fixmls require version information
-            if (string.IsNullOrWhiteSpace(Information.Major))
-            {
-                errors.Add("Missing Major Information");
-            }
-
+            Information.Error(Fields, Components, errors);
             Header.Error(Fields, Components, errors);
             Trailer.Error(Fields, Components, errors);
 
             // verify that all elements in Messages
             foreach (var message in Messages)
             {
-                message.Error(Fields, Components, errors);
+                message.Error(Fields, Components, errors, Messages);
             }
 
             return errors;
@@ -70,94 +65,41 @@ public class Document
     /// </summary>
     public Document Filter(Predicate<Message> predicate)
     {
-        // filter messages
+        // Filter messages
         Messages.RemoveAll(message => !predicate(message));
 
-        var msgtypes = new HashSet<string>();
-        foreach (var message in Messages)
-        {
-            msgtypes.Add(message.Type);
-        }
+        // Reduce to included messages
+        var msgtypes = Messages.Types();
+        Fields.ReduceMsgTypesto(msgtypes);
 
-        // filter message types
-        if (Fields.TryGetValue("MsgType", out var msgtype))
-        {
-            var enums = new Enums();
+        // Reduce to included components
+        var components = GatherComponents();
+        Components.ReduceTo(components);
 
-            foreach (var value in msgtype.Enums)
-            {
-                if (msgtypes.Contains(value.Value))
-                {
-                    enums.Add(value);
-                }
-            }
-
-            msgtype.Enums = enums;
-        }
-
-        // filter fields
-        Normalize();
+        // Reduce to included fields
+        var fields = GatherFields();
+        Fields.ReduceTo(fields);
 
         return this;
     }
 
     /// <summary>
-    ///  Gather all required in fields in fixml document
-    /// </summary>
-    public HashSet<string> GatherFields()
-    {
-        var fields = new HashSet<string>();
-
-        // Gather included fields in header
-        foreach (var header in Header.Elements)
-        {
-            FieldsIn(header, fields);
-        }
-
-        // Gather included fields in trailer
-        foreach (var trailer in Trailer.Elements)
-        {
-            FieldsIn(trailer, fields);
-        }
-
-        // Gather included fields in messages
-        foreach (var message in Messages)
-        {
-            foreach (var element in message.Elements)
-            {
-                FieldsIn(element, fields);
-            }
-        }
-
-        // Gather included fields
-        foreach (var component in Components.Values)
-        {
-            foreach (var element in component.Elements)
-            {
-                FieldsIn(element, fields);
-            }
-        }
-
-        return fields;
-    }
-
-    /// <summary>
-    ///  Gather all in use components 
+    ///  Gather set of included component identifiers in in FIXML document
     /// </summary>
     public HashSet<string> GatherComponents()
     {
-        var components = new HashSet<string>();
+        var set = new HashSet<string>();
 
         // Gather included components in header
-        foreach (var header in Header.Elements)
+        foreach (var element in Header.Elements)
         {
-            ComponentsIn(header, components);
+            Gather.ComponentsIn(element, Components, set);
         }
 
         // Gather included components in trailer
-        foreach (var trailer in Trailer.Elements)
+        foreach (var element in Trailer.Elements)
         {
-            ComponentsIn(trailer, components);
+            Gather.ComponentsIn(element, Components, set);
         }
 
         // Gather included components in messages
@@ -165,83 +107,42 @@ public class Document
         {
             foreach (var element in message.Elements)
             {
-                ComponentsIn(element, components);
+                Gather.ComponentsIn(element, Components, set);
             }
         }
 
-        // Gather nested included components
-        var nested = new HashSet<string>();
+        return set;
+    }
 
-        foreach (var name in components)
+    /// <summary>
+    ///  Gather set of included field identifiers in FIXML document
+    /// </summary>
+    public HashSet<string> GatherFields()
+    {
+        var set = new HashSet<string>();
+
+        // Gather included fields in header
+        foreach (var header in Header.Elements)
         {
-            if (Components.TryGetValue(name, out var component))
+            Gather.FieldsIn(header, Components, set);
+        }
+
+        // Gather included fields in trailer
+        foreach (var trailer in Trailer.Elements)
+        {
+            Gather.FieldsIn(trailer, Components, set);
+        }
+
+        // Gather included fields in messages
+        foreach (var message in Messages)
+        {
+            foreach (var element in message.Elements)
             {
-                foreach (var element in component.Elements)
-                {
-                    ComponentsIn(element, nested);
-                }
+                Gather.FieldsIn(element, Components, set);
             }
         }
 
-        components.UnionWith(nested);
-
-        return components;
-    }
-
-    /// <summary>
-    /// Recursively gather required components
-    /// </summary>
-    public static void ComponentsIn(IChild element, HashSet<string> components)
-    {
-        switch (element)
-        {
-            case Child.Group group:
-                foreach (var child in group.Elements)
-                {
-                    ComponentsIn(child, components);
-                }
-                break;
-
-            case Child.Component component:
-                components.Add(component.Name);
-                break;
-        }
-    }
-
-    /// <summary>
-    ///  Recursively gather required fields
-    /// </summary>
-    public static void FieldsIn(IChild element, HashSet<string> fields)
-    {
-        switch (element)
-        {
-            case Child.Field field:
-                fields.Add(field.Name);
-                break;
-
-            case Child.Group group:
-                fields.Add(group.Name);
-
-                foreach (var child in group.Elements)
-                {
-                    FieldsIn(child, fields);
-                }
-                break;
-        }
-    }
-
-    /// <summary>
-    ///  Normalize/clean Fix Specification
-    /// </summary>
-    public void Normalize()
-    {
-        // Reduce to only used components
-        var components = GatherComponents();
-        Components.ReduceTo(components);
-
-        // Reduce to only used fields
-        var fields = GatherFields();
-        Fields.ReduceTo(fields);
+        return set;
     }
 
     /// <summary>
@@ -259,7 +160,7 @@ public class Document
       };
 
     /// <summary>
-    /// Obtain fixml document from xml file 
+    ///  Load FIXML document from XML file 
     /// </summary>
     public static Document From(Xml.fix xml)
         => new()
@@ -273,7 +174,7 @@ public class Document
         };
 
     /// <summary>
-    ///  Load fixml file from path 
+    ///  Load FIXML file from path 
     /// </summary>
     public static Document From(string path)
     {
@@ -341,7 +242,7 @@ public class Document
             throw new Exception("Missing Information");
         }
 
-        // verify that all elements in Messages
+        // verify that all elements in messages
         foreach (var message in Messages)
         {
             message.Verify(Fields, Components);
@@ -349,7 +250,7 @@ public class Document
     }
 
     /// <summary>
-    ///  Fixml as string
+    ///  FIXML as string
     /// </summary>
     public override string ToString()
         => $"{Information} Fixml";

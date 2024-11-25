@@ -25,7 +25,7 @@ public class Information
     /// <summary>
     ///  Obtain description from xml
     /// </summary>
-    public static Information From(Xml.FixFields xml, string path)
+    public static Information From(Xml.FixFields xml, string? path)
     {
         if (string.IsNullOrEmpty(path))
         {
@@ -41,7 +41,7 @@ public class Information
     /// <summary>
     ///  Obtain description from xml
     /// </summary>
-    public static Information From(Xml.FixTypes xml, string path)
+    public static Information From(Xml.FixTypes xml, string? path)
     {
         if (string.IsNullOrEmpty(path))
         {

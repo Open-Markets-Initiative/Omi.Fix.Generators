@@ -8,7 +8,6 @@
 
 public class Components : Dictionary<string, Component>
 {
-
     /// <summary>
     ///  Default constructor
     /// </summary>
@@ -31,6 +30,11 @@ public class Components : Dictionary<string, Component>
     /// </summary>
     public static Components From(Xml.fix xml)
         => new(xml);
+
+    /// <summary>
+    ///  Errors in the Components Section
+    /// </summary>
+    public List<string> Errors = new List<string>();
 
     /// <summary>
     /// Fix Component from xml file

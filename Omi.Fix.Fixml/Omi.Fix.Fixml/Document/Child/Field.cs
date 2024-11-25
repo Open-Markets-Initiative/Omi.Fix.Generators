@@ -22,7 +22,7 @@ public class Field : IChild
     /// <summary>
     ///  Fixml field parent
     /// </summary>
-    public IParent Parent { get; set; } // how to deal with this
+    public required IParent Parent { get; set; } // how to deal with this
 
     /// <summary>
     ///  Component depth in element tree
@@ -129,11 +129,15 @@ public class Field : IChild
         if (string.IsNullOrWhiteSpace(Name))
         {
             Errors.Add("Field name is missing");
+
+            fields.Errors.Add("Field name is missing");
         }
 
         if (!fields.ContainsKey(Name))
         {
             Errors.Add($"{Name}: Field is missing from dictionary");
+
+            fields.Errors.Add($"{Name}: Field is missing from dictionary");
         }
 
     }

@@ -4,7 +4,7 @@
 public class TypeTests
 {
 
-    Type Account;
+    Type Account = new();
 
     [OneTimeSetUp]
     public void SetUp()

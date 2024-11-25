@@ -1,4 +1,4 @@
-﻿namespace Omi.Fix.Sbe;
+﻿namespace Omi.Fix.T7;
 
 /// <summary>
 ///  Sort Direction

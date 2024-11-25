@@ -2,22 +2,26 @@
     using System.Linq;
 
 /// <summary>
-///  Fixml Trailer section
+///  Fixml rrailers (Trailer section)
 /// </summary>
 
 public class Trailer : IParent
 {
-
     /// <summary>
     ///  Fixml trailer child elements list (fields, groups, components)
     /// </summary>
-    public Elements Elements { get; set; } = new Elements();
+    public Elements Elements { get; set; } = [];
 
     /// <summary>
     ///  Does fixml trailer have elements?
     /// </summary>
     public bool HasFields
         => Elements.Any();
+
+    /// <summary>
+    ///  Errors in the Trailer
+    /// </summary>
+    public List<string> Errors = [];
 
     /// <summary>
     ///  Convert xml file elements to fixml trailer
@@ -52,6 +56,7 @@ public class Trailer : IParent
             // Verify format
             section.Elements.Add(new Child.Field
             {
+                Parent = section,
                 Name = field.Name,
                 Required = field.Required,
             });
@@ -94,6 +99,8 @@ public class Trailer : IParent
             foreach (var repeat in repeats)
             {
                 Errors.Add($"{repeat} : Tag occurs more than once in trailer");
+
+                this.Errors.Add($"{repeat} : Tag occurs more than once in trailer");
             }
         }
 

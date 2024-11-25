@@ -22,7 +22,7 @@ public class Group : IParent, IChild
     /// <summary>
     ///  Group parent
     /// </summary>
-    public IParent Parent { get; set; } // how to deal with this?
+    public required IParent Parent { get; set; } // how to deal with this?
 
     /// <summary>
     ///  Component depth in element tree
@@ -147,11 +147,15 @@ public class Group : IParent, IChild
         if (string.IsNullOrWhiteSpace(Name))
         {
             Errors.Add("Group name is missing");
+
+            fields.Errors.Add("Group name is missing");                 //a group is a field
         }
 
         if (!fields.ContainsKey(Name))
         {
             Errors.Add($"{Name}: Group is missing from dictionary");
+
+            fields.Errors.Add($"{Name}: Group is missing from dictionary");
         }
 
         Elements.Error(fields, components, Errors);

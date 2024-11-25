@@ -7,7 +7,6 @@
 
 public class Header : IParent
 {
-
     /// <summary>
     ///  Fixml header child elements list (fields, groups, components)
     /// </summary>
@@ -18,6 +17,11 @@ public class Header : IParent
     /// </summary>
     public bool HasFields
         => Elements.Any();
+
+    /// <summary>
+    ///  Errors in the Header
+    /// </summary>
+    public List<string> Errors = new List<string>();
 
     /// <summary>
     /// Header components from xml file
@@ -89,6 +93,8 @@ public class Header : IParent
             foreach (var repeat in repeats)
             {
                 Errors.Add($"{repeat} : Tag occurs more than once in header");
+
+                this.Errors.Add($"{repeat} : Tag occurs more than once in header");
             }
         }
 

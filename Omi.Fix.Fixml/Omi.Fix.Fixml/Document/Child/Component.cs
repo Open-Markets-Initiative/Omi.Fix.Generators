@@ -15,7 +15,7 @@ public class Component : IChild
     /// <summary>
     ///  Fixml component parent
     /// </summary>
-    public IParent Parent { get; set; } // how to deal with this
+    public required IParent Parent { get; set; } // how to deal with this
 
     /// <summary>
     ///  Component depth in element tree
@@ -89,11 +89,22 @@ public class Component : IChild
         if (string.IsNullOrWhiteSpace(Name))
         {
             Errors.Add("Component name is missing");
+
+            components.Errors.Add("Component name is missing");
         }
 
-        if (!components.ContainsKey(Name))
+        if (components.TryGetValue(Name, out var temp))
+        {
+            foreach (var child in temp.Elements)
+            {
+                child.Error(fields, components, Errors);
+            }
+        }
+        else
         {
             Errors.Add($"{Name}: Component is missing from dictionary");
+
+            components.Errors.Add($"{Name}: Component is missing from dictionary");
         }
     }
 

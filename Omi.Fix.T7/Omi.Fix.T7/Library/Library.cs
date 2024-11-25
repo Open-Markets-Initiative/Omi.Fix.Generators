@@ -1,33 +1,33 @@
-﻿namespace Omi.Fix.Sbe.Library;
+﻿namespace Omi.Fix.T7.Library;
 
 /// <summary>
-///  Cme ilink3 File Library
+///  Eurex T7 File Library
 /// </summary>
 
-public static class iLink3
+public static class Eti
 {
     /// <summary>
-    ///  Gather all Cme ilink3 sbe xmls in library
+    ///  Gather all Eurex Eti xmls in library
     /// </summary>
     public static string[] Files()
     {
-        var directory = Path.Combine(Directory.GetCurrentDirectory(), "Library", "Cme.iLink3");
+        var directory = Path.Combine(Directory.GetCurrentDirectory(), "Library", "Eurex.Eti");
 
         return Directory.GetFiles(directory, "*.xml");
     }
 
     /// <summary>
-    ///  Gather iLink3 Sbe xmls
+    ///  Gather all Eurex Wmls
     /// </summary>
-    public static List<Xml.messageSchema> Xmls()
+    public static List<Xml.Model> Xmls()
     {
         var files = Files();
 
-        var xmls = new List<Xml.messageSchema>();
+        var xmls = new List<Xml.Model>();
 
-        foreach (var file in files ?? Array.Empty<string>())
+        foreach (var file in files ?? [])
         {
-            var current = Xml.Load.SbeXmlFrom(file);
+            var current = Xml.Load.T7XmlFrom(file);
 
             xmls.Add(current);
         }
@@ -36,12 +36,12 @@ public static class iLink3
     }
 
     /// <summary>
-    ///  Generate normalized fix specifications for all ilink3 xml files in library sorted by version
+    ///  Generate normalized fix specifications for all Eti xml files in library sorted by version
     /// </summary>
     public static List<Specification.Document> Specifications(SortDirection sort = SortDirection.Descending)
     {
         var xmls = Xmls();
-
+/*
         // sort schemas
         var schemas = new List<Xml.messageSchema>();
 
@@ -53,12 +53,14 @@ public static class iLink3
         {
             schemas = xmls.OrderByDescending(schema => schema.id).ThenByDescending(schema => schema.version).ToList();
         }
-
+*/
         var specifications = new List<Specification.Document>();
 
-        foreach (var schema in schemas)
+        foreach (var model in xmls)
         {
-            specifications.Add(Xml.Load.From(schema));
+            var current = Xml.Load.From(model);
+
+            specifications.Add(current);
         }
 
         return specifications;
@@ -71,6 +73,6 @@ public static class iLink3
     {
         var specifications = Specifications();
 
-        return Fix.Specification.Merge.All(specifications);
+        return Specification.Merge.All(specifications);
     }
 }

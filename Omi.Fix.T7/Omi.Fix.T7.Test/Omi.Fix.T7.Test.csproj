@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -16,16 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Omi.Fix.Txt\Omi.Fix.Txt.csproj" />
+    <ProjectReference Include="..\Omi.Fix.T7\Omi.Fix.T7.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Samples\Enums.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Samples\Messages.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Using Include="NUnit.Framework" />
   </ItemGroup>
 
 </Project>

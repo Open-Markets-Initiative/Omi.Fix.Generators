@@ -1,12 +1,11 @@
 ﻿namespace Omi.Fixml;
 
 /// <summary>
-///  Fixml Specification Information
+///  Fixml information
 /// </summary>
 
 public class Information
 {
-
     // Need to add Service pack
 
     /// <summary>
@@ -18,6 +17,11 @@ public class Information
     ///  Fixml Minor Version
     /// </summary>
     public string Minor = string.Empty;
+
+    /// <summary>
+    ///  Errors in the Information
+    /// </summary>
+    public List<string> Errors = new List<string>();
 
     /// <summary>
     ///  Convert xml attributs to fixml information
@@ -71,11 +75,23 @@ public class Information
     /// <summary>
     ///  Report errors in fixml information
     /// </summary>
-    public void Error()
+    public void Error(Fields fields, Components components, List<string> Errors)
     {
+        if (string.IsNullOrWhiteSpace(Major))
+        {
+            Console.WriteLine("Missing Major Version");
+
+            Errors.Add("Missing Major Version");
+
+            this.Errors.Add("Missing Major Version");
+        }
         if (string.IsNullOrWhiteSpace(Minor))
         {
             Console.WriteLine("Missing Minor Version");
+
+            Errors.Add("Missing Minor Version");
+
+            this.Errors.Add("Missing Minor Version");
         }
     }
 

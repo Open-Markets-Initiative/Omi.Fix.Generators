@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\Omi.Fix.Specification\Omi.Fix.Specification\Omi.Fix.Specification.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Library\Eurex.Eti\Eurex.Cash.Eti.T7.v12.1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Eurex.Eti\Eurex.Cash.Eti.T7.v13.0.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Eurex.Eti\Eurex.Derivatives.Eti.T7.v12.1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Eurex.Eti\Eurex.Derivatives.Eti.T7.v13.0.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
