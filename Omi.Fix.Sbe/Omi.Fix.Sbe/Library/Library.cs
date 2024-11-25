@@ -11,13 +11,13 @@ public static class iLink3
     /// </summary>
     public static string[] Files()
     {
-        var directory = Path.Combine(Directory.GetCurrentDirectory(), "Library\\Cme.iLink3");
+        var directory = Path.Combine(Directory.GetCurrentDirectory(), "Library", "Cme.iLink3");
 
         return Directory.GetFiles(directory, "*.xml");
     }
 
     /// <summary>
-    /// 
+    ///  Gather iLink3 Sbe xmls
     /// </summary>
     public static List<Xml.messageSchema> Xmls()
     {
