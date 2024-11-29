@@ -8,7 +8,6 @@
 
 public class Field
 {
-
     public string Name = string.Empty;
 
     public bool Required { get; set; }

@@ -24,8 +24,6 @@ public class Message
 
     public List<Field> Fields = new();
 
-    public Types Types = new();    // used for sbe? (need to redo)
-
     /// <summary>
     /// 
     /// </summary>

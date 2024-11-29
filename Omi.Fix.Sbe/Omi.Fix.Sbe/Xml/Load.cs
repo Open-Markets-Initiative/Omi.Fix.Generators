@@ -53,8 +53,8 @@ public static class Load
             {
                 Name = message.description, // make a method for this
                 Type = message.semanticType,
-                Types = FieldsFrom(message.field),
                 Category = message.id.ToString(),
+                Fields = FieldsFrom(message.field),
             });
         }
 
@@ -64,24 +64,22 @@ public static class Load
     /// <summary>
     ///  Obtain Specification types from iLink fields
     /// </summary>
-    public static Specification.Types FieldsFrom(field[] fields)
+    public static List<Specification.Field> FieldsFrom(field[] fields)
     {
-        var messageFields = new Specification.Types();
+        var result = new List<Specification.Field>();
 
-        foreach (var field in fields ?? Array.Empty<field>())
+        foreach (var field in fields ?? [])
         {
-            if (field != null)
+            if (field != null && field.offsetSpecified)
             {
-                messageFields.Add(field.name, new Specification.Type
+                result.Add(new Specification.Field
                 {
-                    Name = field.name,
-                    Tag = field.id,
-                    Description = field.description,
-                    Underlying = field.semanticType,
+                    Name = field.name
                 });
             }
         }
-        return messageFields;
+
+        return result;
     }
 
     /// <summary>
