@@ -52,13 +52,29 @@ public static class Load
             messages.Add(new Specification.Message
             {
                 Name = message.description, // make a method for this
-                Type = message.semanticType,
-                Category = message.id.ToString(),
+                Type = message.id.ToString(),
+                Category = CategoryFrom(message),
                 Fields = FieldsFrom(message.field),
             });
         }
 
         return messages;
+    }
+
+    /// <summary>
+    ///  Parse message for message category
+    /// </summary>
+    public static string CategoryFrom(messageSchemaMessage message)
+    {
+        if (message.id < 513)
+        {
+            return "admin";
+        }
+        else if (message.id > 513)
+        {
+            return "app";
+        }
+        else return null;
     }
 
     /// <summary>
