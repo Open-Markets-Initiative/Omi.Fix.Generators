@@ -17,7 +17,7 @@ public static class Eti
     }
 
     /// <summary>
-    ///  Gather all Eurex Wmls
+    ///  Gather all Eurex Eti Xmls
     /// </summary>
     public static List<Xml.Model> Xmls()
     {
@@ -41,19 +41,19 @@ public static class Eti
     public static List<Specification.Document> Specifications(SortDirection sort = SortDirection.Descending)
     {
         var xmls = Xmls();
-/*
+
         // sort schemas
-        var schemas = new List<Xml.messageSchema>();
+        var schemas = new List<Xml.Model>();
 
         if (sort == SortDirection.Ascending)
         {
-            schemas = xmls.OrderBy(schema => schema.id).ThenBy(schema => schema.version).ToList();
+            schemas = xmls.OrderBy(schema => schema.version).ToList();
         }
         else
         {
-            schemas = xmls.OrderByDescending(schema => schema.id).ThenByDescending(schema => schema.version).ToList();
+            schemas = xmls.OrderByDescending(schema => schema.version).ToList();
         }
-*/
+
         var specifications = new List<Specification.Document>();
 
         foreach (var model in xmls)
@@ -67,7 +67,7 @@ public static class Eti
     }
 
     /// <summary>
-    ///  Merge all iLink3 versions into a single normalized fix specification
+    ///  Merge all Eti T7 versions into a single normalized fix specification
     /// </summary>
     public static Specification.Document Combined()
     {

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Xml.Serialization;
     using System.Xml;
+    using System.Text.RegularExpressions;
 
 /// <summary>
 ///  Load T7 xml elements into generated object classes
@@ -122,7 +123,7 @@ public static class Load
                     enums.Add(new Specification.Enum { 
                         Name = value.name,
                         Value = value.value,
-                        Description = value.description
+                        Description = ProcessDescription(value, enums)
                     });
                 }
 
@@ -136,9 +137,28 @@ public static class Load
     }
 
     /// <summary>
-    ///  Load classes from file path
+    ///  Process the original description
     /// </summary>
-    public static T From<T>(string xml)
+    public static string ProcessDescription(ModelDataTypeValidValue value, Specification.Enums enums)
+    {
+        var description = value.description;
+
+        if(description == string.Empty || description.Length > 35 || enums.Any(e => e.Description == description))
+        {
+            description = value.name;
+        }
+
+        string result = description.Replace("-", " ").Replace("_", " ").Replace(".", " ").Replace("/", " or ");
+
+        result = Regex.Replace(result, @"\([^)]*\)", string.Empty).Trim();
+
+        return result;
+    }
+
+        /// <summary>
+        ///  Load classes from file path
+        /// </summary>
+        public static T From<T>(string xml)
     {
         using var reader = XmlReader.Create(xml);
 
