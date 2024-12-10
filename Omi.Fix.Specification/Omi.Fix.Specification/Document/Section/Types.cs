@@ -52,6 +52,18 @@ public class Types : Dictionary<string, Type>
         }
     }
 
+
+    /// <summary>
+    ///  Remove Enums
+    /// </summary>
+    public void RemoveEnumValues(string name)
+    {
+        if (TryGetValue(name, out var type))
+        {
+            type.Enums = new Enums();
+        }
+    }
+
     /// <summary>
     ///  Convert types to fields list
     /// </summary>

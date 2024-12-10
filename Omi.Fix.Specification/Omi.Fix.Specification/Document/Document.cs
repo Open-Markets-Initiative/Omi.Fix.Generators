@@ -127,6 +127,12 @@ public class Document
     }
 
     /// <summary>
+    ///  Add field to message (need one with placement)
+    /// </summary>
+    public void RemoveEnumValues(string name)
+        => Types.RemoveEnumValues(name);
+
+    /// <summary>
     ///  Try Get Message
     /// </summary>
     public bool TryGetMessage(string name, out Message message)
