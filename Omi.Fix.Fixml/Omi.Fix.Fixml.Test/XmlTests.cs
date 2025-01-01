@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.IO;
 using System.Xml;
 namespace Omi.Fix.Fixml.Test;
 
@@ -11,8 +12,8 @@ public class XmlTests
 
     [OneTimeSetUp]
     public void Setup() {
-        var fixml = Omi.Fixml.Library.Fix44;
-        var document = fixml.GenerateXml();
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Library", "Fixml", "Fix.v4.4.xml");
+        var document = Omi.Fixml.Document.From(path).GenerateXml();
         root = document.DocumentElement;
     }
     [Test]
