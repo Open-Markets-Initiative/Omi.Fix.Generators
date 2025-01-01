@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fixml;
     using System.IO;
+using System.Xml;
 
 /// <summary>
 ///  Financial Information eXchange FIXML C# Document Object Model
@@ -184,37 +185,56 @@ public class Document
     }
 
     /// <summary>
-    ///  Write fixml file to stream
+    /// Creates XmlDocument from Document
     /// </summary>
-    public void WriteTo(StreamWriter stream)
-        => WriteTo(stream, new Indent { });
+    public XmlDocument GenerateXml() 
+        {
+        //Create XmlDocument and root element from Information
+        var doc = new XmlDocument();
+        var root = Information.GenerateXml(doc);
 
-    /// <summary>
-    ///  Write fixml file to stream
-    /// </summary>
-    public void WriteTo(StreamWriter stream, Indent indent)
-    {
-        Information.Write(stream);
-        Header.Write(stream, indent);
-        Trailer.Write(stream, indent);
-        Messages.Write(stream, indent);
-        Components.Write(stream, indent);
-        Fields.Write(stream, indent);
+        //Generate XmlElements from Sections
+        Header.GenerateXml(doc, root);
+        Trailer.GenerateXml(doc, root);
+        Messages.GenerateXml(doc, root);
+        Components.GenerateXml(doc, root);
+        Fields.GenerateXml(doc, root);
 
-        stream.WriteLine("</fix>");
+        return doc;
     }
 
     /// <summary>
-    ///  Write fixml to path
+    /// Write out Xml with default settings
     /// </summary>
-    public string WriteTo(string path)
-    {
-        using var file = File.Create(path);
-        using var stream = new StreamWriter(file);
+    public void WriteTo(string path) 
+        {
+        var doc = GenerateXml();
 
-        WriteTo(stream);
+        //Default file write settings
+        XmlWriterSettings settings = new XmlWriterSettings
+        {
+            Indent = true,                   // Enable indentation
+            IndentChars = "  ",              // Use two spaces for indentation
+            NewLineChars = "\r\n",           // Use Windows-style newlines
+            OmitXmlDeclaration = true,      // Exclude the XML declaration
+            Encoding = System.Text.Encoding.UTF8 // Use UTF-8 encoding
+        };
 
-        return file.Name;
+        using (XmlWriter writer = XmlWriter.Create(path, settings)) {
+            doc.WriteTo(writer);
+        }
+    }
+
+    /// <summary>
+    /// Write out Xml with custom settings
+    /// </summary>
+    public void WriteTo(string path, XmlWriterSettings settings) 
+        {
+        var doc = GenerateXml();
+
+        using (XmlWriter writer = XmlWriter.Create(path, settings)) {
+            doc.WriteTo(writer);
+        }
     }
 
     /// <summary>

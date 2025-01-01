@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fixml.Child;
     using Omi.Fix.Specification;
+using System.Xml;
 
 /// <summary>
 ///  Fix Xml Component Element
@@ -58,11 +59,18 @@ public class Component : IChild
         };
 
     /// <summary>
-    ///  Write fixml component to stream
+    /// Appends XmlElement from Component to parent
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
-    {
-        stream.WriteLine($"{indent}<component name=\"{Name}\"/>");
+    public void GenerateXml(XmlDocument doc,XmlElement parent) 
+        {
+        var componentElement = doc.CreateElement("component");
+
+        //Append name attribute to componentElement
+        var nameAtr = doc.CreateAttribute("name");
+        nameAtr.Value = Name;
+        componentElement.Attributes.Append(nameAtr);
+
+        parent.AppendChild(componentElement);
     }
 
     /// <summary>

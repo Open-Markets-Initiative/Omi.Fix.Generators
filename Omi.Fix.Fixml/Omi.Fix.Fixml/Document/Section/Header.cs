@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fixml;
     using System.Linq;
+using System.Xml;
 
 /// <summary>
 ///  Fixml headers section
@@ -60,22 +61,15 @@ public class Header : IParent
     }
 
     /// <summary>
-    ///  Write header out to Fixml
+    /// Creates header XmlElement and appends to root
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
-    {
-        if (HasFields)
+    public void GenerateXml(XmlDocument doc, XmlElement root) 
         {
-            stream.WriteLine($"{indent}<header>");
-
-            Elements.Write(stream, indent.Increment());
-
-            stream.WriteLine($"{indent}</header>");
-        }
-        else
-        {
-            stream.WriteLine($"{indent}<header/>");
-        }
+        var headerElement = doc.CreateElement("header");
+        root.AppendChild(headerElement);
+        
+        //Generate XmlElements from Elements
+        Elements.GenerateXml(doc, headerElement);
     }
 
     /// <summary>

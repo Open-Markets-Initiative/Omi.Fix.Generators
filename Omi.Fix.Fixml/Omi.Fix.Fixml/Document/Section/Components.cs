@@ -1,6 +1,7 @@
 ﻿namespace Omi.Fixml;
     using System.Collections.Generic;
     using System.Linq;
+using System.Xml;
 
 /// <summary>
 ///  Fixml Components (Components Section)
@@ -73,24 +74,17 @@ public class Components : Dictionary<string, Component>
     }
 
     /// <summary>
-    ///  Write components out to Fixml
+    /// Appends XmlElement from Components to root
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
-    {
-        if (this.Any())
+    public void GenerateXml(XmlDocument doc, XmlElement root) 
         {
-            stream.WriteLine($"{indent}<components>");
+        var componentsElement = doc.CreateElement("components");
+        root.AppendChild(componentsElement);
 
-            foreach (var component in Values)
-            { // should sort
-                component.Write(stream, indent.Increment());
-            }
-
-            stream.WriteLine($"{indent}</components>");
-        }
-        else
+        foreach (var component in Values) 
         {
-            stream.WriteLine($"{indent}<components/>");
+            //Append XmlElement from component to componentsElement
+            component.GenerateXml(doc, componentsElement);
         }
     }
 

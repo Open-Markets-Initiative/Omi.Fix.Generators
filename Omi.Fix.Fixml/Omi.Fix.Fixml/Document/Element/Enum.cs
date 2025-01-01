@@ -1,4 +1,6 @@
-﻿namespace Omi.Fixml;
+﻿using System.Xml;
+
+namespace Omi.Fixml;
 
 /// <summary>
 ///  Fixml Enumerated Value
@@ -36,6 +38,26 @@ public class Enum
             Value = @enum.Value,
             Description = @enum.Name
         };
+
+    /// <summary>
+    /// Appends XmlElement from Enum to parent
+    /// </summary>
+    public void GenerateXml(XmlDocument doc,XmlElement parent) 
+        {
+        var enumElement = doc.CreateElement("value");
+
+        //Appends enum attribute to enumElement
+        var enumAtr = doc.CreateAttribute("enum");
+        enumAtr.Value = Value;
+        enumElement.Attributes.Append(enumAtr);
+
+        //Appends description attribute to enumElement
+        var descAtr = doc.CreateAttribute("description");
+        descAtr.Value = Description;
+        enumElement.Attributes.Append(descAtr);
+
+        parent.AppendChild(enumElement);
+    }
 
     /// <summary>
     ///  Convert to normalized fix specification enum

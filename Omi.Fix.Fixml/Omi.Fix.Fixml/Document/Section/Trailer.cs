@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fixml;
     using System.Linq;
+using System.Xml;
 
 /// <summary>
 ///  Fixml rrailers (Trailer section)
@@ -66,22 +67,15 @@ public class Trailer : IParent
     }
 
     /// <summary>
-    ///  Write fixml trailer out to stream
+    /// Appends XmlElement from Trailer to root
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
-    {
-        if (HasFields)
+    public void GenerateXml(XmlDocument doc,XmlElement root) 
         {
-            stream.WriteLine($"{indent}<trailer>");
+        var trailerElement = doc.CreateElement("trailer");
+        root.AppendChild(trailerElement);
 
-            Elements.Write(stream, indent.Increment());
-
-            stream.WriteLine($"{indent}</trailer>");
-        }
-        else
-        {
-            stream.WriteLine($"{indent}<trailer/>");
-        }
+        //Append XmlElements from Elements to trailerElement
+        Elements.GenerateXml(doc, trailerElement);
     }
 
     /// <summary>

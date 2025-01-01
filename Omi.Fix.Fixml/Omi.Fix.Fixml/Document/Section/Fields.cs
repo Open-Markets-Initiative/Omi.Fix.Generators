@@ -1,6 +1,7 @@
 ﻿namespace Omi.Fixml;
     using System.Collections.Generic;
     using System.Linq;
+using System.Xml;
 
 /// <summary>
 ///  FIXML Fields (Fields Section)
@@ -114,24 +115,17 @@ public class Fields : Dictionary<string, Field>
     }
 
     /// <summary>
-    /// Write fields to stream
+    /// Appends XmlElement from Fields to root
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
-    {
-        if (Values.Count != 0)
+    public void GenerateXml(XmlDocument doc, XmlElement root) 
         {
-            stream.WriteLine($"{indent}<fields>");
+        var fieldsElement = doc.CreateElement("fields");
+        root.AppendChild(fieldsElement);
 
-            foreach (var field in Values)
-            {
-                field.Write(stream);
-            }
-
-            stream.WriteLine($"{indent}</fields>");
-        }
-        else
+        foreach (var field in Values) 
         {
-            stream.WriteLine($"{indent}<fields/>");
+            //Appends XmlElement from field to fieldsElement
+            field.GenerateXml(doc, fieldsElement);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fixml;
     using System.Collections.Generic;
+using System.Xml;
 
 /// <summary>
 ///  Fixml list of child elements (fields, groups, components)
@@ -53,13 +54,11 @@ public class Elements : List<IChild>
     }
 
     /// <summary>
-    ///  Write fixml elements
+    /// Appends XmlElement from element to parent
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
-    {
-        foreach (var element in this)
-        {
-            element.Write(stream, indent.Increment());
+    public void GenerateXml(XmlDocument doc, XmlElement parent) {
+        foreach (var element in this) {
+            element.GenerateXml(doc, parent);
         }
     }
 

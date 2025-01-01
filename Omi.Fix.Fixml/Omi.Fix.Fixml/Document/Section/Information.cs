@@ -1,4 +1,6 @@
-﻿namespace Omi.Fixml;
+﻿using System.Xml;
+
+namespace Omi.Fixml;
 
 /// <summary>
 ///  Fixml information
@@ -44,11 +46,26 @@ public class Information
         };
 
     /// <summary>
-    ///  Write components out to Fixml
+    /// Create root XmlElement from Information
     /// </summary>
-    public void Write(StreamWriter stream)
-    {
-        stream.WriteLine($"<fix major=\"{Major}\" minor=\"{Minor}\">"); // sp, null, etc
+    public XmlElement GenerateXml(XmlDocument doc) 
+        {
+        var root = doc.CreateElement("fix");
+
+        //Append major attribute to root
+        var majorAtr = doc.CreateAttribute("major");
+        majorAtr.Value = Major;
+        root.Attributes.Append(majorAtr);
+
+        //Append minor attribute to root
+        var minorAtr = doc.CreateAttribute("minor");
+        minorAtr.Value = Minor;
+        root.Attributes.Append(minorAtr);
+
+        //Append root to document
+        doc.AppendChild(root);
+
+        return root;
     }
 
     /// <summary>

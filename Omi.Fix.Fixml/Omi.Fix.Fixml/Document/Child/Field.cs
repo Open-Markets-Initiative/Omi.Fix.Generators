@@ -1,6 +1,8 @@
 ﻿namespace Omi.Fixml.Child;
     using System;
-    using Omi.Fix.Specification;
+using System.Reflection.PortableExecutable;
+using System.Xml;
+using Omi.Fix.Specification;
 
 /// <summary>
 ///  Fix Xml Field Element
@@ -92,11 +94,24 @@ public class Field : IChild
     }
 
     /// <summary>
-    ///  Write fixml field to stream
+    /// Appends XmlElement from Field to parent
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
-    {
-        stream.WriteLine($"{indent}<field name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
+    public void GenerateXml(XmlDocument doc,XmlElement parent) 
+        {
+        var fieldElement = doc.CreateElement("field");
+
+        //Append name attribute to fieldElement
+        var nameAtr = doc.CreateAttribute("name");
+        nameAtr.Value = Name;
+        fieldElement.Attributes.Append(nameAtr);
+
+        //Append required attribute to fieldElement
+        var reqAtr = doc.CreateAttribute("required");
+        reqAtr.Value = Required ? "Y" : "N";
+        fieldElement.Attributes.Append(reqAtr);
+
+        //Append fieldElement to parent
+        parent.AppendChild(fieldElement);
     }
 
     /// <summary>
