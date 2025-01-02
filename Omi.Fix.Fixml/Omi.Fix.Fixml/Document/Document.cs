@@ -1,6 +1,5 @@
 ﻿namespace Omi.Fixml;
-    using System.IO;
-using System.Xml;
+    using System.Xml;
 
 /// <summary>
 ///  Financial Information eXchange FIXML C# Document Object Model
@@ -71,7 +70,7 @@ public class Document
 
         // Reduce to included messages
         var msgtypes = Messages.Types();
-        Fields.ReduceMsgTypesto(msgtypes);
+        Fields.ReduceMsgTypesTo(msgtypes);
 
         // Reduce to included components
         var components = GatherComponents();
@@ -185,56 +184,50 @@ public class Document
     }
 
     /// <summary>
-    /// Creates XmlDocument from Document
+    ///  Convert to XML Document
     /// </summary>
-    public XmlDocument GenerateXml() 
-        {
-        //Create XmlDocument and root element from Information
-        var doc = new XmlDocument();
-        var root = Information.GenerateXml(doc);
+    public XmlDocument ToXml()  {
 
-        //Generate XmlElements from Sections
-        Header.GenerateXml(doc, root);
-        Trailer.GenerateXml(doc, root);
-        Messages.GenerateXml(doc, root);
-        Components.GenerateXml(doc, root);
-        Fields.GenerateXml(doc, root);
+        // Create xml document and root element
+        var document = new XmlDocument();
+        var root = Information.ToXml(document);
 
-        return doc;
+        Header.ToXml(document, root);
+        Trailer.ToXml(document, root);
+        Messages.ToXml(document, root);
+        Components.ToXml(document, root);
+        Fields.ToXml(document, root);
+
+        return document;
     }
 
     /// <summary>
-    /// Write out Xml with default settings
+    ///  Write Xml with default settings
     /// </summary>
     public void WriteTo(string path) 
+    {
+        var settings = new XmlWriterSettings
         {
-        var doc = GenerateXml();
-
-        //Default file write settings
-        XmlWriterSettings settings = new XmlWriterSettings
-        {
-            Indent = true,                   // Enable indentation
-            IndentChars = "  ",              // Use two spaces for indentation
-            NewLineChars = "\r\n",           // Use Windows-style newlines
-            OmitXmlDeclaration = true,      // Exclude the XML declaration
+            Indent = true,
+            IndentChars = "  ",                  // Use two spaces for indentation
+            NewLineChars = Environment.NewLine,
+            OmitXmlDeclaration = true,           // Exclude the XML declaration
             Encoding = System.Text.Encoding.UTF8 // Use UTF-8 encoding
         };
 
-        using (XmlWriter writer = XmlWriter.Create(path, settings)) {
-            doc.WriteTo(writer);
-        }
+        WriteTo(path, settings);
     }
 
     /// <summary>
-    /// Write out Xml with custom settings
+    ///  Write XML with settings
     /// </summary>
     public void WriteTo(string path, XmlWriterSettings settings) 
-        {
-        var doc = GenerateXml();
+    {
+        var xml = ToXml();
 
-        using (XmlWriter writer = XmlWriter.Create(path, settings)) {
-            doc.WriteTo(writer);
-        }
+        using var writer = XmlWriter.Create(path, settings);
+
+        xml.WriteTo(writer);
     }
 
     /// <summary>

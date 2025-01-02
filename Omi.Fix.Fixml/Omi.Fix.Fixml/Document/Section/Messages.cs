@@ -62,15 +62,14 @@ public class Messages : List<Message>
     /// <summary>
     /// Appends XmlElement from Messages to root
     /// </summary>
-    public void GenerateXml(XmlDocument doc, XmlElement root) 
-        {
-        var messagesElement = doc.CreateElement("messages");
-        root.AppendChild(messagesElement);
+    public void ToXml(XmlDocument document, XmlElement root) 
+    {
+        var messages = document.CreateElement("messages");
+        root.AppendChild(messages);
 
         foreach (var message in this) 
         {
-            //Append message XmlElements to messagesElement
-            message.GenerateXml(doc, messagesElement);
+            message.ToXml(document, messages);
         }
     }
 

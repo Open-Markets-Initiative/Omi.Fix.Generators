@@ -1,15 +1,12 @@
-﻿using System.Xml;
-
-namespace Omi.Fixml;
+﻿namespace Omi.Fixml;
+    using System.Xml;
 
 /// <summary>
-///  Fixml information
+///  FIXML information
 /// </summary>
 
 public class Information
 {
-    // Need to add Service pack
-
     /// <summary>
     ///  Fixml Major Version
     /// </summary>
@@ -20,13 +17,15 @@ public class Information
     /// </summary>
     public string Minor = string.Empty;
 
+    // TODO: Add Service pack
+
     /// <summary>
     ///  Errors in the Information
     /// </summary>
-    public List<string> Errors = new List<string>();
+    public List<string> Errors = [];
 
     /// <summary>
-    ///  Convert xml attributs to fixml information
+    ///  Convert XML attributes to FIXML document information
     /// </summary>
     public static Information From(Xml.fix xml)
         => new()
@@ -36,7 +35,7 @@ public class Information
         };
 
     /// <summary>
-    /// Convert from specification Types to Xml Fields
+    ///  Convert from specification Types to Xml Fields
     /// </summary>
     public static Information From(Fix.Specification.Information description)
         => new()
@@ -46,24 +45,24 @@ public class Information
         };
 
     /// <summary>
-    /// Create root XmlElement from Information
+    ///  Create root Xml element for Information
     /// </summary>
-    public XmlElement GenerateXml(XmlDocument doc) 
-        {
-        var root = doc.CreateElement("fix");
+    public XmlElement ToXml(XmlDocument xml)
+    {
+        var root = xml.CreateElement("fix");
 
-        //Append major attribute to root
-        var majorAtr = doc.CreateAttribute("major");
-        majorAtr.Value = Major;
-        root.Attributes.Append(majorAtr);
+        // Append major attribute to root
+        var major = xml.CreateAttribute("major");
+        major.Value = Major;
+        root.Attributes.Append(major);
 
-        //Append minor attribute to root
-        var minorAtr = doc.CreateAttribute("minor");
-        minorAtr.Value = Minor;
-        root.Attributes.Append(minorAtr);
+        // Append minor attribute to root
+        var minor = xml.CreateAttribute("minor");
+        minor.Value = Minor;
+        root.Attributes.Append(minor);
 
         //Append root to document
-        doc.AppendChild(root);
+        xml.AppendChild(root);
 
         return root;
     }
@@ -90,22 +89,18 @@ public class Information
     }
 
     /// <summary>
-    ///  Report errors in fixml information
+    ///  Report errors in FIXML information
     /// </summary>
     public void Error(Fields fields, Components components, List<string> Errors)
     {
         if (string.IsNullOrWhiteSpace(Major))
         {
-            Console.WriteLine("Missing Major Version");
-
             Errors.Add("Missing Major Version");
 
             this.Errors.Add("Missing Major Version");
         }
         if (string.IsNullOrWhiteSpace(Minor))
         {
-            Console.WriteLine("Missing Minor Version");
-
             Errors.Add("Missing Minor Version");
 
             this.Errors.Add("Missing Minor Version");
@@ -113,7 +108,7 @@ public class Information
     }
 
     /// <summary>
-    ///  Display fixml version information as string
+    ///  Display FIXML version information as string
     /// </summary>
     public override string ToString()
     {
@@ -128,5 +123,4 @@ public class Information
 
         return "UNSPECIFIED";
     }
-
 }

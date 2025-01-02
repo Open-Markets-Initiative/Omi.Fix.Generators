@@ -66,7 +66,7 @@ public class Component : IParent
     /// <summary>
     /// Appends XmlElement from Component to parent
     /// </summary>
-    public void GenerateXml(XmlDocument doc,XmlElement parent) 
+    public void ToXml(XmlDocument doc,XmlElement parent) 
         {
         var componentElement = doc.CreateElement("component");
 
@@ -78,7 +78,7 @@ public class Component : IParent
         parent.AppendChild(componentElement);
 
         //Append XmlElement from Elements to componentElement
-        Elements.GenerateXml(doc, componentElement);
+        Elements.ToXml(doc, componentElement);
     }
 
     /// <summary>

@@ -1,6 +1,6 @@
 ﻿namespace Omi.Fixml;
     using System.Collections.Generic;
-using System.Xml;
+    using System.Xml;
 
 /// <summary>
 ///  Fixml list of child elements (fields, groups, components)
@@ -8,7 +8,6 @@ using System.Xml;
 
 public class Elements : List<IChild>
 {
-
     /// <summary>
     ///  Default constructor
     /// </summary>
@@ -29,7 +28,7 @@ public class Elements : List<IChild>
     {
         var elements = new Elements();
 
-        foreach (var item in items ?? Array.Empty<object>())
+        foreach (var item in items ?? [])
         {
             elements.Add(Child.Field.From(item, parent));
         }
@@ -54,11 +53,11 @@ public class Elements : List<IChild>
     }
 
     /// <summary>
-    /// Appends XmlElement from element to parent
+    ///  Appends Xml element from element to parent
     /// </summary>
-    public void GenerateXml(XmlDocument doc, XmlElement parent) {
+    public void ToXml(XmlDocument document, XmlElement parent) {
         foreach (var element in this) {
-            element.GenerateXml(doc, parent);
+            element.ToXml(document, parent);
         }
     }
 

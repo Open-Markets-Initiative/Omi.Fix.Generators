@@ -42,5 +42,5 @@ public interface IChild
     /// <summary>
     /// Generates XmlElements from element
     /// </summary>
-    void GenerateXml(XmlDocument doc, XmlElement parent);
+    void ToXml(XmlDocument doc, XmlElement parent);
 }

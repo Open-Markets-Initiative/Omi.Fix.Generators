@@ -63,13 +63,12 @@ public class Header : IParent
     /// <summary>
     /// Creates header XmlElement and appends to root
     /// </summary>
-    public void GenerateXml(XmlDocument doc, XmlElement root) 
-        {
-        var headerElement = doc.CreateElement("header");
-        root.AppendChild(headerElement);
+    public void ToXml(XmlDocument xml, XmlElement root) 
+    {
+        var header = xml.CreateElement("header");
+        root.AppendChild(header);
         
-        //Generate XmlElements from Elements
-        Elements.GenerateXml(doc, headerElement);
+        Elements.ToXml(xml, header);
     }
 
     /// <summary>

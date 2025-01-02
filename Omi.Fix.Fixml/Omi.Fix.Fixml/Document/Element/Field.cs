@@ -47,7 +47,7 @@ public class Field
     /// <summary>
     /// Appends XmlElement from Field to parent
     /// </summary>
-    public void GenerateXml(XmlDocument doc,XmlElement parent) 
+    public void ToXml(XmlDocument doc,XmlElement parent) 
         {
         var fieldElement = doc.CreateElement("field");
 

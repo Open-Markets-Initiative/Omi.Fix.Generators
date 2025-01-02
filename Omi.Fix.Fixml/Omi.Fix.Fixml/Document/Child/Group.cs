@@ -86,7 +86,7 @@ public class Group : IParent, IChild
     /// <summary>
     /// Generates XmlElement from Group Element and appends to parent
     /// </summary>
-    public void GenerateXml(XmlDocument doc, XmlElement parent)
+    public void ToXml(XmlDocument doc, XmlElement parent)
     {
         var groupElement = doc.CreateElement("group");
 
@@ -104,7 +104,7 @@ public class Group : IParent, IChild
         parent.AppendChild(groupElement);
 
         //Generate XmlElements from Elements
-        Elements.GenerateXml(doc, groupElement);
+        Elements.ToXml(doc, groupElement);
     }
 
     /// <summary>

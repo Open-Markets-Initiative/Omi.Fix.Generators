@@ -1,6 +1,6 @@
 ﻿namespace Omi.Fixml;
     using System.Linq;
-using System.Xml;
+    using System.Xml;
 
 /// <summary>
 ///  Fixml Message
@@ -8,7 +8,6 @@ using System.Xml;
 
 public class Message : IParent
 {
-
     /// <summary>
     ///  Fixml message name
     /// </summary>
@@ -27,7 +26,7 @@ public class Message : IParent
     /// <summary>
     ///  Fixml message child elements list (fields, groups, components)
     /// </summary>
-    public Elements Elements { get; set; } = new Elements();
+    public Elements Elements { get; set; } = [];
 
     /// <summary>
     ///  Convert xml element to fixml message 
@@ -66,29 +65,25 @@ public class Message : IParent
     /// <summary>
     /// Appends XmlElement from Message to parent
     /// </summary>
-    public void GenerateXml(XmlDocument doc,XmlElement parent) 
-        {
+    public void ToXml(XmlDocument doc,XmlElement parent) 
+    {
         var messageElement = doc.CreateElement("message");
 
-        //Append name attribute to messageElement
         var nameAtr = doc.CreateAttribute("name");
         nameAtr.Value = Name;
         messageElement.Attributes.Append(nameAtr);
 
-        //Append message type attribute to messageElement
         var msgtypeAtr = doc.CreateAttribute("msgtype");
         msgtypeAtr.Value = Type;
         messageElement.Attributes.Append(msgtypeAtr);
 
-        //Appends message category to messageElement
         var msgcatAtr = doc.CreateAttribute("msgcat");
         msgcatAtr.Value = Category;
         messageElement.Attributes.Append(msgcatAtr);
 
         parent.AppendChild(messageElement);
 
-        //Append XmlElements from Elements to messageElement
-        Elements.GenerateXml(doc, messageElement);
+        Elements.ToXml(doc, messageElement);
     }
 
     /// <summary>

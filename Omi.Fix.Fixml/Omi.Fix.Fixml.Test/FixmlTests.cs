@@ -1,9 +1,12 @@
 namespace Omi.Fix.Fixml.Test;
     using NUnit.Framework;
 
+/// <summary>
+///  Fixml Library regression tests
+/// </summary>
+
 public class LibraryTests
 {
-
     [Test]
     public void VerifyFixmlCount()
     {

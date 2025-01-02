@@ -61,7 +61,7 @@ public class Component : IChild
     /// <summary>
     /// Appends XmlElement from Component to parent
     /// </summary>
-    public void GenerateXml(XmlDocument doc,XmlElement parent) 
+    public void ToXml(XmlDocument doc,XmlElement parent) 
         {
         var componentElement = doc.CreateElement("component");
 

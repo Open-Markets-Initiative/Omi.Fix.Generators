@@ -1,7 +1,6 @@
 ﻿namespace Omi.Fixml;
     using System.Collections.Generic;
-    using System.Linq;
-using System.Xml;
+    using System.Xml;
 
 /// <summary>
 ///  Fixml Components (Components Section)
@@ -27,21 +26,21 @@ public class Components : Dictionary<string, Component>
     }
 
     /// <summary>
-    ///  Load components in xml
+    ///  Load components in xml classes
     /// </summary>
     public static Components From(Xml.fix xml)
         => new(xml);
 
     /// <summary>
-    ///  Errors in the Components Section
+    ///  Errors in the components section
     /// </summary>
-    public List<string> Errors = new List<string>();
+    public List<string> Errors = [];
 
     /// <summary>
     /// Fix Component from xml file
     /// </summary>
     public static Xml.fixComponent[] ListFrom(Xml.fix xml)
-        => xml.components ?? Array.Empty<Xml.fixComponent>();
+        => xml.components ?? [];
 
     /// <summary>
     ///  Convert normalized fix specification components to fixml components 
@@ -74,22 +73,21 @@ public class Components : Dictionary<string, Component>
     }
 
     /// <summary>
-    /// Appends XmlElement from Components to root
+    ///  Appends components XML element
     /// </summary>
-    public void GenerateXml(XmlDocument doc, XmlElement root) 
-        {
-        var componentsElement = doc.CreateElement("components");
-        root.AppendChild(componentsElement);
+    public void ToXml(XmlDocument document, XmlElement root) 
+    {
+        var element = document.CreateElement("components");
+        root.AppendChild(element);
 
         foreach (var component in Values) 
         {
-            //Append XmlElement from component to componentsElement
-            component.GenerateXml(doc, componentsElement);
+            component.ToXml(document, element);
         }
     }
 
     /// <summary>
-    ///  Convert fixml components section to normalized fix specification components
+    ///  Convert FIXML components section to normalized FIX specification components
     /// </summary>
     public Fix.Specification.Components ToSpecification()
     {
