@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fixml;
     using System.Linq;
+using System.Xml;
 
 /// <summary>
 ///  Fix Field Declaration (Type)
@@ -44,24 +45,33 @@ public class Field
     public string Version = string.Empty;
 
     /// <summary>
-    /// Writes fixml field to stream
+    /// Appends XmlElement from Field to parent
     /// </summary>
-    public void Write(StreamWriter stream)
-    {
-        if (IsEnum)
+    public void ToXml(XmlDocument doc,XmlElement parent) 
         {
-            stream.WriteLine($"    <field number=\"{Number}\" name=\"{Name}\" type=\"{Type.ToUpper()}\">");
+        var fieldElement = doc.CreateElement("field");
 
-            foreach (var @enum in Enums)
-            {
-                stream.WriteLine($"      <value enum=\"{@enum.Value}\" description=\"{@enum.Description}\"/>");
-            }
+        //Appends number attribute to fieldElement
+        var numberAtr = doc.CreateAttribute("number");
+        numberAtr.Value = Number.ToString();
+        fieldElement.Attributes.Append(numberAtr);
 
-            stream.WriteLine("    </field>");
-        }
-        else
+        //Appends name attribute to fieldElement
+        var nameAtr = doc.CreateAttribute("name");
+        nameAtr.Value = Name;
+        fieldElement.Attributes.Append(nameAtr);
+
+        //Appends type attribute to fieldElement
+        var typeAtr = doc.CreateAttribute("type");
+        typeAtr.Value = Type;
+        fieldElement.Attributes.Append(typeAtr);
+
+        parent.AppendChild(fieldElement);
+
+        foreach (var element in Enums) 
         {
-            stream.WriteLine($"    <field number=\"{Number}\" name=\"{Name}\" type=\"{Type.ToUpper()}\"/>");
+            //Append XmlElement from enum to fieldElement
+            element.GenerateXml(doc, fieldElement);
         }
     }
 

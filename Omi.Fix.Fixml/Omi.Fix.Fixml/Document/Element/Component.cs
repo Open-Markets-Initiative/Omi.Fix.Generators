@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fixml;
     using System.Linq;
+using System.Xml;
 
 /// <summary>
 ///  Fixml Component (predefined collection of elements)
@@ -63,22 +64,21 @@ public class Component : IParent
     }
 
     /// <summary>
-    ///  Write componenet to xml file 
+    /// Appends XmlElement from Component to parent
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
-    {
-        if (HasFields)
+    public void ToXml(XmlDocument doc,XmlElement parent) 
         {
-            stream.WriteLine($"{indent.Increment()}<component name=\"{Name}\">");
+        var componentElement = doc.CreateElement("component");
 
-            Elements.Write(stream, indent.Increment().Increment());
+        //Append name attribute to componentElement
+        var nameAtr = doc.CreateAttribute("name");
+        nameAtr.Value = Name;
+        componentElement.Attributes.Append(nameAtr);
 
-            stream.WriteLine($"{indent}</component>");
-        }
-        else
-        {
-            stream.WriteLine($"{indent}<component name=\"{Name}\"/>");
-        }
+        parent.AppendChild(componentElement);
+
+        //Append XmlElement from Elements to componentElement
+        Elements.ToXml(doc, componentElement);
     }
 
     /// <summary>

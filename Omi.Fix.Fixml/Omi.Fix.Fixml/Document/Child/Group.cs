@@ -1,6 +1,7 @@
 ﻿namespace Omi.Fixml.Child;
     using System.Linq;
-    using Omi.Fix.Specification;
+using System.Xml;
+using Omi.Fix.Specification;
 
 /// <summary>
 ///  Fix Xml Group Element
@@ -83,22 +84,27 @@ public class Group : IParent, IChild
     }
 
     /// <summary>
-    /// Write groups to xml file 
+    /// Generates XmlElement from Group Element and appends to parent
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
+    public void ToXml(XmlDocument doc, XmlElement parent)
     {
-        if (HasFields)
-        {
-            stream.WriteLine($"{indent}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\">");
+        var groupElement = doc.CreateElement("group");
 
-            Elements.Write(stream, indent);
+        //Append name attribute to groupElement
+        var nameAtr = doc.CreateAttribute("name");
+        nameAtr.Value = Name;
+        groupElement.Attributes.Append(nameAtr);
 
-            stream.WriteLine($"{indent}</group>");
-        }
-        else
-        {
-            stream.WriteLine($"{indent}<group name=\"{Name}\" required=\"{(Required ? 'Y' : 'N')}\"/>");
-        }
+        //Append required attribute to groupElement
+        var reqAtr = doc.CreateAttribute("required");
+        reqAtr.Value = Required ? "Y" : "N";
+        groupElement.Attributes.Append(reqAtr);
+
+        //Append groupElement to parent
+        parent.AppendChild(groupElement);
+
+        //Generate XmlElements from Elements
+        Elements.ToXml(doc, groupElement);
     }
 
     /// <summary>

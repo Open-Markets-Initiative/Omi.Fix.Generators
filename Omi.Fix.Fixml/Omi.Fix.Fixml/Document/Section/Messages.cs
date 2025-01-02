@@ -1,4 +1,6 @@
-﻿namespace Omi.Fixml;
+﻿using System.Xml;
+
+namespace Omi.Fixml;
 
 /// <summary>
 ///  List of fixml messsages
@@ -58,24 +60,16 @@ public class Messages : List<Message>
         => new Messages(messages.Select(Message.From));
 
     /// <summary>
-    ///  Write fixml messages to stream
+    /// Appends XmlElement from Messages to root
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
+    public void ToXml(XmlDocument document, XmlElement root) 
     {
-        if (this.Any())
-        {
-            stream.WriteLine($"{indent}<messages>");
+        var messages = document.CreateElement("messages");
+        root.AppendChild(messages);
 
-            foreach (var message in this)
-            {
-                message.Write(stream, indent);
-            }
-
-            stream.WriteLine($"{indent}</messages>");
-        }
-        else
+        foreach (var message in this) 
         {
-            stream.WriteLine($"{indent}<messages/>");
+            message.ToXml(document, messages);
         }
     }
 

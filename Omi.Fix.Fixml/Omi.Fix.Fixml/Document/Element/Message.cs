@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fixml;
     using System.Linq;
+    using System.Xml;
 
 /// <summary>
 ///  Fixml Message
@@ -7,7 +8,6 @@
 
 public class Message : IParent
 {
-
     /// <summary>
     ///  Fixml message name
     /// </summary>
@@ -26,7 +26,7 @@ public class Message : IParent
     /// <summary>
     ///  Fixml message child elements list (fields, groups, components)
     /// </summary>
-    public Elements Elements { get; set; } = new Elements();
+    public Elements Elements { get; set; } = [];
 
     /// <summary>
     ///  Convert xml element to fixml message 
@@ -63,22 +63,27 @@ public class Message : IParent
     }
 
     /// <summary>
-    ///  Write fixml message to stream
+    /// Appends XmlElement from Message to parent
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
+    public void ToXml(XmlDocument doc,XmlElement parent) 
     {
-        if (HasFields)
-        {
-            stream.WriteLine($"{indent.Increment()}<message name=\"{Name}\" msgtype=\"{Type}\" msgcat=\"{Category}\">");
+        var messageElement = doc.CreateElement("message");
 
-            Elements.Write(stream, indent.Increment().Increment());
+        var nameAtr = doc.CreateAttribute("name");
+        nameAtr.Value = Name;
+        messageElement.Attributes.Append(nameAtr);
 
-            stream.WriteLine($"{indent.Increment()}</message>");
-        }
-        else
-        {
-            stream.WriteLine($"{indent.Increment()}<message name=\"{Name}\" msgtype=\"{Type}\" msgcat=\"{Category}\"/>");
-        }
+        var msgtypeAtr = doc.CreateAttribute("msgtype");
+        msgtypeAtr.Value = Type;
+        messageElement.Attributes.Append(msgtypeAtr);
+
+        var msgcatAtr = doc.CreateAttribute("msgcat");
+        msgcatAtr.Value = Category;
+        messageElement.Attributes.Append(msgcatAtr);
+
+        parent.AppendChild(messageElement);
+
+        Elements.ToXml(doc, messageElement);
     }
 
     /// <summary>

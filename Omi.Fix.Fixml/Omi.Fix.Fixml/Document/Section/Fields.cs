@@ -1,6 +1,7 @@
 ﻿namespace Omi.Fixml;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Xml;
 
 /// <summary>
 ///  FIXML Fields (Fields Section)
@@ -33,7 +34,7 @@ public class Fields : Dictionary<string, Field>
     /// <summary>
     ///  Errors in the Fields Section
     /// </summary>
-    public List<string> Errors = new List<string>();
+    public List<string> Errors = [];
 
     /// <summary>
     /// Convert from specification Types to Xml Fields
@@ -92,9 +93,9 @@ public class Fields : Dictionary<string, Field>
     /// <summary>
     ///  Normalize MsgTypes
     /// </summary>
-    public void ReduceMsgTypesto(HashSet<string> included)
+    public void ReduceMsgTypesTo(HashSet<string> included)
     {
-        // what if msgtypes doesnt exist?
+        // what if msgtypes doesn't exist?
 
         // filter message types
         if (TryGetValue("MsgType", out var msgtype))
@@ -114,29 +115,21 @@ public class Fields : Dictionary<string, Field>
     }
 
     /// <summary>
-    /// Write fields to stream
+    ///  Append fields xml element
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
+    public void ToXml(XmlDocument document, XmlElement root) 
     {
-        if (Values.Count != 0)
-        {
-            stream.WriteLine($"{indent}<fields>");
+        var element = document.CreateElement("fields");
+        root.AppendChild(element);
 
-            foreach (var field in Values)
-            {
-                field.Write(stream);
-            }
-
-            stream.WriteLine($"{indent}</fields>");
-        }
-        else
+        foreach (var field in Values) 
         {
-            stream.WriteLine($"{indent}<fields/>");
+            field.ToXml(document, element);
         }
     }
 
     /// <summary>
-    ///  Convert FIXML field declarations to normalized fix specification types
+    ///  Convert FIXML field declarations to normalized FIX specification types
     /// </summary>
     public Fix.Specification.Types ToSpecification()
     {

@@ -1,4 +1,6 @@
-﻿namespace Omi.Fixml;
+﻿using System.Xml;
+
+namespace Omi.Fixml;
 
 /// <summary>
 ///  Fixml Child Element
@@ -38,7 +40,7 @@ public interface IChild
     Fix.Specification.Field ToSpecification();
 
     /// <summary>
-    ///  Write element to stream
+    /// Generates XmlElements from element
     /// </summary>
-    void Write(StreamWriter stream, Indent indent);
+    void ToXml(XmlDocument doc, XmlElement parent);
 }

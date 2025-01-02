@@ -1,6 +1,6 @@
 ﻿namespace Omi.Fixml;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Xml;
 
 /// <summary>
 ///  Fixml Components (Components Section)
@@ -26,21 +26,21 @@ public class Components : Dictionary<string, Component>
     }
 
     /// <summary>
-    ///  Load components in xml
+    ///  Load components in xml classes
     /// </summary>
     public static Components From(Xml.fix xml)
         => new(xml);
 
     /// <summary>
-    ///  Errors in the Components Section
+    ///  Errors in the components section
     /// </summary>
-    public List<string> Errors = new List<string>();
+    public List<string> Errors = [];
 
     /// <summary>
     /// Fix Component from xml file
     /// </summary>
     public static Xml.fixComponent[] ListFrom(Xml.fix xml)
-        => xml.components ?? Array.Empty<Xml.fixComponent>();
+        => xml.components ?? [];
 
     /// <summary>
     ///  Convert normalized fix specification components to fixml components 
@@ -73,29 +73,21 @@ public class Components : Dictionary<string, Component>
     }
 
     /// <summary>
-    ///  Write components out to Fixml
+    ///  Appends components XML element
     /// </summary>
-    public void Write(StreamWriter stream, Indent indent)
+    public void ToXml(XmlDocument document, XmlElement root) 
     {
-        if (this.Any())
-        {
-            stream.WriteLine($"{indent}<components>");
+        var element = document.CreateElement("components");
+        root.AppendChild(element);
 
-            foreach (var component in Values)
-            { // should sort
-                component.Write(stream, indent.Increment());
-            }
-
-            stream.WriteLine($"{indent}</components>");
-        }
-        else
+        foreach (var component in Values) 
         {
-            stream.WriteLine($"{indent}<components/>");
+            component.ToXml(document, element);
         }
     }
 
     /// <summary>
-    ///  Convert fixml components section to normalized fix specification components
+    ///  Convert FIXML components section to normalized FIX specification components
     /// </summary>
     public Fix.Specification.Components ToSpecification()
     {
