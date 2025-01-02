@@ -73,16 +73,21 @@ public class Components : Dictionary<string, Component>
     }
 
     /// <summary>
-    ///  Appends components XML element
+    ///  Append as XML element
     /// </summary>
-    public void ToXml(XmlDocument document, XmlElement root) 
+    public void ToXml(XmlDocument document)
     {
-        var element = document.CreateElement("components");
-        root.AppendChild(element);
+        var root = document.FirstChild;
 
-        foreach (var component in Values) 
+        if (root != null)
         {
-            component.ToXml(document, element);
+            var element = document.CreateElement("components");
+            root.AppendChild(element);
+
+            foreach (var component in Values)
+            {
+                component.ToXml(document, element);
+            }
         }
     }
 

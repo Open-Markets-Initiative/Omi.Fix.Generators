@@ -1,6 +1,5 @@
-﻿using System.Xml;
-
-namespace Omi.Fixml;
+﻿namespace Omi.Fixml;
+    using System.Xml;
 
 /// <summary>
 ///  Fixml Child Element
@@ -8,7 +7,6 @@ namespace Omi.Fixml;
 
 public interface IChild
 {
-
     /// <summary>
     ///  Element name
     /// </summary>
@@ -40,7 +38,7 @@ public interface IChild
     Fix.Specification.Field ToSpecification();
 
     /// <summary>
-    /// Generates XmlElements from element
+    ///  Convert to Xml Element
     /// </summary>
     void ToXml(XmlDocument doc, XmlElement parent);
 }

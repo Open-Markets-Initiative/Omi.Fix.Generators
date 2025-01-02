@@ -67,14 +67,19 @@ public class Trailer : IParent
     }
 
     /// <summary>
-    ///  Appends XmlElement from Trailer to root
+    ///  Append as XML element
     /// </summary>
-    public void ToXml(XmlDocument document, XmlElement root) 
+    public void ToXml(XmlDocument document) 
     {
-        var trailer = document.CreateElement("trailer");
-        root.AppendChild(trailer);
+        var root = document.FirstChild;
 
-        Elements.ToXml(document, trailer);
+        if (root != null) 
+        {
+            var element = document.CreateElement("trailer");
+            root.AppendChild(element);
+
+            Elements.ToXml(document, element);
+        }
     }
 
     /// <summary>

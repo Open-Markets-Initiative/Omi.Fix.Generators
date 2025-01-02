@@ -59,17 +59,23 @@ public class Messages : List<Message>
     public static Messages From(Fix.Specification.Messages messages)
         => new Messages(messages.Select(Message.From));
 
-    /// <summary>
-    /// Appends XmlElement from Messages to root
-    /// </summary>
-    public void ToXml(XmlDocument document, XmlElement root) 
-    {
-        var messages = document.CreateElement("messages");
-        root.AppendChild(messages);
 
-        foreach (var message in this) 
+    /// <summary>
+    ///  Append as XML element
+    /// </summary>
+    public void ToXml(XmlDocument document)
+    {
+        var root = document.FirstChild;
+
+        if (root != null)
         {
-            message.ToXml(document, messages);
+            var element = document.CreateElement("messages");
+            root.AppendChild(element);
+
+            foreach (var message in this)
+            {
+                message.ToXml(document, element);
+            }
         }
     }
 

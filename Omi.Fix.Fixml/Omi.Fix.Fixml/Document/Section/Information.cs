@@ -47,22 +47,22 @@ public class Information
     /// <summary>
     ///  Create root Xml element for Information
     /// </summary>
-    public XmlElement ToXml(XmlDocument xml)
+    public XmlElement ToXml(XmlDocument document)
     {
-        var root = xml.CreateElement("fix");
+        var root = document.CreateElement("fix");
 
-        // Append major attribute to root
-        var major = xml.CreateAttribute("major");
+        // Append major attribute to fix element
+        var major = document.CreateAttribute("major");
         major.Value = Major;
         root.Attributes.Append(major);
 
-        // Append minor attribute to root
-        var minor = xml.CreateAttribute("minor");
+        // Append minor attribute to fix element
+        var minor = document.CreateAttribute("minor");
         minor.Value = Minor;
         root.Attributes.Append(minor);
 
-        //Append root to document
-        xml.AppendChild(root);
+        // Append fix element to document
+        document.AppendChild(root);
 
         return root;
     }

@@ -115,16 +115,21 @@ public class Fields : Dictionary<string, Field>
     }
 
     /// <summary>
-    ///  Append fields xml element
+    ///  Append as XML element
     /// </summary>
-    public void ToXml(XmlDocument document, XmlElement root) 
+    public void ToXml(XmlDocument document)
     {
-        var element = document.CreateElement("fields");
-        root.AppendChild(element);
+        var root = document.FirstChild;
 
-        foreach (var field in Values) 
+        if (root != null)
         {
-            field.ToXml(document, element);
+            var element = document.CreateElement("fields");
+            root.AppendChild(element);
+
+            foreach (var field in Values)
+            {
+                field.ToXml(document, element);
+            }
         }
     }
 

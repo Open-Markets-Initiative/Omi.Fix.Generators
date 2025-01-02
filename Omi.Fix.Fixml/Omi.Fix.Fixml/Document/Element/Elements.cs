@@ -53,7 +53,7 @@ public class Elements : List<IChild>
     }
 
     /// <summary>
-    ///  Appends Xml element from element to parent
+    ///  Append xml child elements
     /// </summary>
     public void ToXml(XmlDocument document, XmlElement parent) {
         foreach (var element in this) {
@@ -62,7 +62,7 @@ public class Elements : List<IChild>
     }
 
     /// <summary>
-    ///  Convert fixml elements to normalized fix specification fields 
+    ///  Convert FIXML elements to normalized FIX specification fields 
     /// </summary>
     public List<Fix.Specification.Field> ToSpecification()
     {

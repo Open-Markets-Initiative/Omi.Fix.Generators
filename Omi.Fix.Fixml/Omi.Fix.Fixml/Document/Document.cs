@@ -184,19 +184,32 @@ public class Document
     }
 
     /// <summary>
+    ///  Convert FIXML to normalized FIX specification
+    /// </summary>
+    public Fix.Specification.Document ToSpecification()
+        => new()
+        {
+            Information = Information.ToSpecification(),
+            Header = Header.ToSpecification(),
+            Trailer = Trailer.ToSpecification(),
+            Messages = Messages.ToSpecification(),
+            Components = Components.ToSpecification(),
+            Types = Fields.ToSpecification(),
+        };
+
+    /// <summary>
     ///  Convert to XML Document
     /// </summary>
-    public XmlDocument ToXml()  {
-
-        // Create xml document and root element
+    public XmlDocument ToXml()
+    {
         var document = new XmlDocument();
-        var root = Information.ToXml(document);
 
-        Header.ToXml(document, root);
-        Trailer.ToXml(document, root);
-        Messages.ToXml(document, root);
-        Components.ToXml(document, root);
-        Fields.ToXml(document, root);
+        Information.ToXml(document);
+        Header.ToXml(document);
+        Trailer.ToXml(document);
+        Messages.ToXml(document);
+        Components.ToXml(document);
+        Fields.ToXml(document);
 
         return document;
     }
@@ -229,20 +242,6 @@ public class Document
 
         xml.WriteTo(writer);
     }
-
-    /// <summary>
-    ///  Convert fixml to normalized fix specification
-    /// </summary>
-    public Fix.Specification.Document ToSpecification()
-        => new()
-        {
-            Information = Information.ToSpecification(),
-            Header = Header.ToSpecification(),
-            Trailer = Trailer.ToSpecification(),
-            Messages = Messages.ToSpecification(),
-            Components = Components.ToSpecification(),
-            Types = Fields.ToSpecification(),
-        };
 
     /// <summary>
     ///  Verify fixml
