@@ -67,7 +67,7 @@ public static class Load
     /// </summary>
     public static string CategoryFrom(ModelStructure message)
     {
-        if (message.numericID < 10100) 
+        if (message.numericID < 10100 || message.numericID >= 10900) 
         {
             return "admin";
         }
