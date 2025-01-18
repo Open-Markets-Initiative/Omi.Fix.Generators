@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Text;
+using System.Xml;
 
 namespace Omi.Fix.Types;
 
@@ -124,32 +126,50 @@ public class Type
         };
 
     /// <summary>
-    /// Writes fix type field to stream
+    /// Write field type to XML
     /// </summary>
-    public void Write(StreamWriter stream)
-    {
-        stream.WriteLine($"  <FixType>");
-        stream.WriteLine($"    <Name>{Name}</Name>");
-        stream.WriteLine($"    <Tag>{Tag}</Tag>");
-        stream.WriteLine($"    <Type>{DataType}</Type>");
-        stream.WriteLine($"    <Description>{Description}</Description>");
+    public void ToXml(XmlDocument document) {
+        var root = document.DocumentElement;
+        var parent = document.CreateElement("FixType");
+        root.AppendChild(parent);
 
-        if (!String.IsNullOrWhiteSpace(Note))
-        {
-            stream.WriteLine($"    <Note>{Note}</Note>");
+        //Initialize and append name
+        var nameElement = document.CreateElement("Name");
+        nameElement.InnerText = Name;
+        parent.AppendChild(nameElement);
+
+        //Initialize and append tag
+        var tagElement = document.CreateElement("Tag");
+        tagElement.InnerText = Tag.ToString();
+        parent.AppendChild(tagElement);
+
+        //Initialize and append type
+        var typeElement = document.CreateElement("Type");
+        typeElement.InnerText = DataType;
+        parent.AppendChild(typeElement);
+
+        //Initialize and append description
+        var descElement = document.CreateElement("Description");
+        descElement.InnerText = Description;
+        parent.AppendChild(descElement);
+
+        //Initialize and append Note if not empty
+        if (!String.IsNullOrWhiteSpace(Note)) {
+            var noteElement = document.CreateElement("Description");
+            noteElement.InnerText = Note;
+            parent.AppendChild(noteElement);
         }
 
-        stream.WriteLine($"    <Version>{Version}</Version>");
+        //Initialize and append version
+        var versionElement = document.CreateElement("Version");
+        versionElement.InnerText = Version;
+        parent.AppendChild(versionElement);
 
-        if (IsEnum)
-        {
-            foreach (var @enum in Enums)
-            {
-                @enum.Write(stream);
+        if (IsEnum) {
+            foreach (var @enum in Enums) {
+                @enum.ToXml(document, parent);
             }
         }
-
-        stream.WriteLine("  </FixType>");
     }
 
     /// <summary>

@@ -1,4 +1,7 @@
-﻿namespace Omi.Fix.Types;
+﻿using System.IO;
+using System.Xml;
+
+namespace Omi.Fix.Types;
 
 /// <summary>
 ///  Fix Type Enumerated Value
@@ -67,20 +70,28 @@ public class Enum
         };
 
     /// <summary>
-    /// Write fix type enum to stream
+    /// Appends Xml Element from Enum to parent
     /// </summary>
-    public void Write(StreamWriter stream)
-    {
-        stream.WriteLine($"    <Enum>");
-        stream.WriteLine($"      <Name>{Name}</Name>");
-        stream.WriteLine($"      <Value>{Value}</Value>");
+    public void ToXml(XmlDocument document, XmlElement parent) {
+        var enumElement = document.CreateElement("Enum");
+        parent.AppendChild(enumElement);
 
-        if (!string.IsNullOrEmpty(Description))
-        {
-            stream.WriteLine($"      <Description>{Description}</Description>");
+        //Initialize and append name element to enum element
+        var nameElement = document.CreateElement("Name");
+        nameElement.InnerText = Name;
+        enumElement.AppendChild(nameElement);
+
+        //Initialize and append value element to enum element
+        var valueElement = document.CreateElement("Value");
+        valueElement.InnerText = Value;
+        enumElement.AppendChild(valueElement);
+
+        //Initialize and append description element to enum element if not empty
+        if (!string.IsNullOrEmpty(Description)) {
+            var descElement = document.CreateElement("Description");
+            descElement.InnerText = Description;
+            enumElement.AppendChild(descElement);
         }
-
-        stream.WriteLine($"    </Enum>");
     }
 
     /// <summary>
