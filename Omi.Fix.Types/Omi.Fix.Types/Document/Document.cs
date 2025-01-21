@@ -1,3 +1,5 @@
+using System.Xml;
+
 namespace Omi.Fix.Types;
 
 /// <summary>
@@ -92,24 +94,41 @@ public class Document
         };
 
     /// <summary>
-    ///  Write fix types xml to stream
+    ///  Convert to XML Document
     /// </summary>
-    public void WriteTo(StreamWriter stream)
-    {
-        Fields.Write(stream);
+    public XmlDocument ToXml() {
+        var document = new XmlDocument();
+
+        Fields.ToXml(document);
+
+        return document;
     }
 
     /// <summary>
-    ///  Write fix types xml to path
+    ///  Write Xml with default settings
     /// </summary>
-    public string WriteTo(string path)
-    {
-        using var file = File.Create(path);
-        using var stream = new StreamWriter(file);
+    public void WriteTo(string path) {
+        var settings = new XmlWriterSettings
+        {
+            Indent = true,
+            IndentChars = "  ",                  // Use two spaces for indentation
+            NewLineChars = Environment.NewLine,
+            OmitXmlDeclaration = true,           // Exclude the XML declaration
+            Encoding = System.Text.Encoding.UTF8 // Use UTF-8 encoding
+        };
 
-        WriteTo(stream);
+        WriteTo(path, settings);
+    }
 
-        return file.Name;
+    /// <summary>
+    ///  Write XML with settings
+    /// </summary>
+    public void WriteTo(string path, XmlWriterSettings settings) {
+        var xml = ToXml();
+
+        using var writer = XmlWriter.Create(path, settings);
+
+        xml.WriteTo(writer);
     }
 
     /// <summary>

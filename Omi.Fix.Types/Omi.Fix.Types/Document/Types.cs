@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fix.Types;
     using System.Collections.Generic;
+using System.Xml;
 
 /// <summary>
 ///  Fix Fields Xml Element (Fields Section)
@@ -74,24 +75,15 @@ public class Types : Dictionary<string, Type>
     }
 
     /// <summary>
-    /// Write fields to stream
+    /// Write fields to XML
     /// </summary>
-    public void Write(StreamWriter stream)
-    {
-        if (Values.Any())
-        {
-            stream.WriteLine("<FixTypes>");
+    public void ToXml(XmlDocument document) {
+        //Append root node
+        var root = document.CreateElement("FixTypes");
+        document.AppendChild(root);
 
-            foreach (var type in Values)
-            {
-                type.Write(stream);
-            }
-
-            stream.WriteLine("</FixTypes>");
-        }
-        else
-        {
-            stream.WriteLine("<FixTypes/>");
+        foreach (var type in Values) {
+            type.ToXml(document);
         }
     }
 }
