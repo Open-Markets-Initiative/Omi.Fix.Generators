@@ -32,6 +32,48 @@
     <None Update="Library\Cme.iLink3\Cme.Futures.iLink3.Sbe.v8.8.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.16.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.17.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.18.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.19.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.20.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.21.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.23.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.24.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.25.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.28.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.29.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.30.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.31.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Euronext.Optiq\Euronext.Optiq.OrderEntryGateway.Sbe.v5.33.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,9 @@
-﻿namespace Omi.Fix.Sbe.Xml;
-
-#pragma warning disable CS8981
+﻿namespace Omi.Fix.Sbe.Optiq;
 
 [System.SerializableAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.fixprotocol.org/ns/simple/1.0")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.fixprotocol.org/ns/simple/1.0", IsNullable = false)]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fixprotocol.io/2016/sbe")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://fixprotocol.io/2016/sbe", IsNullable = false)]
 public partial class messageSchema
 {
 
@@ -17,11 +15,11 @@ public partial class messageSchema
 
     private byte idField;
 
-    private byte versionField;
+    private ushort versionField;
 
     private string semanticVersionField;
 
-    private uint descriptionField;
+    private string descriptionField;
 
     private string byteOrderField;
 
@@ -83,7 +81,7 @@ public partial class messageSchema
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public byte version
+    public ushort version
     {
         get
         {
@@ -111,7 +109,7 @@ public partial class messageSchema
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public uint description
+    public string description
     {
         get
         {
@@ -152,7 +150,7 @@ public partial class types
 
     private typesEnum[] enumField;
 
-    private typesSet setField;
+    private typesSet[] setField;
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute("type")]
@@ -197,7 +195,8 @@ public partial class types
     }
 
     /// <remarks/>
-    public typesSet set
+    [System.Xml.Serialization.XmlElementAttribute("set")]
+    public typesSet[] set
     {
         get
         {
@@ -219,27 +218,23 @@ public partial class typesType
 
     private string nameField;
 
-    private string descriptionField;
-
     private string primitiveTypeField;
+
+    private string nullValueField;
 
     private string presenceField;
 
-    private ushort lengthField;
+    private long minValueField;
+
+    private bool minValueFieldSpecified;
+
+    private ulong maxValueField;
+
+    private bool maxValueFieldSpecified;
+
+    private byte lengthField;
 
     private bool lengthFieldSpecified;
-
-    private string semanticTypeField;
-
-    private byte sinceVersionField;
-
-    private bool sinceVersionFieldSpecified;
-
-    private ulong nullValueField;
-
-    private bool nullValueFieldSpecified;
-
-    private string valueField;
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -257,20 +252,6 @@ public partial class typesType
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string description
-    {
-        get
-        {
-            return this.descriptionField;
-        }
-        set
-        {
-            this.descriptionField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
     public string primitiveType
     {
         get
@@ -280,6 +261,20 @@ public partial class typesType
         set
         {
             this.primitiveTypeField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType = "integer")]
+    public string nullValue
+    {
+        get
+        {
+            return this.nullValueField;
+        }
+        set
+        {
+            this.nullValueField = value;
         }
     }
 
@@ -299,7 +294,63 @@ public partial class typesType
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort length
+    public long minValue
+    {
+        get
+        {
+            return this.minValueField;
+        }
+        set
+        {
+            this.minValueField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool minValueSpecified
+    {
+        get
+        {
+            return this.minValueFieldSpecified;
+        }
+        set
+        {
+            this.minValueFieldSpecified = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public ulong maxValue
+    {
+        get
+        {
+            return this.maxValueField;
+        }
+        set
+        {
+            this.maxValueField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool maxValueSpecified
+    {
+        get
+        {
+            return this.maxValueFieldSpecified;
+        }
+        set
+        {
+            this.maxValueFieldSpecified = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte length
     {
         get
         {
@@ -324,90 +375,6 @@ public partial class typesType
             this.lengthFieldSpecified = value;
         }
     }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string semanticType
-    {
-        get
-        {
-            return this.semanticTypeField;
-        }
-        set
-        {
-            this.semanticTypeField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public byte sinceVersion
-    {
-        get
-        {
-            return this.sinceVersionField;
-        }
-        set
-        {
-            this.sinceVersionField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool sinceVersionSpecified
-    {
-        get
-        {
-            return this.sinceVersionFieldSpecified;
-        }
-        set
-        {
-            this.sinceVersionFieldSpecified = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ulong nullValue
-    {
-        get
-        {
-            return this.nullValueField;
-        }
-        set
-        {
-            this.nullValueField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool nullValueSpecified
-    {
-        get
-        {
-            return this.nullValueFieldSpecified;
-        }
-        set
-        {
-            this.nullValueFieldSpecified = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTextAttribute()]
-    public string Value
-    {
-        get
-        {
-            return this.valueField;
-        }
-        set
-        {
-            this.valueField = value;
-        }
-    }
 }
 
 /// <remarks/>
@@ -422,8 +389,6 @@ public partial class typesComposite
     private string nameField;
 
     private string descriptionField;
-
-    private string semanticTypeField;
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute("type")]
@@ -466,20 +431,6 @@ public partial class typesComposite
             this.descriptionField = value;
         }
     }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string semanticType
-    {
-        get
-        {
-            return this.semanticTypeField;
-        }
-        set
-        {
-            this.semanticTypeField = value;
-        }
-    }
 }
 
 /// <remarks/>
@@ -491,23 +442,9 @@ public partial class typesCompositeType
 
     private string nameField;
 
-    private string descriptionField;
-
     private string primitiveTypeField;
 
     private string semanticTypeField;
-
-    private byte lengthField;
-
-    private bool lengthFieldSpecified;
-
-    private string presenceField;
-
-    private ulong nullValueField;
-
-    private bool nullValueFieldSpecified;
-
-    private string valueField;
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -520,20 +457,6 @@ public partial class typesCompositeType
         set
         {
             this.nameField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string description
-    {
-        get
-        {
-            return this.descriptionField;
-        }
-        set
-        {
-            this.descriptionField = value;
         }
     }
 
@@ -564,90 +487,6 @@ public partial class typesCompositeType
             this.semanticTypeField = value;
         }
     }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public byte length
-    {
-        get
-        {
-            return this.lengthField;
-        }
-        set
-        {
-            this.lengthField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool lengthSpecified
-    {
-        get
-        {
-            return this.lengthFieldSpecified;
-        }
-        set
-        {
-            this.lengthFieldSpecified = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string presence
-    {
-        get
-        {
-            return this.presenceField;
-        }
-        set
-        {
-            this.presenceField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ulong nullValue
-    {
-        get
-        {
-            return this.nullValueField;
-        }
-        set
-        {
-            this.nullValueField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool nullValueSpecified
-    {
-        get
-        {
-            return this.nullValueFieldSpecified;
-        }
-        set
-        {
-            this.nullValueFieldSpecified = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTextAttribute()]
-    public string Value
-    {
-        get
-        {
-            return this.valueField;
-        }
-        set
-        {
-            this.valueField = value;
-        }
-    }
 }
 
 /// <remarks/>
@@ -662,6 +501,10 @@ public partial class typesEnum
     private string nameField;
 
     private string encodingTypeField;
+
+    private byte deprecatedField;
+
+    private bool deprecatedFieldSpecified;
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute("validValue")]
@@ -704,6 +547,34 @@ public partial class typesEnum
             this.encodingTypeField = value;
         }
     }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte deprecated
+    {
+        get
+        {
+            return this.deprecatedField;
+        }
+        set
+        {
+            this.deprecatedField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool deprecatedSpecified
+    {
+        get
+        {
+            return this.deprecatedFieldSpecified;
+        }
+        set
+        {
+            this.deprecatedFieldSpecified = value;
+        }
+    }
 }
 
 /// <remarks/>
@@ -715,11 +586,13 @@ public partial class typesEnumValidValue
 
     private string nameField;
 
-    private string descriptionField;
-
-    private byte sinceVersionField;
+    private ushort sinceVersionField;
 
     private bool sinceVersionFieldSpecified;
+
+    private ushort deprecatedField;
+
+    private bool deprecatedFieldSpecified;
 
     private string valueField;
 
@@ -739,21 +612,7 @@ public partial class typesEnumValidValue
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string description
-    {
-        get
-        {
-            return this.descriptionField;
-        }
-        set
-        {
-            this.descriptionField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public byte sinceVersion
+    public ushort sinceVersion
     {
         get
         {
@@ -776,6 +635,34 @@ public partial class typesEnumValidValue
         set
         {
             this.sinceVersionFieldSpecified = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public ushort deprecated
+    {
+        get
+        {
+            return this.deprecatedField;
+        }
+        set
+        {
+            this.deprecatedField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool deprecatedSpecified
+    {
+        get
+        {
+            return this.deprecatedFieldSpecified;
+        }
+        set
+        {
+            this.deprecatedFieldSpecified = value;
         }
     }
 
@@ -859,7 +746,13 @@ public partial class typesSetChoice
 
     private string nameField;
 
-    private string descriptionField;
+    private ushort sinceVersionField;
+
+    private bool sinceVersionFieldSpecified;
+
+    private byte deprecatedField;
+
+    private bool deprecatedFieldSpecified;
 
     private byte valueField;
 
@@ -879,15 +772,57 @@ public partial class typesSetChoice
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string description
+    public ushort sinceVersion
     {
         get
         {
-            return this.descriptionField;
+            return this.sinceVersionField;
         }
         set
         {
-            this.descriptionField = value;
+            this.sinceVersionField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool sinceVersionSpecified
+    {
+        get
+        {
+            return this.sinceVersionFieldSpecified;
+        }
+        set
+        {
+            this.sinceVersionFieldSpecified = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte deprecated
+    {
+        get
+        {
+            return this.deprecatedField;
+        }
+        set
+        {
+            this.deprecatedField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool deprecatedSpecified
+    {
+        get
+        {
+            return this.deprecatedFieldSpecified;
+        }
+        set
+        {
+            this.deprecatedFieldSpecified = value;
         }
     }
 
@@ -909,7 +844,7 @@ public partial class typesSetChoice
 /// <remarks/>
 [System.SerializableAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.fixprotocol.org/ns/simple/1.0")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fixprotocol.io/2016/sbe")]
 public partial class messageSchemaMessage
 {
 
@@ -917,19 +852,11 @@ public partial class messageSchemaMessage
 
     private group[] groupField;
 
-    private data dataField;
-
     private string nameField;
 
-    private ushort idField;
+    private byte idField;
 
-    private string descriptionField;
-
-    private ushort blockLengthField;
-
-    private string semanticTypeField;
-
-    private byte sinceVersionField;
+    private ushort sinceVersionField;
 
     private bool sinceVersionFieldSpecified;
 
@@ -962,20 +889,6 @@ public partial class messageSchemaMessage
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Namespace = "")]
-    public data data
-    {
-        get
-        {
-            return this.dataField;
-        }
-        set
-        {
-            this.dataField = value;
-        }
-    }
-
-    /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
     public string name
     {
@@ -991,7 +904,7 @@ public partial class messageSchemaMessage
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort id
+    public byte id
     {
         get
         {
@@ -1005,49 +918,7 @@ public partial class messageSchemaMessage
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string description
-    {
-        get
-        {
-            return this.descriptionField;
-        }
-        set
-        {
-            this.descriptionField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort blockLength
-    {
-        get
-        {
-            return this.blockLengthField;
-        }
-        set
-        {
-            this.blockLengthField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string semanticType
-    {
-        get
-        {
-            return this.semanticTypeField;
-        }
-        set
-        {
-            this.semanticTypeField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public byte sinceVersion
+    public ushort sinceVersion
     {
         get
         {
@@ -1082,23 +953,35 @@ public partial class messageSchemaMessage
 public partial class field
 {
 
-    private string nameField;
+    private byte idField;
 
-    private ushort idField;
+    private string nameField;
 
     private string typeField;
 
-    private string descriptionField;
+    private string presenceField;
 
-    private string semanticTypeField;
-
-    private ushort offsetField;
-
-    private bool offsetFieldSpecified;
-
-    private byte sinceVersionField;
+    private ushort sinceVersionField;
 
     private bool sinceVersionFieldSpecified;
+
+    private byte deprecatedField;
+
+    private bool deprecatedFieldSpecified;
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte id
+    {
+        get
+        {
+            return this.idField;
+        }
+        set
+        {
+            this.idField = value;
+        }
+    }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1111,20 +994,6 @@ public partial class field
         set
         {
             this.nameField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort id
-    {
-        get
-        {
-            return this.idField;
-        }
-        set
-        {
-            this.idField = value;
         }
     }
 
@@ -1144,63 +1013,21 @@ public partial class field
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string description
+    public string presence
     {
         get
         {
-            return this.descriptionField;
+            return this.presenceField;
         }
         set
         {
-            this.descriptionField = value;
+            this.presenceField = value;
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string semanticType
-    {
-        get
-        {
-            return this.semanticTypeField;
-        }
-        set
-        {
-            this.semanticTypeField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort offset
-    {
-        get
-        {
-            return this.offsetField;
-        }
-        set
-        {
-            this.offsetField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool offsetSpecified
-    {
-        get
-        {
-            return this.offsetFieldSpecified;
-        }
-        set
-        {
-            this.offsetFieldSpecified = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public byte sinceVersion
+    public ushort sinceVersion
     {
         get
         {
@@ -1225,6 +1052,34 @@ public partial class field
             this.sinceVersionFieldSpecified = value;
         }
     }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte deprecated
+    {
+        get
+        {
+            return this.deprecatedField;
+        }
+        set
+        {
+            this.deprecatedField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool deprecatedSpecified
+    {
+        get
+        {
+            return this.deprecatedFieldSpecified;
+        }
+        set
+        {
+            this.deprecatedFieldSpecified = value;
+        }
+    }
 }
 
 /// <remarks/>
@@ -1237,15 +1092,11 @@ public partial class group
 
     private groupField[] fieldField;
 
-    private string nameField;
-
-    private ushort idField;
-
-    private string descriptionField;
-
-    private byte blockLengthField;
+    private byte idField;
 
     private string dimensionTypeField;
+
+    private string nameField;
 
     private byte sinceVersionField;
 
@@ -1267,21 +1118,7 @@ public partial class group
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string name
-    {
-        get
-        {
-            return this.nameField;
-        }
-        set
-        {
-            this.nameField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort id
+    public byte id
     {
         get
         {
@@ -1290,34 +1127,6 @@ public partial class group
         set
         {
             this.idField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string description
-    {
-        get
-        {
-            return this.descriptionField;
-        }
-        set
-        {
-            this.descriptionField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public byte blockLength
-    {
-        get
-        {
-            return this.blockLengthField;
-        }
-        set
-        {
-            this.blockLengthField = value;
         }
     }
 
@@ -1332,6 +1141,20 @@ public partial class group
         set
         {
             this.dimensionTypeField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string name
+    {
+        get
+        {
+            return this.nameField;
+        }
+        set
+        {
+            this.nameField = value;
         }
     }
 
@@ -1371,23 +1194,35 @@ public partial class group
 public partial class groupField
 {
 
+    private byte idField;
+
     private string nameField;
 
-    private ushort idField;
+    private string presenceField;
 
     private string typeField;
 
-    private string descriptionField;
-
-    private byte offsetField;
-
-    private bool offsetFieldSpecified;
-
-    private string semanticTypeField;
-
-    private byte sinceVersionField;
+    private ushort sinceVersionField;
 
     private bool sinceVersionFieldSpecified;
+
+    private byte deprecatedField;
+
+    private bool deprecatedFieldSpecified;
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte id
+    {
+        get
+        {
+            return this.idField;
+        }
+        set
+        {
+            this.idField = value;
+        }
+    }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1405,15 +1240,15 @@ public partial class groupField
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort id
+    public string presence
     {
         get
         {
-            return this.idField;
+            return this.presenceField;
         }
         set
         {
-            this.idField = value;
+            this.presenceField = value;
         }
     }
 
@@ -1433,63 +1268,7 @@ public partial class groupField
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string description
-    {
-        get
-        {
-            return this.descriptionField;
-        }
-        set
-        {
-            this.descriptionField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public byte offset
-    {
-        get
-        {
-            return this.offsetField;
-        }
-        set
-        {
-            this.offsetField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool offsetSpecified
-    {
-        get
-        {
-            return this.offsetFieldSpecified;
-        }
-        set
-        {
-            this.offsetFieldSpecified = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string semanticType
-    {
-        get
-        {
-            return this.semanticTypeField;
-        }
-        set
-        {
-            this.semanticTypeField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public byte sinceVersion
+    public ushort sinceVersion
     {
         get
         {
@@ -1514,93 +1293,32 @@ public partial class groupField
             this.sinceVersionFieldSpecified = value;
         }
     }
-}
-
-/// <remarks/>
-[System.SerializableAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-public partial class data
-{
-
-    private string nameField;
-
-    private ushort idField;
-
-    private string typeField;
-
-    private string descriptionField;
-
-    private string semanticTypeField;
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string name
+    public byte deprecated
     {
         get
         {
-            return this.nameField;
+            return this.deprecatedField;
         }
         set
         {
-            this.nameField = value;
+            this.deprecatedField = value;
         }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort id
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool deprecatedSpecified
     {
         get
         {
-            return this.idField;
+            return this.deprecatedFieldSpecified;
         }
         set
         {
-            this.idField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string type
-    {
-        get
-        {
-            return this.typeField;
-        }
-        set
-        {
-            this.typeField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string description
-    {
-        get
-        {
-            return this.descriptionField;
-        }
-        set
-        {
-            this.descriptionField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string semanticType
-    {
-        get
-        {
-            return this.semanticTypeField;
-        }
-        set
-        {
-            this.semanticTypeField = value;
+            this.deprecatedFieldSpecified = value;
         }
     }
 }
