@@ -68,13 +68,20 @@ public static class Load
     ///  Parse message name
     /// </summary>
     public static string NameFor(messageSchemaMessage message)
-        => message.name; 
+    {
+        ArgumentNullException.ThrowIfNull(message);
+        ArgumentException.ThrowIfNullOrWhiteSpace(message.name);
+
+        return Format.UpperFirstLetter(message.name);
+    }
 
     /// <summary>
     ///  Parse message for message category
     /// </summary>
-    public static string CategoryFor(messageSchemaMessage message)
+    public static string CategoryFor(messageSchemaMessage message) 
     {
+        // check negative?
+
         if (message.id > 100)
         {
             return "admin";
@@ -94,7 +101,7 @@ public static class Load
         {
             result.Add(new Specification.Field
             {
-                Name = field.name,
+                Name = Format.UpperFirstLetter(field.name)
                 //Required = p use presecence
 
             });
@@ -116,13 +123,15 @@ public static class Load
             // Message fields
             foreach (var field in message.field ?? [])
             {
-                if (names.Contains(field.name)) { continue; }
+                var name = Format.UpperFirstLetter(field.name);
 
-                names.Add(field.name);
-                fields.Add(field.name, new Specification.Type
+                if (names.Contains(name)) { continue; }
+
+                names.Add(name);
+                fields.Add(name, new Specification.Type
                 {
-                    Name = field.name,
-                    Tag = field.id, // need to generate this
+                    Name = name,
+                    Tag = field.id, // need to generate these
                     Description = field.name,
                     Underlying = field.type,
                 });
@@ -131,29 +140,33 @@ public static class Load
             // Repeating groups and fields  
             foreach (var group in message.group ?? [])
             {
-                if (!names.Contains(group.name))
+                var name = Format.UpperFirstLetter(group.name);
+
+                if (!names.Contains(name))
                 {
-                    names.Add(group.name);
-                    fields.Add(group.name, new Specification.Type
+                    names.Add(name);
+                    fields.Add(name, new Specification.Type
                     {
-                        Name = group.name,
+                        Name = name,
                         Tag = group.id,
-                        Description = group.name,
+                        Description = name,
                         Underlying = group.dimensionType,
                     });
                 }
 
-                foreach (var subfield in group.field ?? [])
+                foreach (var type in group.field ?? [])
                 {
-                    if (names.Contains(subfield.name)) { continue; }
+                    var current = Format.UpperFirstLetter(type.name);
 
-                    names.Add(subfield.name);
-                    fields.Add(subfield.name, new Specification.Type
+                    if (names.Contains(current)) { continue; }
+
+                    names.Add(current);
+                    fields.Add(current, new Specification.Type
                     {
-                        Name = subfield.name,
-                        Tag = subfield.id,
-                        Description = subfield.name,
-                        Underlying = subfield.type,
+                        Name = current,
+                        Tag = type.id,
+                        Description = type.name,
+                        Underlying = type.type,
                     });
                 }
             }
