@@ -1,5 +1,5 @@
 ﻿namespace Omi.Fix.Specification;
-    using System.Collections.Generic;
+using System.Collections.Generic;
 
 /// <summary>
 ///  Normalized Fix Specification Field Types List
@@ -7,7 +7,6 @@
 
 public class Types : Dictionary<string, Type>
 {
-
     /// <summary>
     ///  Default Constructor
     /// </summary>
@@ -15,13 +14,34 @@ public class Types : Dictionary<string, Type>
     { }
 
     /// <summary>
-    ///  Intialize IEnumerable types 
+    ///  Initialize from IEnumerable types 
     /// </summary>
     public Types(IEnumerable<Type> types)
     {
         foreach (var type in types)
         {
             Add(type.Name, type);
+        }
+    }
+
+    /// <summary>
+    ///  Add type
+    /// </summary>
+    public void Add(Type type)
+    {
+        // how to handle enums?
+
+        this[type.Name] = type;
+    }
+
+    /// <summary>
+    ///  Add Types, overwrite in case of same name
+    /// </summary>
+    public void AddOverwrite(Types types)
+    {
+        foreach (var type in types.Values)
+        {
+            Add(type);
         }
     }
 
@@ -39,19 +59,6 @@ public class Types : Dictionary<string, Type>
 
         return types;
     }
-
-    /// <summary>
-    ///  Add Types, overwrite in case of same name
-    /// </summary>
-    public void AddOverwrite(Types types)
-    {
-        foreach (var type in types.Values)
-        {
-            // how to handle enums?
-            this[type.Name] = type;
-        }
-    }
-
 
     /// <summary>
     ///  Remove Enums
@@ -112,7 +119,8 @@ public class Types : Dictionary<string, Type>
             {
                 continue;
             }
-            if (updatedNames.ContainsKey(pair.Key)){
+            if (updatedNames.ContainsKey(pair.Key))
+            {
                 types.Add(updatedNames[pair.Key], pair.Value);
             }
             else
