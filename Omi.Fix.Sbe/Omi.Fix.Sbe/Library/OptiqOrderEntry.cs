@@ -17,7 +17,7 @@ public static class OptiqOrderEntry
     }
 
     /// <summary>
-    ///  Gather iLink3 Sbe xmls
+    ///  Gather Optiq Sbe xmls
     /// </summary>
     public static List<Sbe.Optiq.messageSchema> Xmls()
     {
@@ -36,45 +36,66 @@ public static class OptiqOrderEntry
     }
 
     /// <summary>
-    ///  Sort iLink3 message schemas
+    ///  Generate normalized fix specifications for all Optiq xml files in library sorted by version
     /// </summary>
-    public static List<Sbe.Optiq.messageSchema> Sort(List<Sbe.Optiq.messageSchema> xmls, SortDirection sort = SortDirection.Descending)
+    public static IEnumerable<Optiq.messageSchema> SortedXmls(SortDirection direction = SortDirection.Descending)
     {
-        if (sort == SortDirection.Ascending)
+        var xmls = Xmls();
+
+        if (direction == SortDirection.Ascending)
         {
-            return xmls.OrderBy(schema => schema.id).ThenBy(schema => schema.version).ToList();
+            return xmls.OrderBy(schema => schema.id).ThenBy(schema => schema.version);
         }
         else
         {
-            return xmls.OrderByDescending(schema => schema.id).ThenByDescending(schema => schema.version).ToList();
+            return xmls.OrderByDescending(schema => schema.id).ThenByDescending(schema => schema.version);
         }
     }
 
     /// <summary>
-    ///  Generate normalized fix specifications for all Optiq xml files in library sorted by version
+    ///  Convert Optiq Sbe  specifications
     /// </summary>
-    public static List<Specification.Document> Specifications(SortDirection sort = SortDirection.Descending)
+    public static List<Specification.Document> Specifications(IEnumerable<Optiq.messageSchema> schemas)
     {
-        var xmls = Xmls();
-        var schemas = Sort(xmls, sort);
-
         var specifications = new List<Specification.Document>();
 
         foreach (var schema in schemas)
         {
-            specifications.Add(Sbe.Optiq.Load.From(schema));
+            var specification = Optiq.Load.From(schema);
+
+            specifications.Add(specification);
         }
 
         return specifications;
     }
 
     /// <summary>
-    ///  Merge all iLink3 versions into a single normalized fix specification
+    ///  Merge all Optiq versions into a single normalized fix specification
     /// </summary>
-    public static Specification.Document Combined()
+    public static Specification.Document Combined(SortDirection direction = SortDirection.Descending)
     {
-        var specifications = Specifications();
+        var xmls = SortedXmls(direction);
+
+        var specifications = Specifications(xmls);
 
         return Fix.Specification.Merge.All(specifications);
     }
+
+    /// <summary>
+    ///  Merge a count of Optiq versions into a single normalized fix specification
+    /// </summary>
+    public static Specification.Document Last(int count, SortDirection direction = SortDirection.Descending)
+    {
+        var xmls = SortedXmls(direction).Take(count);
+
+        var specifications = Specifications(xmls);
+
+        return Fix.Specification.Merge.All(specifications);
+    }
+
+    /// <summary>
+    ///  Latest 2 Optiq protocol xmls merged into a single Omi Fix specification 
+    /// </summary>
+    public static Specification.Document Active()
+        => Last(2);
 }
