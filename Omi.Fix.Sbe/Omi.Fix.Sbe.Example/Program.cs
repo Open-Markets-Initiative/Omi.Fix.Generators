@@ -1,7 +1,7 @@
-﻿// Load fix intermediate from library
+﻿// Load OptiqOrderGateway FIX intermediate from library
 var Optiq = Omi.Fix.Sbe.Library.OptiqOrderEntry.Combined();
 
-// Load fix intermediate from library
+// Load iLink3 FIX intermediate
 var iLink3 = Omi.Fix.Sbe.Library.iLink3.Combined();
 
 // Filter to admin messages
