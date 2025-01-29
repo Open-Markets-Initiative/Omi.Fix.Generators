@@ -51,7 +51,7 @@ public static class Types
     /// </summary>
     public static void Process(field field, messageSchema xml, Specification.Types types)
     {
-        // should verify field values
+        // TODO: verify field values
         var name = NameFor(field);
 
         if (types.ContainsKey(name)) { return; }
@@ -61,7 +61,8 @@ public static class Types
             Name = NameFor(field),
             Tag = field.id,
             Description = field.description,
-            Underlying = field.semanticType,
+            Underlying = UnderlyingTypeFor(field.semanticType, xml),
+            DataType = FixTypeFor(field.semanticType),
             Enums = EnumsFor(field.name, xml)
         };
 
@@ -93,6 +94,7 @@ public static class Types
             Tag = group.id,
             Description = group.description,
             Underlying = group.dimensionType,
+            // Is this num in Group?
         };
 
         types.Add(type);
@@ -124,6 +126,7 @@ public static class Types
             Tag = field.id,
             Description = field.description,
             Underlying = field.semanticType,
+            DataType = FixTypeFor(field.semanticType),
             Enums = EnumsFor(field.name, xml)
         };
 
@@ -138,6 +141,61 @@ public static class Types
         // verify
 
         return field.name;
+    }
+
+    /// <summary>
+    ///  Normalize underlying iLink3 Type
+    /// </summary>
+    public static string UnderlyingTypeFor(string type, messageSchema xml)
+    {
+        // TODO: search for correct type
+
+        return type;
+    }
+
+    /// <summary>
+    ///  Convert iLink3 type to FixType
+    /// </summary>
+    public static string FixTypeFor(string type)
+    {
+        switch (type)
+        {
+            case "char":
+                return "Char"; // make types enum
+
+            case "data":
+                return "Data";
+
+            case "float":
+                return "Float";
+
+            case "Price":
+                return "Price";
+
+            case "Qty":
+                return "Qty";
+
+            case "int":
+                return "Int";
+
+            case "String":
+                return "String";
+
+            case "LocalMktDate":
+                return "LocalMktDate";
+
+            case "MonthYear":
+                return "MonthYear";
+
+            case "UTCTimestamp":
+                return "UTCTimestamp";
+
+            case "MultipleCharValue":
+                return "MultipleValueString";
+
+            default:
+                throw new Exception($"Unknown ILink3 Fix type: {type}");
+        }
     }
 
     /// <summary>
