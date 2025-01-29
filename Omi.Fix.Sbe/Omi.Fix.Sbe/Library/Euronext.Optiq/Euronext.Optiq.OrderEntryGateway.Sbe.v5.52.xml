@@ -1,0 +1,59 @@
+<Reference>
+
+  <!-- Euronext Markets Optiq OrderEntryGateway 5.52 -->
+
+  <Organization>Euronext</Organization>
+  <Division>
+    <Name>Optiq</Name>
+    <Abbreviation>Optiq</Abbreviation>
+  </Division>
+  <Data>
+    <Name>Order Entry Gateway</Name>
+    <Abbreviation>OrderEntryGateway</Abbreviation>
+    <Encoding>Binary</Encoding>
+    <Type>Order Entry</Type>
+  </Data>
+  <Protocol>Sbe</Protocol>
+  <Version>
+    <Major>5</Major>
+    <Minor>52</Minor>
+  </Version>
+  <Details>
+    <Date>12/13/2024</Date>
+    <Status>Active</Status>
+    <Testing>Beta</Testing>
+  </Details>
+
+  <!-- Optiq Documentation -->
+
+  <Document>
+    <Type>url</Type>
+    <Url>https://connect2.euronext.com/en/membership/resources/it-documentation</Url>
+  </Document>
+  <Document>
+    <Type>pdf</Type>
+    <Name>Optiq OEG SBE Messages - Interface Specification - Euronext Cash and Derivatives Markets - External - v5.352.0 + TC</Name>
+    <Directory>Optiq.v5.52/Euronext.Optiq.OrderEntryGateway.Sbe.v5.52.pdf</Directory>
+  </Document>
+  <Document>
+    <Type>xml</Type>
+    <Name>oeg_binary_sbe_input_352.xml</Name>
+    <Directory>Optiq.v5.52/Euronext.Optiq.OrderEntryGateway.Sbe.v5.52.xml</Directory>
+  </Document>
+
+  <!-- Optiq Sbe Tcp Packet -->
+
+  <Source>
+    <File>Optiq.Frame.Tcp.Source.xml</File>
+    <Loader>Omc.Xml</Loader>
+  </Source>
+
+  <!-- Optiq Sbe Xml -->
+
+  <Source>
+    <File>Euronext.Optiq.OrderEntryGateway.Sbe.v5.52.Exchange.xml</File>
+    <Loader>Sbe.V1.Xml</Loader>
+    <Edit>Euronext.Optiq.OrderEntryGateway.Edits.xml</Edit>
+  </Source>
+
+</Reference>
