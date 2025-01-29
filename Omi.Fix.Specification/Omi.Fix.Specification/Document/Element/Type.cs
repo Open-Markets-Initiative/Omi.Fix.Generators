@@ -6,7 +6,6 @@
 
 public class Type
 {
-
     /// <summary>
     ///  Fix Field Tag/Number
     /// </summary>
@@ -37,7 +36,23 @@ public class Type
             Required = Required
         };
 
+    /// <summary>
+    ///  Display intermediate Fix type
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
-    => $"{Tag} => {Name}, {Underlying}";
+    {
+        if (!string.IsNullOrWhiteSpace(Underlying) && Underlying != DataType)
+        {
+            return $"{Tag}: {Name} [{DataType}|{Underlying}]";
+        }
+
+        if (!string.IsNullOrWhiteSpace(DataType))
+        {
+            return $"{Tag}: {Name}";
+        }
+
+        return $"{Tag}: {Name} [{DataType}]";
+    }
 
 }

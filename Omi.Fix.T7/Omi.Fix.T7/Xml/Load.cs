@@ -1,9 +1,10 @@
 ﻿namespace Omi.Fix.T7.Xml;
-    using System;
-    using System.Collections.Generic;
-    using System.Xml.Serialization;
-    using System.Xml;
-    using System.Text.RegularExpressions;
+
+using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+using System.Xml;
+using System.Text.RegularExpressions;
 
 /// <summary>
 ///  Load T7 xml elements into generated object classes
@@ -98,37 +99,17 @@ public static class Load
     }
 
     /// <summary>
-    ///  Obtain Specification types from T7 DataTypes
+    ///  Normalize Fix Specification types from T7 DataTypes
     /// </summary>
     public static Specification.Types TypesFrom(Model model)
     {
         var types = new Specification.Types();
 
-        foreach (var type in model.DataTypes ?? [])
+        var etitypes = (model.DataTypes ?? []).Where(type => type.numericIDSpecified);
+
+        foreach (var type in etitypes)
         {
-            var current = new Specification.Type
-            {
-                Name = type.name,
-                Tag = type.numericID,
-                Description = type.description,
-                Underlying = type.type, 
-            };
-
-            if (type.ValidValue != null && type.ValidValue.Length > 0)
-            {
-                var enums = new Specification.Enums();
-
-                foreach (var value in type.ValidValue)
-                {
-                    enums.Add(new Specification.Enum { 
-                        Name = value.name,
-                        Value = value.value,
-                        Description = ProcessDescription(value, enums)
-                    });
-                }
-
-                current.Enums = enums;
-            }
+            var current = TypeFrom(type);
 
             types.Add(type.name, current);
         }
@@ -137,9 +118,111 @@ public static class Load
     }
 
     /// <summary>
+    ///  Normalize T7 DataType to Fix intern
+    /// </summary>
+    public static Specification.Type TypeFrom(ModelDataType type)
+    {
+        var current = new Specification.Type
+        {
+            Name = type.name,
+            Tag = type.numericID,
+            Description = type.description,
+            DataType = FixTypeFrom(type),
+            Underlying = type.type,
+        };
+
+        if (type.ValidValue != null && type.ValidValue.Length > 0)
+        {
+            var enums = new Specification.Enums();
+
+            foreach (var value in type.ValidValue)
+            {
+                enums.Add(new Specification.Enum
+                {
+                    Name = value.name,
+                    Value = value.value,
+                    Description = DescriptionFrom(value, enums)
+                });
+            }
+
+            current.Enums = enums;
+        }
+
+        return current;
+    }
+
+    /// <summary>
+    ///  Convert Eti type to FixType
+    /// </summary>
+    public static string FixTypeFrom(ModelDataType model)
+    {
+        var type = model.type.Trim();
+
+        switch (type)
+        {
+            case "char":
+                return "Char"; // make types enum
+
+            case "data":
+                return "Data";
+
+            case "float":
+            case "floatDecimal4":
+            case "floatDecimal6":
+            case "floatDecimal7":
+                return "Float";
+
+            case "percentage":
+                return "Percentage";
+
+            case "PriceType":
+            case "price":
+                return "Price";
+
+            case "Qty":
+                return "Qty";
+
+            case "int":
+                return "Int";
+
+            case "length":
+                return "Length";
+
+            case "Counter":
+                return "NumInGroup";
+
+            case "SeqNum":
+                return "SeqNum";
+
+            case "String":
+            case "ISIN":
+            case "AlphaNumeric":
+            case "Freetext":
+                return "String";
+
+
+            case "CurrencyType":
+                return "Currency";
+
+            case "LocalMktDate":
+                return "LocalMktDate";
+
+            case "LocalMonthYearCod":
+                return "MonthYear";
+
+            case "UTCTimestamp":
+                return "UTCTimestamp";
+
+            default:
+
+                throw new Exception($"Unknown Eti Fix type: {type}");
+        }
+    }
+
+    /// <summary>
     ///  Process the original description
     /// </summary>
-    public static string ProcessDescription(ModelDataTypeValidValue value, Specification.Enums enums)
+    public static string DescriptionFrom(ModelDataTypeValidValue value, Specification.Enums enums)
     {
         var description = value.description;
 
@@ -155,10 +238,10 @@ public static class Load
         return result;
     }
 
-        /// <summary>
-        ///  Load classes from file path
-        /// </summary>
-        public static T From<T>(string xml)
+    /// <summary>
+    ///  Load classes from file path
+    /// </summary>
+    public static T From<T>(string xml)
     {
         using var reader = XmlReader.Create(xml);
 
