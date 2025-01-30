@@ -129,7 +129,13 @@ public class Field
             case "MonthYear":
                 return Omi.Fix.Specification.DataType.MonthYear;
 
+            case "MULTIPLECHARVALUE":
+            case "MultipleCharValue":
+                return Omi.Fix.Specification.DataType.MultipleCharValue;
+
+            case "MULTIPLESTRINGVALUE":
             case "MULTIPLEVALUESTRING":
+            case "MultipleStringValue":
             case "MultipleValueString":
                 return Omi.Fix.Specification.DataType.MultipleValueString;
 
@@ -152,6 +158,14 @@ public class Field
             case "UtcTimestamp":
             case "UTCTimestamp":
                 return Omi.Fix.Specification.DataType.UtcTimestamp;
+
+            case "TZTIMEONLY":
+            case "TZTimeOnly":
+                return Omi.Fix.Specification.DataType.TzTimeOnly;
+
+            case "TZTIMESTAMP":
+            case "TZTimestamp":
+                return Omi.Fix.Specification.DataType.TzTimestamp;
 
             case "CHAR":
             case "Char":
@@ -179,6 +193,10 @@ public class Field
             case "PERCENTAGE":
             case "Percentage":
                 return Omi.Fix.Specification.DataType.Percentage;
+
+            case "LANGUAGE":
+            case "Language":
+                return Omi.Fix.Specification.DataType.Language;
 
             case "PRICE":
             case "Price":
@@ -216,6 +234,10 @@ public class Field
             case "TAGNUM":
             case "TagNum":
                 return Omi.Fix.Specification.DataType.TagNum;
+
+            case "XMLDATA":
+            case "XMLData":
+                return Omi.Fix.Specification.DataType.XmlData;
 
             default:
                 throw new NotImplementedException($"Unknown Fixml type: {type}");

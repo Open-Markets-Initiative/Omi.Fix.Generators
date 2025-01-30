@@ -127,6 +127,7 @@ public class Type
     {
         switch (type.Trim())
         {
+            case "Char":
             case "char":
                 return Specification.DataType.Char;
 
@@ -143,6 +144,9 @@ public class Type
             case "Amt":
                 return Specification.DataType.Amt;
 
+            case "Percentage":
+                return Specification.DataType.Percentage;
+
             case "Price":
             case "price":
                 return Specification.DataType.Price;
@@ -150,6 +154,8 @@ public class Type
             case "PriceOffset":
                 return Specification.DataType.PriceOffset;
 
+            case "Quantity":
+            case "quantity":
             case "Qty":
             case "qty":
                 return Specification.DataType.Qty;
@@ -168,6 +174,13 @@ public class Type
             case "string":
                 return Specification.DataType.String;
 
+            case "MultipleCharValue":
+                return Specification.DataType.MultipleCharValue;
+
+            case "MultipleStringValue":
+            case "MultipleValueString":
+                return Specification.DataType.MultipleValueString;
+
             case "Currency":
                 return Specification.DataType.Currency;
 
@@ -179,12 +192,12 @@ public class Type
                 return Specification.DataType.LocalMktDate;
 
             case "MonthYear":
+            case "month-year":
             case "month - year":
             case "monthyear":
                 return Specification.DataType.MonthYear;
 
-            case "MultipleValueString":
-                return Specification.DataType.MultipleValueString;
+
 
             case "UTCDate":
             case "UtcDate":
@@ -201,6 +214,33 @@ public class Type
             case "UTCTimestamp":
             case "datetime":
                 return Specification.DataType.UtcTimestamp;
+
+            case "NumInGroup":
+                return Specification.DataType.NumInGroup;
+
+            case "SeqNum":
+                return Specification.DataType.SeqNum;
+
+            case "Length":
+                return Specification.DataType.Length;
+
+            case "UTCDateOnly":
+                return Specification.DataType.UtcDateOnly;
+
+            case "Country":
+                return Specification.DataType.Country;
+
+            case "TZTimeOnly":
+                return Specification.DataType.TzTimeOnly;
+
+            case "TZTimestamp":
+                return Specification.DataType.TzTimestamp;
+
+            case "XMLData":
+                return Specification.DataType.XmlData;
+
+            case "Language":
+                return Specification.DataType.Language;
 
             default:
                 throw new NotImplementedException($"Unknown Fix type: {type}");

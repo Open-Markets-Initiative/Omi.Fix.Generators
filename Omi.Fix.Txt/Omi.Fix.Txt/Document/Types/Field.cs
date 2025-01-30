@@ -220,6 +220,7 @@ public class Field
     {
         switch (type.Trim())
         {
+            case "CHAR":
             case "char":
                 return Specification.DataType.Char;
 
@@ -257,6 +258,7 @@ public class Field
             case "DayOfMonth":
                 return Specification.DataType.DayOfMonth;
 
+            case "STRING":
             case "String":
             case "string":
                 return Specification.DataType.String;
@@ -295,8 +297,16 @@ public class Field
             case "datetime":
                 return Specification.DataType.UtcTimestamp;
 
+            case "ID":
             case "id":
                 return Specification.DataType.String;
+
+            case "datalen":
+                return Specification.DataType.Length;
+
+            case "HEXLONG":
+            case "hexlong":
+                return Specification.DataType.Length;
 
             default:
                 throw new NotImplementedException($"Unknown Fix text type: {type}");

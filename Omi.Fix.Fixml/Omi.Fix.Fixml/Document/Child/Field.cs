@@ -1,6 +1,6 @@
 ﻿namespace Omi.Fixml.Child;
-    using System;
-using System.Reflection.PortableExecutable;
+
+using System;
 using System.Xml;
 using Omi.Fix.Specification;
 
