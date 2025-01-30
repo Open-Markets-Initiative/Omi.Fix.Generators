@@ -28,8 +28,10 @@ public class Field
     ///  Parse fix field (type) from string
     /// </summary>
     public static Field From(string line)
-    { // add line index
-      // validate field record
+    {
+        // add line index
+        // validate field record
+
         if (!IsValidLine(line))
         {
             throw new ArgumentException($"Invalid line: {line}");
@@ -168,28 +170,34 @@ public class Field
     }
 
     /// <summary>
-    ///  Normalize to FIx intermediate specification type
+    ///  Normalize to Fix intermediate specification type
     /// </summary>
     public Specification.Type ToSpecification(Enums enums)
         => new()
         {
-            Tag = NormalizeTag(Number),
-            Name = Name, // trim?
-            DataType = NormalizeType(Name, Type, enums),
-            Underlying = NormalizeUnderlying(Type),
+            Tag = FixTagFor(Number),
+            Name = NameFor(Name), // trim?
+            DataType = DataTypeFor(Name, Type, enums),
+            Underlying = UnderlyingTypeFor(Type),
             Enums = enums.ToSpecification(Name, Type)
         };
 
     /// <summary>
-    ///  Normalize tag
+    ///  Normalize Fix field tag
     /// </summary>
-    public static uint NormalizeTag(string text)
+    public static uint FixTagFor(string text)
         => uint.Parse(text);
 
     /// <summary>
-    ///  Normalize type
+    ///  Normalize Fix field name
     /// </summary>
-    public static Specification.DataType NormalizeType(string name, string type, Enums enums)
+    public static string NameFor(string text)
+        => text.Trim();
+
+    /// <summary>
+    ///  Normalize Fix DataType
+    /// </summary>
+    public static Specification.DataType DataTypeFor(string name, string type, Enums enums)
     {
         // enum declarations contain type
 
@@ -287,6 +295,9 @@ public class Field
             case "datetime":
                 return Specification.DataType.UtcTimestamp;
 
+            case "id":
+                return Specification.DataType.String;
+
             default:
                 throw new NotImplementedException($"Unknown Fix text type: {type}");
         }
@@ -295,19 +306,22 @@ public class Field
     /// <summary>
     ///  Underlying custom types
     /// </summary>
-    public static string NormalizeUnderlying(string text)
+    public static string UnderlyingTypeFor(string text)
     {
         var type = text.Trim();
 
         switch (type)
         {
-            case "long": // allow overrides of some types
-            case "string":
+            // allow overrides of some types
+
+            case "long":
+            case "string": // is this still needed?
             case "int":
             case "char":
             case "hexlong":
             case "data":
             case "datalen":
+            case "id":
                 return type;
 
             default:

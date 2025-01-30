@@ -203,7 +203,7 @@ public class Type
                 return Specification.DataType.UtcTimestamp;
 
             default:
-                throw new NotImplementedException($"Unknown Fix text type: {type}");
+                throw new NotImplementedException($"Unknown Fix type: {type}");
         }
     }
 
