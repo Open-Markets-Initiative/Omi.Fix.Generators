@@ -17,6 +17,16 @@ public enum DataType
     String,
 
     /// <summary>
+    ///  String Type one or more single character space delimited values.
+    /// </summary>
+    MultipleCharValue,
+
+    /// <summary>
+    ///  String Type containing one or more space delimited values.
+    /// </summary>
+    MultipleValueString,
+
+    /// <summary>
     ///  String Type representing a country using ISO 3166 Country [421] code (2 character) values.
     /// </summary>
     Country,
@@ -32,54 +42,59 @@ public enum DataType
     Exchange,
 
     /// <summary>
-    ///  String Type date of local market (vs. UTC) in YYYYMMDD format. Valid values: YYYY = 0000-9999, MM = 01-12, DD = 01-31.
-    /// </summary>
-    LocalMktDate,
-
-    /// <summary>
     ///  String Type representing month of a year in YYYYMM format. Valid values: YYYY = 0000-9999, MM = 01-12.
     /// </summary>
     MonthYear,
 
     /// <summary>
-    ///  String Type one or more single character space delimited values.
+    ///  String Type date/time combination represented in UTC (Universal Time Coordinated, also known as "GMT") in either YYYYMMDD-HH:MM:SS (whole seconds) or YYYYMMDD-HH:MM:SS.sss (milliseconds) format, colons, dash, and period required.
     /// </summary>
-    MultipleCharValue,
-
-    /// <summary>
-    ///  String Type containing one or more space delimited values.
-    /// </summary>
-    MultipleValueString,
-
-    /// <summary>
-    ///  String Type representing time field that contains the time represented based on ISO 8601. This is the time with a UTC offset to allow identification of local time and time zone of that time. 
-    /// </summary>
-    TZTimeOnly,
-
-    /// <summary>
-    ///  String Type representing a time/date combination representing local time with an offset to UTC to allow identification of local time and timezone offset of that time.
-    /// </summary>
-    TZTimestamp,
-
-    /// <summary>
-    ///  String Type date represented in UTC (Universal Time Coordinated, also known as "GMT") in YYYYMMDD format. Valid values: YYYY = 0000-9999, MM = 01-12, DD = 01-31.
-    /// </summary>
-    UTCDate,
-
-    /// <summary>
-    ///  String Type date Date represented in UTC (Universal Time Coordinated, also known as “GMT”) in YYYYMMDD format.
-    /// </summary>
-    UTCDateOnly,
+    UtcTimestamp,
 
     /// <summary>
     ///  String Type time represented in UTC (Universal Time Coordinated, also known as "GMT") in either HH:MM:SS (whole seconds) or HH:MM:SS.sss (milliseconds) format, colons, and period required.
     /// </summary>
-    UTCTimeOnly,
+    UtcTimeOnly,
 
     /// <summary>
-    ///  String Type date/time combination represented in UTC (Universal Time Coordinated, also known as "GMT") in either YYYYMMDD-HH:MM:SS (whole seconds) or YYYYMMDD-HH:MM:SS.sss (milliseconds) format, colons, dash, and period required.
+    ///  String Type date Date represented in UTC (Universal Time Coordinated, also known as “GMT”) in YYYYMMDD format.
     /// </summary>
-    UTCTimestamp,
+    UtcDateOnly,
+
+    /// <summary>
+    ///  String Type date represented in UTC (Universal Time Coordinated, also known as "GMT") in YYYYMMDD format. Valid values: YYYY = 0000-9999, MM = 01-12, DD = 01-31.
+    /// </summary>
+    UtcDate,
+
+    /// <summary>
+    ///  String Type date of local market (vs. UTC) in YYYYMMDD format. Valid values: YYYY = 0000-9999, MM = 01-12, DD = 01-31.
+    /// </summary>
+    LocalMktDate,
+
+    /// <summary>
+    ///  String Type representing time field that contains the time represented based on ISO 8601. This is the time with a UTC offset to allow identification of local time and time zone of that time. 
+    /// </summary>
+    TzTimeOnly,
+
+    /// <summary>
+    ///  String Type representing a time/date combination representing local time with an offset to UTC to allow identification of local time and timezone offset of that time.
+    /// </summary>
+    TzTimestamp,
+
+    /// <summary>
+    ///  String Type identifier for a national language - uses ISO 639-1 standard
+    /// </summary>
+    Language,
+
+    /// <summary>
+    ///  Raw data with no format or content restrictions. Data fields are always immediately preceded by a length field. The length field should specify the number of bytes of the value of the data field (up to but not including the terminating SOH).
+    /// </summary>
+    Data,
+
+    /// <summary>
+    ///  Contains an XML document raw data with no format or content restrictions. XMLData fields are always immediately preceded by a length field. The length field should specify the number of bytes of the value of the data field (up to but not including the terminating SOH).
+    /// </summary>
+    XmlData,
 
     /// <summary>
     ///  Single character value, can include any alphanumeric character or punctuation except the delimiter. All char fields are case sensitive (i.e. m != M).
@@ -90,11 +105,6 @@ public enum DataType
     ///  Char Type containing one of two values: 'Y' = True/Yes, 'N' = False/No.
     /// </summary>
     Boolean,
-
-    /// <summary>
-    ///  Raw data with no format or content restrictions. Data fields are always immediately preceded by a length field. The length field should specify the number of bytes of the value of the data field (up to but not including the terminating SOH).
-    /// </summary>
-    Data,
 
     /// <summary>
     ///  Sequence of digits with optional decimal point and sign character (ASCII characters "-", "0" - "9" and "."); the absence of the decimal point within the string will be interpreted as the float representation of an integer value. All float fields must accommodate up to fifteen significant digits.

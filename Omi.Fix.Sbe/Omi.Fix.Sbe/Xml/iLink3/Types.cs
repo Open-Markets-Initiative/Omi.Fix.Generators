@@ -190,7 +190,7 @@ public static class Types
                 return Specification.DataType.MonthYear;
 
             case "UTCTimestamp":
-                return Specification.DataType.UTCTimestamp;
+                return Specification.DataType.UtcTimestamp;
 
             case "MultipleCharValue":
                 return Specification.DataType.MultipleValueString;

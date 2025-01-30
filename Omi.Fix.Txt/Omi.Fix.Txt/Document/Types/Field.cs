@@ -275,17 +275,17 @@ public class Field
             case "UtcDate":
             case "utcdate":
             case "date":
-                return Specification.DataType.UTCDate;
+                return Specification.DataType.UtcDate;
 
             case "UTCTimeOnly":
             case "UtcTimeOnly":
             case "utctime":
             case "time":
-                return Specification.DataType.UTCTimeOnly;
+                return Specification.DataType.UtcTimeOnly;
 
             case "UTCTimestamp":
             case "datetime":
-                return Specification.DataType.UTCTimestamp;
+                return Specification.DataType.UtcTimestamp;
 
             default:
                 throw new NotImplementedException($"Unknown Fix text type: {type}");

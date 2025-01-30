@@ -210,7 +210,7 @@ public static class Load
                 return Specification.DataType.MonthYear;
 
             case "UTCTimestamp":
-                return Specification.DataType.UTCTimestamp;
+                return Specification.DataType.UtcTimestamp;
 
             default:
                 throw new Exception($"Unknown Eti Fix type: {type}");

@@ -136,22 +136,22 @@ public class Field
             case "UTCDATE":
             case "UTCDate":
             case "UtcDate":
-                return Omi.Fix.Specification.DataType.UTCDate;
+                return Omi.Fix.Specification.DataType.UtcDate;
 
             case "UTCDATEONLY":
             case "UTCDateOnly":
             case "UtcDateOnly":
-                return Omi.Fix.Specification.DataType.UTCDateOnly;
+                return Omi.Fix.Specification.DataType.UtcDateOnly;
 
             case "UTCTIMEONLY":
             case "UTCTimeOnly":
             case "UtcTimeOnly":
-                return Omi.Fix.Specification.DataType.UTCTimeOnly;
+                return Omi.Fix.Specification.DataType.UtcTimeOnly;
 
             case "UTCTIMESTAMP":
             case "UtcTimestamp":
             case "UTCTimestamp":
-                return Omi.Fix.Specification.DataType.UTCTimestamp;
+                return Omi.Fix.Specification.DataType.UtcTimestamp;
 
             case "CHAR":
             case "Char":

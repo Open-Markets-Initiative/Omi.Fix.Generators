@@ -1,5 +1,7 @@
 ﻿namespace Omi.Fix.Sbe.Optiq;
 
+#pragma warning disable CS8981
+
 [System.SerializableAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fixprotocol.io/2016/sbe")]

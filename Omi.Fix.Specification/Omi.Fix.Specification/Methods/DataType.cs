@@ -72,17 +72,17 @@ public static partial class Convert
             case "UtcDate":
             case "utcdate":
             case "date":
-                return DataType.UTCDate;
+                return DataType.UtcDate;
 
             case "UTCTimeOnly":
             case "UtcTimeOnly":
             case "utctime":
             case "time":
-                return DataType.UTCTimeOnly;
+                return DataType.UtcTimeOnly;
 
             case "UTCTimestamp":
             case "datetime":
-                return DataType.UTCTimestamp;
+                return DataType.UtcTimestamp;
 
             default:
                 return DataType.None;
