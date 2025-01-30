@@ -76,9 +76,9 @@ public class Document
     {
         if (Types.TryGetValue(name, out var field))
         { 
-            // check that it is a fundamentatl type first?
+            // TODO: this is not likely correct
 
-            field.DataType = type;
+            field.DataType = Convert.TypeFor(type);
         }
     }
 

@@ -89,12 +89,138 @@ public class Field
         {
             Tag = Number,
             Name = Name,
+            DataType = DataTypeFor(Type),
             Underlying = Type,
             Enums = Enums.ToSpecification(),
             Description = Description,
             Required = Required,
             Version = Version
         };
+
+    /// <summary>
+    ///  Convert Fixml field to Omi Fix intermediate datatype
+    /// </summary>
+    public static Omi.Fix.Specification.DataType DataTypeFor(string type)
+    {
+        switch (type.Trim())
+        {
+            case "STRING":
+            case "String":
+            case "string":
+                return Omi.Fix.Specification.DataType.String;
+
+            case "COUNTRY":
+            case "Country":
+                return Omi.Fix.Specification.DataType.Country;
+
+            case "CURRENCY":
+            case "Currency":
+                return Omi.Fix.Specification.DataType.Currency;
+
+            case "EXCHANGE":
+            case "Exchange":
+                return Omi.Fix.Specification.DataType.String;
+
+            case "LOCALMKTDATE":
+            case "LocalMktDate":
+                return Omi.Fix.Specification.DataType.LocalMktDate;
+
+            case "MONTHYEAR":
+            case "MonthYear":
+                return Omi.Fix.Specification.DataType.MonthYear;
+
+            case "MULTIPLEVALUESTRING":
+            case "MultipleValueString":
+                return Omi.Fix.Specification.DataType.MultipleValueString;
+
+            case "UTCDATE":
+            case "UTCDate":
+            case "UtcDate":
+                return Omi.Fix.Specification.DataType.UTCDate;
+
+            case "UTCDATEONLY":
+            case "UTCDateOnly":
+            case "UtcDateOnly":
+                return Omi.Fix.Specification.DataType.UTCDateOnly;
+
+            case "UTCTIMEONLY":
+            case "UTCTimeOnly":
+            case "UtcTimeOnly":
+                return Omi.Fix.Specification.DataType.UTCTimeOnly;
+
+            case "UTCTIMESTAMP":
+            case "UtcTimestamp":
+            case "UTCTimestamp":
+                return Omi.Fix.Specification.DataType.UTCTimestamp;
+
+            case "CHAR":
+            case "Char":
+            case "char":
+                return Omi.Fix.Specification.DataType.Char;
+
+            case "BOOLEAN":
+            case "Boolean":
+                return Omi.Fix.Specification.DataType.Boolean;
+
+            case "DATA":
+            case "Data":
+            case "data":
+                return Omi.Fix.Specification.DataType.Data;
+
+            case "FLOAT":
+            case "Float":
+            case "float":
+                return Omi.Fix.Specification.DataType.Float;
+
+            case "AMT":
+            case "Amt":
+                return Omi.Fix.Specification.DataType.Amt;
+
+            case "PERCENTAGE":
+            case "Percentage":
+                return Omi.Fix.Specification.DataType.Percentage;
+
+            case "PRICE":
+            case "Price":
+                return Omi.Fix.Specification.DataType.Price;
+
+            case "PRICEOFFSET":
+            case "PriceOffset":
+                return Omi.Fix.Specification.DataType.PriceOffset;
+
+            case "QTY":
+            case "Qty":
+                return Omi.Fix.Specification.DataType.Qty;
+
+            case "INT":
+            case "Int":
+            case "int":
+                return Omi.Fix.Specification.DataType.Int;
+
+            case "DAYOFMONTH":
+            case "DayOfMonth":
+                return Omi.Fix.Specification.DataType.DayOfMonth;
+
+            case "LENGTH":
+            case "Length":
+                return Omi.Fix.Specification.DataType.Length;
+
+            case "NUMINGROUP":
+            case "NumInGroup":
+                return Omi.Fix.Specification.DataType.NumInGroup;
+
+            case "SEQNUM":
+            case "SeqNum":
+                return Omi.Fix.Specification.DataType.SeqNum;
+
+            case "TAGNUM":
+            case "TagNum":
+                return Omi.Fix.Specification.DataType.TagNum;
+
+            default:
+                throw new NotImplementedException($"Unknown Fixml type: {type}");
+        }
+    }
 
     /// <summary>
     /// Display Fixml Field as string

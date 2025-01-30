@@ -7,13 +7,19 @@
 public class Type
 {
     /// <summary>
-    ///  Fix Field Tag/Number
+    ///  Fix Field Type Tag/Number
     /// </summary>
     public uint Tag = 0;
 
+    /// <summary>
+    ///  Fix field type name
+    /// </summary>
     public string Name = string.Empty;
 
-    public string DataType = string.Empty;
+    /// <summary>
+    ///  Fix field type name
+    /// </summary>
+    public DataType DataType = DataType.None;
 
     public string Description = string.Empty;
 
@@ -42,17 +48,16 @@ public class Type
     /// <returns></returns>
     public override string ToString()
     {
-        if (!string.IsNullOrWhiteSpace(Underlying) && Underlying != DataType)
+        if (!string.IsNullOrWhiteSpace(Underlying))
         {
             return $"{Tag}: {Name} [{DataType}|{Underlying}]";
         }
 
-        if (!string.IsNullOrWhiteSpace(DataType))
+        if (DataType != DataType.None)
         {
             return $"{Tag}: {Name}";
         }
 
         return $"{Tag}: {Name} [{DataType}]";
     }
-
 }

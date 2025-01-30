@@ -47,11 +47,12 @@ public static class Types
     }
 
     /// <summary>
-    ///  Convert message field to normalized Fix intermediate type
+    ///  Convert message field to normalized Omi Fix intermediate type
     /// </summary>
     public static void Process(field field, messageSchema xml, Specification.Types types)
     {
         // TODO: verify field values
+
         var name = NameFor(field);
 
         if (types.ContainsKey(name)) { return; }
@@ -62,7 +63,7 @@ public static class Types
             Tag = field.id,
             Description = field.description,
             Underlying = UnderlyingTypeFor(field.semanticType, xml),
-            DataType = FixTypeFor(field.semanticType),
+            DataType = DataTypeFor(field.semanticType),
             Enums = EnumsFor(field.name, xml)
         };
 
@@ -94,6 +95,7 @@ public static class Types
             Tag = group.id,
             Description = group.description,
             Underlying = group.dimensionType,
+            DataType = Specification.DataType.NumInGroup
             // Is this num in Group?
         };
 
@@ -126,7 +128,7 @@ public static class Types
             Tag = field.id,
             Description = field.description,
             Underlying = field.semanticType,
-            DataType = FixTypeFor(field.semanticType),
+            DataType = DataTypeFor(field.semanticType),
             Enums = EnumsFor(field.name, xml)
         };
 
@@ -156,42 +158,42 @@ public static class Types
     /// <summary>
     ///  Convert iLink3 type to FixType
     /// </summary>
-    public static string FixTypeFor(string type)
+    public static Specification.DataType DataTypeFor(string type)
     {
         switch (type)
         {
             case "char":
-                return "Char"; // make types enum
+                return Specification.DataType.Char;
 
             case "data":
-                return "Data";
+                return Specification.DataType.Data;
 
             case "float":
-                return "Float";
+                return Specification.DataType.Float;
 
             case "Price":
-                return "Price";
+                return Specification.DataType.Price;
 
             case "Qty":
-                return "Qty";
+                return Specification.DataType.Qty;
 
             case "int":
-                return "Int";
+                return Specification.DataType.Int;
 
             case "String":
-                return "String";
+                return Specification.DataType.String;
 
             case "LocalMktDate":
-                return "LocalMktDate";
+                return Specification.DataType.LocalMktDate;
 
             case "MonthYear":
-                return "MonthYear";
+                return Specification.DataType.MonthYear;
 
             case "UTCTimestamp":
-                return "UTCTimestamp";
+                return Specification.DataType.UTCTimestamp;
 
             case "MultipleCharValue":
-                return "MultipleValueString";
+                return Specification.DataType.MultipleValueString;
 
             default:
                 throw new Exception($"Unknown ILink3 Fix type: {type}");

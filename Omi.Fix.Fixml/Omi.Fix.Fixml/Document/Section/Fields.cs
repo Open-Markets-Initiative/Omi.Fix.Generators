@@ -66,14 +66,7 @@ public class Fields : Dictionary<string, Field>
     /// </summary>
     public static string TypeFrom(Fix.Specification.Type field)
     {
-        // is this correct?
-
-        if (!string.IsNullOrEmpty(field.DataType))
-        {
-            return field.DataType;
-        }
-
-        return field.Underlying;
+        return field.DataType.ToString().ToUpperInvariant(); // is this correct?
     }
 
     /// <summary>

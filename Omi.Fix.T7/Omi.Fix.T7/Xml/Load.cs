@@ -127,7 +127,7 @@ public static class Load
             Name = type.name,
             Tag = type.numericID,
             Description = type.description,
-            DataType = FixTypeFrom(type),
+            DataType = DataTypeFrom(type),
             Underlying = type.type,
         };
 
@@ -154,67 +154,65 @@ public static class Load
     /// <summary>
     ///  Convert Eti type to FixType
     /// </summary>
-    public static string FixTypeFrom(ModelDataType model)
+    public static Specification.DataType DataTypeFrom(ModelDataType model)
     {
         var type = model.type.Trim();
 
         switch (type)
         {
             case "char":
-                return "Char"; // make types enum
+                return Specification.DataType.Char;
 
             case "data":
-                return "Data";
+                return Specification.DataType.Data;
 
             case "float":
             case "floatDecimal4":
             case "floatDecimal6":
             case "floatDecimal7":
-                return "Float";
+                return Specification.DataType.Float;
 
             case "percentage":
-                return "Percentage";
+                return Specification.DataType.Percentage;
 
             case "PriceType":
             case "price":
-                return "Price";
+                return Specification.DataType.Price;
 
             case "Qty":
-                return "Qty";
+                return Specification.DataType.Qty;
 
             case "int":
-                return "Int";
+                return Specification.DataType.Int;
 
             case "length":
-                return "Length";
+                return Specification.DataType.Length;
 
             case "Counter":
-                return "NumInGroup";
+                return Specification.DataType.NumInGroup;
 
             case "SeqNum":
-                return "SeqNum";
+                return Specification.DataType.SeqNum;
 
             case "String":
             case "ISIN":
             case "AlphaNumeric":
             case "Freetext":
-                return "String";
-
+                return Specification.DataType.String;
 
             case "CurrencyType":
-                return "Currency";
+                return Specification.DataType.Currency;
 
             case "LocalMktDate":
-                return "LocalMktDate";
+                return Specification.DataType.LocalMktDate;
 
             case "LocalMonthYearCod":
-                return "MonthYear";
+                return Specification.DataType.MonthYear;
 
             case "UTCTimestamp":
-                return "UTCTimestamp";
+                return Specification.DataType.UTCTimestamp;
 
             default:
-
                 throw new Exception($"Unknown Eti Fix type: {type}");
         }
     }

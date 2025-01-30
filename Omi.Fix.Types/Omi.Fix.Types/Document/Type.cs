@@ -1,9 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Text;
-using System.Xml;
+﻿namespace Omi.Fix.Types;
 
-namespace Omi.Fix.Types;
+using System.Xml;
 
 /// <summary>
 ///  Fix Field (Type) Element
@@ -11,7 +8,6 @@ namespace Omi.Fix.Types;
 
 public class Type
 {
-
     /// <summary>
     ///  Fix Field Type Tag/Number
     /// </summary>
@@ -91,23 +87,22 @@ public class Type
     ///  Convert normalized fix type to xml field
     /// </summary>
     public static Type From(Fix.Specification.Type type)
-    {
-        var dataType = type.DataType;
-
-        if (String.IsNullOrWhiteSpace(type.DataType))
-        {
-            dataType = type.Underlying;
-        }
-
-        return new Type
+        => new ()
         {
             Name = type.Name,
             Tag = type.Tag,
-            DataType = dataType,
+            DataType = TypeFor(type.DataType),
             Description = type.Description,
             Version = type.Version,
             Enums = Enums.From(type)
         };
+
+    /// <summary>
+    ///  Convert normalized fix type to xml field type
+    /// </summary>
+    public static string TypeFor(Fix.Specification.DataType type)
+    {
+        return type.ToString();
     }
 
     /// <summary>
@@ -118,7 +113,7 @@ public class Type
         {
             Name = Name,
             Tag = Tag,
-            DataType = DataType,
+            DataType = TypeFor(DataType),
             Description = Description,
             Version = Version,
             Underlying = Description.Contains("Valid values") ? "Enum" : "", // hack for now
@@ -126,9 +121,97 @@ public class Type
         };
 
     /// <summary>
+    ///  Convert Fix type field to Omi Fix intermediate type
+    /// </summary>
+    public static Omi.Fix.Specification.DataType TypeFor(string type)
+    {
+        switch (type.Trim())
+        {
+            case "char":
+                return Specification.DataType.Char;
+
+            case "Boolean":
+            case "bool":
+                return Specification.DataType.Boolean;
+
+            case "data":
+                return Specification.DataType.Data;
+
+            case "float":
+                return Specification.DataType.Float;
+
+            case "Amt":
+                return Specification.DataType.Amt;
+
+            case "Price":
+            case "price":
+                return Specification.DataType.Price;
+
+            case "PriceOffset":
+                return Specification.DataType.PriceOffset;
+
+            case "Qty":
+            case "qty":
+                return Specification.DataType.Qty;
+
+            case "Int":
+            case "int":
+            case "long":
+                return Specification.DataType.Int;
+
+            case "day-of-month":
+            case "dayofmonth":
+            case "DayOfMonth":
+                return Specification.DataType.DayOfMonth;
+
+            case "String":
+            case "string":
+                return Specification.DataType.String;
+
+            case "Currency":
+                return Specification.DataType.Currency;
+
+            case "Exchange":
+            case "exchange":
+                return Specification.DataType.String;
+
+            case "LocalMktDate":
+                return Specification.DataType.LocalMktDate;
+
+            case "MonthYear":
+            case "month - year":
+            case "monthyear":
+                return Specification.DataType.MonthYear;
+
+            case "MultipleValueString":
+                return Specification.DataType.MultipleValueString;
+
+            case "UTCDate":
+            case "UtcDate":
+            case "utcdate":
+            case "date":
+                return Specification.DataType.UTCDate;
+
+            case "UTCTimeOnly":
+            case "UtcTimeOnly":
+            case "utctime":
+            case "time":
+                return Specification.DataType.UTCTimeOnly;
+
+            case "UTCTimestamp":
+            case "datetime":
+                return Specification.DataType.UTCTimestamp;
+
+            default:
+                throw new NotImplementedException($"Unknown Fix text type: {type}");
+        }
+    }
+
+    /// <summary>
     /// Write field type to XML
     /// </summary>
-    public void ToXml(XmlDocument document) {
+    public void ToXml(XmlDocument document) 
+    {
         var root = document.DocumentElement;
         var parent = document.CreateElement("FixType");
         root.AppendChild(parent);
@@ -182,6 +265,6 @@ public class Type
             return $"{Name} : {Tag}";
         }
 
-        return $"{Name} : {Tag}, {Description}"; // add if if enum
+        return $"{Name} : {Tag}, {Description}"; // add if enum
     }
 }

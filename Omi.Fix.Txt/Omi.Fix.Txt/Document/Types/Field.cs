@@ -1,6 +1,7 @@
 ﻿namespace Omi.Fix.Txt;
-    using System;
-    using System.Linq;
+
+using System;
+using System.Linq;
 
 /// <summary>
 ///  Fix Txt Type
@@ -8,7 +9,6 @@
 
 public class Field
 {
-
     /// <summary>
     ///  Fix Field Tag/Number
     /// </summary>
@@ -168,7 +168,7 @@ public class Field
     }
 
     /// <summary>
-    ///  Converts enums to normalized fix specification
+    ///  Normalize to FIx intermediate specification type
     /// </summary>
     public Specification.Type ToSpecification(Enums enums)
         => new()
@@ -189,16 +189,17 @@ public class Field
     /// <summary>
     ///  Normalize type
     /// </summary>
-    public static string NormalizeType(string name, string type, Enums enums)
+    public static Specification.DataType NormalizeType(string name, string type, Enums enums)
     {
-        if (enums.TryGetType(name, out var value))
-        {
-            return value;
-        }
+        // enum declarations contain type
 
-        if (enums.TryGetType(type, out value))
+        if (enums.TryGetType(name, out var first))
         {
-            return value;
+            type = first;
+        }
+        else if (enums.TryGetType(type, out var second))
+        {
+            type = second;
         }
 
         return ConvertType(type);
@@ -207,42 +208,87 @@ public class Field
     /// <summary>
     ///  Check that type is valid fix 
     /// </summary>
-    public static string ConvertType(string text)
+    public static Omi.Fix.Specification.DataType ConvertType(string type)
     {
-        var type = text.Trim();
-
-        switch (type)
+        switch (type.Trim())
         {
-            case "datetime":
-                return "UTCTimeStamp";
-
-            case "bool":
-            case "Boolean":
-                return "Boolean";
-
             case "char":
+                return Specification.DataType.Char;
+
+            case "Boolean":
+            case "bool":
+                return Specification.DataType.Boolean;
+
             case "data":
+                return Specification.DataType.Data;
+
             case "float":
+                return Specification.DataType.Float;
+
             case "Amt":
+                return Specification.DataType.Amt;
+
+            case "Price":
             case "price":
+                return Specification.DataType.Price;
+
             case "PriceOffset":
+                return Specification.DataType.PriceOffset;
+
             case "Qty":
             case "qty":
+                return Specification.DataType.Qty;
+
+            case "Int":
             case "int":
-            case "day-of-month":
-            case "String":
-            case "Currency":
-            case "exchange":
-            case "LocalMktDate":
-            case "month - year":
-            case "MultipleValueString":
-            case "UTCDate":
-            case "UTCTimeOnly":
             case "long":
-                return type.ToUpper(); // need all values here
+                return Specification.DataType.Int;
+
+            case "day-of-month":
+            case "dayofmonth":
+            case "DayOfMonth":
+                return Specification.DataType.DayOfMonth;
+
+            case "String":
+            case "string":
+                return Specification.DataType.String;
+
+            case "Currency":
+                return Specification.DataType.Currency;
+
+            case "Exchange":
+            case "exchange":
+                return Specification.DataType.String;
+
+            case "LocalMktDate":
+                return Specification.DataType.LocalMktDate;
+
+            case "MonthYear":
+            case "month - year":
+            case "monthyear":
+                return Specification.DataType.MonthYear;
+
+            case "MultipleValueString":
+                return Specification.DataType.MultipleValueString;
+
+            case "UTCDate":
+            case "UtcDate":
+            case "utcdate":
+            case "date":
+                return Specification.DataType.UTCDate;
+
+            case "UTCTimeOnly":
+            case "UtcTimeOnly":
+            case "utctime":
+            case "time":
+                return Specification.DataType.UTCTimeOnly;
+
+            case "UTCTimestamp":
+            case "datetime":
+                return Specification.DataType.UTCTimestamp;
 
             default:
-                return "String";
+                throw new NotImplementedException($"Unknown Fix text type: {type}");
         }
     }
 
