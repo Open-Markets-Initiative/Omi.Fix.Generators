@@ -1,7 +1,7 @@
 ﻿namespace Omi.Fix.Specification;
 
 /// <summary>
-///  Normalized Fix intermedaite specification types dictionary
+///  Normalized Fix intermedaite specification field types dictionary
 /// </summary>
 
 public class AggregatedTypes : Dictionary<string, AggregatedType>
