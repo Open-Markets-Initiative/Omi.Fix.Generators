@@ -82,11 +82,6 @@ public enum DataType
     TzTimestamp,
 
     /// <summary>
-    ///  String Type identifier for a national language - uses ISO 639-1 standard
-    /// </summary>
-    Language,
-
-    /// <summary>
     ///  Raw data with no format or content restrictions. Data fields are always immediately preceded by a length field. The length field should specify the number of bytes of the value of the data field (up to but not including the terminating SOH).
     /// </summary>
     Data,
@@ -95,6 +90,11 @@ public enum DataType
     ///  Contains an XML document raw data with no format or content restrictions. XMLData fields are always immediately preceded by a length field. The length field should specify the number of bytes of the value of the data field (up to but not including the terminating SOH).
     /// </summary>
     XmlData,
+
+    /// <summary>
+    ///  String Type identifier for a national language - uses ISO 639-1 standard
+    /// </summary>
+    Language,
 
     /// <summary>
     ///  Single character value, can include any alphanumeric character or punctuation except the delimiter. All char fields are case sensitive (i.e. m != M).
@@ -165,4 +165,47 @@ public enum DataType
     ///  Int Type representing a field's tag number when using FIX "Tag=Value" syntax. Value must be positive and may not contain leading zeros.
     /// </summary>
     TagNum
+}
+
+public static partial class Extensions
+{
+    /// <summary>
+    ///  Convert Fix to FIX standard display for intermediate datatype
+    /// </summary>
+    public static string DisplayAsFixStandard(this DataType type)
+        => type switch
+        {
+            DataType.MultipleCharValue => "MultipleCharValue",
+            DataType.MultipleValueString => "MultipleStringValue",
+            DataType.Country => "Country",
+            DataType.Currency => "Currency",
+            DataType.Exchange => "Exchange",
+            DataType.MonthYear => "MonthYear",
+            DataType.UtcTimestamp => "UTCTimestamp",
+            DataType.UtcTimeOnly => "UTCTimeOnly",
+            DataType.UtcDateOnly => "UTCDateOnly",
+            DataType.UtcDate => "UTCDate",
+            DataType.LocalMktDate => "LocalMktDate",
+            DataType.TzTimeOnly => "TZTimeOnly",
+            DataType.TzTimestamp => "TZTimestamp",
+            DataType.Data => "data",
+            DataType.XmlData => "XMLdata",
+            DataType.Language => "Language",
+            DataType.Char => "char",
+            DataType.Boolean => "Boolean",
+            DataType.Float => "float",
+            DataType.Qty => "Qty",
+            DataType.Amt => "Amt",
+            DataType.Percentage => "Percentage",
+            DataType.Price => "Price",
+            DataType.PriceOffset => "PriceOffset",
+            DataType.Int => "int",
+            DataType.Length => "Length",
+            DataType.SeqNum => "SeqNum",
+            DataType.TagNum => "TagNum",
+            DataType.NumInGroup => "NumInGroup",
+            DataType.DayOfMonth => "DayOfMonth",
+
+            _ => "String",
+        };
 }

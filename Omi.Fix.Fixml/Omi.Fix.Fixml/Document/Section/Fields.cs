@@ -135,9 +135,9 @@ public class Fields : Dictionary<string, Field>
 
         var fields = this.Select(f => f.Value).ToList();
 
-        foreach (var pair in fields)
+        foreach (var field in fields)
         {
-            types.Add(pair.Name, pair.ToSpecification());
+            types.Add(field.Name, field.ToSpecification());
         }
 
         return types;

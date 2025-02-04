@@ -1,4 +1,6 @@
-﻿namespace Omi.Fix.Specification;
+﻿using Omi.Fix.Specification;
+
+namespace Omi.Fix.Specification;
 
 /// <summary>
 ///  Merge intermediate FIX specifications
@@ -77,9 +79,37 @@ public static class Merge
     }
 
     /// <summary>
-    /// Add a fix specification to a another
+    ///  Discrete types list for a list specifications (keep first tag, merge enum values)
     /// </summary>
-    public static void Add(this Document merged, Document specification)
+    public static List<AggregatedType> AggregatedTypes(IEnumerable<Document> specifications)
+    {
+        var types = new AggregatedTypes();
+
+        foreach (var specification in specifications)
+        {
+            types.Add(specification.Types);
+        }
+
+        return types.Values.OrderBy(type => type.Tag).ToList();
+    }
+/*
+                    if (types.TryGetValue(type.Tag, out var existing))
+                {
+                    if (type.Enums.Count > 0) // make a merge?
+                    {
+                        existing.Enums.Merge(type.Enums);
+                    }
+                }
+                else
+{
+    types.Add(type.Tag, type);
+}
+*/
+
+/// <summary>
+/// Add a fix specification to a another
+/// </summary>
+public static void Add(this Document merged, Document specification)
     { // this can be better
         merged.Components.AddRange(specification.Components.Where(component => !merged.Components.Contains(component)));
         merged.Header.AddRange(specification.Header.Where(header => !merged.Header.Contains(header)));

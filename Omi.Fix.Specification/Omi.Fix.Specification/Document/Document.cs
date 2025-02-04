@@ -6,7 +6,6 @@
 
 public class Document
 {
-
     #region Properties
     ///////////////////////////////////////////////////////
 
@@ -36,7 +35,7 @@ public class Document
     public Components Components = new();
 
     /// <summary>
-    ///  Normalized Fix Specification Field Types
+    ///  Normalized Fix intermediate specification field types
     /// </summary>
     public Types Types = new();
 
@@ -67,7 +66,7 @@ public class Document
     ///  Add Overwrite Type (minimal)
     /// </summary>
     public void Set(string name, uint tag, string type)
-        => Set(new Type { Name = name, Tag = tag, Underlying = type });
+        => Set(new Type { Name = name, Tag = tag, Underlying = type});
 
     /// <summary>
     ///  Add Overwrite Type (minimal)

@@ -21,6 +21,9 @@ public class Type
     /// </summary>
     public DataType DataType = DataType.None;
 
+    /// <summary>
+    ///  Fix intermediate field type description
+    /// </summary>
     public string Description = string.Empty;
 
     public bool Required;
