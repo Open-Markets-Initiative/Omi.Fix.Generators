@@ -167,12 +167,12 @@ public enum DataType
     TagNum
 }
 
-public static partial class Extensions
+public static partial class Display
 {
     /// <summary>
     ///  Convert Fix to FIX standard display for intermediate datatype
     /// </summary>
-    public static string DisplayAsFixStandard(this DataType type)
+    public static string AsFixStandard(DataType type)
         => type switch
         {
             DataType.MultipleCharValue => "MultipleCharValue",
@@ -189,7 +189,7 @@ public static partial class Extensions
             DataType.TzTimeOnly => "TZTimeOnly",
             DataType.TzTimestamp => "TZTimestamp",
             DataType.Data => "data",
-            DataType.XmlData => "XMLdata",
+            DataType.XmlData => "XMLData",
             DataType.Language => "Language",
             DataType.Char => "char",
             DataType.Boolean => "Boolean",
@@ -208,4 +208,36 @@ public static partial class Extensions
 
             _ => "String",
         };
+
+    /// <summary>
+    ///  Convert Fix to FIX standard display for intermediate datatype
+    /// </summary>
+    public static DataType AsPrimitiveType(DataType type)
+        => type switch
+        {
+            DataType.Char or 
+            DataType.Boolean => DataType.Char,
+
+            DataType.Float or 
+            DataType.Qty or 
+            DataType.Price or 
+            DataType.PriceOffset or 
+            DataType.Amt or 
+            DataType.Percentage => DataType.Float,
+            
+            DataType.Int or 
+            DataType.DayOfMonth or 
+            DataType.Length or 
+            DataType.NumInGroup or 
+            DataType.SeqNum or 
+            DataType.TagNum => DataType.Int,
+
+            _ => DataType.String,
+        };
+
+    /// <summary>
+    ///  Convert Fix to FIX standard display for intermediate datatype
+    /// </summary>
+    public static string ToFixStandard(this DataType type)
+        => Display.AsFixStandard(type);
 }
