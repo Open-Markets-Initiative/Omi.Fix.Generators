@@ -65,17 +65,56 @@ public static class Merge
                 {
                     if (type.Enums.Count > 0) // make a merge?
                     {
-                        existing.Enums.Merge(type.Enums);
+                        existing.Enums.Merge(type.Enums); // this is a bug
                     }
                 }
                 else
                 {
-                    types.Add(type.Tag, type);
+                    types.Add(type.Tag, type.Clone());
                 }
             }
         }
 
         return types.Values.OrderBy(type => type.Tag).ToList();
+    }
+
+    /// <summary>
+    ///  Message types list
+    /// </summary>
+    public static List<MessageType> MessageTypesFor(Document specification)
+    {
+        var messages = new List<MessageType>();
+
+        if (specification.Messages.Any())
+        {
+            foreach (var message in specification.Messages)
+            {
+                var info = new MessageType
+                {
+                    Name = message.Name,
+                    Type = message.Type,
+                    Category = "Standard",
+                };
+
+                messages.Add(info);
+            }
+        }
+        else if (specification.Types.TryGetValue("MsgType", out var type))
+        {
+            foreach (var value in type.Enums)
+            {
+                var info = new MessageType
+                {
+                    Name = value.Name,
+                    Type = value.Value,
+                    Category = "Standard",
+                };
+
+                messages.Add(info);
+            }
+        }
+
+        return messages.OrderBy(message => message.Name).ToList();
     }
 
     /// <summary>

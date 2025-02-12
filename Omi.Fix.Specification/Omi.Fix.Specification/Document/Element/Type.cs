@@ -46,6 +46,22 @@ public class Type
         };
 
     /// <summary>
+    ///  Clone
+    /// </summary>
+    public Type Clone()
+        => new()
+        {
+            Name = Name,
+            Tag = Tag,
+            DataType = DataType,
+            Description = Description,
+            Version = Version,
+            Underlying = Underlying,
+            Required = Required,
+            Enums = Enums.Clone()
+        };
+
+    /// <summary>
     ///  Display intermediate Fix type
     /// </summary>
     /// <returns></returns>

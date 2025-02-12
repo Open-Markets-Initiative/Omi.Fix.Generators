@@ -1,6 +1,7 @@
 ﻿namespace Omi.Fix.Specification;
-    using System.Collections.Generic;
-    using System.Linq;
+
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 ///  Normalized Fix Specification Enum List
@@ -20,6 +21,18 @@ public class Enums : List<Enum>
     public IEnumerable<string> Values()
         => from @enum in this 
            select @enum.Value;
+
+    /// <summary>
+    ///  Does fix type have any enumerated values
+    /// </summary>
+    public Enums Clone()
+    {
+        var clone = new Enums(); // make another constructor
+
+        clone.AddRange(this);
+
+        return clone;
+    }
 
     /// <summary>
     ///  
