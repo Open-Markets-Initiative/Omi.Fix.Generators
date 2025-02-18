@@ -7,14 +7,26 @@ namespace Omi.Fix.T7.Test;
 
 public class LibraryTests
 {
+
     [Test]
-    public void VerifyEtiSpecifications()
+    public void VerifyEtiCashMessages()
     {
-        var specifications = Library.Eti.Specifications();
+        var specifications = Library.EtiDerivatives.Combined();
 
-        var actual = specifications.Count;
-        var expected = 4;
+        var actual = specifications.Messages.Count;
+        var expected = 161;
 
-        Assert.That(actual, Is.EqualTo(expected), "Verify Eurex Eti library count");
+        Assert.That(actual, Is.EqualTo(expected), "Verify Eurex Eti cash messages count");
+    }
+
+    [Test]
+    public void VerifyEtiDerivativesMessages()
+    {
+        var specifications = Library.EtiDerivatives.Combined();
+
+        var actual = specifications.Messages.Count;
+        var expected = 161;
+
+        Assert.That(actual, Is.EqualTo(expected), "Verify Eurex Eti derivatives message count");
     }
 }

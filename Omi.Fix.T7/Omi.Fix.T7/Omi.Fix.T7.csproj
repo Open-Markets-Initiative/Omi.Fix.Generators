@@ -11,16 +11,16 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Update="Library\Eurex.Eti\Eurex.Cash.Eti.T7.v12.1.xml">
+    <None Update="Library\Eurex.Eti.Derivatives\Eurex.Derivatives.Eti.T7.v12.1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Library\Eurex.Eti\Eurex.Cash.Eti.T7.v13.0.xml">
+    <None Update="Library\Eurex.Eti.Derivatives\Eurex.Derivatives.Eti.T7.v13.0.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Library\Eurex.Eti\Eurex.Derivatives.Eti.T7.v12.1.xml">
+    <None Update="Library\Eurex.Eti.Cash\Eurex.Cash.Eti.T7.v12.1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Library\Eurex.Eti\Eurex.Derivatives.Eti.T7.v13.0.xml">
+    <None Update="Library\Eurex.Eti.Cash\Eurex.Cash.Eti.T7.v13.0.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
