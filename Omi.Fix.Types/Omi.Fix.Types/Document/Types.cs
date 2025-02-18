@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fix.Types;
-    using System.Collections.Generic;
+
+using System.Collections.Generic;
 using System.Xml;
 
 /// <summary>
@@ -77,13 +78,14 @@ public class Types : Dictionary<string, Type>
     /// <summary>
     /// Write fields to XML
     /// </summary>
-    public void ToXml(XmlDocument document) {
-        //Append root node
+    public void ToXml(XmlDocument document) 
+    {
         var root = document.CreateElement("FixTypes");
         document.AppendChild(root);
 
-        foreach (var type in Values) {
-            type.ToXml(document);
+        foreach (var type in Values) 
+        {
+            type.ToXml(document, root);
         }
     }
 }

@@ -86,10 +86,6 @@ public class Document
         => new()
         {
             Information = Information.ToSpecification(),
-            Header = new Specification.Header(),
-            Trailer = new Specification.Trailer(),
-            Messages = new Specification.Messages(),
-            Components = new Specification.Components(),
             Types = Fields.ToSpecification()
         };
 

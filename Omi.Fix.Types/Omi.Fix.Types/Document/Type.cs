@@ -197,8 +197,6 @@ public class Type
             case "monthyear":
                 return Specification.DataType.MonthYear;
 
-
-
             case "UTCDate":
             case "UtcDate":
             case "utcdate":
@@ -250,43 +248,46 @@ public class Type
     /// <summary>
     /// Write field type to XML
     /// </summary>
-    public void ToXml(XmlDocument document) 
+    public void ToXml(XmlDocument document, XmlElement parent) 
     {
-        var parent = document.CreateElement("FixType");
-        document.AppendChild(parent);
-
-        var name = document.CreateElement("Name");
-        name.InnerText = Name;
-        parent.AppendChild(name);
-
-        var tag = document.CreateElement("Tag");
-        tag.InnerText = Tag.ToString();
-        parent.AppendChild(tag);
-
-        var type = document.CreateElement("Type");
-        type.InnerText = DataType;
-        parent.AppendChild(type);
-
-        var description = document.CreateElement("Description");
-        description.InnerText = Description;
-        parent.AppendChild(description);
-
-        if (!string.IsNullOrWhiteSpace(Note)) 
+        if (parent != null)
         {
-            var note = document.CreateElement("Note");
-            note.InnerText = Note;
-            parent.AppendChild(note);
-        }
+            var element = document.CreateElement("FixType");
+            parent.AppendChild(element);
 
-        var version = document.CreateElement("Version");
-        version.InnerText = Version;
-        parent.AppendChild(version);
+            var name = document.CreateElement("Name");
+            name.InnerText = Name;
+            element.AppendChild(name);
 
-        if (IsEnum) 
-        {
-            foreach (var @enum in Enums) 
+            var tag = document.CreateElement("Tag");
+            tag.InnerText = Tag.ToString();
+            element.AppendChild(tag);
+
+            var type = document.CreateElement("Type");
+            type.InnerText = DataType;
+            element.AppendChild(type);
+
+            var description = document.CreateElement("Description");
+            description.InnerText = Description;
+            element.AppendChild(description);
+
+            if (!string.IsNullOrWhiteSpace(Note))
             {
-                @enum.ToXml(document, parent);
+                var note = document.CreateElement("Note");
+                note.InnerText = Note;
+                element.AppendChild(note);
+            }
+
+            var version = document.CreateElement("Version");
+            version.InnerText = Version;
+            element.AppendChild(version);
+
+            if (IsEnum)
+            {
+                foreach (var @enum in Enums)
+                {
+                    @enum.ToXml(document, element);
+                }
             }
         }
     }

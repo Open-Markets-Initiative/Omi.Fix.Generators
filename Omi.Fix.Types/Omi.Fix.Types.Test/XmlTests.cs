@@ -1,8 +1,9 @@
-﻿namespace Omi.Fix.Fixml.Test;
+﻿namespace Omi.Fix.Types.Test;
+
 using NUnit.Framework;
 
 /// <summary>
-/// Fixml XML document regression tests
+///  Fix types XML document regression tests
 /// </summary>
 
 public class XmlTests
