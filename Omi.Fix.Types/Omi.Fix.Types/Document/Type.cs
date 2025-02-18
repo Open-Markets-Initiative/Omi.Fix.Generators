@@ -9,42 +9,42 @@ using System.Xml;
 public class Type
 {
     /// <summary>
-    ///  Fix Field Type Tag/Number
+    ///  Fix field type tag (Number)
     /// </summary>
     public uint Tag = 0;
 
     /// <summary>
-    ///  Fix Field Type Name
+    ///  Fix field type name
     /// </summary>
     public string Name = string.Empty;
 
     /// <summary>
-    ///  Fix Field Type Value Type
+    ///  Fix field type datatype
     /// </summary>
     public string DataType = string.Empty;
 
     /// <summary>
-    ///  Fix Field Type Version
+    ///  Fix field type version
     /// </summary>
     public string Version = string.Empty; // Maybe should be list
 
     /// <summary>
-    ///  Fix Field Type Description
+    ///  Fix field type description
     /// </summary>
     public string Description = string.Empty;
 
     /// <summary>
-    ///  Fix Field Type Note
+    ///  Fix field type note
     /// </summary>
     public string Note = string.Empty;
 
     /// <summary>
-    ///  Fix Field Enumerated Values
+    ///  Fix field type enumerated values
     /// </summary>
-    public Enums Enums = new();
+    public Enums Enums = [];
 
     /// <summary>
-    ///  Is Field an Enum?
+    ///  Is Fix field an enum?
     /// </summary>
     public bool IsEnum => Enums.Any();
 
@@ -252,44 +252,40 @@ public class Type
     /// </summary>
     public void ToXml(XmlDocument document) 
     {
-        var root = document.DocumentElement;
         var parent = document.CreateElement("FixType");
-        root.AppendChild(parent);
+        document.AppendChild(parent);
 
-        //Initialize and append name
-        var nameElement = document.CreateElement("Name");
-        nameElement.InnerText = Name;
-        parent.AppendChild(nameElement);
+        var name = document.CreateElement("Name");
+        name.InnerText = Name;
+        parent.AppendChild(name);
 
-        //Initialize and append tag
-        var tagElement = document.CreateElement("Tag");
-        tagElement.InnerText = Tag.ToString();
-        parent.AppendChild(tagElement);
+        var tag = document.CreateElement("Tag");
+        tag.InnerText = Tag.ToString();
+        parent.AppendChild(tag);
 
-        //Initialize and append type
-        var typeElement = document.CreateElement("Type");
-        typeElement.InnerText = DataType;
-        parent.AppendChild(typeElement);
+        var type = document.CreateElement("Type");
+        type.InnerText = DataType;
+        parent.AppendChild(type);
 
-        //Initialize and append description
-        var descElement = document.CreateElement("Description");
-        descElement.InnerText = Description;
-        parent.AppendChild(descElement);
+        var description = document.CreateElement("Description");
+        description.InnerText = Description;
+        parent.AppendChild(description);
 
-        //Initialize and append Note if not empty
-        if (!String.IsNullOrWhiteSpace(Note)) {
-            var noteElement = document.CreateElement("Description");
-            noteElement.InnerText = Note;
-            parent.AppendChild(noteElement);
+        if (!string.IsNullOrWhiteSpace(Note)) 
+        {
+            var note = document.CreateElement("Note");
+            note.InnerText = Note;
+            parent.AppendChild(note);
         }
 
-        //Initialize and append version
-        var versionElement = document.CreateElement("Version");
-        versionElement.InnerText = Version;
-        parent.AppendChild(versionElement);
+        var version = document.CreateElement("Version");
+        version.InnerText = Version;
+        parent.AppendChild(version);
 
-        if (IsEnum) {
-            foreach (var @enum in Enums) {
+        if (IsEnum) 
+        {
+            foreach (var @enum in Enums) 
+            {
                 @enum.ToXml(document, parent);
             }
         }
