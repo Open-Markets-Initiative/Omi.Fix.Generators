@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 /// <summary>
 ///  Load T7 xml elements into generated object classes
@@ -35,10 +36,7 @@ public static class Load
         => new ()
         {
             Information = new Specification.Information(),
-            Header = new Specification.Header(),
-            Trailer = new Specification.Trailer(),
             Messages = MessagesFrom(model),
-            Components = new Specification.Components(),
             Types = TypesFrom(model)
         };
 
@@ -51,13 +49,15 @@ public static class Load
 
         foreach (var message in xml.Structures.Where(structure => structure.type.Equals("Message")))
         {
-            messages.Add(new Specification.Message
+            var current = new Specification.Message
             {
                 Name = message.name,
                 Type = message.numericID.ToString(),
                 Category = CategoryFrom(message),
-                Fields = FieldsFrom(message),         
-            });
+                Fields = FieldsFrom(message),
+            };
+
+            messages.Add(current);
         }
 
         return messages;
@@ -137,12 +137,14 @@ public static class Load
 
             foreach (var value in type.ValidValue)
             {
-                enums.Add(new Specification.Enum
+                var @enum = new Specification.Enum
                 {
-                    Name = value.name,
+                    Name = NameFrom(value),
                     Value = value.value,
                     Description = DescriptionFrom(value, enums)
-                });
+                };
+
+                enums.Add(@enum);
             }
 
             current.Enums = enums;
@@ -215,6 +217,22 @@ public static class Load
             default:
                 throw new Exception($"Unknown Eti Fix type: {type}");
         }
+    }
+
+    /// <summary>
+    ///  Normalize enum value
+    /// </summary>
+    public static string NameFrom(ModelDataTypeValidValue value)
+    {
+        var textInfo = new CultureInfo("en-US", false).TextInfo;
+
+        var first = value.name.Replace("-", " ").Replace("_", " ").Replace(".", " ").Replace("/", " or ");
+        var second = Format.DecapitalizeAbbreviationsBeforeWordsIn(first);
+        var third = Regex.Replace(second, @"\([^)]*\)", string.Empty);
+        var fourth = textInfo.ToTitleCase(third);
+        var result = Regex.Replace(fourth, @"\s+", "");
+
+        return result;
     }
 
     /// <summary>
