@@ -1,6 +1,8 @@
 ﻿namespace Omi.Fix.T7.Xml;
 
+using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 
 public static partial class Format 
 {
@@ -50,5 +52,22 @@ public static partial class Format
         }
 
         return result.ToString();
+    }
+
+    /// <summary>
+    ///  Normalize name
+    /// </summary>
+    public static string Name(string text)
+    {
+        var textInfo = new CultureInfo("en-US", false).TextInfo;
+
+        var first = text.Replace("-", " ").Replace("_", " ").Replace(".", " ").Replace("/", " or ");
+        var second = DecapitalizeAbbreviationsBeforeWordsIn(first);
+        var third = Regex.Replace(second, @"\([^)]*\)", string.Empty);
+        var fourth = Regex.Replace(third, "[A-Z]", " $0");
+        var fifth = textInfo.ToTitleCase(fourth);
+        var result = Regex.Replace(fifth, @"\s+", "");
+
+        return result;
     }
 }

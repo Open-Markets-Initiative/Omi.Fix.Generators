@@ -1,4 +1,4 @@
-namespace Omi.Fix.T7.Test;
+namespace Omi.Fix.T7.Tests;
     using NUnit.Framework;
 
 /// <summary>

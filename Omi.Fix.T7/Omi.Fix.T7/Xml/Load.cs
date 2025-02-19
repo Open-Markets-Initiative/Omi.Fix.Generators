@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Text.RegularExpressions;
-using System.Globalization;
 
 /// <summary>
 ///  Load T7 xml elements into generated object classes
@@ -224,16 +223,9 @@ public static class Load
     /// </summary>
     public static string NameFrom(ModelDataTypeValidValue value)
     {
-        var textInfo = new CultureInfo("en-US", false).TextInfo;
+        // throw exception if value is missing
 
-        var first = value.name.Replace("-", " ").Replace("_", " ").Replace(".", " ").Replace("/", " or ");
-        var second = Format.DecapitalizeAbbreviationsBeforeWordsIn(first);
-        var third = Regex.Replace(second, @"\([^)]*\)", string.Empty);
-        var fourth = Regex.Replace(third, "[A-Z]", " $0");
-        var fifth = textInfo.ToTitleCase(fourth);
-        var result = Regex.Replace(fifth, @"\s+", "");
-
-        return result;
+        return Format.Name(value.name);
     }
 
     /// <summary>
