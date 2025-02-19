@@ -1,6 +1,7 @@
 ﻿namespace Omi.Fix.Types;
-    using System.Collections.Generic;
-    using System.Linq;
+
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 ///  Enumerated Field Values
@@ -8,7 +9,6 @@
 
 public class Enums : List<Enum>
 {
-
     /// <summary>
     ///  Default constructor
     /// </summary>

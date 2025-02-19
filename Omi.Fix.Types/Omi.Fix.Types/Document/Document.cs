@@ -1,6 +1,6 @@
-using System.Xml;
-
 namespace Omi.Fix.Types;
+
+using System.Xml;
 
 /// <summary>
 ///  Omi Fix Types C# Document
@@ -8,9 +8,8 @@ namespace Omi.Fix.Types;
 
 public class Document
 {
-
     /// <summary>
-    ///  Fix types xml documention information
+    ///  Fix types xml documentation information
     /// </summary>
     public Information Information = new();
 
@@ -62,7 +61,6 @@ public class Document
     /// </summary>
     public static Document From(Fix.Specification.Document specification)
     {
-
         var document = new Document();
 
         document.Information = Information.From(specification.Information);
@@ -70,7 +68,7 @@ public class Document
 
         foreach (var pair in document.Fields)
         {
-            if (String.IsNullOrWhiteSpace(pair.Value.Version))
+            if (string.IsNullOrWhiteSpace(pair.Value.Version))
             {
                 pair.Value.Version = $"FIX{specification.Information.Major}{specification.Information.Minor}";
             }
@@ -92,7 +90,8 @@ public class Document
     /// <summary>
     ///  Convert to XML Document
     /// </summary>
-    public XmlDocument ToXml() {
+    public XmlDocument ToXml()
+    {
         var document = new XmlDocument();
 
         Fields.ToXml(document);
@@ -103,7 +102,8 @@ public class Document
     /// <summary>
     ///  Write Xml with default settings
     /// </summary>
-    public void WriteTo(string path) {
+    public void WriteTo(string path) 
+    {
         var settings = new XmlWriterSettings
         {
             Indent = true,
@@ -119,7 +119,8 @@ public class Document
     /// <summary>
     ///  Write XML with settings
     /// </summary>
-    public void WriteTo(string path, XmlWriterSettings settings) {
+    public void WriteTo(string path, XmlWriterSettings settings) 
+    {
         var xml = ToXml();
 
         using var writer = XmlWriter.Create(path, settings);

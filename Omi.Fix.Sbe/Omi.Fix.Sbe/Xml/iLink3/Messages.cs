@@ -1,4 +1,5 @@
 ﻿namespace Omi.Fix.Sbe.iLink3;
+
 using System.Collections.Generic;
 
 /// <summary>
@@ -16,7 +17,9 @@ public static class Messages
 
         foreach (var message in xml.message ?? [])
         {
-            messages.Add(MessageFrom(message));
+            var current = MessageFrom(message);
+
+            messages.Add(current);
         }
 
         return messages;
@@ -78,10 +81,12 @@ public static class Messages
         {
             if (field != null && field.offsetSpecified)
             {
-                result.Add(new Specification.Field
+                var current = new Specification.Field
                 {
                     Name = field.name
-                });
+                };
+
+                result.Add(current);
             }
         }
 

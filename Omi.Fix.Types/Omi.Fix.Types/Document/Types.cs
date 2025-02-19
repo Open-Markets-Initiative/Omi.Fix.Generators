@@ -9,7 +9,6 @@ using System.Xml;
 
 public class Types : Dictionary<string, Type>
 {
-
     /// <summary>
     ///  Load fix field types from fields xml
     /// </summary>

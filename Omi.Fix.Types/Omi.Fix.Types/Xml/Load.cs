@@ -7,7 +7,6 @@
 /// </summary>
 public static class Load
 {
-
     /// <summary>
     ///  Load fields xml from file path
     /// </summary>

@@ -1,7 +1,5 @@
 ﻿namespace Omi.Fix.Sbe.iLink3;
 
-#pragma warning disable CS8981
-
 [System.SerializableAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.fixprotocol.org/ns/simple/1.0")]

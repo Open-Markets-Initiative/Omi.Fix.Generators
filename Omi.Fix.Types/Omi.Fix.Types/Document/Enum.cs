@@ -1,7 +1,6 @@
-﻿using System.IO;
-using System.Xml;
+﻿namespace Omi.Fix.Types;
 
-namespace Omi.Fix.Types;
+using System.Xml;
 
 /// <summary>
 ///  Fix Type Enumerated Value
@@ -9,7 +8,6 @@ namespace Omi.Fix.Types;
 
 public class Enum
 {
-
     /// <summary>
     ///  Enum name
     /// </summary>
@@ -72,7 +70,8 @@ public class Enum
     /// <summary>
     /// Appends Xml Element from Enum to parent
     /// </summary>
-    public void ToXml(XmlDocument document, XmlElement parent) {
+    public void ToXml(XmlDocument document, XmlElement parent) 
+    {
         var enumElement = document.CreateElement("Enum");
         parent.AppendChild(enumElement);
 
