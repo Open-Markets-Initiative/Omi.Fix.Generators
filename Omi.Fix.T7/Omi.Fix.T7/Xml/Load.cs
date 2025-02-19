@@ -229,8 +229,9 @@ public static class Load
         var first = value.name.Replace("-", " ").Replace("_", " ").Replace(".", " ").Replace("/", " or ");
         var second = Format.DecapitalizeAbbreviationsBeforeWordsIn(first);
         var third = Regex.Replace(second, @"\([^)]*\)", string.Empty);
-        var fourth = textInfo.ToTitleCase(third);
-        var result = Regex.Replace(fourth, @"\s+", "");
+        var fourth = Regex.Replace(third, "[A-Z]", " $0");
+        var fifth = textInfo.ToTitleCase(fourth);
+        var result = Regex.Replace(fifth, @"\s+", "");
 
         return result;
     }

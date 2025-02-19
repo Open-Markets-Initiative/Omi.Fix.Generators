@@ -27,12 +27,11 @@ public static partial class Format
         var capitalized = true;
         for (var index = position + 1; index < result.Length; ++index)
         {
-
             // Get case of current letter
             var capital = char.IsUpper(text[index]);
 
             // Check if abbreviation is done
-            if (capitalized && !capital)
+            if (capitalized && !capital && !char.IsWhiteSpace(text[index]))
             {
                 result[index - 1] = char.ToUpper(text[index - 1]);
             }
