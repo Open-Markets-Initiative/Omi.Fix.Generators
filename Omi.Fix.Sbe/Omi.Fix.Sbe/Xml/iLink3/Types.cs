@@ -141,9 +141,10 @@ public static class Types
     /// </summary>
     public static string NameFor(groupField field)
     {
-        // verify
+        ArgumentNullException.ThrowIfNull(field);
+        ArgumentException.ThrowIfNullOrWhiteSpace(field.name);
 
-        return field.name;
+        return Format.Name(field.name);
     }
 
     /// <summary>
