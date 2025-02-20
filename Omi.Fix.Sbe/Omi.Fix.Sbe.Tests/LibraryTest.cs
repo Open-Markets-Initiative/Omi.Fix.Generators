@@ -1,4 +1,5 @@
 namespace Omi.Fix.Sbe.Test;
+
 using NUnit.Framework;
 
 /// <summary>

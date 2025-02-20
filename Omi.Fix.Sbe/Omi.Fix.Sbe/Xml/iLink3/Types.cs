@@ -51,15 +51,15 @@ public static class Types
     /// </summary>
     public static void Process(field field, messageSchema xml, Specification.Types types)
     {
-        // TODO: verify field values
-
         var name = NameFor(field);
 
         if (types.ContainsKey(name)) { return; }
 
-        var type = new Specification.Type ()
+        // TODO: verify field values
+
+        var type = new Specification.Type()
         {
-            Name = NameFor(field),
+            Name = name,
             Tag = field.id,
             Description = field.description,
             Underlying = UnderlyingTypeFor(field.semanticType, xml),
@@ -75,9 +75,10 @@ public static class Types
     /// </summary>
     public static string NameFor(field field)
     {
-        // verify
+        ArgumentNullException.ThrowIfNull(field);
+        ArgumentException.ThrowIfNullOrWhiteSpace(field.name);
 
-        return field.name;
+        return Format.Name(field.name);
     }
 
     /// <summary>
@@ -201,7 +202,7 @@ public static class Types
     }
 
     /// <summary>
-    ///  Norm
+    ///  Normalize enum values 
     /// </summary>
     public static Specification.Enums EnumsFor(string name, messageSchema xml)
     {
@@ -215,7 +216,7 @@ public static class Types
             {
                 var current = new Specification.Enum
                 {
-                    Name = value.name,
+                    Name = Format.Name(value.description),
                     Value = value.Value,
                     Description = value.description
                 };

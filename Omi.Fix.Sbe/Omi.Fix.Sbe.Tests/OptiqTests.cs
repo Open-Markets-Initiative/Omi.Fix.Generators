@@ -1,8 +1,9 @@
 ﻿namespace Omi.Fix.Sbe.Test;
+
 using NUnit.Framework;
 
 /// <summary>
-///  Regression tests for Opti Sbe
+///  Regression tests for Optiq Sbe
 /// </summary>
 
 public class OptiqTests {

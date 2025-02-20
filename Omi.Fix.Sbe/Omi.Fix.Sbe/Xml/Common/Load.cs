@@ -1,10 +1,11 @@
 ﻿namespace Omi.Fix.Sbe.Xml;
+
 using System;
 using System.Xml.Serialization;
 using System.Xml;
 
 /// <summary>
-///  Load sbe xml elements
+///  Load Sbe Xml elements
 /// </summary>
 
 public static class Load
