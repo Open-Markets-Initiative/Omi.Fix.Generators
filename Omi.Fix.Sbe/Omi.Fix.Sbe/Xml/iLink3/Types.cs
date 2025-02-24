@@ -64,7 +64,7 @@ public static class Types
             Description = field.description,
             Underlying = UnderlyingTypeFor(field.semanticType, xml),
             DataType = DataTypeFor(field.semanticType),
-            Enums = EnumsFor(field.name, xml)
+            Enums = EnumsFor(field.name, field.type, xml)
         };
 
         types.Add(type);
@@ -118,10 +118,11 @@ public static class Types
     /// </summary>
     public static void Process(groupField field, messageSchema xml, Specification.Types types)
     {
-        // should verify field values
         var name = NameFor(field);
 
         if (types.ContainsKey(name)) { return; }
+
+        // should verify field values
 
         var type = new Specification.Type()
         {
@@ -130,7 +131,7 @@ public static class Types
             Description = field.description,
             Underlying = field.semanticType,
             DataType = DataTypeFor(field.semanticType),
-            Enums = EnumsFor(field.name, xml)
+            Enums = EnumsFor(field.name, field.type, xml)
         };
 
         types.Add(type);
@@ -205,11 +206,13 @@ public static class Types
     /// <summary>
     ///  Normalize enum values 
     /// </summary>
-    public static Specification.Enums EnumsFor(string name, messageSchema xml)
+    public static Specification.Enums EnumsFor(string name, string type, messageSchema xml)
     {
         var enums = new Specification.Enums();
 
-        var @enum = xml.types?.@enum.FirstOrDefault(@enum => @enum.name == name);
+        // first try name, then try type
+        var @enum = (xml.types?.@enum.FirstOrDefault(@enum => @enum.name == name))
+                 ?? (xml.types?.@enum.FirstOrDefault(@enum => @enum.name == type));
 
         if (@enum != null)
         {
@@ -217,8 +220,8 @@ public static class Types
             {
                 var current = new Specification.Enum
                 {
-                    Name = Format.Name(value.description),
-                    Value = value.Value,
+                    Name = EnumNameFor(value),
+                    Value = EnumValueFor(value),
                     Description = value.description
                 };
 
@@ -228,4 +231,35 @@ public static class Types
 
         return enums;
     }
+
+    /// <summary>
+    ///  Parse value element for enum value name
+    /// </summary>
+    public static string EnumNameFor(typesEnumValidValue value)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(value.description);
+
+        if (value.name == "False")
+        {
+            return "False";
+        }
+        if (value.name == "True")
+        {
+            return "True";
+        }
+
+        return Format.Name(value.description);
+    }
+
+    /// <summary>
+    ///  Parse value element for enum value
+    /// </summary>
+    public static string EnumValueFor(typesEnumValidValue value)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(value.Value);
+
+        return value.Value;
+    }
+
+    //
 }
