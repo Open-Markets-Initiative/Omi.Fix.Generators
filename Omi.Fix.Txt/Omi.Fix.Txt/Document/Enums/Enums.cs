@@ -1,7 +1,7 @@
 ﻿namespace Omi.Fix.Txt;
-    using System.Collections.Generic;
-    using System.Linq;
-using System.Xml.Linq;
+
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 ///  Dictionary of the Enum(s) found in a file, with its name as the index
@@ -9,7 +9,6 @@ using System.Xml.Linq;
 
 public class Enums : Dictionary<string, Enum>
 {
-
     /// <summary>
     ///  Default constructor
     /// </summary>

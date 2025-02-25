@@ -1,7 +1,6 @@
 ﻿namespace Omi.Fix.Txt;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Omi.Fix.Specification;
+
+using System.Collections.Generic;
 
 /// <summary>
 /// List of the groups associated with a section 

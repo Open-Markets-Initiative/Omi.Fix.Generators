@@ -1,6 +1,7 @@
 ﻿namespace Omi.Fix.Txt;
-    using System.Collections.Generic;
-    using System.Linq;
+
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// FIX major and minor
@@ -8,7 +9,6 @@
 
 public class Information
 {
-
     /// <summary>
     /// Fix major version
     /// </summary>
@@ -40,6 +40,7 @@ public class Information
     public static Information From(string path)
     {
         var lines = File.ReadLines(path);
+
         return From(lines);
     }
 

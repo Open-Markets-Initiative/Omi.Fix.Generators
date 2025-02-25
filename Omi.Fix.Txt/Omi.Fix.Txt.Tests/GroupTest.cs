@@ -1,5 +1,6 @@
-namespace Omi.Fix.Txt.Test;
-    using NUnit.Framework;
+namespace Omi.Fix.Txt.Tests;
+
+using NUnit.Framework;
 
 /// <summary>
 ///  Fix Txt Message Regression tests 
@@ -11,9 +12,9 @@ public class MessageTests
     public void VerifyChildrenFromGroups()
     {
         var expected = new Children {
-                new Group { Name = "AllocAccount", Required = true },
-                new Group { Name = "AllocShares", Required = false }
-            };
+            new Group { Name = "AllocAccount", Required = true },
+            new Group { Name = "AllocShares", Required = false }};
+
         var actual = Children.From("AllocAccount(required), AllocShares");
 
         Assert.That(actual[1].Name, Is.EqualTo(expected[1].Name), "Verify group children from record");
@@ -55,6 +56,7 @@ public class MessageTests
     [Test]
     public void VerifyInvalidMessageFromLine()
     {
-        Assert.Throws<IndexOutOfRangeException>(() => Messages.From(new List<string> { "NewOrderSingle:admin:D: ClOrdID(required), ClientID, ExecBroker, Account, NoAllocs(required)[AllocAccount(required), AllocShares" }), "Verify Line missing type is invalid");
+        Assert.Throws<IndexOutOfRangeException>(() 
+            => Messages.From(new List<string> { "NewOrderSingle:admin:D: ClOrdID(required), ClientID, ExecBroker, Account, NoAllocs(required)[AllocAccount(required), AllocShares" }), "Verify Line missing type is invalid");
     }
 }

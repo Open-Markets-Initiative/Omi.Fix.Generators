@@ -1,14 +1,14 @@
 ﻿namespace Omi.Fix.Txt;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Omi.Fix.Specification;
+
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// List of message(s) from text 
 /// </summary>
+
 public class Messages : List<Message>
 {
-
     /// <summary>
     ///  Default constructor
     /// </summary>

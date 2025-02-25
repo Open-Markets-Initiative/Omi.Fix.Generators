@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fix.Txt;
-    using System.Linq;
+
+using System.Linq;
 
 /// <summary>
 /// Name and data of corresponing enum
@@ -7,7 +8,6 @@
 
 public class Value
 {
-
     /// <summary>
     /// Name of value
     /// </summary>
@@ -33,29 +33,32 @@ public class Value
     /// </summary>
     public static Value From(string pair)
     {
+        // need to rewrite this
+
         // Check valid input
         if (string.IsNullOrWhiteSpace(pair))
         {
             throw new ArgumentException(nameof(pair));
         }
 
-        var idx = pair.IndexOf("=");
+        var index = pair.IndexOf("=");
 
-        if (idx < 0)
+        if (index < 0)
         {
             throw new ArgumentException(nameof(pair));
         }
 
         // Trim whitespace from string and find where name and data are split
-        var pairnowhite = String.Concat(pair.Where(c => !Char.IsWhiteSpace(c)));
-        var name = pairnowhite.Substring(0, pairnowhite.IndexOf("="));
+        var current = String.Concat(pair.Where(c => !Char.IsWhiteSpace(c)));
+        var token = pair.Substring(0, current.IndexOf("="));
+        var name = Format.Name(token);
 
         if (string.IsNullOrEmpty(name))
         {
             throw new ArgumentException(nameof(pair));
         }
 
-        var data = pairnowhite.Substring(pairnowhite.IndexOf("=") + 1);
+        var data = current.Substring(current.IndexOf("=") + 1);
 
         return From(name, data);
     }

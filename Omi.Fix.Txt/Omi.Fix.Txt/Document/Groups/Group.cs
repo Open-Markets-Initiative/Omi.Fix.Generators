@@ -6,7 +6,6 @@
 
 public class Group
 {
-
     /// <summary>
     /// Name of group
     /// </summary>
@@ -78,14 +77,12 @@ public class Group
                 required = true;
             }
         }
-
         else
         {
             name = pair;
         }
 
         return From(name, required, children);
-
     }
 
     /// <summary>

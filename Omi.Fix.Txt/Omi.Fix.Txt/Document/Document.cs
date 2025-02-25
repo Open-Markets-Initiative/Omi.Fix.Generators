@@ -1,5 +1,6 @@
 namespace Omi.Fix.Txt;
-    using System.IO;
+
+using System.IO;
 
 /// <summary>
 ///  Omi Fix Text C# Document
@@ -7,7 +8,6 @@ namespace Omi.Fix.Txt;
 
 public class Document
 {
-
     /// <summary>
     ///  Fix txt documention information
     /// </summary>
@@ -34,6 +34,7 @@ public class Document
     public static Document From(string path)
     {
         var lines = File.ReadLines(path);
+
         return From(lines);
     }
 
@@ -44,15 +45,16 @@ public class Document
     {
         var enums = Enums.From(lines);
 
+        // need to parse these in order 
+
         return new()
-        { // need to parse these in order 
+        {
             Information = Information.From(lines),
             Enums = enums,
             Fields = Fields.From(lines, enums),
             Messages = Messages.From(lines)
         };
     }
-
 
     /// <summary>
     ///  Convert fix txt to normalized fix specification
@@ -61,10 +63,7 @@ public class Document
         => new()
         {
             Information = Information.ToSpecification(),
-            Header = new Specification.Header(),
-            Trailer = new Specification.Trailer(),
             Messages = Messages.ToSpecification(),
-            Components = new Specification.Components(),
             Types = Fields.ToSpecification(Enums),
         };
 
@@ -72,5 +71,5 @@ public class Document
     ///  Fix Txt description as string
     /// </summary>
     public override string ToString()
-        => $"{Information} fix txt";
+        => $"{Information} FIX txt";
 }

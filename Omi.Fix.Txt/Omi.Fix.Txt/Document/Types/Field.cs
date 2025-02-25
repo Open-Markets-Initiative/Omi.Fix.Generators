@@ -84,13 +84,14 @@ public class Field
         return true;
     }
 
-
     /// <summary>
     ///  Try parse Fix field name from tokenized record
     /// </summary>
     public static bool TryParseName(string[] tokens, out string name)
     {
-        name = tokens[1];
+        // should verify this data
+
+        name = Format.Name(tokens[1]);
 
         return true;
     }

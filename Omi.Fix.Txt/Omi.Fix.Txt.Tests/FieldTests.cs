@@ -1,5 +1,6 @@
-namespace Omi.Fix.Txt.Test;
-    using NUnit.Framework;
+namespace Omi.Fix.Txt.Tests;
+
+using NUnit.Framework;
 
 /// <summary>
 ///  Regression tests for fix text field records

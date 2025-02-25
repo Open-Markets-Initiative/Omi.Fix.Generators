@@ -1,19 +1,20 @@
 ﻿namespace Omi.Fix.Txt;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Omi.Fix.Specification;
+
+using System.Linq;
 
 /// <summary>
 /// Types of FIX messages in text file
 /// </summary>
 public class Message
 {
-
     /// <summary>
-    /// 
+    ///  Fix txt message name
     /// </summary>
     public string Name = string.Empty;
 
+    /// <summary>
+    ///  Fix txt message type
+    /// </summary>
     public string Type = string.Empty;
 
     public string Category = string.Empty;
@@ -58,19 +59,20 @@ public class Message
     }
 
     /// <summary>
-    /// Obtain Fix specification for message from text
+    ///  Obtain Fix specification for message from text
     /// </summary>
-    /// <returns></returns>
     public Specification.Message ToSpecification()
-    => new Specification.Message
-    {
-        Name = Name,
-        Type = Type,
-        Category = Category,
-        Fields = this.Elements.ToSpecification()
-    };
+        => new()
+        {
+            Name = Name,
+            Type = Type,
+            Category = Category,
+            Fields = this.Elements.ToSpecification()
+        };
 
+    /// <summary>
+    ///  Fix Txt message as string
+    /// </summary>
     public override string ToString()
         => $"{Name} => {Type}, {Category}";
-
 }

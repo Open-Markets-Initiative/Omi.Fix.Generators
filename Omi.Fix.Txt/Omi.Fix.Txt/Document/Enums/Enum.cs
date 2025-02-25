@@ -1,6 +1,7 @@
 ﻿namespace Omi.Fix.Txt;
-    using System.Collections.Generic;
-    using System.Linq;
+
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 ///  Fix Txt Enumerated Value
@@ -8,7 +9,6 @@
 
 public class Enum
 {
-
     /// <summary>
     /// The name associated with the Enum
     /// </summary>

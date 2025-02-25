@@ -1,7 +1,6 @@
 ﻿namespace Omi.Fix.Txt;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Omi.Fix.Specification;
+
+using System.Collections.Generic;
 
 /// <summary>
 /// List of the fields associated with a message
@@ -76,5 +75,4 @@ public class Groups : List<Group>
 
         return fields;
     }
-
 }

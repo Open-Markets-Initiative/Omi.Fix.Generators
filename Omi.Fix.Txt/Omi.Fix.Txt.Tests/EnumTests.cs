@@ -1,5 +1,6 @@
-namespace Omi.Fix.Txt.Test;
-    using NUnit.Framework;
+namespace Omi.Fix.Txt.Tests;
+
+using NUnit.Framework;
 
 /// <summary>
 ///  Regression tests for fix txt enums
@@ -7,7 +8,6 @@ namespace Omi.Fix.Txt.Test;
 
 public class EnumTests
 {
-
     [Test]
     public void VerifyEnumsFromTxt()
     {
@@ -22,26 +22,24 @@ public class EnumTests
     [Test]
     public void VerifyEnumValuesFromRecord()
     {
-
         var expected = "0";
-        var actual = Enums.From(new List<string> { "ExecTransType:enum:New=0,Cancel=1,Correct=2,Status=3" })["ExecTransType"].Values[0].Data;
+        var actual = Enums.From(["ExecTransType:enum:New=0,Cancel=1,Correct=2,Status=3"])["ExecTransType"].Values[0].Data;
 
         Assert.That(actual, Is.EqualTo(expected), "Verify enums from record");
     }
 
     [Test]
-    public void VerifyEnumsExcludesComments()
+    public void VerifyEnumValueNameFromRecordMacroCase()
     {
+        var expected = "MacroCase";
+        var actual = Enums.From(["ENUM:enum:MACRO_CASE=2"])["ENUM"].Values[0].Name;
 
-        var actual = Enums.From(new List<string> { "# This is a comment " });
-
-        Assert.That(actual, Is.Empty, "Verify comments do not get read");
+        Assert.That(actual, Is.EqualTo(expected), "Verify enums from record");
     }
 
     [Test]
-    public void VerifyEnumNameFromRecord()
+    public void VerifyEnumNameFromRecordPascalCase()
     {
-
         var expected = "ExecTransType";
         var actual = Enum.From("ExecTransType:enum:New=0,Cancel=1,Correct=2,Status=3").Name;
 
@@ -49,9 +47,16 @@ public class EnumTests
     }
 
     [Test]
+    public void VerifyEnumsExcludesComments()
+    {
+        var actual = Enums.From(["# This is a comment"]);
+
+        Assert.That(actual, Is.Empty, "Verify comments do not get read");
+    }
+
+    [Test]
     public void VerifyEnumValueFromLine()
     {
-
         var expected = "2";
         var actual = Enum.From("ExecTransType:enum:New=0,Cancel=1,Correct=2,Status=3").Values[2].Data;
 

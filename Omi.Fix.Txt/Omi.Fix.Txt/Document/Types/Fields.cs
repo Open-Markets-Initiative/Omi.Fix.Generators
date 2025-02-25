@@ -1,9 +1,10 @@
 ﻿namespace Omi.Fix.Txt;
-    using System.Collections.Generic;
-    using System.Linq;
+
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
-/// List of all the fields found in a text file
+/// List of all the fields found in FIX text file
 /// </summary>
 
 public class Fields : List<Field>
@@ -72,6 +73,7 @@ public class Fields : List<Field>
             }
 
             Field field = Field.From(line);
+
             fields.Add(field);
         }
 
