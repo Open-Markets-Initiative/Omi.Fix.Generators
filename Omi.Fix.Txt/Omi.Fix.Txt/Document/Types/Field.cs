@@ -91,7 +91,7 @@ public class Field
     {
         // should verify this data
 
-        name = Format.Name(tokens[1]);
+        name = tokens[1]; // TODO use format (need to be able to handle SR)
 
         return true;
     }

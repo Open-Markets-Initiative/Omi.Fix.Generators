@@ -67,7 +67,7 @@ public class Message
             Name = Name,
             Type = Type,
             Category = Category,
-            Fields = this.Elements.ToSpecification()
+            Fields = Elements.ToSpecification()
         };
 
     /// <summary>

@@ -72,6 +72,20 @@ public class Types : Dictionary<string, Type>
     }
 
     /// <summary>
+    ///  Remove all types that meet a predicate
+    /// </summary>
+    public void RemoveAll(Predicate<Type> match)
+    {
+        foreach (var pair in this)
+        {
+            if (!match(pair.Value))
+            {
+                Remove(pair.Key);
+            }
+        }
+    }
+
+    /// <summary>
     ///  Convert types to fields list
     /// </summary>
     public List<Field> ToFields()
@@ -85,6 +99,26 @@ public class Types : Dictionary<string, Type>
 
         return fields;
     }
+
+    /// <summary>
+    ///  Convert types to fields list with predicate
+    /// </summary>
+    public List<Field> ToFields(Predicate<Type> match)
+    {
+        var fields = new List<Field>();
+
+        foreach (var type in Values)
+        {
+            if (match(type))
+            {
+                fields.Add(type.ToField());
+            }
+        }
+
+        return fields;
+    }
+
+
 
     /// <summary>
     ///  Convert Dictionary of types to Specification Types

@@ -51,6 +51,12 @@ public class Document
         => Messages.RemoveAll(predicate);
 
     /// <summary>
+    ///  Filter types
+    /// </summary>
+    public void Filter(Predicate<Type> predicate)
+        => Types.RemoveAll(predicate);
+
+    /// <summary>
     ///  Normalize/clean Fix Specification
     /// </summary>
     public void Normalize()
@@ -65,8 +71,14 @@ public class Document
     /// <summary>
     ///  Add Overwrite Type (minimal)
     /// </summary>
-    public void Set(string name, uint tag, string type)
-        => Set(new Type { Name = name, Tag = tag, Underlying = type});
+    public void Set(string name, uint tag, string  type)
+        => Set(new Type { Name = name, Tag = tag, DataType = Convert.TypeFor(type) });
+
+    /// <summary>
+    ///  Add Overwrite Type (minimal)
+    /// </summary>
+    public void Set(string name, uint tag, DataType type = DataType.String)
+        => Set(new Type { Name = name, Tag = tag, DataType = type});
 
     /// <summary>
     ///  Add Overwrite Type (minimal)

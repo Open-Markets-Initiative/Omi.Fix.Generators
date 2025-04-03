@@ -1,20 +1,21 @@
 ﻿namespace Omi.Fix.Specification;
-    using System.Collections.Generic;
-    using System.Linq;
+
+using System.Linq;
 
 public partial class Normalize
 {
-
     /// <summary>
     ///  Normalize underlying types in specification
     /// </summary>
     public static void UnderlyingTypes(Document specification)
     {
         var types = new Types();
-        foreach (var type in specification.Types.Values.OrderBy(fix => fix.Tag))
+        foreach (var type in specification.Types.Values.OrderBy(fix => fix.Tag)) // does ordering this make sense?
         {
-            type.Underlying = ConvertType(type.Underlying);
-            types.Add(type.Name, type);
+            var current = type.Clone();
+            current.Underlying = ConvertType(type.Underlying);
+
+            types.Add(current);
         }
 
         specification.Types = types;
@@ -34,6 +35,7 @@ public partial class Normalize
             case "PRICEOFFSET":
                 return "FLOAT";
 
+            case "INT":
             case "DAY-OF-MONTH":
             case "DAYOFMONTH":
             case "SEQNUM":

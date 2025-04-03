@@ -65,9 +65,7 @@ public class Fields : Dictionary<string, Field>
     ///  Convert from specification type information to fixml type
     /// </summary>
     public static string TypeFrom(Fix.Specification.Type field)
-    {
-        return field.DataType.ToString().ToUpperInvariant(); // is this correct?
-    }
+        => field.DataType.ToString().ToUpperInvariant(); // is this correct?
 
     /// <summary>
     ///  Remove unused fields
