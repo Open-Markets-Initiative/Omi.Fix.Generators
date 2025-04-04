@@ -307,7 +307,7 @@ public class Field
 
             case "HEXLONG":
             case "hexlong":
-                return Specification.DataType.Length;
+                return Specification.DataType.String;
 
             default:
                 throw new NotImplementedException($"Unknown Fix text type: {type}");
