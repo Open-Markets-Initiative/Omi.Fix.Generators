@@ -12,10 +12,13 @@
   
   <ItemGroup>
     <None Update="Library\Eurex.Edci\Eurex.Derivatives.Edci.T7.v13.0.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Library\Eurex.Edci\Eurex.Derivatives.Edci.T7.v13.1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Eurex.Eti.Cash\Eurex.Cash.Eti.T7.v13.1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Library\Eurex.Eti.Derivatives\Eurex.Derivatives.Eti.T7.v12.1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -27,6 +30,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Library\Eurex.Eti.Cash\Eurex.Cash.Eti.T7.v13.0.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Library\Eurex.Eti.Derivatives\Eurex.Derivatives.Eti.T7.v13.1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

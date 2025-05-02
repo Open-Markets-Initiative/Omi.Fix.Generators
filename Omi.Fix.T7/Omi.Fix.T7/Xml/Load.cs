@@ -67,9 +67,19 @@ public static class Load
     /// </summary>
     public static string CategoryFrom(ModelStructure message)
     {
-        if (message.numericID < 10100 || message.numericID >= 10900) 
+        if (message.package.Contains("eti"))
         {
-            return "admin";
+            if (message.numericID < 10100 || message.numericID >= 10900)
+            {
+                return "admin";
+            }
+        }
+        else if (message.package.Contains("edci"))
+        {
+            if (message.numericID <= 10900)
+            {
+                return "admin";
+            }
         }
 
         return "app"; // make intermediate versions of these?
