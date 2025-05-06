@@ -1,4 +1,5 @@
 ﻿namespace Omi.Fix.Specification;
+
 using System.Collections.Generic;
 
 /// <summary>
@@ -44,6 +45,12 @@ public class Types : Dictionary<string, Type>
             Add(type);
         }
     }
+
+    /// <summary>
+    ///  Try get type by name
+    /// </summary>
+    public bool TryGetByName(string name, out Type type)
+        => TryGetValue(name, out type);
 
     /// <summary>
     ///  Convert Dictionary of types to Specification

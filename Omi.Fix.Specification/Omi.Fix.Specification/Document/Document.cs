@@ -162,6 +162,12 @@ public class Document
         => Types.AddOverwrite(types);
 
     /// <summary>
+    ///  Try get type by name
+    /// </summary>
+    public bool TryGet(string name, out Type type)
+        => Types.TryGetByName(name, out type);
+
+    /// <summary>
     ///  Display Normalized Fix Specification
     /// </summary>
     public override string ToString()
