@@ -79,6 +79,24 @@ public static class Merge
     }
 
     /// <summary>
+    ///  Discrete Types by name
+    /// </summary>
+    public static List<Type> DiscreteTypesByName(List<List<Type>> listOfTypeList)
+    {
+        var mergedTypes = new Types();
+
+        foreach (var type in listOfTypeList.SelectMany(t => t))
+        {
+            if (mergedTypes.ContainsKey(type.Name)) continue;
+
+            mergedTypes.Add(type.Name, type.Clone());
+        }
+        
+        return mergedTypes.ToList();
+    }
+
+
+    /// <summary>
     ///  Message types list
     /// </summary>
     public static List<MessageType> MessageTypesFor(Document specification)
