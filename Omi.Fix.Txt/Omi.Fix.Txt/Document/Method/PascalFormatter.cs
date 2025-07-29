@@ -8,12 +8,12 @@ using System.Text;
 ///  Formatting methods
 /// </summary>
 
-public static class Format
+public class DefaultFormat : IFormatter
 {
     /// <summary>
     ///  Make first letter uppercase
     /// </summary>
-    public static string UpperFirstLetter(string source)
+    public string UpperFirstLetter(string source)
     {
         if (string.IsNullOrEmpty(source))
         {
@@ -30,7 +30,7 @@ public static class Format
     /// <summary>
     ///  Decapitalize consecutive capital letters assuming next word is upper case
     /// </summary>
-    public static string DecapitalizeAbbreviationsBeforeWordsIn(string text)
+    public string DecapitalizeAbbreviationsBeforeWordsIn(string text)
     {
         // Figure out
         if (string.IsNullOrWhiteSpace(text)) { return string.Empty; }
@@ -78,7 +78,7 @@ public static class Format
     /// <summary>
     ///  Normalize name
     /// </summary>
-    public static string Name(string text)
+    public string Name(string text)
     {
         var textInfo = new CultureInfo("en-US", false).TextInfo;
 

@@ -33,19 +33,19 @@ public class Document
     /// <summary>
     ///  Fix Txt document from path
     /// </summary>
-    public static Document From(string path)
+    public static Document From(string path, IFormatter? format = null)
     {
         var lines = File.ReadLines(path);
 
-        return From(lines);
+        return From(lines, format);
     }
 
     /// <summary>
     ///  Fix Txt document from records
     /// </summary>
-    public static Document From(IEnumerable<string> lines)
+    public static Document From(IEnumerable<string> lines, IFormatter? format = null)
     {
-        var enums = Enums.From(lines);
+        var enums = Enums.From(lines, format);
 
         // need to parse these in order 
 

@@ -22,11 +22,11 @@ public class Enum
     /// <summary>
     /// Constructs an enum based on a line in the txt file
     /// </summary>
-    public static Enum From(string line)
+    public static Enum From(string line, IFormatter? format = null)
         => new()
         {
             Name = NameFrom(line),
-            Values = ValuesFrom(line)
+            Values = ValuesFrom(line, format)
         };
 
     /// <summary>
@@ -63,7 +63,7 @@ public class Enum
     /// <summary>
     /// Gets the list of each value present in a given enum line
     /// </summary>
-    public static List<Value> ValuesFrom(string line)
+    public static List<Value> ValuesFrom(string line, IFormatter? format = null)
     {
         // Validate line
         if (line[0].Equals("#"))
@@ -107,7 +107,7 @@ public class Enum
         {
             if (!string.IsNullOrWhiteSpace(token))
             {
-                values.Add(Value.From(token));
+                values.Add(Value.From(token, format));
             }
         }
 

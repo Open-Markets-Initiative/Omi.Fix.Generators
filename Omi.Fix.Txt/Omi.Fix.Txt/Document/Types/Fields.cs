@@ -18,11 +18,11 @@ public class Fields : List<Field>
     /// <summary>
     /// Returns fields from a text file
     /// </summary>
-    public static Fields From(string path)
+    public static Fields From(string path, IFormatter? format = null)
     {
         var lines = File.ReadLines(path);
 
-        return From(lines, Enums.From(lines));
+        return From(lines, Enums.From(lines, format));
     }
 
     /// <summary>

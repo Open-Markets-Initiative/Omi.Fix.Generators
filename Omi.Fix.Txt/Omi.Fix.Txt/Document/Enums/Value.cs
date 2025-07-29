@@ -31,7 +31,7 @@ public class Value
     /// <summary>
     /// Contains Value from string
     /// </summary>
-    public static Value From(string pair)
+    public static Value From(string pair, IFormatter? format = null)
     {
         // need to rewrite this
 
@@ -51,7 +51,7 @@ public class Value
         // Trim whitespace from string and find where name and data are split
         var current = String.Concat(pair.Where(c => !Char.IsWhiteSpace(c)));
         var token = pair.Substring(0, current.IndexOf("="));
-        var name = Format.Name(token);
+        var name = format?.Name(token) ?? token;
 
         if (string.IsNullOrEmpty(name))
         {

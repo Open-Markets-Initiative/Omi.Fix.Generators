@@ -28,17 +28,17 @@ public class Enums : Dictionary<string, Enum>
     /// <summary>
     /// Returns enums from a text file
     /// </summary>
-    public static Enums From(string path)
+    public static Enums From(string path, IFormatter? format = null)
     {
         var lines = File.ReadLines(path);
 
-        return From(lines);
+        return From(lines, format);
     }
 
     /// <summary>
     ///  Returns enums from a list of lines
     /// </summary>
-    public static Enums From(IEnumerable<string> lines)
+    public static Enums From(IEnumerable<string> lines, IFormatter? format = null)
     {
         // Check that line contains enums
         var enums = new List<string>();
@@ -50,13 +50,13 @@ public class Enums : Dictionary<string, Enum>
             }
         }
 
-        return Process(enums);
+        return Process(enums, format);
     }
 
     /// <summary>
     /// Process each enum line and return enums
     /// </summary>
-    public static Enums Process(IEnumerable<string> lines)
+    public static Enums Process(IEnumerable<string> lines, IFormatter? format = null)
     {
         var enums = new Enums();
         var validlines = lines.ToList().Where(l => !l.StartsWith("#"));
@@ -71,7 +71,7 @@ public class Enums : Dictionary<string, Enum>
                 trimline = line.Substring(0, line.IndexOf("#"));
             }
 
-            var enumerator = Enum.From(trimline);
+            var enumerator = Enum.From(trimline, format);
             enums.Add(enumerator.Name, enumerator);
         }
 
