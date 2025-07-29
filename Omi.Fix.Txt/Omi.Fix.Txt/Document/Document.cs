@@ -1,3 +1,5 @@
+using Omi.Fix.Specification;
+
 namespace Omi.Fix.Txt;
 
 using System.IO;
@@ -65,6 +67,17 @@ public class Document
             Information = Information.ToSpecification(),
             Messages = Messages.ToSpecification(),
             Types = Fields.ToSpecification(Enums),
+        };
+
+    /// <summary>
+    ///  Convert fix txt to normalized fix specification
+    /// </summary>
+    public Specification.Document ToSpecificationEnumsAsTypes()
+        => new()
+        {
+            Information = Information.ToSpecification(),
+            Messages = Messages.ToSpecification(),
+            Types = Enums.ToSpecificationAsTypes()
         };
 
     /// <summary>

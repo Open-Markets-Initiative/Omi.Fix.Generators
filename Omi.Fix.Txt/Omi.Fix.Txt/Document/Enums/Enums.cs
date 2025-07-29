@@ -149,4 +149,31 @@ public class Enums : Dictionary<string, Enum>
 
         return enums;
     }
+
+
+    /// <summary>
+    /// Convert fields to specification as Types
+    /// </summary>
+    public Specification.Types ToSpecificationAsTypes()
+    {
+        var types = new Specification.Types();
+
+        foreach (var name in this.Keys)
+        {
+            TryGetType(name, out var type);
+            var dataType = Field.ConvertType(type);
+            var underlying = Field.UnderlyingTypeFor(type);
+
+            types.Add(new()
+            {
+                Tag = 0,
+                Name = name,
+                DataType = dataType,
+                Underlying = underlying,
+                Enums = ToSpecification(name, name)
+            });
+        }
+
+        return types;
+    }
 }
