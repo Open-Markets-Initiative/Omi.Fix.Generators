@@ -8,7 +8,7 @@ using System.Text;
 ///  Formatting methods
 /// </summary>
 
-public class DefaultFormat : IFormatter
+public class PascalFormatter : IFormatter
 {
     /// <summary>
     ///  Make first letter uppercase
