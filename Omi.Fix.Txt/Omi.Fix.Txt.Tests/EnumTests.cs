@@ -31,8 +31,9 @@ public class EnumTests
     [Test]
     public void VerifyEnumValueNameFromRecordMacroCase()
     {
+        var format = new PascalFormatter();
         var expected = "MacroCase";
-        var actual = Enums.From(["ENUM:enum:MACRO_CASE=2"])["ENUM"].Values[0].Name;
+        var actual = Enums.From(["ENUM:enum:MACRO_CASE=2"], format)["ENUM"].Values[0].Name;
 
         Assert.That(actual, Is.EqualTo(expected), "Verify enums from record");
     }
