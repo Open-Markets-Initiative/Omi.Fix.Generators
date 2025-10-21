@@ -15,6 +15,11 @@ public class Field
     public string Number = string.Empty;
 
     /// <summary>
+    /// Fix Field belongs to header
+    /// </summary>
+    public string IsHeader = string.Empty;
+
+    /// <summary>
     ///  Fix Field Name
     /// </summary>
     public string Name = string.Empty;
@@ -50,6 +55,11 @@ public class Field
             throw new ArgumentException($"Invalid record, tag: {line}");
         }
 
+        if (!TryParseHeader(tokens, out var header))
+        {
+            throw new ArgumentException($"Invalid record, header: {line}");
+        }
+
         if (!TryParseName(tokens, out var name))
         {
             throw new ArgumentException($"Invalid record, name: {line}");
@@ -60,16 +70,17 @@ public class Field
             throw new ArgumentException($"Invalid record, type: {line}");
         }
 
-        return From(tag, name, type);
+        return From(tag, header, name, type);
     }
 
     /// <summary>
     /// Returns fix field from properties
     /// </summary>
-    public static Field From(string number, string name, string type)
+    public static Field From(string number, string header, string name, string type)
      => new()
      {
          Number = number,
+         IsHeader = header,
          Name = name,
          Type = type,
      };
@@ -84,6 +95,19 @@ public class Field
         return true;
     }
 
+
+    /// <summary>
+    ///  Try parse Fix field header status from tokenized record
+    /// </summary>
+    public static bool TryParseHeader(string[] tokens, out string isHeader)
+    {
+        // should verify this data
+
+        isHeader = tokens[1];
+
+        return true;
+    }
+
     /// <summary>
     ///  Try parse Fix field name from tokenized record
     /// </summary>
@@ -91,7 +115,7 @@ public class Field
     {
         // should verify this data
 
-        name = tokens[1]; // TODO use format (need to be able to handle SR)
+        name = tokens[2]; // TODO use format (need to be able to handle SR)
 
         return true;
     }
@@ -101,7 +125,7 @@ public class Field
     /// </summary>
     public static bool TryParseType(string[] tokens, out string type)
     {
-        type = tokens[2]; // could make this default to string
+        type = tokens[3]; // could make this default to string
 
         return true;
     }
@@ -126,7 +150,7 @@ public class Field
     ///</summary>
     public static bool InvalidSplit(string[] split)
     {
-        if (split.Length != 3)
+        if (split.Length != 4)
         {
             return true;
         }
@@ -180,7 +204,8 @@ public class Field
             Name = NameFor(Name), // trim?
             DataType = DataTypeFor(Name, Type, enums),
             Underlying = UnderlyingTypeFor(Type),
-            Enums = enums.ToSpecification(Name, Type)
+            Enums = enums.ToSpecification(Name, Type),
+            IsHeader = HeaderFor(IsHeader)
         };
 
     /// <summary>
@@ -194,6 +219,13 @@ public class Field
     /// </summary>
     public static string NameFor(string text)
         => text.Trim();
+
+
+    /// <summary>
+    ///  Normalize Fix field name
+    /// </summary>
+    public static bool HeaderFor(string flag)
+        => flag == "Y";
 
     /// <summary>
     ///  Normalize Fix DataType

@@ -28,6 +28,8 @@ public class Type
 
     public bool Required;
 
+    public bool IsHeader;
+
     public string Version = string.Empty;
 
     public string Underlying = string.Empty;
@@ -58,6 +60,7 @@ public class Type
             Version = Version,
             Underlying = Underlying,
             Required = Required,
+            IsHeader = IsHeader,
             Enums = Enums.Clone()
         };
 
