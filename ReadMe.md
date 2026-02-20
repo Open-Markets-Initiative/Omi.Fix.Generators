@@ -8,7 +8,7 @@ Composable platform for [FIX](https://en.wikipedia.org/wiki/Financial_Informatio
 
 Supported Formats:
 
-[Fixml](https://github.com/Open-Markets-Initiative/Omi.Fix.Generators/tree/main/Omi.Fix.Fixml "Omi Fixml"): Industry standard FIX XML
+[Fix Xml](https://github.com/Open-Markets-Initiative/Omi.Fix.Generators/tree/main/Omi.Fix.Xml "Omi Fix Xml"): Industry standard FIX XML
 
 Sbe Fix: Simple binary encoding Fix 
 

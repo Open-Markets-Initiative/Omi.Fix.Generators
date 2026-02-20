@@ -1901,7 +1901,7 @@ public static class Library
                 };
 
     /// <summary>
-    ///  Gather Fixml files in library
+    ///  Gather Fix Xml files in library
     /// </summary>
     public static string[] Files()
     {

@@ -1,4 +1,4 @@
-﻿var specification = Omi.Fixml.Library.Fix44.ToSpecification();
+﻿var specification = Omi.Fix.Xml.Library.Fix44.ToSpecification();
 
 // only use admin messages
 specification.Filter(Omi.Fix.Specification.Include.Admin);
@@ -7,5 +7,5 @@ specification.Filter(Omi.Fix.Specification.Include.Admin);
 specification.Normalize();
 
 // write fixml 
-var fixml = Omi.Fixml.Document.From(specification);
+var fixml = Omi.Fix.Xml.Document.From(specification);
 fixml.WriteTo("Example.xml");

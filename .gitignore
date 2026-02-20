@@ -138,3 +138,7 @@ UpgradeLog*.htm
 # NuGet v3's project.json files produces more ignorable files
 *.nuget.props
 *.nuget.targets
+
+# Ignore everything in .claude
+*.claude
+Claude.md

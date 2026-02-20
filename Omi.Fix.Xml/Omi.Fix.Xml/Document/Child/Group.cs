@@ -1,0 +1,175 @@
+﻿namespace Omi.Fix.Xml.Child;
+    using System.Linq;
+using System.Xml;
+using Omi.Fix.Specification;
+
+/// <summary>
+///  Fix Xml Group Element
+/// </summary>
+
+public class Group : IParent, IChild
+{
+
+    /// <summary>
+    ///  Fixml group name 
+    /// </summary>
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    ///  True if group is required, false otherwise
+    /// </summary>
+    public bool Required { get; set; }
+
+    /// <summary>
+    ///  Group parent
+    /// </summary>
+    public required IParent Parent { get; set; } // how to deal with this?
+
+    /// <summary>
+    ///  Component depth in element tree
+    /// </summary>
+    public int Depth()
+        => Omi.Fix.Xml.Depth.Of(this);
+
+    /// <summary>
+    ///  Fixml group elements list (fields, groups, components)
+    /// </summary>
+    public Elements Elements { get; set; } = new Elements();
+
+    /// <summary>
+    ///  Does a group element contain child fields?
+    /// </summary>
+    public bool HasFields
+        => Elements.Any();
+
+    /// <summary>
+    ///  Convert xml child group element to fixml group
+    /// </summary>
+    public static Group From(Xml.fixChildGroup element, IParent parent)
+    {
+        // Verify values
+        var group = new Group
+        {
+            Name = element.name,
+            Required = Is.Required(element.required),
+            Parent = parent
+        };
+
+        foreach (var item in element.Items)
+        {
+            group.Elements.Add(Field.From(item, group));
+        }
+
+        return group;
+    }
+
+    /// <summary>
+    ///  Convert normalized fix specification group to fixml group 
+    /// </summary>
+    public static Group From(Fix.Specification.Field element, IParent parent)
+    {
+        var group = new Group
+        {
+            Name = element.Name,
+            Required = element.Required,
+            Parent = parent
+        };
+
+        foreach (var item in element.Children)
+        {
+            group.Elements.Add(Field.From(item, group));
+        }
+
+        return group;
+    }
+
+    /// <summary>
+    /// Generates XmlElement from Group Element and appends to parent
+    /// </summary>
+    public void ToXml(XmlDocument doc, XmlElement parent)
+    {
+        var groupElement = doc.CreateElement("group");
+
+        //Append name attribute to groupElement
+        var nameAtr = doc.CreateAttribute("name");
+        nameAtr.Value = Name;
+        groupElement.Attributes.Append(nameAtr);
+
+        //Append required attribute to groupElement
+        var reqAtr = doc.CreateAttribute("required");
+        reqAtr.Value = Required ? "Y" : "N";
+        groupElement.Attributes.Append(reqAtr);
+
+        //Append groupElement to parent
+        parent.AppendChild(groupElement);
+
+        //Generate XmlElements from Elements
+        Elements.ToXml(doc, groupElement);
+    }
+
+    /// <summary>
+    ///  Convert fixml group to normalized fix specification group
+    /// </summary>
+    public Fix.Specification.Field ToSpecification()
+    {
+        var group = new Fix.Specification.Field
+        {
+            Kind = Kind.Group,
+            Name = Name,
+            Required = Required,
+        };
+
+        foreach (var child in Elements)
+        { // nethod?
+            group.Children.Add(child.ToSpecification());
+        }
+
+        return group;
+    }
+
+    /// <summary>
+    ///  Verify fixml field element
+    /// </summary>
+    public void Verify(Fields fields, Fix.Xml.Components components)
+    {
+        if (string.IsNullOrWhiteSpace(Name))
+        {
+            throw new Exception("Group name is missing");
+        }
+
+        if (!fields.ContainsKey(Name))
+        {
+            throw new Exception($"{Name}: Group is missing from dictionary");
+        }
+
+        Elements.Verify(fields, components);
+    }
+
+    /// <summary>
+    ///  Report erroneous fixml field element
+    /// </summary>
+    public void Error(Fields fields, Fix.Xml.Components components, List<string> Errors)
+    {
+        if (string.IsNullOrWhiteSpace(Name))
+        {
+            Errors.Add("Group name is missing");
+
+            fields.Errors.Add("Group name is missing");                 //a group is a field
+        }
+
+        if (!fields.ContainsKey(Name))
+        {
+            Errors.Add($"{Name}: Group is missing from dictionary");
+
+            fields.Errors.Add($"{Name}: Group is missing from dictionary");
+        }
+
+        Elements.Error(fields, components, Errors);
+    }
+
+    /// <summary>
+    ///  Display Fixml child group as string
+    /// </summary>
+    public override string ToString()
+        => $"{Name} [Group : {Elements.Count}]";
+}
