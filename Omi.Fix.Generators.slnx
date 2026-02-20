@@ -1,0 +1,41 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Formats/" />
+  <Folder Name="/Formats/Sbe/">
+    <Project Path="Assemblies/Omi.Fix.Sbe/Omi.Fix.Sbe.Example/Omi.Fix.Sbe.Example.csproj" />
+    <Project Path="Assemblies/Omi.Fix.Sbe/Omi.Fix.Sbe.Tests/Omi.Fix.Sbe.Tests.csproj" />
+    <Project Path="Assemblies/Omi.Fix.Sbe/Omi.Fix.Sbe/Omi.Fix.Sbe.csproj" />
+  </Folder>
+  <Folder Name="/Formats/T7/">
+    <Project Path="Assemblies/Omi.Fix.T7/Omi.Fix.T7.Example/Omi.Fix.T7.Example.csproj" />
+    <Project Path="Assemblies/Omi.Fix.T7/Omi.Fix.T7.Tests/Omi.Fix.T7.Tests.csproj" />
+    <Project Path="Assemblies/Omi.Fix.T7/Omi.Fix.T7/Omi.Fix.T7.csproj" />
+  </Folder>
+  <Folder Name="/Formats/Text/">
+    <Project Path="Assemblies/Omi.Fix.Txt/Omi.Fix.Txt.Example/Omi.Fix.Txt.Example.csproj" />
+    <Project Path="Assemblies/Omi.Fix.Txt/Omi.Fix.Txt.Tests/Omi.Fix.Txt.Tests.csproj" />
+    <Project Path="Assemblies/Omi.Fix.Txt/Omi.Fix.Txt/Omi.Fix.Txt.csproj" />
+  </Folder>
+  <Folder Name="/Formats/Types/">
+    <Project Path="Assemblies/Omi.Fix.Types/Example.Types/Example.Types.csproj" />
+    <Project Path="Assemblies/Omi.Fix.Types/Omi.Fix.Types.Test/Omi.Fix.Types.Test.csproj" />
+    <Project Path="Assemblies/Omi.Fix.Types/Omi.Fix.Types/Omi.Fix.Types.csproj" />
+  </Folder>
+  <Folder Name="/Formats/Xml/">
+    <Project Path="Assemblies/Omi.Fix.Xml/Omi.Fix.Xml.Example/Omi.Fix.Xml.Example.csproj" />
+    <Project Path="Assemblies/Omi.Fix.Xml/Omi.Fix.Xml.Tests/Omi.Fix.Xml.Tests.csproj" />
+    <Project Path="Assemblies/Omi.Fix.Xml/Omi.Fix.Xml/Omi.Fix.Xml.csproj" />
+  </Folder>
+  <Folder Name="/Generators/">
+    <Project Path="Assemblies/Omi.Fix.CSharp/Omi.Fix.CSharp.csproj" />
+  </Folder>
+  <Folder Name="/Intermediate/">
+    <Project Path="Assemblies/Omi.Fix.Specification/Omi.Fix.Specification.Example/Omi.Fix.Specification.Example.csproj" />
+    <Project Path="Assemblies/Omi.Fix.Specification/Omi.Fix.Specification.Test/Omi.Fix.Specification.Test.csproj" />
+    <Project Path="Assemblies/Omi.Fix.Specification/Omi.Fix.Specification/Omi.Fix.Specification.csproj" />
+  </Folder>
+</Solution>
