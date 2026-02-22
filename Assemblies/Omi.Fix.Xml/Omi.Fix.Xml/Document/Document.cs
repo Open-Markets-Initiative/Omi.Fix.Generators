@@ -146,20 +146,6 @@ public class Document
     }
 
     /// <summary>
-    ///  Convert fixml document from specification document
-    /// </summary>
-    public static Document From(Fix.Specification.Document specification)
-      => new()
-      {
-          Information = Information.From(specification.Information),
-          Header = Header.From(specification.Header),
-          Trailer = Trailer.From(specification.Trailer),
-          Messages = Messages.From(specification.Messages),
-          Components = Components.From(specification.Components),
-          Fields = Fields.From(specification.Types),
-      };
-
-    /// <summary>
     ///  Load FIXML document from XML file 
     /// </summary>
     public static Document From(Xml.fix xml)
@@ -182,20 +168,6 @@ public class Document
 
         return From(xml);
     }
-
-    /// <summary>
-    ///  Convert FIXML to normalized FIX specification
-    /// </summary>
-    public Fix.Specification.Document ToSpecification()
-        => new()
-        {
-            Information = Information.ToSpecification(),
-            Header = Header.ToSpecification(),
-            Trailer = Trailer.ToSpecification(),
-            Messages = Messages.ToSpecification(),
-            Components = Components.ToSpecification(),
-            Types = Fields.ToSpecification(),
-        };
 
     /// <summary>
     ///  Convert to XML Document

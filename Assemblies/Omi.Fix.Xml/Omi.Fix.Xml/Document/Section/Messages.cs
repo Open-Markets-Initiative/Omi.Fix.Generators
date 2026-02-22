@@ -54,13 +54,6 @@ public class Messages : List<Message>
     }
 
     /// <summary>
-    ///  Gather fixml components list from normalized fix specification 
-    /// </summary>
-    public static Messages From(Fix.Specification.Messages messages)
-        => new Messages(messages.Select(Message.From));
-
-
-    /// <summary>
     ///  Append as XML element
     /// </summary>
     public void ToXml(XmlDocument document)
@@ -79,18 +72,4 @@ public class Messages : List<Message>
         }
     }
 
-    /// <summary>
-    ///  Convert fixml messages list to normalized fix specification message
-    /// </summary>
-    public Fix.Specification.Messages ToSpecification()
-    {
-        var messages = new Fix.Specification.Messages();
-
-        foreach (var message in this)
-        {
-            messages.Add(message.ToSpecification());
-        }
-
-        return messages;
-    }
 }

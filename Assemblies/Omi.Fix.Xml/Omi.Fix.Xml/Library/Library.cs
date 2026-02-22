@@ -71,22 +71,4 @@ public static class Library
 
         return xmls;
     }
-
-    /// <summary>
-    ///  Gather normalized specifications for all xml files in library
-    /// </summary>
-    public static List<Fix.Specification.Document> Specifications()
-    {
-        var xmls = Xmls();
-
-        var specifications = new List<Fix.Specification.Document>();
-
-        foreach (var xml in xmls)
-        {
-            var fixml = Document.From(xml);
-            specifications.Add(fixml.ToSpecification());
-        }
-
-        return specifications;
-    }
 }

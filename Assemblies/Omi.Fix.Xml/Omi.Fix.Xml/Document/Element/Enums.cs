@@ -34,33 +34,4 @@ public class Enums : List<Enum>
     public static Xml.fixFieldValue[] ListFrom(Xml.fixField field)
         => field.value ?? Array.Empty<Xml.fixFieldValue>();
 
-    /// <summary>
-    ///  Convert normalized fix specification enums to fixml enums
-    /// </summary>
-    public static Enums From(Fix.Specification.Type type)
-    {
-        var enums = new Enums();
-
-        foreach (var @enum in type.Enums)
-        {
-            enums.Add(Enum.From(@enum));
-        }
-
-        return enums;
-    }
-
-    /// <summary>
-    ///  Convert fixml enums to normalized fix specification enums
-    /// </summary>
-    public Fix.Specification.Enums ToSpecification()
-    {
-        var enums = new Fix.Specification.Enums();
-
-        foreach (var component in this)
-        {
-            enums.Add(component.ToSpecification());
-        }
-
-        return enums;
-    }
 }

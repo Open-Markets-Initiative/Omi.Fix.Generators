@@ -1,5 +1,4 @@
 ﻿namespace Omi.Fix.Xml.Child;
-    using Omi.Fix.Specification;
 using System.Xml;
 
 /// <summary>
@@ -37,26 +36,6 @@ public class Component : IChild
             Parent = parent
         };
     }
-
-    /// <summary>
-    ///  Convert xml normalized fix specification to fixml document element 
-    /// </summary>
-    public static Component From(Fix.Specification.Field element, IParent parent)
-        => new()
-        {
-            Name = element.Name,
-            Parent = parent
-        };
-
-    /// <summary>
-    ///  Convert fixml component to normalized specification component
-    /// </summary>
-    public Fix.Specification.Field ToSpecification()
-        => new()
-        {
-            Kind = Kind.Component,
-            Name = Name,
-        };
 
     /// <summary>
     /// Appends XmlElement from Component to parent

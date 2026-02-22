@@ -35,16 +35,6 @@ public class Information
         };
 
     /// <summary>
-    ///  Convert from specification Types to Xml Fields
-    /// </summary>
-    public static Information From(Fix.Specification.Information description)
-        => new()
-        {
-            Major = description.Major,
-            Minor = description.Minor,
-        };
-
-    /// <summary>
     ///  Create root Xml element for Information
     /// </summary>
     public XmlElement ToXml(XmlDocument document)
@@ -66,16 +56,6 @@ public class Information
 
         return root;
     }
-
-    /// <summary>
-    ///  Convert fixml field declarations to normalized fix specification description
-    /// </summary>
-    public Fix.Specification.Information ToSpecification()
-        => new()
-        {
-            Major = Major,
-            Minor = Minor,
-        };
 
     /// <summary>
     ///  Verify fixml information

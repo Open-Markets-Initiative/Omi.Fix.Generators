@@ -43,22 +43,6 @@ public class Components : Dictionary<string, Component>
         => xml.components ?? [];
 
     /// <summary>
-    ///  Convert normalized fix specification components to fixml components 
-    /// </summary>
-    public static Components From(Fix.Specification.Components components)
-    {  // make this a dictionary also
-        var section = new Components();
-
-        foreach (var element in components)
-        {
-            var component = Component.From(element);
-            section[component.Name] = component;
-        }
-
-        return section;
-    }
-
-    /// <summary>
     ///  Remove unused components
     /// </summary>
     public void ReduceTo(HashSet<string> required)
@@ -91,18 +75,4 @@ public class Components : Dictionary<string, Component>
         }
     }
 
-    /// <summary>
-    ///  Convert FIXML components section to normalized FIX specification components
-    /// </summary>
-    public Fix.Specification.Components ToSpecification()
-    {
-        var components = new Fix.Specification.Components();
-
-        foreach (var component in Values)
-        {
-            components.Add(component.ToSpecification());
-        }
-
-        return components;
-    }
 }

@@ -46,21 +46,6 @@ public class Header : IParent
         => xml?.header.Items ?? Array.Empty<object>();
 
     /// <summary>
-    ///  Convert normalized fix specification headers to fixml headers section
-    /// </summary>
-    public static Header From(Fix.Specification.Header header)
-    {
-        var section = new Header();
-
-        foreach (var element in header)
-        {
-            section.Elements.Add(Child.Field.From(element, section));
-        }
-
-        return section;
-    }
-
-    /// <summary>
     /// Creates header XmlElement and appends to root
     /// </summary>
     public void ToXml(XmlDocument document) 
@@ -97,21 +82,6 @@ public class Header : IParent
         }
 
         Elements.Error(fields, components, Errors);
-    }
-
-    /// <summary>
-    ///  Convert fixml trailer to normalized fix specification trailer
-    /// </summary>
-    public Fix.Specification.Header ToSpecification()
-    {
-        var header = new Fix.Specification.Header();
-
-        foreach (var element in Elements)
-        {
-            header.Add(element.ToSpecification());
-        }
-
-        return header;
     }
 
     /// <summary>

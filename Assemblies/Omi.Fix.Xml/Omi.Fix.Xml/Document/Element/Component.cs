@@ -45,25 +45,6 @@ public class Component : IParent
     }
 
     /// <summary>
-    /// Obtain fixml component from specification
-    /// </summary>
-    public static Component From(Fix.Specification.Component element)
-    {
-        // Verify values?
-        var component = new Component
-        {
-            Name = element.Name
-        };
-
-        foreach (var item in element.Fields)
-        {  // need ?? 
-            component.Elements.Add(Child.Field.From(item, component));
-        }
-
-        return component;
-    }
-
-    /// <summary>
     /// Appends XmlElement from Component to parent
     /// </summary>
     public void ToXml(XmlDocument doc,XmlElement parent) 
@@ -80,16 +61,6 @@ public class Component : IParent
         //Append XmlElement from Elements to componentElement
         Elements.ToXml(doc, componentElement);
     }
-
-    /// <summary>
-    ///  Convert to standardized specification component
-    /// </summary>
-    public Fix.Specification.Component ToSpecification()
-        => new()
-        {
-            Name = Name,
-            Fields = Elements.ToSpecification()
-        };
 
     /// <summary>
     ///  Display fixml component as string

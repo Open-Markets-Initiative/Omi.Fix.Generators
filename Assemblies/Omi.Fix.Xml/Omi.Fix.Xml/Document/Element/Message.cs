@@ -46,23 +46,6 @@ public class Message : IParent
     }
 
     /// <summary>
-    ///  Convert normalized specification messages to fixml messages 
-    /// </summary>
-    public static Message From(Fix.Specification.Message element)
-    {
-        var message = new Message()
-        {
-            Name = element.Name,
-            Type = element.Type,
-            Category = element.Category,
-        };
-
-        message.Elements = Elements.From(element.Fields, message);
-
-        return message;
-    }
-
-    /// <summary>
     /// Appends XmlElement from Message to parent
     /// </summary>
     public void ToXml(XmlDocument doc,XmlElement parent) 
@@ -91,18 +74,6 @@ public class Message : IParent
     /// </summary>
     public bool HasFields
         => Elements.Any();
-
-    /// <summary>
-    ///  Convert to normalized fix specification message
-    /// </summary>
-    public Fix.Specification.Message ToSpecification()
-        => new()
-        {
-            Type = Type,
-            Name = Name,
-            Category = Category,
-            Fields = Elements.ToSpecification()
-        };
 
     /// <summary>
     ///  Verify fixml message properties

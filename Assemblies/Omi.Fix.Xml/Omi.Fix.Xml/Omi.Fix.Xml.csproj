@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Omi.Fix.Specification\Omi.Fix.Specification\Omi.Fix.Specification.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
     <None Update="Library\Xml\Fix.v4.2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

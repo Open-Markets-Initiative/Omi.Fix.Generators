@@ -46,27 +46,6 @@ public class Trailer : IParent
         => xml?.trailer.Items ?? Array.Empty<object>();
 
     /// <summary>
-    ///  Convert normalized specification trailer to fixml trailer
-    /// </summary>
-    public static Trailer From(Fix.Specification.Trailer trailer)
-    {
-        var section = new Trailer();
-
-        foreach (var field in trailer)
-        {
-            // Verify format
-            section.Elements.Add(new Child.Field
-            {
-                Parent = section,
-                Name = field.Name,
-                Required = field.Required,
-            });
-        }
-
-        return section;
-    }
-
-    /// <summary>
     ///  Append as XML element
     /// </summary>
     public void ToXml(XmlDocument document) 
@@ -103,21 +82,6 @@ public class Trailer : IParent
         }
 
         Elements.Error(fields, components, Errors);
-    }
-
-    /// <summary>
-    ///  Convert fixml trailer to normalized fix specification trailer
-    /// </summary>
-    public Fix.Specification.Trailer ToSpecification()
-    {
-        var trailer = new Fix.Specification.Trailer();
-
-        foreach (var element in Elements)
-        {
-            trailer.Add(element.ToSpecification());
-        }
-
-        return trailer;
     }
 
     /// <summary>

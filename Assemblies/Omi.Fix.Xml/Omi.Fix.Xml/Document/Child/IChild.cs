@@ -33,11 +33,6 @@ public interface IChild
     int Depth();
 
     /// <summary>
-    ///  Convert to specification field
-    /// </summary>
-    Fix.Specification.Field ToSpecification();
-
-    /// <summary>
     ///  Convert to Xml Element
     /// </summary>
     void ToXml(XmlDocument doc, XmlElement parent);

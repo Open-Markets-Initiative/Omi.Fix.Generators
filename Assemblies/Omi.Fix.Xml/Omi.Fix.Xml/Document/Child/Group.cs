@@ -1,8 +1,6 @@
 ﻿namespace Omi.Fix.Xml.Child;
     using System.Linq;
 using System.Xml;
-using Omi.Fix.Specification;
-
 /// <summary>
 ///  Fix Xml Group Element
 /// </summary>
@@ -64,26 +62,6 @@ public class Group : IParent, IChild
     }
 
     /// <summary>
-    ///  Convert normalized fix specification group to fixml group 
-    /// </summary>
-    public static Group From(Fix.Specification.Field element, IParent parent)
-    {
-        var group = new Group
-        {
-            Name = element.Name,
-            Required = element.Required,
-            Parent = parent
-        };
-
-        foreach (var item in element.Children)
-        {
-            group.Elements.Add(Field.From(item, group));
-        }
-
-        return group;
-    }
-
-    /// <summary>
     /// Generates XmlElement from Group Element and appends to parent
     /// </summary>
     public void ToXml(XmlDocument doc, XmlElement parent)
@@ -105,26 +83,6 @@ public class Group : IParent, IChild
 
         //Generate XmlElements from Elements
         Elements.ToXml(doc, groupElement);
-    }
-
-    /// <summary>
-    ///  Convert fixml group to normalized fix specification group
-    /// </summary>
-    public Fix.Specification.Field ToSpecification()
-    {
-        var group = new Fix.Specification.Field
-        {
-            Kind = Kind.Group,
-            Name = Name,
-            Required = Required,
-        };
-
-        foreach (var child in Elements)
-        { // nethod?
-            group.Children.Add(child.ToSpecification());
-        }
-
-        return group;
     }
 
     /// <summary>

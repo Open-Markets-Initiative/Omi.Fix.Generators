@@ -2,8 +2,6 @@
 
 using System;
 using System.Xml;
-using Omi.Fix.Specification;
-
 /// <summary>
 ///  Fix Xml Field Element
 /// </summary>
@@ -54,32 +52,6 @@ public class Field : IChild
     }
 
     /// <summary>
-    ///  Convert normalized fix specification field to fixml element
-    /// </summary>
-    public static IChild From(Fix.Specification.Field field, IParent parent)
-    {
-        switch (field.Kind)
-        {
-            case Kind.Field:
-                return new Field
-                {
-                    Name = field.Name,
-                    Required = field.Required,
-                    Parent = parent
-                };
-
-            case Kind.Component:
-                return Component.From(field, parent);
-
-            case Kind.Group:
-                return Group.From(field, parent);
-
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
-
-    /// <summary>
     ///  Convert xml child field element to fixml document element 
     /// </summary>
     public static Field From(Xml.fixChildField field, IParent parent)
@@ -113,12 +85,6 @@ public class Field : IChild
         //Append fieldElement to parent
         parent.AppendChild(fieldElement);
     }
-
-    /// <summary>
-    ///  Convert fixml field to normalized fix specification field
-    /// </summary>
-    public Fix.Specification.Field ToSpecification()
-        => new() { Kind = Kind.Field, Name = Name, Required = Required };
 
     /// <summary>
     ///  Verify fixml field element
