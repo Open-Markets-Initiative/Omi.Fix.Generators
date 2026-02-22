@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Omi.Fix.Specification\Omi.Fix.Specification\Omi.Fix.Specification.csproj" />
+    <ProjectReference Include="..\..\..\Intermediate\Omi.Fix.Specification\Omi.Fix.Specification\Omi.Fix.Specification.csproj" />
   </ItemGroup>
 
   <ItemGroup>
