@@ -49,7 +49,7 @@ public class Types : Dictionary<string, Type>
     /// <summary>
     ///  Try get type by name
     /// </summary>
-    public bool TryGetByName(string name, out Type type)
+    public bool TryGetByName(string name, out Type? type)
         => TryGetValue(name, out type);
 
     /// <summary>

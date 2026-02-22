@@ -5,6 +5,13 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Omi.Fix.Specification</PackageId>
+    <Description>FIX protocol intermediate specification representation</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Open-Markets-Initiative/Omi.Fix.Generators</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Open-Markets-Initiative/Omi.Fix.Generators</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

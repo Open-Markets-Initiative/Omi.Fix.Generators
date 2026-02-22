@@ -5,6 +5,13 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Omi.Fix.Xml.Library</PackageId>
+    <Description>Standard FIX protocol XML specification library (FIX 4.2, 4.4, 5.0 SP2)</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Open-Markets-Initiative/Omi.Fix.Generators</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Open-Markets-Initiative/Omi.Fix.Generators</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,15 +19,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Library\Xml\Fix.v4.2.xml">
+    <Content Include="Library\Xml\Fix.v4.2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Library\Xml\Fix.v4.4.xml">
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
+    <Content Include="Library\Xml\Fix.v4.4.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Library\Xml\Fix.v5.0.sp2.xml">
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
+    <Content Include="Library\Xml\Fix.v5.0.sp2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
   </ItemGroup>
 
 </Project>

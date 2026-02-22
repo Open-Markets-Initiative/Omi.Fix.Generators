@@ -164,7 +164,7 @@ public class Document
     /// <summary>
     ///  Try get type by name
     /// </summary>
-    public bool TryGet(string name, out Type type)
+    public bool TryGet(string name, out Type? type)
         => Types.TryGetByName(name, out type);
 
     /// <summary>
