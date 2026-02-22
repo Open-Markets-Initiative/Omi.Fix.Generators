@@ -27,6 +27,7 @@
   </Folder>
   <Folder Name="/Formats/Xml/">
     <Project Path="Formats/Omi.Fix.Xml/Omi.Fix.Xml.Example/Omi.Fix.Xml.Example.csproj" />
+    <Project Path="Formats/Omi.Fix.Xml/Omi.Fix.Xml.Library/Omi.Fix.Xml.Library.csproj" />
     <Project Path="Formats/Omi.Fix.Xml/Omi.Fix.Xml.Tests/Omi.Fix.Xml.Tests.csproj" />
     <Project Path="Formats/Omi.Fix.Xml/Omi.Fix.Xml/Omi.Fix.Xml.csproj" />
   </Folder>

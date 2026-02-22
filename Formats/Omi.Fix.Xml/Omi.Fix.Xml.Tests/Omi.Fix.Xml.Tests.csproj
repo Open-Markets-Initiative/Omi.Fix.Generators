@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Omi.Fix.Xml\Omi.Fix.Xml.csproj" />
+    <ProjectReference Include="..\Omi.Fix.Xml.Library\Omi.Fix.Xml.Library.csproj" />
   </ItemGroup>
 
   <ItemGroup>

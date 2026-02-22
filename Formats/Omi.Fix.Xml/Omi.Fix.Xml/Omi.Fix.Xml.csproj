@@ -5,18 +5,14 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Omi.Fix.Xml</PackageId>
+    <Description>FIX protocol XML specification parser and writer</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Open-Markets-Initiative/Omi.Fix.Generators</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Open-Markets-Initiative/Omi.Fix.Generators</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Update="Library\Xml\Fix.v4.2.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Library\Xml\Fix.v4.4.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Library\Xml\Fix.v5.0.sp2.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 
 </Project>

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Formats\Omi.Fix.Xml\Omi.Fix.Xml\Omi.Fix.Xml.csproj" />
+    <ProjectReference Include="..\..\..\Formats\Omi.Fix.Xml\Omi.Fix.Xml.Library\Omi.Fix.Xml.Library.csproj" />
     <ProjectReference Include="..\Omi.Fix.Specification\Omi.Fix.Specification.csproj" />
   </ItemGroup>
 
