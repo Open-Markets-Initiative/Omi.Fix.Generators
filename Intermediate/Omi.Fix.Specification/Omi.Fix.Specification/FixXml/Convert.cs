@@ -1,7 +1,7 @@
 namespace Omi.Fix.Specification.FixXml;
 
 /// <summary>
-///  Extension methods for converting between FIX XML and FIX intermediate types
+///  Extension methods for converting between FIX XML and FIX intermediate formats
 /// </summary>
 
 public static class Convert
