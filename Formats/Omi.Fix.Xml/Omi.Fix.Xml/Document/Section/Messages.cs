@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace Omi.Fix.Xml;
+﻿namespace Omi.Fix.Xml;
 
 /// <summary>
 ///  List of fixml messsages

@@ -1,6 +1,5 @@
 ﻿namespace Omi.Fix.Xml.Child;
-    using System.Linq;
-using System.Xml;
+
 /// <summary>
 ///  Fix Xml Group Element
 /// </summary>

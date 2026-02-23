@@ -14,5 +14,8 @@
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Using Include="System.Xml" />
+  </ItemGroup>
 
 </Project>

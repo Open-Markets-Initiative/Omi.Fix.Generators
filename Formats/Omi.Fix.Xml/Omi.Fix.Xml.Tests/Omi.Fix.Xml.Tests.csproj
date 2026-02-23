@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -21,35 +21,35 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Fixmls\Fix.v4.4.MissingFieldDefinition.xml">
+    <None Update="Xmls\Fix.v4.4.MissingFieldDefinition.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Fixmls\Fix.v4.4.MissingComponentDefinition.xml">
+    <None Update="Xmls\Fix.v4.4.MissingComponentDefinition.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Fixmls\Fix.v4.2.DuplicateHeaderTags.xml">
+    <None Update="Xmls\Fix.v4.2.DuplicateHeaderTags.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Fixmls\Fix.v4.2.DuplicateMessageTags.xml">
+    <None Update="Xmls\Fix.v4.2.DuplicateMessageTags.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Fixmls\Fix.v4.2.DuplicateTrailerTags.xml">
+    <None Update="Xmls\Fix.v4.2.DuplicateTrailerTags.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Fixmls\Fix.v4.2.MissingFromHeader.xml">
+    <None Update="Xmls\Fix.v4.2.MissingFromHeader.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Fixmls\Fix.v4.2.MissingFromMessage.xml">
+    <None Update="Xmls\Fix.v4.2.MissingFromMessage.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Fixmls\Fix.v4.2.MissingFromTrailer.xml">
+    <None Update="Xmls\Fix.v4.2.MissingFromTrailer.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-	  <None Update="Fixmls\Fix.v4.4.ShortDefinition.xml">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-    <None Update="Fixmls\fixmlmissingrequired.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Update="Xmls\Fix.v4.4.ShortDefinition.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xmls\fixmlmissingrequired.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

@@ -1,7 +1,5 @@
 ﻿namespace Omi.Fix.Specification;
 
-using System.Linq;
-
 public partial class Normalize
 {
     /// <summary>

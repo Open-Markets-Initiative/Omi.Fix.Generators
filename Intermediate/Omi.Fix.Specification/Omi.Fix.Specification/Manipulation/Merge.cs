@@ -1,6 +1,4 @@
-﻿using Omi.Fix.Specification;
-
-namespace Omi.Fix.Specification;
+﻿namespace Omi.Fix.Specification;
 
 /// <summary>
 ///  Merge intermediate FIX specifications

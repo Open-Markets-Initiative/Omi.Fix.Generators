@@ -1,7 +1,5 @@
 ﻿namespace Omi.Fix.Xml.Child;
 
-using System;
-using System.Xml;
 /// <summary>
 ///  Fix Xml Field Element
 /// </summary>

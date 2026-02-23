@@ -1,6 +1,4 @@
 ﻿namespace Omi.Fix.Xml;
-    using System.Linq;
-using System.Xml;
 
 /// <summary>
 ///  Fixml Component (predefined collection of elements)
