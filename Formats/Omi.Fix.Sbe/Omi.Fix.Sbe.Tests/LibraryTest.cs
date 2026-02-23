@@ -1,7 +1,5 @@
 namespace Omi.Fix.Sbe.Test;
 
-using NUnit.Framework;
-
 /// <summary>
 ///  Regression tests for Sbe Fix Library
 /// </summary>

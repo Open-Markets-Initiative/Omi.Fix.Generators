@@ -1,5 +1,4 @@
 namespace Omi.Fix.Specification.Test;
-    using NUnit.Framework;
     using System.Collections;
 
 /// <summary>

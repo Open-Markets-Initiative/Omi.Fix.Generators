@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="NUnit.Framework" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Samples\Enums.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1,5 +1,4 @@
 namespace Omi.Fix.T7.Tests;
-    using NUnit.Framework;
 
 /// <summary>
 ///  Regression tests for Eti Fix Library

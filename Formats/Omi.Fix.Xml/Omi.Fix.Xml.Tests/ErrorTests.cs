@@ -1,5 +1,6 @@
 namespace Omi.Fix.Xml.Test;
-    using NUnit.Framework;
+
+using NUnit.Framework;
 
 /// <summary>
 ///  Fixml Error regression tests
@@ -11,7 +12,7 @@ public class ErrorTests
     [Test]
     public void VerifyFixmlMissingFromMessage() 
     {
-        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.2.MissingFromMessage.xml");
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Xmls", "Fix.v4.2.MissingFromMessage.xml");
         var document = Omi.Fix.Xml.Document.From(path);
 
         var expected = "TestReqID: Field is missing from dictionary";
@@ -23,7 +24,7 @@ public class ErrorTests
     [Test]
     public void VerifyFixmlMissingFromHeader() 
     {
-        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.2.MissingFromHeader.xml");
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Xmls", "Fix.v4.2.MissingFromHeader.xml");
         var document = Omi.Fix.Xml.Document.From(path);
 
         var expected = "SecureDataLen: Field is missing from dictionary";
@@ -35,7 +36,7 @@ public class ErrorTests
     [Test]
     public void VerifyFixmlMissingFromTrailer() 
     {
-        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.2.MissingFromTrailer.xml");
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Xmls", "Fix.v4.2.MissingFromTrailer.xml");
         var document = Omi.Fix.Xml.Document.From(path);
 
         var expected = "CheckSum: Field is missing from dictionary";
@@ -47,7 +48,7 @@ public class ErrorTests
     [Test]
     public void VerifyFixmlErrorFromDuplicateMessageTags() 
     {
-        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.2.DuplicateMessageTags.xml");
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Xmls", "Fix.v4.2.DuplicateMessageTags.xml");
         var document = Omi.Fix.Xml.Document.From(path);
 
         var expected = "ClientID : Tag occurs more than once in message";
@@ -59,7 +60,7 @@ public class ErrorTests
     [Test]
     public void VerifyFixmlErrorFromDuplicateHeaderTags() 
     {
-        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.2.DuplicateHeaderTags.xml");
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Xmls", "Fix.v4.2.DuplicateHeaderTags.xml");
         var document = Omi.Fix.Xml.Document.From(path);
 
         var expected = "MsgType : Tag occurs more than once in header";
@@ -71,7 +72,7 @@ public class ErrorTests
     [Test]
     public void VerifyFixmlErrorFromDuplicateTrailerTags() 
     {
-        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.2.DuplicateTrailerTags.xml");
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Xmls", "Fix.v4.2.DuplicateTrailerTags.xml");
         var document = Omi.Fix.Xml.Document.From(path);
 
         var expected = "SignatureLength : Tag occurs more than once in trailer";
@@ -83,7 +84,7 @@ public class ErrorTests
     [Test]
     public void VerifyGatherComponents()
     {
-        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.4.ShortDefinition.xml");
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Xmls", "Fix.v4.4.ShortDefinition.xml");
         var document = Omi.Fix.Xml.Document.From(path);
 
         var actual = document.GatherComponents();
@@ -102,7 +103,7 @@ public class ErrorTests
     [Test]
     public void VerifyTripleNestedComponentWithDeletingMiddleComponent()
     {
-        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.4.ShortDefinition.xml");
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Xmls", "Fix.v4.4.ShortDefinition.xml");
         var document = Omi.Fix.Xml.Document.From(path);
 
         document.Components.Remove("Component2");
@@ -122,7 +123,7 @@ public class ErrorTests
     [Test]
     public void VerifyGatherFields()
     {
-        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.4.ShortDefinition.xml");
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Xmls", "Fix.v4.4.ShortDefinition.xml");
         var document = Omi.Fix.Xml.Document.From(path);
 
         var actual = document.GatherFields();
@@ -147,7 +148,7 @@ public class ErrorTests
     [Test]
     public void VerifyFieldMissingFromDictionary()
     {
-        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.4.MissingFieldDefinition.xml");
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Xmls", "Fix.v4.4.MissingFieldDefinition.xml");
         var document = Omi.Fix.Xml.Document.From(path);
 
         var actual = document.Errors;
@@ -165,7 +166,7 @@ public class ErrorTests
     [Test]
     public void VerifyComponentMissingFromDictionary()
     {
-        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fixmls", "Fix.v4.4.MissingComponentDefinition.xml");
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "Xmls", "Fix.v4.4.MissingComponentDefinition.xml");
         var document = Omi.Fix.Xml.Document.From(path);
 
         var actual = document.Errors;

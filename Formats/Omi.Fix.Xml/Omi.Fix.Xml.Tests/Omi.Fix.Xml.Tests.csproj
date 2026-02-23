@@ -48,7 +48,7 @@
     <None Update="Xmls\Fix.v4.4.ShortDefinition.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Xmls\fixmlmissingrequired.xml">
+    <None Update="Xmls\Fix.v4.2.MissingRequired.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

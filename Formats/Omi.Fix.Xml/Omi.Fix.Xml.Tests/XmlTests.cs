@@ -1,5 +1,6 @@
 ﻿namespace Omi.Fix.Xml.Test;
-    using NUnit.Framework;
+
+using NUnit.Framework;
 
 /// <summary>
 /// Fixml XML document regression tests

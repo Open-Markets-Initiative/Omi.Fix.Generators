@@ -1,7 +1,5 @@
 namespace Omi.Fix.Txt.Tests;
 
-using NUnit.Framework;
-
 /// <summary>
 ///  Fix Txt Message Regression tests 
 /// </summary>

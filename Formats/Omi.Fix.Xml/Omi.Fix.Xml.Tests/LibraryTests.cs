@@ -1,5 +1,6 @@
 namespace Omi.Fix.Xml.Test;
-    using NUnit.Framework;
+
+using NUnit.Framework;
 
 /// <summary>
 ///  Fixml Library regression tests
@@ -13,7 +14,7 @@ public class LibraryTests
         var directory = Path.Combine(TestContext.CurrentContext.TestDirectory, "Library", "Xml");
         var files = Directory.GetFiles(directory, "*.xml");
         var xmls = new List<Omi.Fix.Xml.Xml.fix>();
-        foreach (var file in files ?? Array.Empty<string>())
+        foreach (var file in files ?? [])
         {
             xmls.Add(Omi.Fix.Xml.Load.From(file));
         }

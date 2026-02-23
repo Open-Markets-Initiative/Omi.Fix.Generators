@@ -1,5 +1,4 @@
 ﻿namespace Omi.Fix.Types.Test;
-    using NUnit.Framework;
 
 public class TypeTests
 {

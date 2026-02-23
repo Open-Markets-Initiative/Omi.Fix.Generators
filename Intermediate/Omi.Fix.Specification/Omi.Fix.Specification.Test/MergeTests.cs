@@ -1,5 +1,4 @@
 namespace Omi.Fix.Specification.Test;
-    using NUnit.Framework;
 
 /// <summary>
 ///  Regression tests for normalized fix specification merge

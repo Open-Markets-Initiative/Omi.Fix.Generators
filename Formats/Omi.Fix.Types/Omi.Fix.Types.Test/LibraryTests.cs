@@ -1,5 +1,4 @@
 namespace Omi.Fix.Types.Test;
-    using NUnit.Framework;
 
 /// <summary>
 ///  Fix Types Regression Tests

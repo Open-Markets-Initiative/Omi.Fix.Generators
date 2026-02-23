@@ -1,7 +1,5 @@
 ﻿namespace Omi.Fix.Types.Test;
 
-using NUnit.Framework;
-
 /// <summary>
 ///  Fix types XML document regression tests
 /// </summary>
