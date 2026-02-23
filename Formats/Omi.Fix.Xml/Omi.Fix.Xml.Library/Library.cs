@@ -6,9 +6,6 @@
 
 public static class Library
 {
-
-    // Todo: universal seperators
-
     /// <summary>
     ///  Standard Fix 4.2 fixml
     /// </summary>
@@ -43,14 +40,14 @@ public static class Library
     ///  Load Library file into Fixml Document
     /// </summary>
     public static Document Load(string file)
-        => Document.From($"Library\\Xml\\{file}"); // need general seperator
+        => Document.From(Path.Combine("Library", "Xml", file));
 
     /// <summary>
     ///  Gather Fixml files in library
     /// </summary>
     public static string[] Files()
     {
-        var directory = Path.Combine(Directory.GetCurrentDirectory(), "Library\\Xml");
+        var directory = Path.Combine(Directory.GetCurrentDirectory(), "Library", "Xml");
 
         return Directory.GetFiles(directory, "*.xml");
     }

@@ -11,19 +11,19 @@ public static class Library
     ///  Standard Fix 4.2 fields
     /// </summary>
     public static Document Fix42
-        => Document.From("Library\\Fields\\Fix42.Fields.xml");
+        => Document.From(Path.Combine("Library", "Fields", "Fix42.Fields.xml"));
 
     /// <summary>
     ///  Standard Fix 4.4 fields
     /// </summary>
     public static Document Fix44
-        => Document.From("Library\\Fields\\Fix44.Fields.xml");
+        => Document.From(Path.Combine("Library", "Fields", "Fix44.Fields.xml"));
 
     /// <summary>
     /// Higher value fix fields
     /// </summary>
     public static Document Fix50SP2
-        => Document.From("Library\\Fields\\Fix50SP2.Fields.xml");
+        => Document.From(Path.Combine("Library", "Fields", "Fix50SP2.Fields.xml"));
 
     /// <summary>
     /// For any duplicate tag in FixMap.cs, these values are the fix field to keep for that tag number
@@ -1905,7 +1905,7 @@ public static class Library
     /// </summary>
     public static string[] Files()
     {
-        var directory = Path.Combine(Directory.GetCurrentDirectory(), "Library\\Fields");
+        var directory = Path.Combine(Directory.GetCurrentDirectory(), "Library", "Fields");
 
         return Directory.GetFiles(directory, "*.xml");
     }
